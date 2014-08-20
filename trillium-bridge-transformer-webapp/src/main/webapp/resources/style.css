@@ -45,3 +45,7 @@ body .modal {
     text-align: right;
     padding-left: 10px;
 }
+
+#ccdaModal {
+    z-index: 2147483647;
+}

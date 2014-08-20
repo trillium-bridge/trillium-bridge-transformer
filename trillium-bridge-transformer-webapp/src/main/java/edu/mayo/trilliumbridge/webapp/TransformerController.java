@@ -25,23 +25,17 @@ package edu.mayo.trilliumbridge.webapp;
 
 import edu.mayo.trilliumbridge.core.TrilliumBridgeTransformer;
 import edu.mayo.trilliumbridge.core.xslt.XsltTrilliumBridgeTransformer;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.OutputStream;
 
 /**
  * Handles requests for the application home page.
@@ -55,64 +49,52 @@ public class TransformerController {
 
     private TrilliumBridgeTransformer transformer = new XsltTrilliumBridgeTransformer();
 
-    @Resource(name="exampleCcdas")
-    private List<ExampleCcda> exampleCcdas;
-
-    @RequestMapping(
-            value = "/transformer",
-            method = RequestMethod.GET,
-            produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getHomePage(){
-        ModelAndView home = new ModelAndView("transformer");
-        home.addObject("exampleCcdas", exampleCcdas);
-
-        return home;
+    private interface Transformer {
+        void transform(InputStream in, OutputStream out, TrilliumBridgeTransformer.Format outputFormat);
     }
 
-    /**
-     * Simply selects the home view to render by returning its name.
-     *
-     * @param request the request
-     * @param response the response
-     * @param xmlurl the xmlurl
-     * @param xmlname the xmlname
-     * @param xslturl the xslturl
-     * @param xsltname the xsltname
-     * @param encoding the encoding
-     * @throws IOException Signals that an I/O exception has occurred.
-     */
-    @RequestMapping(value = "/ccda2epsos", method = RequestMethod.POST)
+    @RequestMapping(value = "/epsos2ccda", method = RequestMethod.POST)
     @ResponseBody
-    public void transform(
+    public void epsos2ccda(
             HttpServletRequest request,
             HttpServletResponse response,
-            @RequestParam(required = false) URL xmlurl,
-            @RequestParam(required = false) String xmlname,
-            @RequestParam(required = false) URL xslturl,
-            @RequestParam(required = false) String xsltname,
             @RequestParam(defaultValue = "application/xml") String encoding)
             throws IOException {
+        this.doTransform(request, response, encoding, new Transformer() {
 
-        Map<String, String> params = new HashMap<String, String>();
-
-        @SuppressWarnings("unchecked")
-        Enumeration<String> names = request.getParameterNames();
-
-        while(names.hasMoreElements()){
-            String name = names.nextElement();
-            if(name.equals("xmlurl") ||
-                    name.equals("xmlname") ||
-                    name.equals("xslturl") ||
-                    name.equals("xsltname") ||
-                    name.equals("encoding")){
-                continue;
-            } else {
-                params.put(name, request.getParameter(name));
+            @Override
+            public void transform(InputStream in, OutputStream out, TrilliumBridgeTransformer.Format outputFormat) {
+                transformer.epsosToCcda(in, out, outputFormat);
             }
-        }
+
+        });
+    }
+
+    @RequestMapping(value = "/ccda2epsos", method = RequestMethod.POST)
+    @ResponseBody
+    public void ccda2epsos(
+            HttpServletRequest request,
+                HttpServletResponse response,
+            @RequestParam(defaultValue = "application/xml") String encoding)
+            throws IOException {
+        this.doTransform(request, response, encoding, new Transformer() {
+
+            @Override
+            public void transform(InputStream in, OutputStream out, TrilliumBridgeTransformer.Format outputFormat) {
+                transformer.ccdaToEpsos(in, out, outputFormat);
+            }
+
+        });
+    }
+
+    protected void doTransform(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            String encoding,
+            Transformer transformer)
+            throws IOException {
 
         response.setContentType(encoding);
-
 
         InputStream inputStream;
         if(request instanceof MultipartHttpServletRequest){
@@ -123,9 +105,7 @@ public class TransformerController {
             inputStream = request.getInputStream();
         }
 
-
-
-        transformer.ccdaToEpsos(
+        transformer.transform(
                 inputStream,
                 response.getOutputStream(),
                 TrilliumBridgeTransformer.Format.XML);

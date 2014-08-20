@@ -1,5 +1,6 @@
-package edu.mayo.trilliumbridge.webapp;
+package edu.mayo.trilliumbridge.webapp.example;
 
+import edu.mayo.trilliumbridge.webapp.BasicRequestFactory;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.FactoryBean;

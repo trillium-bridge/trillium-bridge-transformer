@@ -16,13 +16,7 @@
     </properties>
 
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-        
+
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -46,11 +40,11 @@
                     <programs>
                         <program>
                             <mainClass>edu.mayo.trilliumbridge.cli.Ccda2EpsosLauncher</mainClass>
-                            <name>tbt-ccda2epsos</name>
+                            <name>ccda2epsos</name>
                         </program>
                         <program>
                             <mainClass>edu.mayo.trilliumbridge.cli.Epsos2CcdaLauncher</mainClass>
-                            <name>tbt-epsos2ccda</name>
+                            <name>epsos2ccda</name>
                         </program>
                     </programs>
                 </configuration>

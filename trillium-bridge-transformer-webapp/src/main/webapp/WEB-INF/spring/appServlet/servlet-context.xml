@@ -14,6 +14,8 @@
     <context:property-placeholder location="file:${user.home}/.trilliumbridge/trilliumbridge-properties"
                                   ignore-resource-not-found="true" ignore-unresolvable="true"/>
 
+    <context:property-placeholder location="classpath:/trilliumbridge-version.properties"/>
+
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 

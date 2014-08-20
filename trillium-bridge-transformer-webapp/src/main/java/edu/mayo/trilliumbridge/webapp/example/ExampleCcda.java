@@ -1,4 +1,4 @@
-package edu.mayo.trilliumbridge.webapp;
+package edu.mayo.trilliumbridge.webapp.example;
 
 /**
  */

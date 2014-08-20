@@ -1,4 +1,4 @@
-package edu.mayo.trilliumbridge.webapp;
+package edu.mayo.trilliumbridge.webapp.example;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.http.MediaType;

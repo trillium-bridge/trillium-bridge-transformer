@@ -49,6 +49,8 @@
                     <li class="divider-vertical"></li>
                     <li><a href="."><i class="icon-home"></i> Home</a></li>
                     <li class="divider-vertical"></li>
+                    <li><a href="http://informatics.mayo.edu/maven/content/repositories/releases/edu/mayo/trillium-bridge-transformer-cli/${version}/trillium-bridge-transformer-cli-${version}-bin.zip"><i class="icon-download-alt"></i> Download</a></li>
+                    <li class="divider-vertical"></li>
                     <li><a href="docs"> Documentation</a>
                     <li class="divider-vertical"></li>
                     <li><a href="api"> REST API</a>
@@ -78,7 +80,7 @@
             <div id="my-tab-content" class="tab-content">
 
                 <div class="tab-pane active" id="fileUpload">
-                    <form action='ccda2epsos' enctype='multipart/form-data' method='post' class="form-inline well">
+                    <form enctype='multipart/form-data' name="fileUploadForm" id="fileUploadForm" method='post' class="form-inline well">
                         <div class="fileupload fileupload-new" data-provides="fileupload">
                             <div class="input-append">
                                 <div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i>
@@ -91,12 +93,12 @@
 
                             <div>
                                 <label class="radio">
-                                    <input type="radio" name="version" id="qdm1.0" value="1.0" checked>
+                                    <input type="radio" name="converstionType" value="ccda2epsos" checked>
                                     <span>CCDA to epSOS</span>
                                 </label>
                                 <span>&nbsp;</span>
                                 <label class="radio">
-                                    <input type="radio" name="version" id="qdm2.0" value="2.0">
+                                    <input type="radio" name="converstionType" value="epsos2ccda">
                                     <span>epSOS to CCDA</span>
                                 </label>
                             </div>
@@ -117,8 +119,16 @@
                 </div>
 
             </div>
+
+
+
         </div>
 
+        <p>
+            <a class="btn btn-primary btn-large" href="docs">
+                Learn more
+            </a>
+        </p>
 
         <script type="text/javascript">
 
@@ -127,6 +137,11 @@
             };
 
             jQuery(document).ready(function ($) {
+
+                $("input[name='converstionType']").change(function() {
+                    var action = $(this).val();
+                    $("#fileUploadForm").attr("action", action);
+                });
 
                 $('#tabs').tab();
                 var select2 = $("#ccdaExamplesSelect").select2({
@@ -159,7 +174,7 @@
                                     $('#ccdaModal pre code').each(function(i, block) {
                                         hljs.highlightBlock(block);
                                     });
-                                    select2.close();
+
                                 }
                             });
 
@@ -178,7 +193,7 @@
 </div>
 
 <!-- Modal -->
-<div id="ccdaModal" style="z-index: 1052;" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="ccdaModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel">CCDA XML</h3>

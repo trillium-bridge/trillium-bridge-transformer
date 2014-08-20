@@ -1,32 +1,41 @@
 package edu.mayo.trilliumbridge.core.xslt;
 
 import edu.mayo.trilliumbridge.core.TrilliumBridgeTransformer;
+import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Component;
 
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Map;
 import java.util.Map.Entry;
 
 /**
  * The XSLT Transformation logic.
- *
- * @author <a href="mailto:kevin.peterson@mayo.edu">Kevin Peterson</a>
  */
 @Component
 public class XsltTrilliumBridgeTransformer implements TrilliumBridgeTransformer {
 
     @Override
     public void ccdaToEpsos(InputStream ccdaStream, OutputStream epsosStream, Format outputFormat) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        try {
+            IOUtils.copy(new InputStreamReader(ccdaStream), epsosStream, "UTF-8");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void epsosToCcda(InputStream epsosStream, OutputStream ccdaStream, Format outputFormat) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        try {
+            IOUtils.copy(new InputStreamReader(epsosStream), ccdaStream, "UTF-8");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**

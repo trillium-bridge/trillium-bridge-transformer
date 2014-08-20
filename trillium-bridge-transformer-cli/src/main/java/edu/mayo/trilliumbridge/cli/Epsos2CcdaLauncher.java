@@ -1,10 +1,11 @@
 package edu.mayo.trilliumbridge.cli;
 
 import org.kohsuke.args4j.Option;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public class Epsos2CcdaLauncher extends AbstractBaseCliLauncher {
 
@@ -16,12 +17,7 @@ public class Epsos2CcdaLauncher extends AbstractBaseCliLauncher {
     }
 
     @Override
-    protected void run() throws Exception {
-        ClassPathXmlApplicationContext context =
-            new ClassPathXmlApplicationContext("qdm-executor-context.xml");
-
-        context.registerShutdownHook();
-
-        //
+    protected void doTransform(InputStream in, OutputStream out) throws Exception {
+        this.getTransformer().epsosToCcda(in, out, null);
     }
 }
