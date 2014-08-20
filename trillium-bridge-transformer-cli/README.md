@@ -1,2 +1,2 @@
-# _qdm-phenotyping (qdm-cli)_
-QDM CLI is the command-line interface into the QDM Phenotyping project.
+# _trillium-bridge-transformer-cli_
+Trillium Bridge Transformer CLI is the command-line interface into the Trillium Bridge Transformer project.
