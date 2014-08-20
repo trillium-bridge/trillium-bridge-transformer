@@ -120,8 +120,6 @@
 
             </div>
 
-
-
         </div>
 
         <p>
@@ -202,8 +200,7 @@
         <pre><code id="xmlValue" class="xml"></code></pre>
     </div>
     <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-        <button class="btn btn-primary">Convert</button>
+        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</button>
     </div>
 </div>
 
