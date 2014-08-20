@@ -1,2 +1,2 @@
-# _qdm-phenotyping (qdm-webapp)_
-A web application exposing the QDM Phenotyping API via REST Services.
+# _trillium-bridge-transformer-webapp_
+A web application exposing the Trillium Bridge Transformer API via REST Services.
