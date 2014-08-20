@@ -25,7 +25,7 @@
     </organization>
 
     <scm>
-        <developerConnection>scm:git:git@github.com:SHARP-HTP/qdm-phenotyping.git</developerConnection>
+        <developerConnection>scm:git:git@github.com:kevinpeterson/trillium-bridge-transformer.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
