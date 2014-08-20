@@ -1,0 +1,30 @@
+<assembly>
+    <id>bin</id>
+    <formats>
+        <format>tar.gz</format>
+        <format>zip</format>
+    </formats>
+    <dependencySets>
+        <dependencySet>
+            <includes>
+                <include>*:war</include>
+            </includes>
+            <outputDirectory>/webapp</outputDirectory>
+        </dependencySet>
+    </dependencySets>
+    <fileSets>
+        <fileSet>
+            <directory>src/main/app</directory>
+            <outputDirectory>/</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${project.build.directory}/scripts</directory>
+            <outputDirectory>bin</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>target/app/${project.build.finalName}</directory>
+            <outputDirectory>/</outputDirectory>
+            <fileMode>755</fileMode>
+        </fileSet>
+    </fileSets>
+</assembly>

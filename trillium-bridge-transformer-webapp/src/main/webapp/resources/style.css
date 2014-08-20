@@ -1,0 +1,47 @@
+body {
+    padding-top: 65px;
+    padding-bottom: 65px;
+}
+
+footer {
+    height: 60px;
+}
+footer {
+    background-color: #f5f5f5;
+}
+.credit {
+    margin: 20px 0;
+}
+.error {
+    color: #B94A48; /* color to match Bootstraps error class */
+}
+
+.title {
+    font-size: 28pt;
+    font-weight: bold;
+}
+
+.exampleCcdaXml {
+    color: #00f;
+    font-weight: bold;
+    font-size: 10px;
+    float: right;
+    position: relative;
+    z-index: 1;
+}
+
+.exampleCcdaXml:hover {
+    text-decoration: underline;
+}
+
+body .modal {
+    /* new custom width */
+    width: 1200px;
+    /* must be half of the width, minus scrollbar on the left (30px) */
+    margin-left: -580px;
+}
+
+.trillium-bridge-img {
+    text-align: right;
+    padding-left: 10px;
+}

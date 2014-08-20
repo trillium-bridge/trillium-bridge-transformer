@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>trillium-bridge-transformer</artifactId>
+        <groupId>edu.mayo</groupId>
+        <version>1.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>trillium-bridge-transformer-cli</artifactId>
+    <name>Trillium Bridge Transfomer Command Line Interface</name>
+
+    <properties>
+        <jetty.runner.version>8.1.15.v20140411</jetty.runner.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>appassembler-maven-plugin</artifactId>
+                <version>1.3.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>assemble</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <configurationDirectory>conf</configurationDirectory>
+                    <copyConfigurationDirectory>true</copyConfigurationDirectory>
+                    <includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>
+                    <repositoryLayout>flat</repositoryLayout>
+                    <repositoryName>lib</repositoryName>
+                    <assembleDirectory>${project.build.directory}/app/${project.build.finalName}</assembleDirectory>
+                    <programs>
+                        <program>
+                            <mainClass>edu.mayo.trilliumbridge.cli.Ccda2EpsosLauncher</mainClass>
+                            <name>tbt-ccda2epsos</name>
+                        </program>
+                        <program>
+                            <mainClass>edu.mayo.trilliumbridge.cli.Epsos2CcdaLauncher</mainClass>
+                            <name>tbt-epsos2ccda</name>
+                        </program>
+                    </programs>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptor>src/main/assembly/dist-zip.xml</descriptor>
+                    <finalName>${project.build.finalName}</finalName>
+                    <outputDirectory>${project.build.directory}/dist</outputDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.9</version>
+                <executions>
+                    <execution>
+                        <id>add-resource</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>add-resource</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>${project.build.scriptSourceDirectory}</directory>
+                                    <targetPath>${project.build.directory}/scripts</targetPath>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <artifactId>trillium-bridge-transformer-core</artifactId>
+            <groupId>edu.mayo</groupId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>trillium-bridge-transformer-webapp</artifactId>
+            <groupId>edu.mayo</groupId>
+            <version>${project.parent.version}</version>
+            <type>war</type>
+        </dependency>
+
+        <dependency>
+            <groupId>args4j</groupId>
+            <artifactId>args4j</artifactId>
+            <version>2.0.24</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mortbay.jetty</groupId>
+            <artifactId>jetty-runner</artifactId>
+            <version>${jetty.runner.version}</version>
+        </dependency>
+
+
+    </dependencies>
+
+</project>

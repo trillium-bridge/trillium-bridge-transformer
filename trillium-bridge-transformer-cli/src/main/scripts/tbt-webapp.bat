@@ -1,0 +1,1 @@
+java -jar ../lib/jetty-runner-${jetty.runner.version}.jar "$@" ../webapp/trillium-bridge-transformer-webapp-${project.parent.version}.war
