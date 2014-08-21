@@ -1,0 +1,923 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml-stylesheet type="text/xsl" href="CDA.xsl"?>
+<!--
+	Title: Trillium Bridge Continuity of Care Document (CCD) for Use Case Martha Primary Scenario 
+	File Name: CCD_Marth_Primary_Scenario.xml
+	
+	$LastChangedDate: 2014-02-26 14:25:33 +1000 (Wed, 26 Feb 2014) $ 
+	$Author: sarah.gaunt $
+	********************************************************
+	Disclaimer: This sample file contains representative data elements to represent a Continuity of Care Document (CCD). 
+	The file depicts a fictional character's health data. Any resemblance to a real person is coincidental. 
+	To illustrate as many data elements as possible, the clinical scenario may not be plausible. 
+	The data in this sample file is not intended to represent real patients, people or clinical events.
+	******************************************************** -->
+<!-- 
+This is an attempt of transforming the CCD SAMPLE into a valid PS
+
+I TRACKED MY CHANGES AND COMMENTS WITH THE LABEL GC
+-->
+<!-- GC ADDDED THE NAMESPACE EPSOS-->
+<!--
+<ClinicalDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:hl7-org:v3" xmlns:cda="urn:hl7-org:v3" xmlns:sdtc="urn:hl7-org:sdtc" > -->
+<ClinicalDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:epsos="urn:epsos-org:ep:medication" xmlns="urn:hl7-org:v3" xmlns:cda="urn:hl7-org:v3" xmlns:sdtc="urn:hl7-org:sdtc" xsi:schemaLocation="urn:hl7-org:v3 file:///C:/Consulenze/_epSOS/Deliverables/WP3.9/3.9.1/Appendix%20B%20-%20Semantics/B1%20-%20Guidelines%20epSOS%20Schema/presc_disp_0625/presc_disp_0625/CDASchema/CDA_extended.xsd">
+	<!-- CDA Header  -->
+	<!-- GC should the realmCode be left as is, changed into UV ; or removed ? -->
+	<realmCode code="US"/>
+	<!-- GC should the realmCode be left as is, changed into UV ; or removed ? -->
+	<typeId root="2.16.840.1.113883.1.3" extension="POCD_HD000040"/>
+	<!-- GC TEMPLATE IDs CHANGED -->
+	<!-- US General Header Template -->
+	<!-- <templateId root="2.16.840.1.113883.10.20.22.1.1" /> -->
+	<!-- conforms to the CCD document specific requirements -->
+	<!-- <templateId root="2.16.840.1.113883.10.20.22.1.2" />-->
+	<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.1.3"/>
+	<templateId root="1.3.6.1.4.1.19376.1.5.3.1.1.1"/>
+	<!-- GC TEMPLATE IDs CHANGED -->
+	<!-- GC changed the id -->
+	<id extension="TT9881.epSOS" root="2.16.840.1.113883.19.5.99999.1"/>
+	<!-- GC changed the id -->
+	<!--GC DOES IT MAKE SENSE ? OR SHOULD WE JUST USE THE ps CODE ? -->
+	<code code="60591-5" displayName="Patient Summary" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+		<translation codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" code="34133-9" displayName="Summarization of Episode Note"/>
+	</code>
+	<!--GC DOES IT MAKE SENSE ? OR SHOULD WE JUST USE THE ps CODE ? -->
+	<title>Health Summary</title>
+	<effectiveTime value="201309150000-0400"/>
+	<confidentialityCode code="N" codeSystem="2.16.840.1.113883.5.25"/>
+	<languageCode code="en-US"/>
+	<setId extension="sTT9881" root="2.16.840.1.113883.19.5.99999.19"/>
+	<versionNumber value="1"/>
+	<recordTarget>
+		<patientRole>
+			<!-- Fake ID using HL7 example OID. -->
+			<id extension="998991" root="2.16.840.1.113883.19.5.99999.2"/>
+			<!-- Fake Social Security Number using the actual SSN OID. -->
+			<id extension="111-00-2330" root="2.16.840.1.113883.4.1"/>
+			<!-- HP is "primary home" from codeSystem 2.16.840.1.113883.5.1119 -->
+			<addr use="HP">
+				<streetAddressLine>1357 Amber Drive</streetAddressLine>
+				<city>Beaverton</city>
+				<state>OR</state>
+				<postalCode>97867</postalCode>
+				<!-- US is "United States" from ISO 3166-1 Country Codes: 1.0.3166.1 -->
+				<country>US</country>
+			</addr>
+			<!-- HP is "primary home" from HL7 AddressUse 2.16.840.1.113883.5.1119 -->
+			<telecom value="tel:(555)555-5555" use="HP"/>
+			<patient>
+				<!-- L is "Legal" from HL7 EntityNameUse 2.16.840.1.113883.5.45 -->
+				<name use="L">
+					<given>Martha</given>
+					<family>XXXXX</family>
+				</name>
+				<administrativeGenderCode code="F" codeSystem="2.16.840.1.113883.5.1" displayName="Female"/>
+				<birthTime value="19680607"/>
+				<!-- SHOULD in CCD but don't have this information -->
+				<!--<maritalStatusCode code="M" displayName="Married" codeSystem="2.16.840.1.113883.5.2"
+					codeSystemName="MaritalStatusCode"/>-->
+				<!-- SHOULD in CCD but don't have this information -->
+				<!--<languageCommunication>
+					<!-\- EN is "English" as in the IG -\->
+					<languageCode code="en"/>
+					<modeCode code="ESP" displayName="Expressed spoken"
+						codeSystem="2.16.840.1.113883.5.60" codeSystemName="LanguageAbilityMode"/>
+					<proficiencyLevelCode code="G" displayName="Good"
+						codeSystem="2.16.840.1.113883.5.61"
+						codeSystemName="LanguageAbilityProficiency"/>
+					<preferenceInd value="true"/>
+				</languageCommunication>-->
+			</patient>
+			<!--<providerOrganization>
+				<id root="2.16.840.1.113883.4.6"/>
+				<name>Community Health and Hospitals</name>
+				<telecom use="WP" value="tel: 555-555-5000"/>
+				<addr>
+					<streetAddressLine>1001 Village Avenue</streetAddressLine>
+					<city>Portland</city>
+					<state>OR</state>
+					<postalCode>99123</postalCode>
+					<country>US</country>
+				</addr>
+			</providerOrganization>-->
+		</patientRole>
+	</recordTarget>
+	<author>
+		<time value="20130329224411+0500"/>
+		<assignedAuthor>
+			<id extension="99999999" root="2.16.840.1.113883.4.6"/>
+			<code code="261QX0200X" codeSystem="2.16.840.1.113883.6.101" displayName="Oncology"/>
+			<addr>
+				<streetAddressLine>1002 Healthcare Drive </streetAddressLine>
+				<city>Portland</city>
+				<state>OR</state>
+				<postalCode>99123</postalCode>
+				<country>US</country>
+			</addr>
+			<telecom use="WP" value="tel:555-555-1002"/>
+			<assignedPerson>
+				<name>
+					<given>Henry</given>
+					<family>Oncologist</family>
+				</name>
+			</assignedPerson>
+		</assignedAuthor>
+	</author>
+	<custodian>
+		<assignedCustodian>
+			<representedCustodianOrganization>
+				<id extension="99999999" root="2.16.840.1.113883.4.6"/>
+				<name>Atrius Health</name>
+				<telecom value="tel: 555-555-1002" use="WP"/>
+				<addr use="WP">
+					<streetAddressLine>1002 Healthcare Drive </streetAddressLine>
+					<city>Portland</city>
+					<state>OR</state>
+					<postalCode>99123</postalCode>
+					<country>US</country>
+				</addr>
+			</representedCustodianOrganization>
+		</assignedCustodian>
+	</custodian>
+	<legalAuthenticator>
+		<time value="20130227130000+0500"/>
+		<signatureCode code="S"/>
+		<assignedEntity>
+			<id extension="99999999" root="2.16.840.1.113883.4.6"/>
+			<addr>
+				<streetAddressLine>1002 Healthcare Drive </streetAddressLine>
+				<city>Portland</city>
+				<state>OR</state>
+				<postalCode>99123</postalCode>
+				<country>US</country>
+			</addr>
+			<telecom use="WP" value="tel:555-555-1002"/>
+			<assignedPerson>
+				<name>
+					<given>Henry</given>
+					<family>Oncologist</family>
+				</name>
+			</assignedPerson>
+			<!-- GC ADDED THE ORGANIZATION REQUIRED FOR EPSOS -->
+			<representedOrganization>
+				<!-- Fake ID using HL7 example OID. -->
+				<id nullFlavor="NI"/>
+				<name nullFlavor="NI"/>
+				<telecom nullFlavor="NI"/>
+				<addr nullFlavor="NI"/>
+			</representedOrganization>
+			<!-- GC ADDED THE ORGANIZATION REQUIRED FOR EPSOS -->
+		</assignedEntity>
+	</legalAuthenticator>
+	<!-- GC "Prefered HCP/ Legal Organization" INFORMATION REQUIRED IN EPSOS ADDED -->
+	<!-- participant-hcp-organization-data -->
+	<participant typeCode="IND">
+		<templateId root="1.3.6.1.4.1.19376.1.5.3.1.2.4"/>
+		<functionCode code="PCP" codeSystem="2.16.840.1.113883.5.88" codeSystemName="HL7 ParticipationFunction"/>
+		<associatedEntity classCode="PRS" nullFlavor="NA">
+			<id nullFlavor="NA"/>
+			<addr nullFlavor="NA">
+			</addr>
+			<telecom nullFlavor="NA"/>
+			<associatedPerson nullFlavor="NA">
+				<name nullFlavor="NA">
+					<family nullFlavor="NA"/>
+					<given nullFlavor="NA"/>
+				</name>
+			</associatedPerson>
+		</associatedEntity>
+	</participant>
+	<documentationOf>
+		<serviceEvent classCode="PCPR">
+			<code code="185349003" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Check-up"/>
+			<effectiveTime>
+				<low value="201309081015"/>
+				<high value="201309081045"/>
+			</effectiveTime>
+			<performer typeCode="PRF">
+				<!-- GC NOT MAPPABLE  LEFT UNCHANGED -->
+				<functionCode code="PP" displayName="Primary Performer" codeSystem="2.16.840.1.113883.12.443" codeSystemName="Provider Role">
+					<originalText>Primary Care Provider</originalText>
+				</functionCode>
+				<assignedEntity>
+					<!-- Provider NPI "PseudoMD-1" -->
+					<id extension="PseudoMD-1" root="2.16.840.1.113883.4.6"/>
+					<code code="207RG0100X" displayName="Gastroenterologist" codeSystemName="Provider Codes" codeSystem="2.16.840.1.113883.6.101"/>
+					<addr>
+						<streetAddressLine>1001 Village Avenue</streetAddressLine>
+						<city>Portland</city>
+						<state>OR</state>
+						<postalCode>99123</postalCode>
+						<country>US</country>
+					</addr>
+					<telecom value="tel:+1-555-555-5000" use="HP"/>
+					<assignedPerson>
+						<name>
+							<prefix>Dr.</prefix>
+							<given>Henry</given>
+							<family>Oncologist</family>
+						</name>
+					</assignedPerson>
+					<representedOrganization>
+						<id root="2.16.840.1.113883.19.5.9999.1393"/>
+						<name>Atrius Health</name>
+						<telecom value="tel:+1-555-555-5000" use="HP"/>
+						<addr>
+							<streetAddressLine>1002 Healthcare Drive</streetAddressLine>
+							<city>Portland</city>
+							<state>OR</state>
+							<postalCode>99123</postalCode>
+							<country>US</country>
+						</addr>
+					</representedOrganization>
+				</assignedEntity>
+			</performer>
+		</serviceEvent>
+	</documentationOf>
+	<!-- GC THIS IS THE TRANSFORMATION OF THE "TT988" CCD -->
+	<relatedDocument typeCode="XFRM">
+		<parentDocument>
+			<id extension="TT988" root="2.16.840.1.113883.19.5.99999.1"/>
+		</parentDocument>
+	</relatedDocument>
+	<!-- GC THIS IS THE TRANSFORMATION OF THE "TT988" CCD -->
+	<!-- CDA Body -->
+	<component>
+		<structuredBody>
+			<!-- Allergies Section (entries required)  -->
+			<component>
+				<section>
+					<!-- GC TEMPLATE ID CHANGED -->
+					<!-- conforms to Allergies section with entries optional -->
+					<!-- <templateId root="2.16.840.1.113883.10.20.22.2.6"/> -->
+					<!-- Allergies section with entries required -->
+					<!-- <templateId root="2.16.840.1.113883.10.20.22.2.6.1"/> 
+					-->
+					<templateId root="2.16.840.1.113883.10.20.1.2"/>
+					<templateId root="1.3.6.1.4.1.19376.1.5.3.1.3.13"/>
+					<code code="48765-2" displayName="Allergies, adverse reactions, alerts" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+					<!-- GC ADDED CODEsYSTEM AND DISPALYnAME REQUIRED IN EPSOS -->
+					<!--					<code code="48765-2" codeSystem="2.16.840.1.113883.6.1"/> -->
+					<text>
+						<table border="1" width="100%">
+							<thead>
+								<tr>
+									<th>Type</th>
+									<th>Substance</th>
+									<th>Overall Severity</th>
+									<th>Reaction</th>
+									<th>Reaction Severity</th>
+									<th>Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- GC added ID to the <tr> for referring the global allergy descripton -->
+								<tr ID="allergy.1">
+									<!-- GC added ID to the <tr> for referring the global allergy descripton -->
+									<!-- GC added the missing ID -->
+									<td>
+										<content ID="type1">Drug allergy</content>
+									</td>
+									<td>
+										<content ID="agent1">ALLERGENIC EXTRACT,
+											PENICILLIN</content>
+									</td>
+									<td>
+										<content ID="overallseverity1">Moderate to Severe</content>
+									</td>
+									<td>
+										<content ID="reaction1">Nausea</content>
+									</td>
+									<td>
+										<content ID="reactionseverity1">Moderate to Severe</content>
+									</td>
+									<td>Active</td>
+								</tr>
+							</tbody>
+						</table>
+					</text>
+					<entry typeCode="DRIV">
+						<!-- Allergy Problem Act -->
+						<act classCode="ACT" moodCode="EVN">
+							<!-- ** Allergy problem act ** -->
+							<!-- GC CHANGED TEMPLATE IDs -->
+							<!--
+							<templateId root="2.16.840.1.113883.10.20.22.4.30"/>
+-->
+							<templateId root="2.16.840.1.113883.10.20.1.27"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5.1"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5.3"/>
+							<!-- GC CHANGED TEMPLATE IDs -->
+							<id root="36e3e930-7b14-11db-9fe1-0800200c9a66"/>
+							<!-- GC CHANGED CODE TO "NA" AS REQUESTED BY THE TEMPLATE, IMHO IN THIS CASE DOES NOT MAKE SENS TO ADD THE ORIGINAL CODE IN THE TRANSALTION  -->
+							<code nullFlavor="NA"/>
+							<!-- <code code="48765-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Allergies, adverse reactions, alerts"/> -->
+							<!-- GC CHANGED CODE TO "NA" AS REQUESTED BY THE TEMPLATE, IMHO IN THIS CASE DOES NOT MAKE SENS TO ADD THE ORIGINAL CODE IN THE TRANSALTION  -->
+							<statusCode code="active"/>
+							<!-- GC the IHE PCC template ePsos IS BASED ON asks for low and high values -->
+							<!-- 2.16.840.1.113883.10.20.22.4.30 template (At least the version I saw) says 7.	SHALL contain exactly one [1..1] effectiveTime (CONF:7498). a.	If statusCode = "55561003" Active, then effectiveTime SHALL contain [1..1] low (CONF:7504).
+b.	If statusCode="413322009" Resolved, then effectiveTime SHALL contain [1..1] high (CONF:10085). is not required IVL_TS as well ? -->
+							<!--							<effectiveTime value="20070501"/> -->
+							<effectiveTime>
+								<low value="20070501"/>
+							</effectiveTime>
+							<!-- GC the IHE PCC template ePsos IS BASED ON asks for low and high values -->
+							<!--			THE ihe pcc TEMPLATE "The typeCode SHALL be ‘SUBJ’ and inversionInd SHALL be ‘false’"
+									The CCDA specs (at least the version I saw) just say typeCode SHALL be ‘SUBJ’ -->
+							<!-- <entryRelationship typeCode="SUBJ" inversionInd="true"> -->
+							<entryRelationship typeCode="SUBJ" inversionInd="false">
+								<!-- GC changed the inversionInd -->
+								<!--  Allergy - Intolerance Observation  -->
+								<observation classCode="OBS" moodCode="EVN">
+									<!-- ** Allergy observation ** -->
+									<!-- GC CHANGED TEMPLATE IDs -->
+									<!--
+									<templateId root="2.16.840.1.113883.10.20.22.4.7"/>
+								-->
+									<templateId root="2.16.840.1.113883.10.20.1.18"/>
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.6"/>
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5"/>
+									<templateId root="2.16.840.1.113883.10.20.1.28"/>
+									<!-- GC CHANGED TEMPLATE IDs -->
+									<id root="4adc1020-7b14-11db-9fe1-0800200c9a66"/>
+									<!-- GC THE SYNTAX USED IS COMPLETELY DIFFERENT THE VALUE OF OBS IS USED AS CODE -->
+									<!-- 		<code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/> -->
+									<code xsi:type="CD" code="419511003" displayName="Propensity to adverse reactions to drug" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
+									<!-- GC THE SYNTAX USED IS COMPLETELY DIFFERENT THE VALUE OF OBS IS USED AS CODE -->
+									<!-- GC OBS Text Required ADDED -->
+									<text>
+										<reference value="#allergy.1"/>
+									</text>
+									<!-- GC OBS Text Required ADDED -->
+									<statusCode code="completed"/>
+									<effectiveTime>
+										<low value="20070501"/>
+									</effectiveTime>
+									<!-- GC THE SYNTAX USED IS COMPLETELY DIFFERENT THE VALUE IS CODED ONLY FOR "NOT KNOWN ALLERGIES"  -->
+									<!--									<value xsi:type="CD" code="416098002"
+										displayName="Drug allergy"
+										codeSystem="2.16.840.1.113883.6.96"
+										codeSystemName="SNOMED CT"> <originalText>
+											<reference value="#type1" />
+										</originalText> -->
+									<value xsi:type="CD">
+										<!-- GC THE SYNTAX USED IS COMPLETELY DIFFERENT THE VALUE IS CODED ONLY FOR "NOT KNOWN ALLERGIES"  -->
+										<originalText>
+											<reference value="#allergy.1"/>
+										</originalText>
+									</value>
+									<!-- This particpant represents the causative agent -->
+									<participant typeCode="CSM">
+										<participantRole classCode="MANU">
+											<playingEntity classCode="MMAT">
+												<!-- GC I WAS NOT ABLE TO FIND A MAPPED ATC IN THE TABLE AGREED ; I LEFT THIS CODE UNCHANGED -->
+												<code code="314422" displayName="ALLERGENIC EXTRACT, PENICILLIN" codeSystem="2.16.840.1.113883.6.88" codeSystemName="RxNorm">
+													<originalText>
+														<reference value="#agent1"/>
+													</originalText>
+												</code>
+											</playingEntity>
+										</participantRole>
+									</participant>
+									<!-- GC ihe TEMPLATE USES THE "REFR" TYPE CODE -->
+									<!-- <entryRelationship typeCode="SUBJ" inversionInd="true"> -->
+									<entryRelationship typeCode="REFR" inversionInd="true">
+										<!-- GC ihe TEMPLATE USES THE "REFR" TYPE CODE -->
+										<!--  Allergy status observation  -->
+										<observation classCode="OBS" moodCode="EVN">
+											<!-- GC CHANGED TEMPLATE IDs -->
+											<!--	<templateId root="2.16.840.1.113883.10.20.22.4.28"/> -->
+											<templateId root='2.16.840.1.113883.10.20.1.57'/>
+											<templateId root='2.16.840.1.113883.10.20.1.50'/>
+											<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.1.1"/>
+											<!-- GC CHANGED TEMPLATE IDs -->
+											<code code="33999-4" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Status"/>
+											<!-- GC  ADDED text -->
+											<!-- IHE PCC template requires the text element valued with a ref to the section text. -->
+											<text>
+												<reference value="#allergy.1"/>
+											</text>
+											<!-- GC  ADDED text -->
+											<statusCode code="completed"/>
+											<value xsi:type="CE" code="55561003" codeSystem="2.16.840.1.113883.6.96" displayName="Active"/>
+										</observation>
+									</entryRelationship>
+									<entryRelationship typeCode="MFST" inversionInd="true">
+										<!--  Reaction observation  -->
+										<observation classCode="OBS" moodCode="EVN">
+											<!-- GC CHANGED TEMPLATE IDs -->
+											<!--										
+											<templateId root="2.16.840.1.113883.10.20.22.4.9"/>
+-->
+											<templateId root='2.16.840.1.113883.10.20.1.54'/>
+											<templateId root='1.3.6.1.4.1.19376.1.5.3.1.4.5'/>
+											<templateId root="2.16.840.1.113883.10.20.1.28"/>
+											<!-- GC CHANGED TEMPLATE IDs -->
+											<id root="4adc1020-7b14-11db-9fe1-0800200c9a64"/>
+											<!-- GC CHANGED CODE TO "NA" AS REQUESTED BY THE TEMPLATE, IMHO IN THIS CASE DOES NOT MAKE SENS TO ADD THE ORIGINAL CODE IN THE TRANSALTION  -->
+											<code nullFlavor="NA"/>
+											<!-- <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4" />-->
+											<!-- GC CHANGED CODE TO "NA" AS REQUESTED BY THE TEMPLATE, IMHO IN THIS CASE DOES NOT MAKE SENS TO ADD THE ORIGINAL CODE IN THE TRANSALTION  -->
+											<text>
+												<reference value="#reaction1"/>
+											</text>
+											<statusCode code="completed"/>
+											<effectiveTime>
+												<low value="20070501"/>
+											</effectiveTime>
+											<!-- GC LEFT UNCHANGED THIS IS NOT INCLUDED IN THE EPSOS VALUE SET -->
+											<value xsi:type="CD" code="422587007" codeSystem="2.16.840.1.113883.6.96" displayName="Nausea"/>
+											<!-- GC LEFT UNCHANGED THIS IS NOT INCLUDED IN THE EPSOS VALUE SET -->
+											<entryRelationship typeCode="SUBJ" inversionInd="true">
+												<!--  Severity observation  -->
+												<observation classCode="OBS" moodCode="EVN">
+													<templateId root="2.16.840.1.113883.10.20.22.4.8"/>
+													<code code="SEV" displayName="Severity Observation" codeSystem="2.16.840.1.113883.5.4" codeSystemName="ActCode"/>
+													<text>
+														<reference value="#reactionseverity1"/>
+													</text>
+													<statusCode code="completed"/>
+													<value xsi:type="CD" code="371924009" displayName="Moderate to severe" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
+													<interpretationCode code="S" displayName="Suceptible" codeSystem="2.16.840.1.113883.1.11.78" codeSystemName="Observation Interpretation"/>
+												</observation>
+											</entryRelationship>
+										</observation>
+									</entryRelationship>
+									<entryRelationship typeCode="SUBJ" inversionInd="true">
+										<!--  Severity observation  -->
+										<observation classCode="OBS" moodCode="EVN">
+											<templateId root="2.16.840.1.113883.10.20.22.4.8"/>
+											<code code="SEV" displayName="Severity Observation" codeSystem="2.16.840.1.113883.5.4" codeSystemName="ActCode"/>
+											<text>
+												<reference value="#overallseverity1"/>
+											</text>
+											<statusCode code="completed"/>
+											<value xsi:type="CD" code="371924009" displayName="Moderate to severe" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
+											<interpretationCode code="N" displayName="Normal" codeSystem="2.16.840.1.113883.1.11.78" codeSystemName="Observation Interpretation"/>
+										</observation>
+									</entryRelationship>
+								</observation>
+							</entryRelationship>
+						</act>
+					</entry>
+				</section>
+			</component>
+			<!-- GC. CONTINUARE DA QUI -->
+			<!-- Medications Section (entries required) -->
+			<component>
+				<section>
+					<!-- GC CHANGED TEMPLATE IDs -->
+					<!-- conforms to Medications section with entries optional -->
+					<!-- <templateId root="2.16.840.1.113883.10.20.22.2.1"/> -->
+					<!-- Medications section with entries required -->
+					<!-- <templateId root="2.16.840.1.113883.10.20.22.2.1.1"/> -->
+					<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.2.3"/>
+					<templateId root="2.16.840.1.113883.10.20.1.8"/>
+					<!-- GC CHANGED TEMPLATE IDs -->
+					<code code="10160-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="History of Medication Use"><translation displayName="HISTORY OF MEDICATION USE"/></code>
+					
+					
+										<title>Medications</title>
+					<text>
+						<table border="1" width="100%">
+							<thead>
+								<tr>
+									<th>Medication</th>
+									<th>Directions</th>
+									<th>Start Date</th>
+									<th>Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<content ID="MedSec_1">Anastrozole</content>
+									</td>
+									<td>1 mg once daily</td>
+									<td>20130103</td>
+									<td>Active</td>
+								</tr>
+							</tbody>
+						</table>
+					</text>
+					<entry typeCode="DRIV">
+						<substanceAdministration classCode="SBADM" moodCode="EVN">
+							<!-- Medication activity -->
+							<!-- GC CHANGED TEMPLATE IDs -->
+							<!--
+							<templateId root="2.16.840.1.113883.10.20.22.4.16"/>
+-->
+							<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.4"/>
+							<templateId root="2.16.840.1.113883.10.20.1.24"/>
+							<!-- GC CHANGED TEMPLATE IDs -->
+							<templateId root="2.16.840.1.113883.10.20.22.4.16"/>
+							<id root="cdbd33f0-6cde-11db-9fe1-0800200c9a66"/>
+							<text>
+								<reference value="#MedSec_1"/>Anastrozole</text>
+							<statusCode code="completed"/>
+							<effectiveTime xsi:type="IVL_TS">
+								<low value="20130103"/>
+								<high nullFlavor="NA"/>
+							</effectiveTime>
+							<effectiveTime xsi:type="PIVL_TS" operator="A">
+								<period value="1" unit="d"/>
+							</effectiveTime>
+							<!--	GC CHANGED -->
+							<!-- <doseQuantity value="1" unit="mg"/> -->
+							<doseQuantity>
+								<low value="1" unit="mg"/>
+								<high value="1" unit="mg"/>
+							</doseQuantity>
+							<!--	GC CHANGED -->
+							<consumable>
+								<manufacturedProduct classCode="MANU">
+									<!-- Medication information -->
+									<!-- GC CHANGED TEMPLATE IDs -->
+									<!--
+									<templateId root="2.16.840.1.113883.10.20.22.4.23"/>
+								-->
+									<templateId root="2.16.840.1.113883.10.20.1.53"/>
+									<id root="2a620155-9d11-439e-92b3-5d9815ff4ee8"/>
+									<manufacturedMaterial>
+										<code code="84857" codeSystem="2.16.840.1.113883.6.88" codeSystemName="RxNorm" displayName="Anastrozole">
+											<originalText>
+												<reference value="#MedSec_1"/>
+											</originalText>
+										</code>
+										<!-- GC ADDED THE REQUESTED ELEMENTS SUPPOSING THIS INFO CAN BE DERIVED FORM THE DRUG CODE -->
+										<!-- TO BE CHECKED -->
+										<epsos:formCode nullFlavor="NA"/>
+										<epsos:ingredient classCode="ACTI">
+											<epsos:quantity nullFlavor="NA">
+												<epsos:numerator nullFlavor="NA" xsi:type="epsos:PQ"/>
+												<epsos:denominator nullFlavor="NA" xsi:type="epsos:PQ"/>
+											</epsos:quantity>
+											<epsos:ingredient classCode="MMAT" determinerCode="KIND">
+												<epsos:code code="L02BG03" displayName="anastrozole" codeSystem="2.16.840.1.113883.6.73" codeSystemName="Anatomical Therapeutic Chemical"/>
+											</epsos:ingredient>
+										</epsos:ingredient>
+										<!-- GC ADDED THE REQUESTED ELEMENTS SUPPOSING THIS INFO CAN BE DERIVED FORM THE DRUG CODE -->
+									</manufacturedMaterial>
+								</manufacturedProduct>
+							</consumable>
+						</substanceAdministration>
+					</entry>
+				</section>
+			</component>
+			<!--  Problem Section (entries required)  -->
+			<component>
+				<section>
+					<!-- GC CHANGED TEMPLATE IDs -->
+					<!-- conforms to Problems section with entries optional -->
+					<!--
+									 <templateId root="2.16.840.1.113883.10.20.22.2.5"/> -->
+					<!-- Problems section with entries required -->
+					<!--
+									 <templateId root="2.16.840.1.113883.10.20.22.2.5.1"/> -->
+					<templateId root="2.16.840.1.113883.10.20.1.11"/>
+					<templateId root="1.3.6.1.4.1.19376.1.5.3.1.3.6"/>
+					<!-- GC CHANGED TEMPLATE IDs -->
+					<!-- GC I'VE SIMULATED THE BEHAVIOR OF THE EPSOS TRANSFORMATION COMPONENT -->
+					<!-- <code code="11450-4" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="PROBLEM LIST"/> -->
+					<code code="11450-4" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Problem list">
+						<translation displayName="PROBLEM LIST"/>
+					</code>
+					<!-- GC I'VE SIMULATED THE BEHAVIOR OF THE EPSOS TRANSFORMATION COMPONENT -->
+					<title>Problems</title>
+					<text>
+						<content ID="problems"/>
+						<list listType="ordered">
+							<item>
+								<content ID="problem1">Breast Cancer Stage II</content>
+								<content ID="stat1">Status: Resolved</content>
+							</item>
+							<item>
+								<content ID="problem2">Hot Flashes</content>
+								<content ID="stat2">Status: Active</content>
+							</item>
+						</list>
+					</text>
+					<entry typeCode="DRIV">
+						<!-- Problem concern act -->
+						<act classCode="ACT" moodCode="EVN">
+							<!-- GC CHANGED TEMPLATE IDs -->
+							<!-- ** Problem concern act ** -->
+							<!-- <templateId root="2.16.840.1.113883.10.20.22.4.3"/>  -->
+							<templateId root="2.16.840.1.113883.10.20.1.27"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5.1"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5.2"/>
+							<!-- GC CHANGED TEMPLATE IDs -->
+							<id root="ec8a6ff8-ed4b-4f7e-82c3-e98e58b45de7"/>
+							<!-- GC CHANGED ACCORDING TO THE USED TEMPLATE  -->
+							<!--
+							<code code="CONC" codeSystem="2.16.840.1.113883.5.6" displayName="Concern"/> -->
+							<code nullFlavor="NA"/>
+							<!-- GC CHANGED ACCORDING TO THE USED TEMPLATE  -->
+							<statusCode code="completed"/>
+							<effectiveTime>
+								<low value="20110103"/>
+								<high value="20130703"/>
+							</effectiveTime>
+							<!-- GC the IHE PCC template epsos is based on requires thta the inversionInd is present and set to "false" -->
+							<!-- <entryRelationship typeCode="SUBJ"> -->
+							<entryRelationship typeCode="SUBJ" inversionInd="false">
+								<!-- GC the IHE PCC template epsos is based on requires thta the inversionInd is present and set to "false" -->
+								<!-- Problem Observation -->
+								<observation classCode="OBS" moodCode="EVN">
+									<!-- GC CHANGED TEMPLATE IDs -->
+									<!-- ** Problem observation ** -->
+									<!-- <templateId root="2.16.840.1.113883.10.20.22.4.4"/> -->
+									<templateId root="2.16.840.1.113883.10.20.1.28"/>
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5"/>
+									<!-- GC CHANGED TEMPLATE IDs -->
+									<id root="ab1791b0-5c71-11db-b0de-0800200c9a66"/>
+									<code code="55607006" codeSystem="2.16.840.1.113883.6.96" displayName="Problem"/>
+									<text>
+										<reference value="#problem1"/>
+									</text>
+									<statusCode code="completed"/>
+									<effectiveTime>
+										<low value="20110103"/>
+										<high value="20130703"/>
+									</effectiveTime>
+									<!-- GC CHANGED <value xsi:type="CD" code="254837009" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Breast cancer"> <qualifier>
+											<value code="258219007" codeSystem="2.16.840.1.113883.19.6.96" codeSystemName="SNOMED CT" displayName="Stage 2"/>
+										</qualifier></value>  -->
+									<value code="C50" displayName="Malignant neoplasm of breast" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.44.2" codeSystemName="ICD-10" xsi:type="CD">
+										<qualifier>
+											<value code="258219007" codeSystem="2.16.840.1.113883.19.6.96" codeSystemName="SNOMED CT" displayName="Stage 2"/>
+										</qualifier>
+										<translation xsi:type="CD" code="254837009" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Breast cancer"/>
+									</value>
+										<!-- GC CHANGED -->
+									<!-- GC the IHE PCC template epsos is based on requires thta the inversionInd is present and set to "false" -->
+									<!-- <entryRelationship typeCode="REFR"> -->
+									<entryRelationship typeCode="REFR" inversionInd="false">
+										<!-- GC the IHE PCC template epsos is based on requires thta the inversionInd is present and set to "false" -->
+										<!-- Problem Status -->
+										<observation classCode="OBS" moodCode="EVN">
+											<!-- GC CHANGED TEMPLATE IDs -->
+											<!-- ** Problem status observation ** -->
+											<!-- <templateId root="2.16.840.1.113883.10.20.22.4.6"/> -->
+											<templateId root='2.16.840.1.113883.10.20.1.57'/>
+											<templateId root='2.16.840.1.113883.10.20.1.50'/>
+											<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.1.1"/>
+											<!-- GC CHANGED TEMPLATE IDs -->
+											<id root="ab1791b0-5c71-11db-b0de-0800200c9a66"/>
+											<code code="33999-4" codeSystem="2.16.840.1.113883.6.1" displayName="Status"/>
+											<text>
+												<reference value="#stat1"/>
+											</text>
+											<statusCode code="completed"/>
+											<value xsi:type="CD" code="413322009" codeSystem="2.16.840.1.113883.6.96" displayName="Resolved"/>
+										</observation>
+									</entryRelationship>
+								</observation>
+							</entryRelationship>
+						</act>
+					</entry>
+					<entry typeCode="DRIV">
+						<!-- Problem concern act -->
+						<act classCode="ACT" moodCode="EVN">
+									<!-- GC CHANGED TEMPLATE IDs -->
+							<!-- ** Problem concern act ** -->
+							<!-- <templateId root="2.16.840.1.113883.10.20.22.4.3"/>  -->
+							<templateId root="2.16.840.1.113883.10.20.1.27"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5.1"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5.2"/>
+							<!-- GC CHANGED TEMPLATE IDs -->
+							<id root="ec8a6ff8-ed4b-4f7e-82c3-e98e58b45de7"/>
+							<!-- GC CHANGED ACCORDING TO THE USED TEMPLATE  -->
+							<!--
+							<code code="CONC" codeSystem="2.16.840.1.113883.5.6" displayName="Concern"/> -->
+							<code nullFlavor="NA"/>
+							<!-- GC CHANGED ACCORDING TO THE USED TEMPLATE  -->
+							<statusCode code="completed"/>
+											<!-- GC IF THE STATS IS COMPLETED IS NOT REQUIRED BY THIS TEMPLATE THE EFFECTIVETIME.HIGH ? -->
+							<!-- GC NOT CLEAR IF THE CONCERN IS ACTIVE OR NOT...-->
+							<effectiveTime>
+								<low value="20120103"/>
+									<!-- GC Added -->
+								<high nullFlavor="NI" />
+								<!-- GC Added -->
+							</effectiveTime>
+						<!-- GC the IHE PCC template epsos is based on requires thta the inversionInd is present and set to "false" -->
+							<!-- <entryRelationship typeCode="SUBJ"> -->
+							<entryRelationship typeCode="SUBJ" inversionInd="false">
+								<!-- GC the IHE PCC template epsos is based on requires thta the inversionInd is present and set to "false" -->
+								<!-- Problem Observation -->
+								<observation classCode="OBS" moodCode="EVN">
+									<!-- ** Problem observation ** -->
+									<!-- <templateId root="2.16.840.1.113883.10.20.22.4.4"/> -->
+									<templateId root="2.16.840.1.113883.10.20.1.28"/>
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5"/>
+									<!-- GC CHANGED TEMPLATE IDs -->
+									<id root="ab1791b0-5c71-11db-b0de-0800200c9a66"/>
+									<code code="55607006" codeSystem="2.16.840.1.113883.6.96" displayName="Problem"/>
+									<text>
+										<reference value="#problem2"/>
+									</text>
+									<statusCode code="completed"/>
+									<effectiveTime>
+										<low value="20120103"/>
+									</effectiveTime>
+									<!-- GC No Mapping Unchanged -->
+										<!--GC FIXED wrong code 
+									<value xsi:type="CD" code="55607006"
+										-->
+
+						<value xsi:type="CD" code="389318003"				
+										codeSystem="2.16.840.1.113883.6.96"
+										codeSystemName="SNOMED CT" displayName="Hot flashes" />
+									<!-- GC No Mapping Unchanged -->
+									
+											<!-- GC the IHE PCC template epsos is based on requires thta the inversionInd is present and set to "false" -->
+									<!-- <entryRelationship typeCode="REFR"> -->
+									<entryRelationship typeCode="REFR" inversionInd="false">
+										<!-- GC the IHE PCC template epsos is based on requires thta the inversionInd is present and set to "false" -->
+										
+										<!-- Problem Status -->
+										<observation classCode="OBS" moodCode="EVN">
+										<!-- GC CHANGED TEMPLATE IDs -->
+											<!-- ** Problem status observation ** -->
+											<!-- <templateId root="2.16.840.1.113883.10.20.22.4.6"/> -->
+											<templateId root='2.16.840.1.113883.10.20.1.57'/>
+											<templateId root='2.16.840.1.113883.10.20.1.50'/>
+											<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.1.1"/>
+											<!-- GC CHANGED TEMPLATE IDs -->
+											
+											<id root="ab1791b0-5c71-11db-b0de-0800200c9a66"/>
+											<code code="33999-4" codeSystem="2.16.840.1.113883.6.1" displayName="Status"/>
+											<text>
+												<reference value="#stat2"/>
+											</text>
+											<statusCode code="completed"/>
+											<value xsi:type="CD" code="55561003" codeSystem="2.16.840.1.113883.6.96" displayName="Active"/>
+										</observation>
+									</entryRelationship>
+								</observation>
+							</entryRelationship>
+						</act>
+					</entry>
+				</section>
+			</component>
+			<!-- Results Section (entries required)  -->
+			<component>
+				<section nullFlavor="NI">
+	
+				<!-- GC In this case seection has been left unchanged,being this an optional section in epSOS and used only for providing the blood group -->
+						
+					<!-- conforms to Results section with entries optional -->
+					<templateId root="2.16.840.1.113883.10.20.22.2.3"/>
+					<!-- Results section with entries required -->
+					<templateId root="2.16.840.1.113883.10.20.22.2.3.1"/>
+					<code code="30954-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Relevant diagnostic tests/laboratory data"><translation displayName="RESULTS"/></code>
+					<title>Results</title>
+					<text>No information</text>
+				</section>
+			</component>
+			
+			<!-- Plan of Care Section -->
+			<component>
+				<section>
+					<!-- GC In this case seection has been left unchanged,being this an optional section in epSOS and used only for providing the blood group -->
+					
+					<!-- Plan of Care section -->
+					<templateId root="2.16.840.1.113883.10.20.22.2.10"/>
+					<code code="18776-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Plan of treatment"><translation displayName="Treatment plan" /></code>
+					<title>Plan of Care</title>
+					<text>
+						<table border="1" width="100%">
+							<thead>
+								<tr>
+									<th>Planned Activity</th>
+									<th>Planned Start Date</th>
+									<th>Planned End Date</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Medication: Anastrozole</td>
+									<td>20130103</td>
+									<td>20180102</td>
+								</tr>
+								<tr>
+									<td>Monitor for potential breast cancer recurrence</td>
+									<td>20130103</td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</text>
+					<entry typeCode="DRIV">
+						<!-- Plan of Care Activity Substance Administration -->
+						<substanceAdministration classCode="SBADM" moodCode="RQO">
+							<templateId root="2.16.840.1.113883.10.20.22.4.42"/>
+							<id root="9a6d1bac-17d3-4195-89a4-1121bc809b4a"/>
+							<statusCode code="active"/>
+							<effectiveTime xsi:type="IVL_TS">
+								<low value="20130103"/>
+								<high value="20180102"/>
+							</effectiveTime>
+							<effectiveTime xsi:type="PIVL_TS" operator="A">
+								<period value="1" unit="d"/>
+							</effectiveTime>
+							<routeCode code="C38288" codeSystem="2.16.840.1.113883.3.26.1.1" codeSystemName="NCI Thesaurus" displayName="ORAL"/>
+							<doseQuantity value="1" unit="mg"/>
+							<consumable>
+								<manufacturedProduct classCode="MANU">
+									<!-- Medication information -->
+									<templateId root="2.16.840.1.113883.10.20.22.4.23"/>
+									<id root="2a620155-9d11-439e-92b3-5d9815ff4ee8"/>
+									<manufacturedMaterial>
+										<code code="84857" codeSystem="2.16.840.1.113883.6.88" codeSystemName="RxNorm" displayName="Anastrozole"> </code>
+									</manufacturedMaterial>
+								</manufacturedProduct>
+							</consumable>
+						</substanceAdministration>
+					</entry>
+					<entry typeCode="DRIV">
+						<act classCode="ACT" moodCode="RQO">
+							<!-- Plan of care activity act -->
+							<templateId root="2.16.840.1.113883.10.20.22.4.44"/>
+							<id root="9a6d1bac-17d3-4195-89a4-1121bc809b4a"/>
+							<code nullFlavor="OTH">
+								<originalText>Monitor for potential breast cancer
+									recurrence.</originalText>
+							</code>
+							<statusCode code="active"/>
+							<effectiveTime>
+								<low value="20130512"/>
+							</effectiveTime>
+						</act>
+					</entry>
+				</section>
+			</component>
+
+			<!-- GC ADDED MISSING SECTIONS -->
+			<!--history-of-medical-device-use-->
+			<component>
+				<section>
+					<templateId root="2.16.840.1.113883.10.20.1.7"/>
+					<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.2.4"/>
+					<templateId root="1.3.6.1.4.1.19376.1.5.3.1.1.5.3.5"/>
+					<code code="46264-8" displayName="History of medical device use" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+					<title>History of medical device use</title>
+					<text>
+						<paragraph ID="dev.1">No Devices Used</paragraph>
+					</text>
+					<entry typeCode="DRIV">
+						<supply classCode="SPLY" moodCode="EVN" nullFlavor="NA">
+							<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.5"/>
+							<text>
+								<reference value="#dev.1"/>
+							</text>
+							<effectiveTime nullFlavor="NA"/>
+							<participant typeCode="DEV" nullFlavor="NA">
+								<participantRole classCode="MANU">
+									<playingDevice classCode="DEV" determinerCode="INSTANCE">
+										<code nullFlavor="NA"/>
+									</playingDevice>
+								</participantRole>
+							</participant>
+						</supply>
+					</entry>
+				</section>
+			</component>
+			<!--history-of-medical-device-use-->
+			<!--history-of-procedures-->
+			<component>
+				<section>
+					<templateId root="1.3.6.1.4.1.19376.1.5.3.1.3.11"/>
+					<templateId root="1.3.6.1.4.1.19376.1.5.3.1.3.12"/>
+					<templateId root="2.16.840.1.113883.10.20.1.12"/>
+					<code code="47519-4" displayName="History of Procedures" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+					<title>History of Procedures</title>
+					<text>
+						<!-- Is this coherent with a woman with breast cancer ? -->
+						<paragraph ID="proc.1">No Surgical Procedures</paragraph>
+					</text>
+					<entry typeCode="DRIV">
+						<procedure classCode="PROC" moodCode="EVN" nullFlavor="NA">
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.19"/>
+							<templateId root="2.16.840.1.113883.10.20.1.29"/>
+							<id extension="proc.3" root="2.16.470.1.100.1.1.1000.990.1"/>
+							<code nullFlavor="NA"/>
+							<text>
+								<reference value="#proc.1"/>
+							</text>
+							<statusCode code="completed"/>
+							<effectiveTime>
+								<low value="20120222"/>
+							</effectiveTime>
+						</procedure>
+					</entry>
+				</section>
+			</component>
+			<!--history-of-procedures-->
+			<!-- GC ADDED MISSING SECTIONS -->
+			
+			
+		</structuredBody>
+	</component>
+</ClinicalDocument>

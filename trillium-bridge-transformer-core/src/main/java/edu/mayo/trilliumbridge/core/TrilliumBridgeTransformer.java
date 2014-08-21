@@ -7,7 +7,7 @@ import java.io.OutputStream;
  */
 public interface TrilliumBridgeTransformer {
 
-    public enum Format {XML}
+    public enum Format { XML, HTML, PDF }
 
     public void ccdaToEpsos(InputStream ccdaStream, OutputStream epsosStream, Format outputFormat);
 

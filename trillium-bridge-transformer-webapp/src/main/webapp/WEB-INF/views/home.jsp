@@ -74,13 +74,13 @@
 
             <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
                 <li class="active"><a href="#fileUpload" data-toggle="tab">File Upload</a></li>
-                <li><a href="#ccdaExamples" data-toggle="tab">Try an Example</a></li>
+                <!-- <li><a href="#ccdaExamples" data-toggle="tab">Try an Example</a></li> -->
             </ul>
 
             <div id="my-tab-content" class="tab-content">
 
                 <div class="tab-pane active" id="fileUpload">
-                    <form enctype='multipart/form-data' name="fileUploadForm" id="fileUploadForm" method='post' class="form-inline well">
+                    <form action="ccda2epsos" enctype='multipart/form-data' name="fileUploadForm" id="fileUploadForm" method='post' class="form-inline well">
                         <div class="fileupload fileupload-new" data-provides="fileupload">
                             <div class="input-append">
                                 <div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i>
@@ -91,22 +91,32 @@
                             </div>
                             <button class="btn btn-primary fileupload-exists dropdown-toggle" type='submit'>Convert!</button>
 
-                            <div>
+                            <div>Conversion:
                                 <label class="radio">
-                                    <input type="radio" name="converstionType" value="ccda2epsos" checked>
+                                    <input type="radio" name="conversionType" value="ccda2epsos" checked>
                                     <span>CCDA to epSOS</span>
                                 </label>
                                 <span>&nbsp;</span>
                                 <label class="radio">
-                                    <input type="radio" name="converstionType" value="epsos2ccda">
+                                    <input type="radio" name="conversionType" value="epsos2ccda">
                                     <span>epSOS to CCDA</span>
                                 </label>
                             </div>
+
+                            <div id="formatToggle" class="fileupload-exists">Output Format:
+                                <div  class="btn-group" data-toggle="buttons-radio">
+                                    <button type="button" class="btn active">XML</button>
+                                    <button type="button" class="btn">HTML</button>
+                                    <button type="button" class="btn">PDF</button>
+                                </div>
+                            </div>
+                            <input type="hidden" id="formatOverride" name="formatOverride" value="XML"/>
 
                         </div>
                     </form>
                 </div>
 
+                <!-- Only a no-op transfrom for now
                 <div class="tab-pane" id="ccdaExamples">
                     <form action='qdm2drools' id="emeasureForm" method='get' class="form-inline well">
                         <select id="ccdaExamplesSelect" name="ccdaExamplesSelect" class="combobox" style="width:80%">
@@ -117,6 +127,7 @@
                         <button class="btn btn-primary dropdown-toggle" type='submit'>Convert!</button>
                     </form>
                 </div>
+                -->
 
             </div>
 
@@ -135,8 +146,11 @@
             };
 
             jQuery(document).ready(function ($) {
+                $("#formatToggle .btn-group button").click(function () {
+                    $("#formatOverride").val($(this).text());
+                });
 
-                $("input[name='converstionType']").change(function() {
+                $("input[name='conversionType']").change(function() {
                     var action = $(this).val();
                     $("#fileUploadForm").attr("action", action);
                 });

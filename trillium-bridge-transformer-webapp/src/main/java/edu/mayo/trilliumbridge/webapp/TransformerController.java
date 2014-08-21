@@ -25,6 +25,8 @@ package edu.mayo.trilliumbridge.webapp;
 
 import edu.mayo.trilliumbridge.core.TrilliumBridgeTransformer;
 import edu.mayo.trilliumbridge.core.xslt.XsltTrilliumBridgeTransformer;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,13 +39,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-/**
- * Handles requests for the application home page.
- *
- * @author <a href="mailto:kevin.peterson@mayo.edu">Kevin Peterson</a>
- */
 @Controller
 public class TransformerController {
+
+    private static final String XML_FORMAT = "xml";
 
     private static final String INPUT_FILE_NAME = "file";
 
@@ -58,9 +57,10 @@ public class TransformerController {
     public void epsos2ccda(
             HttpServletRequest request,
             HttpServletResponse response,
-            @RequestParam(defaultValue = "application/xml") String encoding)
+            @RequestHeader("Accept") String accept,
+            @RequestParam(value = "formatOverride", required = false) String formatOverride)
             throws IOException {
-        this.doTransform(request, response, encoding, new Transformer() {
+        this.doTransform(request, response, accept, formatOverride, new Transformer() {
 
             @Override
             public void transform(InputStream in, OutputStream out, TrilliumBridgeTransformer.Format outputFormat) {
@@ -74,10 +74,11 @@ public class TransformerController {
     @ResponseBody
     public void ccda2epsos(
             HttpServletRequest request,
-                HttpServletResponse response,
-            @RequestParam(defaultValue = "application/xml") String encoding)
+            HttpServletResponse response,
+            @RequestHeader("Accept") String accept,
+            @RequestParam(value = "formatOverride", required = false) String formatOverride)
             throws IOException {
-        this.doTransform(request, response, encoding, new Transformer() {
+        this.doTransform(request, response, accept, formatOverride, new Transformer() {
 
             @Override
             public void transform(InputStream in, OutputStream out, TrilliumBridgeTransformer.Format outputFormat) {
@@ -90,11 +91,48 @@ public class TransformerController {
     protected void doTransform(
             HttpServletRequest request,
             HttpServletResponse response,
-            String encoding,
+            String acceptHeader,
+            String formatOverride,
             Transformer transformer)
             throws IOException {
 
-        response.setContentType(encoding);
+        TrilliumBridgeTransformer.Format responseFormat = null;
+
+        if(StringUtils.isNotBlank(formatOverride)) {
+            responseFormat = TrilliumBridgeTransformer.Format.valueOf(formatOverride);
+        } else {
+            String[] accepts = StringUtils.split(acceptHeader, ',');
+
+            for(String accept : accepts) {
+                MediaType askedForType = MediaType.parseMediaType(accept);
+                if(askedForType.isCompatibleWith(MediaType.TEXT_HTML) ||
+                        askedForType.isCompatibleWith(MediaType.APPLICATION_XHTML_XML)) {
+                    responseFormat = TrilliumBridgeTransformer.Format.HTML;
+                } else if(askedForType.isCompatibleWith(MediaType.TEXT_XML) ||
+                        askedForType.isCompatibleWith(MediaType.APPLICATION_XML)) {
+                    responseFormat = TrilliumBridgeTransformer.Format.XML;
+                } else if(askedForType.getType().equals("application") && askedForType.getSubtype().equals("pdf")) {
+                    responseFormat = TrilliumBridgeTransformer.Format.PDF;
+                }
+
+                if(responseFormat != null) {
+                    break;
+                }
+            }
+        }
+
+        if(responseFormat == null) {
+            throw new UserInputException("Cannot return type: " + acceptHeader);
+        }
+
+        String contentType;
+        switch (responseFormat) {
+            case XML: contentType = MediaType.APPLICATION_XML.toString(); break;
+            case HTML: contentType = MediaType.TEXT_XML.toString(); break;
+            case PDF: contentType = "application/pdf"; break;
+            default: throw new IllegalStateException("Illegal Response Format");
+        }
+        response.setContentType(contentType);
 
         InputStream inputStream;
         if(request instanceof MultipartHttpServletRequest){
@@ -108,7 +146,7 @@ public class TransformerController {
         transformer.transform(
                 inputStream,
                 response.getOutputStream(),
-                TrilliumBridgeTransformer.Format.XML);
+                responseFormat);
     }
 
     /**
