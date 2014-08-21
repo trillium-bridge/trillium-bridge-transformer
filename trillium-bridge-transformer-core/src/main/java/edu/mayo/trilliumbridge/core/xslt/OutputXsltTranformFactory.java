@@ -6,6 +6,7 @@ import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,9 +32,19 @@ public class OutputXsltTranformFactory {
         }
 
         for(final Map<String,String> json : jsonList) {
-            transformMap.put(
+            String useFor = json.get("useFor");
+
+            List<XsltTrilliumBridgeTransformer.DocumentType> usedForList;
+            if(useFor.equals("BOTH")) {
+                usedForList = Arrays.asList(XsltTrilliumBridgeTransformer.DocumentType.CCDA, XsltTrilliumBridgeTransformer.DocumentType.EPSOS);
+            } else {
+                usedForList = Arrays.asList(XsltTrilliumBridgeTransformer.DocumentType.valueOf(useFor));
+            }
+
+            for(XsltTrilliumBridgeTransformer.DocumentType type : usedForList) {
+                transformMap.put(
                     new OutputTransformKey(
-                            XsltTrilliumBridgeTransformer.DocumentType.valueOf(json.get("useFor")),
+                            type,
                             TrilliumBridgeTransformer.Format.valueOf(json.get("output"))),
 
                     new InputStreamFactory() {
@@ -48,8 +59,8 @@ public class OutputXsltTranformFactory {
                         }
 
                     });
+            }
         }
-
     }
 
     private interface InputStreamFactory {

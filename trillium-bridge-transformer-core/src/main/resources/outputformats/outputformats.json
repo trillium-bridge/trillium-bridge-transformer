@@ -3,6 +3,6 @@
     "name": "CDA XSLT",
     "xslt": "CDA.xsl",
     "output": "HTML",
-    "useFor": "CCDA"
+    "useFor": "BOTH"
 }
 ]

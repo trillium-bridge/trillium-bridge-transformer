@@ -127,8 +127,8 @@ public class TransformerController {
 
         String contentType;
         switch (responseFormat) {
-            case XML: contentType = MediaType.APPLICATION_XML.toString(); break;
-            case HTML: contentType = MediaType.TEXT_XML.toString(); break;
+            case XML: contentType = MediaType.APPLICATION_XML_VALUE; break;
+            case HTML: contentType = MediaType.TEXT_HTML_VALUE.toString(); break;
             case PDF: contentType = "application/pdf"; break;
             default: throw new IllegalStateException("Illegal Response Format");
         }
