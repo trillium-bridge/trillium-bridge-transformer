@@ -67,7 +67,7 @@
     <h2>Convert epSOS to CCDA</h2>
     <p>Convert an XML representation of epSOS to CCDA format</p>
     <div style="border: 1px solid #ccc; padding: 10px">
-        <h2>File Upload</h2>
+        <h2>> File Upload</h2>
         <pre><code>POST /epsos2ccda</code></pre>
         <h3>Headers</h3>
         <dl>
@@ -82,19 +82,46 @@
         <dl>
             <dt>format</dt>
             <dd>The output format.</dd>
-            <dd><strong>Allowed Values: </strong><code>??</code> or <code>??</code></dd>
+            <dd><strong>Allowed Values: </strong><code>xml</code> or <code>html</code> or <code>pdf</code></dd>
             <dd><strong>Default: </strong><code>xml</code></dd>
         </dl>
         <h3>Example</h3>
 <pre class="highlight">
-curl -X POST -F file=@/path/to/QDM.xml <span class="url"></span>qdm2json
+curl -X POST -F file=@/path/to/epsos.xml <span class="url"></span>epsos2ccda
+</pre>
+
+        <ul class="nav nav-list">
+            <li class="divider"></li>
+        </ul>
+
+        <h2>> POST XML Body</h2>
+        <pre><code>POST /epsos2ccda</code></pre>
+        <h3>Headers</h3>
+        <dl>
+            <dt>Content-Type</dt>
+            <dd><code>application/xml</code></dd>
+        </dl>
+        <h3>Parameters</h3>
+        <dl>
+            <dt>file</dt>
+            <dd>The epSOS XML file.</dd>
+        </dl>
+        <dl>
+            <dt>format</dt>
+            <dd>The output format.</dd>
+            <dd><strong>Allowed Values: </strong><code>xml</code> or <code>html</code> or <code>pdf</code></dd>
+            <dd><strong>Default: </strong><code>xml</code></dd>
+        </dl>
+        <h3>Example</h3>
+<pre class="highlight">
+curl -X POST -F file=@/path/to/epsos.xml <span class="url"></span>epsos2ccda
 </pre>
     </div>
 
     <h2>Convert CCDA to epSOS</h2>
     <p>Convert an XML representation of CCDA to epSOS format</p>
     <div style="border: 1px solid #ccc; padding: 10px">
-        <h2>File Upload</h2>
+        <h2>> File Upload</h2>
         <pre><code>POST /ccda2epsos</code></pre>
         <h3>Headers</h3>
         <dl>
@@ -109,13 +136,40 @@ curl -X POST -F file=@/path/to/QDM.xml <span class="url"></span>qdm2json
         <dl>
             <dt>format</dt>
             <dd>The output format.</dd>
-            <dd><strong>Allowed Values: </strong><code>??</code> or <code>??</code></dd>
+            <dd><strong>Allowed Values: </strong><code>xml</code> or <code>html</code> or <code>pdf</code></dd>            <dd><strong>Default: </strong><code>xml</code></dd>
+        </dl>
+        <h3>Example</h3>
+<pre class="highlight">
+curl -X POST -F file=@/path/to/ccda.xml <span class="url"></span>ccda2epsos
+</pre>
+
+        <ul class="nav nav-list">
+            <li class="divider"></li>
+        </ul>
+
+        <h2>> POST XML Body</h2>
+        <pre><code>POST /ccda2epsos</code></pre>
+        <h3>Headers</h3>
+        <dl>
+            <dt>Content-Type</dt>
+            <dd><code>application/xml</code></dd>
+        </dl>
+        <h3>Parameters</h3>
+        <dl>
+            <dt>file</dt>
+            <dd>The CCDA XML file.</dd>
+        </dl>
+        <dl>
+            <dt>format</dt>
+            <dd>The output format.</dd>
+            <dd><strong>Allowed Values: </strong><code>xml</code> or <code>html</code> or <code>pdf</code></dd>
             <dd><strong>Default: </strong><code>xml</code></dd>
         </dl>
         <h3>Example</h3>
 <pre class="highlight">
-curl -X POST -F file=@/path/to/QDM.xml <span class="url"></span>qdm2json
+curl -X POST -F file=@/path/to/ccda.xml <span class="url"></span>ccda2epsos
 </pre>
+
     </div>
 
     <script>
@@ -127,11 +181,7 @@ curl -X POST -F file=@/path/to/QDM.xml <span class="url"></span>qdm2json
 <footer class="navbar navbar-fixed-bottom">
     <div class="container">
         <p class="muted credit">
-            Powered by the <a href="https://github.com/projectcypress/health-data-standards">hqmf-parser</a>,
-            <a href="https://ushik.ahrq.gov/">USHIK</a>,
-            and the <a href="https://vsac.nlm.nih.gov/">NLM VSAC</a>,
-            For more information see the
-            <a href="http://phenotypeportal.org/">Phenotype Portal</a>.
+           //
         </p>
     </div>
 </footer>
