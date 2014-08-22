@@ -98,9 +98,8 @@ By default, web app will bind to port ```8080``` and be available at http://loca
 
 
 __Transformations__
-__(7)__ ```nooptransform``` the implementaion of the no-op direct copy CCDA <-> epSOS transform. This will be deprecated and replaced with a live transform.
 
-__(7)__ ```nooptransform```
+__(7)__ ```nooptransform``` the implementaion of the no-op direct copy CCDA <-> epSOS transform. This will be deprecated and replaced with a live transform.
 
 __(8)__ ```outputformats``` specification of output format XSLT transformations. This directory contains a ```outputformats.json``` configuration file in the following format:
 
@@ -117,6 +116,23 @@ __(8)__ ```outputformats``` specification of output format XSLT transformations.
 }
 ]
 ```
+__(9)__ ```xslt``` specification the main CCDA/epSOS XSLT transformations. This directory contains a ```xslt.properties``` configuration file in the following format:
+
+```
+xslt.epsos2ccda=noop.xsl
+xslt.ccda2epsos=noop.xsl
+```
+
+This file should contain two entries as show -- one for each type of transformation. The value of the ```xslt.epsos2ccda``` and ```xslt.ccda2epsos``` properties should be the relative path to the XSLT used for conversion.
+
+__Web Application__
+
+__(10)__ ```error.log``` the standard error log of the web application.
+
+__(11)__ ```output.log``` the standard output log of the web application.
+
+__(12)__ ```trillium-bridge-transformer-webapp-{version}.war``` the web application archive. This can be then deployed to an application server such as Tomcat, JBoss, etc.
+
 
 ## Testing
 
