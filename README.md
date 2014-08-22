@@ -48,6 +48,8 @@ The ```trillium-bridge-transformer-cli-{version}-bin.{suffix}``` package will co
     └── trillium-bridge-transformer-webapp-{version}.war <- (12)
 ```
 ##### Footnotes
+__Launch Scripts__
+
 __(1)__ ```ccda2epsos``` the Unix launch file for the CCDA to epSOS transformation
 
 __(2)__ ```ccda2epsos.bat``` the Windows launch file for the CCDA to epSOS transformation
@@ -92,6 +94,26 @@ Context opts:
 example: tbt-webapp --port 5150
  ```
 
+__Transformations__
+__(7)__ ```nooptransform``` the implementaion of the no-op direct copy CCDA <-> epSOS transform. This will be deprecated and replaced with a live transform.
+
+__(7)__ ```nooptransform```
+
+__(8)__ ```outputformats`` specification of output format XSLT transformations. This directory contains a ```outputformats.json``` configuration file in the following format:
+
+```json
+[
+{
+    "name": "CDA XSLT", // the name of the transformation
+    "xslt": "CDA.xsl",  // the relative path to the XSLT
+    "output": "HTML",   // the type of output (only HTML currently)
+    "useFor": "BOTH"    // whether the tranform applies to 'CCDA', 'EPSOS', or 'BOTH'
+},
+{
+//... more transforms
+}
+]
+```
 
 ## Testing
 
