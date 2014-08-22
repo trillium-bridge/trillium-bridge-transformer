@@ -1,1 +1,3 @@
-java -jar ../lib/jetty-runner-${jetty.runner.version}.jar "$@" --classes ../conf ../webapp/trillium-bridge-transformer-webapp-${project.parent.version}.war 2>> ../webapp/logs/error.log 1>> ../webapp/logs/output.log
+echo Starting Trillium Bridge Transformer Webapp...
+java -Dtbt.xslt.dir=../conf -jar ../lib/jetty-runner-${jetty.runner.version}.jar "$@" --classes ../conf ../webapp/trillium-bridge-transformer-webapp-${project.parent.version}.war 2>> ../webapp/logs/error.log 1>> ../webapp/logs/output.log
+echo Done

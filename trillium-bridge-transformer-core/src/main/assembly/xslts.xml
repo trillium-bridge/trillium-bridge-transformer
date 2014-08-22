@@ -6,6 +6,10 @@
     <includeBaseDirectory>false</includeBaseDirectory>
     <fileSets>
         <fileSet>
+            <directory>src/main/resources/nooptransform</directory>
+            <outputDirectory>nooptransform</outputDirectory>
+        </fileSet>
+        <fileSet>
             <directory>src/main/resources/outputformats</directory>
             <outputDirectory>outputformats</outputDirectory>
         </fileSet>

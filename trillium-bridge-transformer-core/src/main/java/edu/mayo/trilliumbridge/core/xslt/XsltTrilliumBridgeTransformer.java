@@ -3,7 +3,6 @@ package edu.mayo.trilliumbridge.core.xslt;
 import edu.mayo.trilliumbridge.core.TrilliumBridgeTransformer;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 
@@ -25,6 +24,8 @@ public class XsltTrilliumBridgeTransformer implements TrilliumBridgeTransformer 
 
     private Logger log = Logger.getLogger(this.getClass());
 
+    private XsltDirectoryResourceFactory resourceFactory = new XsltDirectoryResourceFactory();
+
     private static final String EPSOS2CCDA_XSLT_PROP = "xslt.epsos2ccda";
     private static final String CCDA2EPSOS_XSLT_PROP = "xslt.ccda2epsos";
 
@@ -45,15 +46,15 @@ public class XsltTrilliumBridgeTransformer implements TrilliumBridgeTransformer 
         super();
         Properties properties;
         try {
-            properties = PropertiesLoaderUtils.loadProperties(new ClassPathResource(XSLT_CONFIG_FILE_PATH));
+            properties = PropertiesLoaderUtils.loadProperties(this.resourceFactory.getResource(XSLT_CONFIG_FILE_PATH));
         } catch (IOException e) {
             //No props found -- use no-op
             log.warn("Cannot find XSLT properties file. Is there one on the classpath at " + XSLT_CONFIG_FILE_PATH + "?", e);
             properties = new Properties();
         }
 
-        this.epsos2ccdaXslt = new ClassPathResource(XSLT_BASE_PATH + properties.getProperty(EPSOS2CCDA_XSLT_PROP, NO_OP_XSLT));
-        this.ccda2epsosXslt = new ClassPathResource(XSLT_BASE_PATH + properties.getProperty(CCDA2EPSOS_XSLT_PROP, NO_OP_XSLT));
+        this.epsos2ccdaXslt = this.resourceFactory.getResource(XSLT_BASE_PATH + properties.getProperty(EPSOS2CCDA_XSLT_PROP, NO_OP_XSLT));
+        this.ccda2epsosXslt = this.resourceFactory.getResource(XSLT_BASE_PATH + properties.getProperty(CCDA2EPSOS_XSLT_PROP, NO_OP_XSLT));
     }
 
     @Override
@@ -133,7 +134,7 @@ public class XsltTrilliumBridgeTransformer implements TrilliumBridgeTransformer 
                 public Source resolve(String href, String base) throws TransformerException {
                     href = "/xslt/" + href;
                     try {
-                        return new StreamSource(new ClassPathResource(href).getInputStream());
+                        return new StreamSource(resourceFactory.getResource(href).getInputStream());
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }

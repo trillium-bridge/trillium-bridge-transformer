@@ -2,7 +2,6 @@ package edu.mayo.trilliumbridge.core.xslt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.mayo.trilliumbridge.core.TrilliumBridgeTransformer;
-import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,6 +17,8 @@ public class OutputXsltTranformFactory {
     private static final String OUTPUT_FORMATS_BASE_PATH = "/outputformats";
     private static final String OUTPUT_FORMATS_JSON_PATH = OUTPUT_FORMATS_BASE_PATH + "/outputformats.json";
 
+    private XsltDirectoryResourceFactory resourceFactory = new XsltDirectoryResourceFactory();
+
     private Map<OutputTransformKey, InputStreamFactory> transformMap = new HashMap<OutputTransformKey, InputStreamFactory>();
 
     public OutputXsltTranformFactory() {
@@ -26,7 +27,7 @@ public class OutputXsltTranformFactory {
 
         List<Map<String,String>> jsonList;
         try {
-            jsonList = mapper.readValue(new ClassPathResource(OUTPUT_FORMATS_JSON_PATH).getInputStream(), List.class);
+            jsonList = mapper.readValue(this.resourceFactory.getResource(OUTPUT_FORMATS_JSON_PATH).getInputStream(), List.class);
         } catch (IOException e) {
             throw new IllegalStateException(e);
         }
@@ -52,7 +53,7 @@ public class OutputXsltTranformFactory {
                         @Override
                         public InputStream getInputStream() {
                             try {
-                                return new ClassPathResource(OUTPUT_FORMATS_BASE_PATH + "/" + json.get("xslt")).getInputStream();
+                                return resourceFactory.getResource(OUTPUT_FORMATS_BASE_PATH + "/" + json.get("xslt")).getInputStream();
                             } catch (IOException e) {
                                 throw new IllegalStateException(e);
                             }
