@@ -47,16 +47,16 @@ The ```trillium-bridge-transformer-cli-{version}-bin.{suffix}``` package will co
     │   └── output.log          <- (11)
     └── trillium-bridge-transformer-webapp-{version}.war <- (12)
 ```
-##### Footnotes
+#### Footnotes
 __Launch Scripts__
 
-__(1)__ ```ccda2epsos``` the Unix launch file for the CCDA to epSOS transformation
+__(1)__ ```ccda2epsos``` - the Unix launch file for the CCDA to epSOS transformation
 
-__(2)__ ```ccda2epsos.bat``` the Windows launch file for the CCDA to epSOS transformation
+__(2)__ ```ccda2epsos.bat``` - the Windows launch file for the CCDA to epSOS transformation
 
-__(3)__ ```ccda2epsos``` the Unix launch file for the epSOS to CCDA transformation
+__(3)__ ```ccda2epsos``` - the Unix launch file for the epSOS to CCDA transformation
 
-__(4)__ ```epsos2ccda.bat``` the Windows launch file for the epSOS to CCDA transformation
+__(4)__ ```epsos2ccda.bat``` - the Windows launch file for the epSOS to CCDA transformation
 
 
 All above commands allow the following parameters:
@@ -69,9 +69,9 @@ All above commands allow the following parameters:
  
 example: ccda2epsos -f html ../my/ccda.xml
 ```
-__(5)__ ```tbt-webapp``` the Unix launch file for the web applcation
+__(5)__ ```tbt-webapp``` - the Unix launch file for the web applcation
 
-__(6)__ ```tbt-webapp.bat``` is the Windows launch file for the web applcation
+__(6)__ ```tbt-webapp.bat``` - the Windows launch file for the web applcation
 
 ```
 Usage: tbt-webapp(.bat) [--help|--version] [ server opts] [[ context opts] context ...]
@@ -99,9 +99,9 @@ By default, web app will bind to port ```8080``` and be available at http://loca
 
 __Transformations__
 
-__(7)__ ```nooptransform``` the implementaion of the no-op direct copy CCDA <-> epSOS transform. This will be deprecated and replaced with a live transform.
+__(7)__ ```nooptransform``` - the implementaion of the no-op direct copy CCDA <-> epSOS transform. This will be deprecated and replaced with a live transform.
 
-__(8)__ ```outputformats``` specification of output format XSLT transformations. This directory contains a ```outputformats.json``` configuration file in the following format:
+__(8)__ ```outputformats``` - specification of output format XSLT transformations. This directory contains a ```outputformats.json``` configuration file in the following format:
 
 ```json
 [
@@ -116,7 +116,7 @@ __(8)__ ```outputformats``` specification of output format XSLT transformations.
 }
 ]
 ```
-__(9)__ ```xslt``` specification the main CCDA/epSOS XSLT transformations. This directory contains a ```xslt.properties``` configuration file in the following format:
+__(9)__ ```xslt``` - specification the main CCDA/epSOS XSLT transformations. This directory contains a ```xslt.properties``` configuration file in the following format:
 
 ```
 xslt.epsos2ccda=noop.xsl
@@ -127,11 +127,11 @@ This file should contain two entries as show -- one for each type of transformat
 
 __Web Application__
 
-__(10)__ ```error.log``` the standard error log of the web application.
+__(10)__ ```error.log``` - the standard error log of the web application.
 
-__(11)__ ```output.log``` the standard output log of the web application.
+__(11)__ ```output.log``` - the standard output log of the web application.
 
-__(12)__ ```trillium-bridge-transformer-webapp-{version}.war``` the web application archive. This can be then deployed to an application server such as Tomcat, JBoss, etc.
+__(12)__ ```trillium-bridge-transformer-webapp-{version}.war``` - the web application archive. This can be then deployed to an application server such as Tomcat, JBoss, etc.
 
 
 ## Testing
