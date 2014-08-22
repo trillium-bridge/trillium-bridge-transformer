@@ -92,14 +92,17 @@ Context opts:
  [[--path /path] context]*n          - WAR file, web app dir or context xml file, optionally with a context path
  
 example: tbt-webapp --port 5150
- ```
+```
+
+By default, web app will bind to port ```8080``` and be available at http://localhost:8080/
+
 
 __Transformations__
 __(7)__ ```nooptransform``` the implementaion of the no-op direct copy CCDA <-> epSOS transform. This will be deprecated and replaced with a live transform.
 
 __(7)__ ```nooptransform```
 
-__(8)__ ```outputformats`` specification of output format XSLT transformations. This directory contains a ```outputformats.json``` configuration file in the following format:
+__(8)__ ```outputformats``` specification of output format XSLT transformations. This directory contains a ```outputformats.json``` configuration file in the following format:
 
 ```json
 [
