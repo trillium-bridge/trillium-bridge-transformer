@@ -11,7 +11,16 @@
             </includes>
             <outputDirectory>/webapp</outputDirectory>
         </dependencySet>
+
+        <dependencySet>
+            <unpack>true</unpack>
+            <includes>
+                <include>edu.mayo:trillium-bridge-transformer-core:zip:xslts</include>
+            </includes>
+            <outputDirectory>/conf</outputDirectory>
+        </dependencySet>
     </dependencySets>
+
     <fileSets>
         <fileSet>
             <directory>src/main/app</directory>
@@ -28,5 +37,6 @@
             <outputDirectory>/</outputDirectory>
             <fileMode>755</fileMode>
         </fileSet>
+
     </fileSets>
 </assembly>

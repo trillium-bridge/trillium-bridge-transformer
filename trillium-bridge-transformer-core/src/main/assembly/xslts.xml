@@ -1,0 +1,17 @@
+<assembly>
+    <id>xslts</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+        <fileSet>
+            <directory>src/main/resources/outputformats</directory>
+            <outputDirectory>outputformats</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/resources/xslt</directory>
+            <outputDirectory>xslt</outputDirectory>
+        </fileSet>
+    </fileSets>
+</assembly>

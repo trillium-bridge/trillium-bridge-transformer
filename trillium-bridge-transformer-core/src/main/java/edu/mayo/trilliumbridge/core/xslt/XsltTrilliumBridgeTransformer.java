@@ -2,9 +2,10 @@ package edu.mayo.trilliumbridge.core.xslt;
 
 import edu.mayo.trilliumbridge.core.TrilliumBridgeTransformer;
 import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Logger;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.stereotype.Component;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 import javax.xml.transform.Source;
 import javax.xml.transform.TransformerException;
@@ -15,18 +16,45 @@ import javax.xml.transform.stream.StreamSource;
 import java.io.*;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Properties;
 
 /**
  * The XSLT Transformation logic.
  */
-@Component
 public class XsltTrilliumBridgeTransformer implements TrilliumBridgeTransformer {
+
+    private Logger log = Logger.getLogger(this.getClass());
+
+    private static final String EPSOS2CCDA_XSLT_PROP = "xslt.epsos2ccda";
+    private static final String CCDA2EPSOS_XSLT_PROP = "xslt.ccda2epsos";
+
+    private static final String XSLT_CONFIG_FILE_PATH = "/xslt/xslt.properties";
 
     protected enum DocumentType { CCDA, EPSOS }
 
     private OutputXsltTranformFactory xsltTranformFactory = new OutputXsltTranformFactory();
 
-    private static final Resource NO_OP_XSLT = new ClassPathResource("/xslt/noop.xsl");
+    private static final String XSLT_BASE_PATH = "/xslt/";
+    private static final String NO_OP_XSLT = "noop.xsl";
+
+    private Resource epsos2ccdaXslt;
+
+    private Resource ccda2epsosXslt;
+
+    public XsltTrilliumBridgeTransformer() {
+        super();
+        Properties properties;
+        try {
+            properties = PropertiesLoaderUtils.loadProperties(new ClassPathResource(XSLT_CONFIG_FILE_PATH));
+        } catch (IOException e) {
+            //No props found -- use no-op
+            log.warn("Cannot find XSLT properties file. Is there one on the classpath at " + XSLT_CONFIG_FILE_PATH + "?", e);
+            properties = new Properties();
+        }
+
+        this.epsos2ccdaXslt = new ClassPathResource(XSLT_BASE_PATH + properties.getProperty(EPSOS2CCDA_XSLT_PROP, NO_OP_XSLT));
+        this.ccda2epsosXslt = new ClassPathResource(XSLT_BASE_PATH + properties.getProperty(CCDA2EPSOS_XSLT_PROP, NO_OP_XSLT));
+    }
 
     @Override
     public void ccdaToEpsos(InputStream ccdaStream, OutputStream epsosStream, Format outputFormat) {
@@ -54,15 +82,14 @@ public class XsltTrilliumBridgeTransformer implements TrilliumBridgeTransformer 
 
     protected InputStream getEpsosToCcdaXslt() {
         try {
-            return NO_OP_XSLT.getInputStream();
+            return this.epsos2ccdaXslt.getInputStream();
         } catch (IOException e) {
-            throw new IllegalStateException(e);
-        }
+            throw new IllegalStateException(e);        }
     }
 
     protected InputStream getCcdaToEpsosXslt() {
         try {
-            return NO_OP_XSLT.getInputStream();
+            return this.ccda2epsosXslt.getInputStream();
         } catch (IOException e) {
             throw new IllegalStateException(e);
         }
