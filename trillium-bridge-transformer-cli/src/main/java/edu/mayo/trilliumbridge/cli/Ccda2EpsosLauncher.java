@@ -1,5 +1,7 @@
 package edu.mayo.trilliumbridge.cli;
 
+import edu.mayo.trilliumbridge.core.TrilliumBridgeTransformer;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -11,8 +13,8 @@ public class Ccda2EpsosLauncher extends AbstractBaseCliLauncher {
     }
 
     @Override
-    protected void doTransform(InputStream in, OutputStream out) throws Exception {
-        this.getTransformer().ccdaToEpsos(in, out, null);
+    protected void doTransform(InputStream in, OutputStream out, TrilliumBridgeTransformer.Format format) throws Exception {
+        this.getTransformer().ccdaToEpsos(in, out, format);
     }
 
 }

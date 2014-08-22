@@ -24,6 +24,11 @@ public abstract class AbstractBaseCliLauncher {
     @Option(name="-v", aliases={"-version","--version"}, usage ="Print the application version")
     private boolean version;
 
+    private static enum CliInputFormat { xml, html, pdf }
+
+    @Option(name="-f", aliases={"-format","--format"}, usage ="The output format")
+    private CliInputFormat format = CliInputFormat.xml;
+
     @Argument(required=true, usage ="Input file")
     private File input;
 
@@ -57,14 +62,23 @@ public abstract class AbstractBaseCliLauncher {
             return;
         }
 
+        TrilliumBridgeTransformer.Format outputFormat;
+
+        switch (this.format) {
+            case xml: outputFormat = TrilliumBridgeTransformer.Format.XML; break;
+            case html:outputFormat = TrilliumBridgeTransformer.Format.HTML; break;
+            case pdf:outputFormat = TrilliumBridgeTransformer.Format.PDF; break;
+            default: throw new IllegalStateException("Unexpected output format request.");
+        }
+
         try {
-            this.doTransform(new FileInputStream(this.input), System.out);
+            this.doTransform(new FileInputStream(this.input), System.out, outputFormat);
         } catch( Exception e ) {
             System.err.print(e.getMessage());
         }
     }
 
-    protected abstract void doTransform(InputStream in, OutputStream out) throws Exception;
+    protected abstract void doTransform(InputStream in, OutputStream out, TrilliumBridgeTransformer.Format format) throws Exception;
 
 
     protected TrilliumBridgeTransformer getTransformer() {
