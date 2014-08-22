@@ -7,11 +7,10 @@
 3. Clone the repository using a Git Clone ```https://github.com/kevinpeterson/trillium-bridge-transformer.git```
 
 ## Build/Compile
-1. From the ```trillium-bridge-transformer``` directory, run ```mvn clean install```
+From the ```trillium-bridge-transformer``` directory, run ```mvn clean install```
 This will produce several artifacts, including a ZIP/TAR file will all necessary components. This artifacts will be located in the directory:
 
     trillium-bridge-transformer/trillium-bridge-transformer-cli/target/dist
- 
 and are named:
 
     trillium-bridge-transformer-cli-{version}-bin.zip
