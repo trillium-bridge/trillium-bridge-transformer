@@ -23,7 +23,6 @@
  */
 package edu.mayo.trilliumbridge.webapp;
 
-import edu.mayo.trilliumbridge.core.TransformException;
 import edu.mayo.trilliumbridge.core.TrilliumBridgeTransformer;
 import edu.mayo.trilliumbridge.core.xslt.XsltTrilliumBridgeTransformer;
 import org.apache.commons.io.IOUtils;
@@ -161,8 +160,6 @@ public class TransformerController {
         }
 
         response.setContentType(contentType);
-
-        throw new TransformException(new RuntimeException());
     }
 
 }

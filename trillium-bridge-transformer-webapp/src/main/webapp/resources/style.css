@@ -49,3 +49,21 @@ body .modal {
 #ccdaModal {
     z-index: 2147483647;
 }
+
+.tooltip-inner {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.hero-unit {
+    background-color: #ffffff;
+    font-weight: 400
+}
+
+.container {
+    width: 800px;
+}
+
+.padTop {
+    padding-top: 8px;
+}

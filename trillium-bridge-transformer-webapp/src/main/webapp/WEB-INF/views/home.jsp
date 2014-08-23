@@ -20,17 +20,8 @@
 <link rel="stylesheet" href="resources/include/select2/select2.css">
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/default.min.css">
 
+<link rel="stylesheet" href="resources/style.css" />
 
-    <link rel="stylesheet" href="resources/style.css" />
-
-    <style type="text/css">
-        .hero-unit {
-            background-color: #ffffff;
-        }
-        .container {
-            width: 800px;
-        }
-    </style>
 </head>
 <body>
 
@@ -68,10 +59,6 @@
             <span class="title"> Trillium Bridge Transformer</span>
             <img class="trillium-bridge-img" src="http://www.hl7italia.it/trillium/index_file/image308.png"/>
 
-            <!--
-            <p>Transform CCDA <-> epSOS</p>
-            -->
-
             <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
                 <li class="active"><a href="#fileUpload" data-toggle="tab">File Upload</a></li>
                 <!-- <li><a href="#ccdaExamples" data-toggle="tab">Try an Example</a></li> -->
@@ -85,13 +72,13 @@
                             <div class="input-append">
                                 <div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i>
                                     <span class="fileupload-preview"></span></div>
-    <span class="btn btn-file"><span class="fileupload-new">Select file</span><span class="fileupload-exists">Change</span>
-      <input type="file" name="file"/></span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
-
+                                    <span class="btn btn-file"><span class="fileupload-new">Select file</span><span class="fileupload-exists">Change</span>
+                                    <input type="file" name="file"/></span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
                             </div>
-                            <button class="btn btn-primary fileupload-exists dropdown-toggle" type='submit'>Convert!</button>
 
-                            <div>Conversion:
+                            <button class="btn btn-primary fileupload-exists dropdown-toggle" type='submit'>Convert</button>
+
+                            <div class="padTop">Conversion:
                                 <label class="radio">
                                     <input type="radio" name="conversionType" value="ccda2epsos" checked>
                                     <span>CCDA to epSOS</span>
@@ -103,11 +90,12 @@
                                 </label>
                             </div>
 
-                            <div id="formatToggle" class="fileupload-exists">Output Format:
-                                <div  class="btn-group" data-toggle="buttons-radio">
+                            <div id="formatToggle" class="fileupload-exists padTop">Output Format:
+                                <div class="btn-group" data-toggle="buttons-radio">
                                     <button type="button" class="btn active">XML</button>
                                     <button type="button" class="btn">HTML</button>
-                                    <button type="button" class="btn">PDF</button>
+                                    <!-- PDF conversion currently disabled -->
+                                    <button type="button" class="btn disabled" rel="tooltip" data-placement="right" title="PDF Currenlty Unavailable">PDF</button>
                                 </div>
                             </div>
                             <input type="hidden" id="formatOverride" name="formatOverride" value="XML"/>
@@ -146,6 +134,8 @@
             };
 
             jQuery(document).ready(function ($) {
+                $("[rel='tooltip']").tooltip();
+
                 $("#formatToggle .btn-group button").click(function () {
                     $("#formatOverride").val($(this).text());
                 });
@@ -156,6 +146,11 @@
                 });
 
                 $('#tabs').tab();
+
+                /* -------------------------------------- */
+                /* Re-enable when the examples are needed */
+                /* -------------------------------------- */
+                /*
                 var select2 = $("#ccdaExamplesSelect").select2({
                     formatResult: format,
                     escapeMarkup: function(m) { return m; }
@@ -195,7 +190,7 @@
                         }
                     }
                 })(select2.onSelect);
-
+                */
 
             });
         </script>

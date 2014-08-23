@@ -1,6 +1,7 @@
 package edu.mayo.trilliumbridge.webapp;
 
 import edu.mayo.trilliumbridge.core.TransformException;
+import edu.mayo.trilliumbridge.core.UnsupportedOutputFormatException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class ErrorHandlingControllerAdvice {
     private DefaultHandlerExceptionResolver defaultHandlerExceptionResolver;
 
     @ExceptionHandler(UserInputException.class)
-    public ModelAndView handleNullPointerException(
+    public ModelAndView handleUserInputException(
             HttpServletRequest request,
             HttpServletResponse response,
             UserInputException ex) {
@@ -37,6 +38,17 @@ public class ErrorHandlingControllerAdvice {
         return this.doResolveError(request, response, mav, ex.getMessage());
     }
 
+    @ExceptionHandler(UnsupportedOutputFormatException.class)
+    public ModelAndView handleUnsupportedOutputFormatException(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            UnsupportedOutputFormatException ex) {
+        ModelAndView mav = new ModelAndView("error");
+
+        response.setStatus(HttpServletResponse.SC_UNSUPPORTED_MEDIA_TYPE);
+
+        return this.doResolveError(request, response, mav, ex.getMessage());
+    }
 
     @ExceptionHandler(TransformException.class)
     public ModelAndView handleTransformException(

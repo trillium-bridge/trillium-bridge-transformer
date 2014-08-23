@@ -2,6 +2,7 @@ package edu.mayo.trilliumbridge.core.xslt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.mayo.trilliumbridge.core.TrilliumBridgeTransformer;
+import edu.mayo.trilliumbridge.core.UnsupportedOutputFormatException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -99,6 +100,12 @@ public class OutputXsltTranformFactory {
     }
 
     protected InputStream getOutputTransform(TrilliumBridgeTransformer.Format format, XsltTrilliumBridgeTransformer.DocumentType documentType) {
-        return this.transformMap.get(new OutputTransformKey(documentType, format)).getInputStream();
+        OutputTransformKey key = new OutputTransformKey(documentType, format);
+
+        if(! this.transformMap.containsKey(key)) {
+            throw new UnsupportedOutputFormatException(format);
+        } else {
+            return this.transformMap.get(key).getInputStream();
+        }
     }
 }

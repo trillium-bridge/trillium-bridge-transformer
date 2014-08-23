@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>HTP REST</title>
+<title>Error - Trillium Bridge Transformer</title>
 
 <script type="text/javascript" src="resources/include/jquery-ui-1.8.19.custom/js/jquery-1.7.2.min.js"></script>
 <script src="resources/include/bootstrap/js/bootstrap.min.js"></script>
@@ -14,16 +14,6 @@
 
 <link rel="stylesheet" href="resources/style.css">
 
-<style>
-    .item {
-        height: 400px;
-    }
-    .hero-unit {
-        height: 100%;
-        padding-top: 20px;
-        padding-left: 60px;
-    }
-</style>
 
     <script type="text/javascript">
         $(document).ready(function() {
@@ -75,7 +65,6 @@
     </b>
     <br/>
     <br/>
-    Please check the input file and try again.
     </div>
 
 </div>
