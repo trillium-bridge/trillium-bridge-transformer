@@ -64,6 +64,10 @@
 
 <div class="container">
 
+    <div class="alert">
+        <b>Important!</b> No data will be retained on the server as a result of the transformation process.
+    </div>
+
     <h2>Convert epSOS to CCDA</h2>
     <p>Convert an XML representation of epSOS to CCDA format</p>
     <div style="border: 1px solid #ccc; padding: 10px">
@@ -88,6 +92,8 @@
         <h3>Example</h3>
 <pre class="highlight">
 curl -X POST -F file=@/path/to/epsos.xml <span class="url"></span>epsos2ccda
+
+curl -X POST -F file=@/path/to/epsos.xml "<span class="url"></span>epsos2ccda?format=html"
 </pre>
 
         <ul class="nav nav-list">
@@ -103,7 +109,7 @@ curl -X POST -F file=@/path/to/epsos.xml <span class="url"></span>epsos2ccda
         </dl>
         <h3>Parameters</h3>
         <dl>
-            <dt>file</dt>
+            <dt>POST Body</dt>
             <dd>The epSOS XML file.</dd>
         </dl>
         <dl>
@@ -112,9 +118,11 @@ curl -X POST -F file=@/path/to/epsos.xml <span class="url"></span>epsos2ccda
             <dd><strong>Allowed Values: </strong><code>xml</code> or <code>html</code> or <code>pdf</code></dd>
             <dd><strong>Default: </strong><code>xml</code></dd>
         </dl>
-        <h3>Example</h3>
+        <h3>Examples</h3>
 <pre class="highlight">
-curl -X POST -F file=@/path/to/epsos.xml <span class="url"></span>epsos2ccda
+curl -X POST --header "Content-Type:application/xml" -d@/path/to/epsos.xml <span class="url"></span>epsos2ccda
+
+curl -X POST --header "Content-Type:application/xml" -d@/path/to/epsos.xml "<span class="url"></span>epsos2ccda?format=html"
 </pre>
     </div>
 
@@ -138,9 +146,11 @@ curl -X POST -F file=@/path/to/epsos.xml <span class="url"></span>epsos2ccda
             <dd>The output format.</dd>
             <dd><strong>Allowed Values: </strong><code>xml</code> or <code>html</code> or <code>pdf</code></dd>            <dd><strong>Default: </strong><code>xml</code></dd>
         </dl>
-        <h3>Example</h3>
+        <h3>Examples</h3>
 <pre class="highlight">
 curl -X POST -F file=@/path/to/ccda.xml <span class="url"></span>ccda2epsos
+
+curl -X POST -F file=@/path/to/ccda.xml "<span class="url"></span>ccda2epsos?format=html"
 </pre>
 
         <ul class="nav nav-list">
@@ -156,7 +166,7 @@ curl -X POST -F file=@/path/to/ccda.xml <span class="url"></span>ccda2epsos
         </dl>
         <h3>Parameters</h3>
         <dl>
-            <dt>file</dt>
+            <dt>POST Body</dt>
             <dd>The CCDA XML file.</dd>
         </dl>
         <dl>
@@ -167,7 +177,9 @@ curl -X POST -F file=@/path/to/ccda.xml <span class="url"></span>ccda2epsos
         </dl>
         <h3>Example</h3>
 <pre class="highlight">
-curl -X POST -F file=@/path/to/ccda.xml <span class="url"></span>ccda2epsos
+curl -X POST --header "Content-Type:application/xml" -d@/path/to/ccda.xml <span class="url"></span>ccda2epsos
+
+curl -X POST --header "Content-Type:application/xml" -d@/path/to/ccda.xml "<span class="url"></span>ccda2epsos?format=html"
 </pre>
 
     </div>

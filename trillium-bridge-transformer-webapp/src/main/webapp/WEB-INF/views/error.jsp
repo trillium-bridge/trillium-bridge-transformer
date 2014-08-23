@@ -14,16 +14,6 @@
 
 <link rel="stylesheet" href="resources/style.css">
 
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('.carousel').carousel();
-
-            var value = location.hostname;
-            $('.qdm2jsonUrl').attr("href", "${qdm2jsonUrl}");
-        });
-    </script>
-
 </head>
 <body>
 
