@@ -97,6 +97,11 @@ public class TransformerController {
             Transformer transformer)
             throws IOException {
 
+        // default to XML if no Accept Header (it should at least be */*, but just in case).
+        if(StringUtils.isBlank(acceptHeader)) {
+            acceptHeader = MediaType.APPLICATION_ATOM_XML_VALUE;
+        }
+
         TrilliumBridgeTransformer.Format responseFormat = null;
 
         if(StringUtils.isNotBlank(formatOverride)) {
@@ -106,12 +111,12 @@ public class TransformerController {
 
             for(String accept : accepts) {
                 MediaType askedForType = MediaType.parseMediaType(accept);
-                if(askedForType.isCompatibleWith(MediaType.TEXT_HTML) ||
-                        askedForType.isCompatibleWith(MediaType.APPLICATION_XHTML_XML)) {
-                    responseFormat = TrilliumBridgeTransformer.Format.HTML;
-                } else if(askedForType.isCompatibleWith(MediaType.TEXT_XML) ||
+                if(askedForType.isCompatibleWith(MediaType.TEXT_XML) ||
                         askedForType.isCompatibleWith(MediaType.APPLICATION_XML)) {
                     responseFormat = TrilliumBridgeTransformer.Format.XML;
+                } else if(askedForType.isCompatibleWith(MediaType.TEXT_HTML) ||
+                        askedForType.isCompatibleWith(MediaType.APPLICATION_XHTML_XML)) {
+                    responseFormat = TrilliumBridgeTransformer.Format.HTML;
                 } else if(askedForType.getType().equals("application") && askedForType.getSubtype().equals("pdf")) {
                     responseFormat = TrilliumBridgeTransformer.Format.PDF;
                 }

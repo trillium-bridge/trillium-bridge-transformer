@@ -38,13 +38,15 @@ public class AcceptHeaderAdjustingFilter implements Filter {
 			String type;
 			
 			if(format.equals("html")){
-				type = "application/html";
+				type = "text/html";
 			} else if (format.equals("xml")){
 				type = "application/xml";
 			} else if (format.equals("pdf")){
                 type = "application/pdf";
             } else {
-				throw new IllegalStateException("Format: " + format + " not recognized.");
+                // not sure what we do here... sending it along and downstream code can
+                // try to make sense of it.
+				type = "application/" + format;
 			}
 			
 			chain.doFilter(new AcceptTypeChangingRequest(httpRequest, type), response);
