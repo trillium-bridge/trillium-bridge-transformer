@@ -1,5 +1,6 @@
 package edu.mayo.trilliumbridge.core.xslt;
 
+import edu.mayo.trilliumbridge.core.TransformException;
 import edu.mayo.trilliumbridge.core.TrilliumBridgeTransformer;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
@@ -155,7 +156,7 @@ public class XsltTrilliumBridgeTransformer implements TrilliumBridgeTransformer 
             // Apply the transformation
             transformer.transform(xmlFile, resultStream);
         } catch(Exception ex) {
-            throw new RuntimeException(ex);
+            throw new TransformException(ex);
         } finally {
             IOUtils.closeQuietly(xmlInputStream);
             IOUtils.closeQuietly(xsltInputStream);

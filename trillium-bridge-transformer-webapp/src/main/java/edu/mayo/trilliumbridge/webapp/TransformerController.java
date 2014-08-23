@@ -23,18 +23,20 @@
  */
 package edu.mayo.trilliumbridge.webapp;
 
+import edu.mayo.trilliumbridge.core.TransformException;
 import edu.mayo.trilliumbridge.core.TrilliumBridgeTransformer;
 import edu.mayo.trilliumbridge.core.xslt.XsltTrilliumBridgeTransformer;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -132,7 +134,6 @@ public class TransformerController {
             case PDF: contentType = "application/pdf"; break;
             default: throw new IllegalStateException("Illegal Response Format");
         }
-        response.setContentType(contentType);
 
         InputStream inputStream;
         if(request instanceof MultipartHttpServletRequest){
@@ -143,30 +144,25 @@ public class TransformerController {
             inputStream = request.getInputStream();
         }
 
+        // create a buffer so we don't use the servlet's output stream unless
+        // we get a successful transform, because if we do use it,
+        // we can't use the error view anymore.
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
         transformer.transform(
                 inputStream,
-                response.getOutputStream(),
+                baos,
                 responseFormat);
-    }
 
-    /**
-     * Handle null pointer exception.
-     *
-     * @param response the response
-     * @param ex the ex
-     * @return the model and view
-     */
-    @ExceptionHandler(UserInputException.class)
-    public ModelAndView handleNullPointerException(
-            HttpServletResponse response,
-            UserInputException ex) {
+        try {
+            response.getOutputStream().write(baos.toByteArray());
+        } finally {
+            IOUtils.closeQuietly(baos);
+        }
 
-        ModelAndView mav = new ModelAndView("inputError");
-        mav.addObject("message", ex.getLocalizedMessage());
+        response.setContentType(contentType);
 
-        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-
-        return mav;
+        throw new TransformException(new RuntimeException());
     }
 
 }

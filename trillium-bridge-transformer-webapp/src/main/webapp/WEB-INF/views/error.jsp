@@ -45,20 +45,18 @@
             <a href="https://github.com/SHARP-HTP/qdm-phenotyping"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
 
             <a class="brand" href="#">
-                QDM Phenotyping
+                Trillium Bridge Transformer
             </a>
 
             <ul class="nav">
                 <li class="divider-vertical"></li>
-                <li><a class="qdm2jsonUrl" href="">Qdm2Json</a></li>
+                <li><a href="."><i class="icon-home"></i> Home</a></li>
                 <li class="divider-vertical"></li>
-                <li><a href="qdm2drools">Qdm2Drools</a></li>
+                <li><a href="http://informatics.mayo.edu/maven/content/repositories/releases/edu/mayo/trillium-bridge-transformer-cli/${version}/trillium-bridge-transformer-cli-${version}-bin.zip"><i class="icon-download-alt"></i> Download</a></li>
                 <li class="divider-vertical"></li>
-                <li><a href="executor">Phenotyping</a></li>
+                <li><a href="https://github.com/kevinpeterson/trillium-bridge-transformer/blob/master/README.md"> Documentation</a>
                 <li class="divider-vertical"></li>
-                <li><a href="executor/cypress/report">Cypress Validation</a></li>
-                <li class="divider-vertical"></li>
-                <li><a href="http://phenotypeportal.org/">PhenotypePortal</a></li>
+                <li><a href="api"> REST API</a>
                 <li class="divider-vertical"></li>
             </ul>
 
@@ -69,15 +67,15 @@
 <div class="container">
 
     <div class="alert">
-    There was an error translating into Drools: <br/>
-    ${error}
+    There was an error translating the provided content:
     <br/>
     <br/>
-    This is most likely caused by an ill-formed input algorithm or an unsupported operator. QDM Phenotyping supports
-    all Cypress-validated algorithms, and all other algorithms that use standard syntax and operations.
+    <b>
+    ${message}
+    </b>
     <br/>
     <br/>
-    Please check the input file and try again, or input another algorithm.
+    Please check the input file and try again.
     </div>
 
 </div>
@@ -85,11 +83,8 @@
 <footer class="navbar navbar-fixed-bottom">
     <div class="container">
         <p class="muted credit">
-            Powered by the <a href="https://github.com/projectcypress/health-data-standards">hqmf-parser</a>,
-            <a href="https://ushik.ahrq.gov/">USHIK</a>,
-            and the <a href="https://vsac.nlm.nih.gov/">NLM VSAC</a>,
-            For more information see the
-            <a href="http://phenotypeportal.org/">Phenotype Portal</a>.
+            For more information see
+            <a href="http://www.trilliumbridge.eu">Trillium Bridge</a>.
         </p>
     </div>
 </footer>

@@ -51,7 +51,7 @@
                     <li class="divider-vertical"></li>
                     <li><a href="http://informatics.mayo.edu/maven/content/repositories/releases/edu/mayo/trillium-bridge-transformer-cli/${version}/trillium-bridge-transformer-cli-${version}-bin.zip"><i class="icon-download-alt"></i> Download</a></li>
                     <li class="divider-vertical"></li>
-                    <li><a href="docs"> Documentation</a>
+                    <li><a href="https://github.com/kevinpeterson/trillium-bridge-transformer/blob/master/README.md"> Documentation</a>
                     <li class="divider-vertical"></li>
                     <li><a href="api"> REST API</a>
                     <li class="divider-vertical"></li>
@@ -221,7 +221,7 @@
 <footer class="navbar navbar-fixed-bottom">
     <div class="container">
         <p class="muted credit">
-            For more information see the
+            For more information see
             <a href="http://www.trilliumbridge.eu">Trillium Bridge</a>.
         </p>
     </div>
