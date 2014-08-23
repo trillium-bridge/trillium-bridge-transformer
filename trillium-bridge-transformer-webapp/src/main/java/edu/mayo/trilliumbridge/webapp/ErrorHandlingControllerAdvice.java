@@ -2,6 +2,7 @@ package edu.mayo.trilliumbridge.webapp;
 
 import edu.mayo.trilliumbridge.core.TransformException;
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -16,6 +17,8 @@ import java.io.IOException;
 
 @ControllerAdvice
 public class ErrorHandlingControllerAdvice {
+
+    private Logger log = Logger.getLogger(this.getClass());
 
     private static String MOZILLA = "Mozilla";
 
@@ -78,9 +81,26 @@ public class ErrorHandlingControllerAdvice {
 
         ModelAndView mav = this.defaultHandlerExceptionResolver.resolveException(request, wrapper, null, ex);
 
+        String message;
+
+        // default handler didn't catch it
+        if(mav == null) {
+            mav = new ModelAndView();
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+
+            if(StringUtils.isBlank(ex.getMessage())) {
+                message = "A " + ex.getClass().getName() + " was thrown. Please consult server logs for more information.";
+            } else {
+                message = ex.getMessage();
+            }
+        } else {
+            message = wrapper.errorMsg;
+        }
         mav.setViewName("error");
 
-        return this.doResolveError(request, response, mav, wrapper.errorMsg);
+        log.warn("Server Error", ex);
+
+        return this.doResolveError(request, response, mav, message);
     }
 
     protected ModelAndView doResolveError(HttpServletRequest request,

@@ -29,7 +29,7 @@ public abstract class AbstractBaseCliLauncher {
     @Option(name="-f", aliases={"-format","--format"}, usage ="The output format")
     private CliInputFormat format = CliInputFormat.xml;
 
-    @Argument(required=true, usage ="Input file")
+    @Argument(usage ="Input file", metaVar = "Input File")
     private File input;
 
     public void doMain(String[] args) throws IOException {
@@ -45,7 +45,7 @@ public abstract class AbstractBaseCliLauncher {
             // parse the arguments.
             parser.parseArgument(args);
         } catch( CmdLineException e ) {
-            System.err.print(e.getMessage());
+            System.err.println(e.getMessage());
             parser.printUsage(System.err);
             return;
         }
@@ -60,6 +60,11 @@ public abstract class AbstractBaseCliLauncher {
                     new ClassPathResource("/trilliumbridge-version.properties"));
             System.out.println(properties.getProperty("app.version"));
             return;
+        }
+
+        if(this.input == null) {
+            System.err.println("Input file is required.");
+            parser.printUsage(System.err);
         }
 
         TrilliumBridgeTransformer.Format outputFormat;
