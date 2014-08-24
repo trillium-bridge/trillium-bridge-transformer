@@ -5,10 +5,11 @@
     <parent>
         <artifactId>trillium-bridge-transformer</artifactId>
         <groupId>edu.mayo</groupId>
-        <version>1.0.0.RC1</version>
+        <version>1.0.10.RC2-SNAPSHOT</version>
     </parent>
 
     <artifactId>trillium-bridge-transformer-cli</artifactId>
+  <version>1.0.0.RC2-SNAPSHOT</version>
     <name>Trillium Bridge Transfomer Command Line Interface</name>
 
     <properties>

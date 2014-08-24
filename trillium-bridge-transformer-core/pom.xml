@@ -3,11 +3,12 @@
     <parent>
         <artifactId>trillium-bridge-transformer</artifactId>
         <groupId>edu.mayo</groupId>
-        <version>1.0.0.RC1</version>
+        <version>1.0.10.RC2-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>trillium-bridge-transformer-core</artifactId>
+  <version>1.0.0.RC2-SNAPSHOT</version>
     <name>Trillium Bridge Transfomer Core</name>
 
     <build>
