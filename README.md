@@ -147,6 +147,21 @@ The ```conf/outputformats/outputformats.json``` file is the configuration file u
 ```
 By default, the command line applications and the web application will introspect this file and utilize the specified XSLTs.
 
+## Web Application Deployment
+The Trillium Bridge Transformer comes with a built-in [Jetty](http://www.eclipse.org/jetty/) server, which can be started from the ```bin``` directory.
+
+Alternatively, the web application can be deployed to an existing web container. To do this, first ensure the Trillium Bridge Transformer HOME enviroment variable (```TBT_HOME```) is set. This will allow the web application to find the user-specified XSLT configuration files. ```TBT_HOME``` should be set to the root directory of the installation packge:
+
+```
+TBT_HOME
+    ├── bin 
+    ├── conf
+    ├── doc
+    ├── lib
+    └── webapp
+```
+Once ```TBT_HOME``` has been set, deploy the WAR file located in the ```webapp``` directory to the target web container. 
+
 ## Testing
 
 From the ```trillium-bridge-transformer``` directory, run ```mvn clean test```
