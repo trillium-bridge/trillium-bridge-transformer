@@ -90,7 +90,7 @@
                 <version>1.5.3</version>
                 <executions>
                     <execution>
-                        <phase>prepare-package</phase>
+                        <phase>deploy</phase>
                         <goals>
                             <goal>replace</goal>
                         </goals>
@@ -100,8 +100,8 @@
                     <file>README.md</file>
                     <replacements>
                         <replacement>
-                            <token>http://informatics.mayo.edu/maven/content/repositories/releases/edu/mayo/trillium-bridge-transformer-cli/.*/trillium-bridge-transformer-.*-bin.zip</token>
-                            <value>http://informatics.mayo.edu/maven/content/repositories/releases/edu/mayo/trillium-bridge-transformer-cli/${project.version}/trillium-bridge-transformer-${project.version}-bin.zip</value>
+                            <token>http://informatics.mayo.edu/maven/content/repositories/releases/edu/mayo/trillium-bridge-transformer-cli/.*/trillium-bridge-transformer-cli-.*-bin.zip</token>
+                            <value>http://informatics.mayo.edu/maven/content/repositories/releases/edu/mayo/trillium-bridge-transformer-cli/${project.version}/trillium-bridge-transformer-cli-${project.version}-bin.zip</value>
                         </replacement>
                     </replacements>
                 </configuration>
