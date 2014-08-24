@@ -2,13 +2,15 @@
 
 
 ## Project Setup
-1. Install [Git](http://git-scm.com/book/en/Getting-Started-Installing-Git)
-2. Install [Maven](http://maven.apache.org/download.cgi)
-3. Clone the repository using a Git Clone ```https://github.com/kevinpeterson/trillium-bridge-transformer.git```
+1. Install [Java SDK 7+](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html)
+2. *Install [Git](http://git-scm.com/book/en/Getting-Started-Installing-Git)
+3. *Install [Maven](http://maven.apache.org/download.cgi)
+4. *Clone the repository using a Git Clone ```https://github.com/kevinpeterson/trillium-bridge-transformer.git```
+(*) Not necessary unless bulding/compiling. See [downloads](download--install) for binary distributions. 
 
 ## Build/Compile
 From the ```trillium-bridge-transformer``` directory, run ```mvn clean install```
-This will produce several artifacts, including a ZIP/TAR file will all necessary components. This artifacts will be located in the directory:
+This will produce several artifacts, including a ZIP/TAR.GZ file will all necessary components. This artifacts will be located in the directory:
 
     trillium-bridge-transformer/trillium-bridge-transformer-cli/target/dist
 and are named:
@@ -19,7 +21,7 @@ and
     trillium-bridge-transformer-cli-{version}-bin.tar.gz
 
 ## Download/Install
-http://informatics.mayo.edu/maven/content/repositories/releases/edu/mayo/trillium-bridge-transformer-cli/1.0.0-SNAPSHOT/trillium-bridge-transformer-1.0.0-SNAPSHOT-bin.zip
+Download the latest [ZIP](http://informatics.mayo.edu/maven/content/repositories/releases/edu/mayo/trillium-bridge-transformer-cli/1.0.0-SNAPSHOT/trillium-bridge-transformer-1.0.0-SNAPSHOT-bin.zip) or [TAR.GZ](http://informatics.mayo.edu/maven/content/repositories/releases/edu/mayo/trillium-bridge-transformer-cli/1.0.0-SNAPSHOT/trillium-bridge-transformer-1.0.0-SNAPSHOT-bin.tar.gz) binary distribution.
 
 ## Distribution Package
 The ```trillium-bridge-transformer-cli-{version}-bin.{suffix}``` package will contain the following structure (see footnotes below for further information on the various parts):
