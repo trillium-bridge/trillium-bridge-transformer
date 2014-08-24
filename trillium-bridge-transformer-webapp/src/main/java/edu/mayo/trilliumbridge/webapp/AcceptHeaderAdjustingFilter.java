@@ -28,26 +28,7 @@ public class AcceptHeaderAdjustingFilter implements Filter {
 		Map<String, String[]> params = httpRequest.getParameterMap();
 		
 		if(params.containsKey("format")){
-			String[] formats = params.get("format");
-			if(formats.length != 1){
-				throw new IllegalStateException("Only one 'format' parameter allowed.");
-			}
-			
-			String format = formats[0];
-			
-			String type;
-			
-			if(format.equals("html")){
-				type = "text/html";
-			} else if (format.equals("xml")){
-				type = "application/xml";
-			} else if (format.equals("pdf")){
-                type = "application/pdf";
-            } else {
-                // not sure what we do here... sending it along and downstream code can
-                // try to make sense of it.
-				type = "application/" + format;
-			}
+            String type = this.getFormatTypeFromParameter(params);
 			
 			chain.doFilter(new AcceptTypeChangingRequest(httpRequest, type), response);
 		} else {
@@ -55,7 +36,31 @@ public class AcceptHeaderAdjustingFilter implements Filter {
 		}
 	}
 
-	@Override
+    protected String getFormatTypeFromParameter(Map<String, String[]> params) {
+        String[] formats = params.get("format");
+        if(formats.length != 1){
+            throw new IllegalStateException("Only one 'format' parameter allowed.");
+        }
+
+        String format = formats[0];
+
+        String type;
+
+        if(format.equals("html")){
+            type = "text/html";
+        } else if (format.equals("xml")){
+            type = "application/xml";
+        } else if (format.equals("pdf")){
+            type = "application/pdf";
+        } else {
+        // not sure what we do here... sending it along and downstream code can
+        // try to make sense of it.
+            type = "application/" + format;
+        }
+        return type;
+    }
+
+    @Override
 	public void init(FilterConfig config) throws ServletException {
 		//
 	}

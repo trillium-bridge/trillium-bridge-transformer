@@ -33,7 +33,7 @@ public class ErrorHandlingControllerAdvice {
             UserInputException ex) {
         ModelAndView mav = new ModelAndView("error");
 
-        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        response.setStatus(ex.getStatus().value());
 
         return this.doResolveError(request, response, mav, ex.getMessage());
     }
@@ -93,20 +93,28 @@ public class ErrorHandlingControllerAdvice {
 
         ModelAndView mav = this.defaultHandlerExceptionResolver.resolveException(request, wrapper, null, ex);
 
-        String message;
+        String message = null;
 
         // default handler didn't catch it
         if(mav == null) {
             mav = new ModelAndView();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 
-            if(StringUtils.isBlank(ex.getMessage())) {
+            if(StringUtils.isBlank(message)) {
+                message = ex.getMessage();
+            }
+
+            if(StringUtils.isBlank(null)) {
                 message = "A " + ex.getClass().getName() + " was thrown. Please consult server logs for more information.";
+            }
+
+        } else {
+            if(StringUtils.isNotBlank(wrapper.errorMsg)) {
+                message = wrapper.errorMsg;
             } else {
                 message = ex.getMessage();
             }
-        } else {
-            message = wrapper.errorMsg;
+
         }
         mav.setViewName("error");
 

@@ -27,6 +27,7 @@ import edu.mayo.trilliumbridge.core.TrilliumBridgeTransformer;
 import edu.mayo.trilliumbridge.core.xslt.XsltTrilliumBridgeTransformer;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -35,13 +36,12 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 @Controller
 public class TransformerController {
+
+    private static final String NO_CONTENT_ERROR_MSG = "No file or XML content body sent.";
 
     private static final String XML_FORMAT = "xml";
 
@@ -58,7 +58,7 @@ public class TransformerController {
     public void epsos2ccda(
             HttpServletRequest request,
             HttpServletResponse response,
-            @RequestHeader("Accept") String accept,
+            @RequestHeader(value = "Accept", defaultValue = MediaType.APPLICATION_XML_VALUE) String accept,
             @RequestParam(value = "formatOverride", required = false) String formatOverride)
             throws IOException {
         this.doTransform(request, response, accept, formatOverride, new Transformer() {
@@ -76,7 +76,7 @@ public class TransformerController {
     public void ccda2epsos(
             HttpServletRequest request,
             HttpServletResponse response,
-            @RequestHeader("Accept") String accept,
+            @RequestHeader(value = "Accept", defaultValue = MediaType.APPLICATION_XML_VALUE) String accept,
             @RequestParam(value = "formatOverride", required = false) String formatOverride)
             throws IOException {
         this.doTransform(request, response, accept, formatOverride, new Transformer() {
@@ -128,7 +128,7 @@ public class TransformerController {
         }
 
         if(responseFormat == null) {
-            throw new UserInputException("Cannot return type: " + acceptHeader);
+            throw new UserInputException("Cannot return type: " + acceptHeader, HttpStatus.NOT_ACCEPTABLE);
         }
 
         String contentType;
@@ -148,6 +148,8 @@ public class TransformerController {
             inputStream = request.getInputStream();
         }
 
+        inputStream = this.checkForUtf8BOMAndDiscardIfAny(this.checkStreamIsNotEmpty(inputStream));
+
         // create a buffer so we don't use the servlet's output stream unless
         // we get a successful transform, because if we do use it,
         // we can't use the error view anymore.
@@ -165,6 +167,39 @@ public class TransformerController {
         }
 
         response.setContentType(contentType);
+    }
+
+    /**
+     * From http://stackoverflow.com/a/19137900/656853
+     */
+    private InputStream checkStreamIsNotEmpty(InputStream inputStream) throws IOException {
+        if(inputStream == null) {
+            throw new UserInputException(NO_CONTENT_ERROR_MSG);
+        }
+
+        PushbackInputStream pushbackInputStream = new PushbackInputStream(inputStream);
+        int b;
+        b = pushbackInputStream.read();
+        if ( b == -1 ) {
+            throw new UserInputException("No file or XML content body sent.");
+        }
+        pushbackInputStream.unread(b);
+
+        return pushbackInputStream;
+    }
+
+    /**
+     * From http://stackoverflow.com/a/9737529/656853
+     */
+    private InputStream checkForUtf8BOMAndDiscardIfAny(InputStream inputStream) throws IOException {
+        PushbackInputStream pushbackInputStream = new PushbackInputStream(new BufferedInputStream(inputStream), 3);
+        byte[] bom = new byte[3];
+        if (pushbackInputStream.read(bom) != -1) {
+            if (!(bom[0] == (byte) 0xEF && bom[1] == (byte) 0xBB && bom[2] == (byte) 0xBF)) {
+                pushbackInputStream.unread(bom);
+            }
+        }
+        return pushbackInputStream;
     }
 
 }
