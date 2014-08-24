@@ -1,13 +1,5 @@
 # _Trillium Bridge Transformer_
 
-- [Trillium Bridge Transformer Table Of Contents](#user-content-trillium-bridge-transformer)
-	- [Project Setup](#user-content-project-setup)
-	- [Build/Compile](#user-content-buildcompile)
-	- [Distribution Package](#user-content-distribution-package)
-	- [Testing](#user-content-testing)
-	- [Contributing changes](#user-content-contributing-changes)
-	- [License](#user-content-license)
-	
 
 ## Project Setup
 
@@ -110,9 +102,9 @@ __Transformations__
 
 __(7)__ ```nooptransform``` - the implementaion of the no-op direct copy CCDA <-> epSOS transform. This will be deprecated and replaced with a live transform.
 
-__(8)__ ```outputformats``` - specification of output format XSLT transformations. See (here)[Configuring the Output Format Transformation] for more inforamation on output format configuration
+__(8)__ ```outputformats``` - specification of output format XSLT transformations. See [here](Configuring the Output Format Transformation) for more inforamation on output format configuration
 
-__(9)__ ```xslt``` - specification the main CCDA/epSOS XSLT transformations. See (here)[CConfiguring the CCDA <-> epSOS Transformation] for more infomation on CCDA/epSOS XSLT configuration.
+__(9)__ ```xslt``` - specification the main CCDA/epSOS XSLT transformations. See [here](Configuring the CCDA <-> epSOS Transformation) for more infomation on CCDA/epSOS XSLT configuration.
 
 __Web Application__
 
