@@ -3,10 +3,11 @@
 
 ## Project Setup
 1. Install [Java SDK 7+](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html)
-2. *Install [Git](http://git-scm.com/book/en/Getting-Started-Installing-Git)
-3. *Install [Maven](http://maven.apache.org/download.cgi)
-4. *Clone the repository using a Git Clone ```https://github.com/kevinpeterson/trillium-bridge-transformer.git```
-(*) Not necessary unless bulding/compiling. See [downloads](download--install) for binary distributions. 
+2. * Install [Git](http://git-scm.com/book/en/Getting-Started-Installing-Git)
+3. * Install [Maven](http://maven.apache.org/download.cgi)
+4. * Clone the repository using a Git Clone ```https://github.com/kevinpeterson/trillium-bridge-transformer.git```
+
+(*) Not necessary unless bulding/compiling. See [downloads](#downloadinstall) for binary distributions. 
 
 ## Build/Compile
 From the ```trillium-bridge-transformer``` directory, run ```mvn clean install```
@@ -21,7 +22,7 @@ and
     trillium-bridge-transformer-cli-{version}-bin.tar.gz
 
 ## Download/Install
-Download the latest [ZIP](http://informatics.mayo.edu/maven/content/repositories/releases/edu/mayo/trillium-bridge-transformer-cli/1.0.0-SNAPSHOT/trillium-bridge-transformer-1.0.0-SNAPSHOT-bin.zip) or [TAR.GZ](http://informatics.mayo.edu/maven/content/repositories/releases/edu/mayo/trillium-bridge-transformer-cli/1.0.0-SNAPSHOT/trillium-bridge-transformer-1.0.0-SNAPSHOT-bin.tar.gz) binary distribution.
+Download the latest [ZIP](http://informatics.mayo.edu/maven/content/repositories/releases/edu/mayo/trillium-bridge-transformer-cli/1.0.0-SNAPSHOT/trillium-bridge-transformer-1.0.0-SNAPSHOT-bin.zip) or [TAR.GZ](http://informatics.mayo.edu/maven/content/repositories/releases/edu/mayo/trillium-bridge-transformer-cli/1.0.0-SNAPSHOT/trillium-bridge-transformer-1.0.0-SNAPSHOT-bin.tar.gz) binary distribution. For installation, extract the archive to the desired location on the filesystem.
 
 ## Distribution Package
 The ```trillium-bridge-transformer-cli-{version}-bin.{suffix}``` package will contain the following structure (see footnotes below for further information on the various parts):
