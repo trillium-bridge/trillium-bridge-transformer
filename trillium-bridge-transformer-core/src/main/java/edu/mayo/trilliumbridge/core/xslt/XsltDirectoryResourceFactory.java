@@ -10,14 +10,16 @@ import java.io.File;
  */
 public class XsltDirectoryResourceFactory {
 
-    public static final String XSLT_DIR_PROP = "tbt.xslt.dir";
+    public static final String TBT_HOME_PROP = "TBT_HOME";
+
+    public static final String TBT_CONF_DIR = "conf";
 
     private String envXsltDirOverride;
 
     protected XsltDirectoryResourceFactory() {
-        String prop = System.getProperty(XSLT_DIR_PROP);
+        String prop = System.getProperty(TBT_HOME_PROP);
         if(prop != null) {
-            this.envXsltDirOverride = prop;
+            this.envXsltDirOverride = prop + File.separator + TBT_CONF_DIR;
         }
     }
 

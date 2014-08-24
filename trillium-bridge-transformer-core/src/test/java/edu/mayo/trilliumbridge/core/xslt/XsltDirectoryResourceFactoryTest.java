@@ -19,10 +19,10 @@ public class XsltDirectoryResourceFactoryTest {
 
     @Test
     public void testGetResourceOverride() throws Exception {
-        System.setProperty(XsltDirectoryResourceFactory.XSLT_DIR_PROP, "test");
+        System.setProperty(XsltDirectoryResourceFactory.TBT_HOME_PROP, "test");
         XsltDirectoryResourceFactory factory = new XsltDirectoryResourceFactory();
 
         assertTrue(factory.getResource("test") instanceof FileSystemResource);
-        System.clearProperty(XsltDirectoryResourceFactory.XSLT_DIR_PROP);
+        System.clearProperty(XsltDirectoryResourceFactory.TBT_HOME_PROP);
     }
 }

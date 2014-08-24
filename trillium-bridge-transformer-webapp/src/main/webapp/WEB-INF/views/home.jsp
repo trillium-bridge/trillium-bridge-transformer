@@ -70,7 +70,7 @@
                     <form action="ccda2epsos" enctype='multipart/form-data' name="fileUploadForm" id="fileUploadForm" method='post' class="form-inline well">
                         <div class="fileupload fileupload-new" data-provides="fileupload">
                             <div class="input-append">
-                                <div class="uneditable-input span3"><i class="icon-file fileupload-exists"></i>
+                                <div class="uneditable-input span5"><i class="icon-file fileupload-exists"></i>
                                     <span class="fileupload-preview"></span></div>
                                     <span class="btn btn-file"><span class="fileupload-new">Select file</span><span class="fileupload-exists">Change</span>
                                     <input type="file" name="file"/></span><a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
