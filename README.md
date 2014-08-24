@@ -1,6 +1,22 @@
 # _Trillium Bridge Transformer_
 
+**Table of Contents**
 
+- [Trillium Bridge Transformer](#user-content-trillium-bridge-transformer)
+	- [Project Setup](#user-content-project-setup)
+	- [Build/Compile](#user-content-buildcompile)
+	- [Download/Install](#user-content-downloadinstall)
+	- [Distribution Package](#user-content-distribution-package)
+			- [Components](#user-content-components)
+	- [Transformations](#user-content-transformations)
+		- [Configuring the CCDA <-> epSOS Transformation](#user-content-configuring-the-ccda---epsos-transformation)
+		- [Configuring the Output Format Transformation](#user-content-configuring-the-output-format-transformation)
+	- [Web Application Deployment](#user-content-web-application-deployment)
+	- [Java API](#user-content-java-api)
+	- [Testing](#user-content-testing)
+	- [Contributing changes](#user-content-contributing-changes)
+	- [License](#user-content-license)
+	
 ## Project Setup
 1. Install [Java SDK 7+](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html)
 2. * Install [Git](http://git-scm.com/book/en/Getting-Started-Installing-Git)
