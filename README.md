@@ -48,7 +48,7 @@ The ```trillium-bridge-transformer-cli-{version}-bin.{suffix}``` package will co
     │   └── output.log          <- (11)
     └── trillium-bridge-transformer-webapp-{version}.war <- (12)
 ```
-#### Footnotes
+#### Components
 __Launch Scripts__
 
 __(1)__ ```ccda2epsos``` - the Unix launch file for the CCDA to epSOS transformation
