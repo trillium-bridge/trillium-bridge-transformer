@@ -126,6 +126,12 @@
             <groupId>org.mortbay.jetty</groupId>
             <artifactId>jetty-runner</artifactId>
             <version>${jetty.runner.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
 
