@@ -18,13 +18,13 @@ public class XsltDirectoryResourceFactory {
 
     protected XsltDirectoryResourceFactory() {
         String prop = System.getProperty(TBT_HOME_PROP);
-        if(prop != null) {
+        if (prop != null) {
             this.envXsltDirOverride = prop + File.separator + TBT_CONF_DIR;
         }
     }
 
     protected Resource getResource(String path) {
-        if(this.envXsltDirOverride != null) {
+        if (this.envXsltDirOverride != null) {
             return new FileSystemResource(this.envXsltDirOverride + File.separator + path);
         } else {
             return new ClassPathResource(path);

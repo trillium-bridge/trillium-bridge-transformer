@@ -1,6 +1,7 @@
 package edu.mayo.trilliumbridge.core;
 
 /**
+ * General {@link RuntimeException} for transformation errors.
  */
 public class TransformException extends RuntimeException {
 

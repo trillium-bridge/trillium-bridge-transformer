@@ -19,7 +19,7 @@ import java.util.Map.Entry;
 import java.util.Properties;
 
 /**
- * The XSLT Transformation logic.
+ * The XSLT transformation logic.
  */
 public class XsltTrilliumBridgeTransformer implements TrilliumBridgeTransformer {
 
@@ -32,7 +32,7 @@ public class XsltTrilliumBridgeTransformer implements TrilliumBridgeTransformer 
 
     private static final String XSLT_CONFIG_FILE_PATH = "/xslt/xslt.properties";
 
-    protected enum DocumentType { CCDA, EPSOS }
+    protected enum DocumentType {CCDA, EPSOS}
 
     private OutputXsltTranformFactory xsltTranformFactory = new OutputXsltTranformFactory();
 
@@ -75,7 +75,7 @@ public class XsltTrilliumBridgeTransformer implements TrilliumBridgeTransformer 
     }
 
     protected InputStream getFormatXslt(Format outputFormat, DocumentType type) {
-        if(! outputFormat.equals(Format.XML)) {
+        if (!outputFormat.equals(Format.XML)) {
             return this.xsltTranformFactory.getOutputTransform(outputFormat, type);
         } else {
             return null;
@@ -86,7 +86,8 @@ public class XsltTrilliumBridgeTransformer implements TrilliumBridgeTransformer 
         try {
             return this.epsos2ccdaXslt.getInputStream();
         } catch (IOException e) {
-            throw new IllegalStateException(e);        }
+            throw new IllegalStateException(e);
+        }
     }
 
     protected InputStream getCcdaToEpsosXslt() {
@@ -102,11 +103,11 @@ public class XsltTrilliumBridgeTransformer implements TrilliumBridgeTransformer 
             InputStream documentXsltInputStream,
             InputStream outputFormatXsltInputStream,
             OutputStream outputStream,
-            Map<String,String> parameters){
+            Map<String, String> parameters) {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
         try {
-            if(outputFormatXsltInputStream != null) {
+            if (outputFormatXsltInputStream != null) {
                 this.transform(xmlInputStream, documentXsltInputStream, out, parameters);
                 this.transform(new ByteArrayInputStream(out.toByteArray()), outputFormatXsltInputStream, outputStream, parameters);
             } else {
@@ -121,7 +122,7 @@ public class XsltTrilliumBridgeTransformer implements TrilliumBridgeTransformer 
             InputStream xmlInputStream,
             InputStream xsltInputStream,
             OutputStream outputStream,
-            Map<String,String> parameters){
+            Map<String, String> parameters) {
         try {
             // Source XML File
             StreamSource xmlFile = new StreamSource(xmlInputStream);
@@ -144,8 +145,8 @@ public class XsltTrilliumBridgeTransformer implements TrilliumBridgeTransformer 
 
             javax.xml.transform.Transformer transformer = xsltFactory.newTransformer(xsltFile);
 
-            if(parameters != null){
-                for(Entry<String, String> entry : parameters.entrySet()){
+            if (parameters != null) {
+                for (Entry<String, String> entry : parameters.entrySet()) {
                     transformer.setParameter(entry.getKey(), entry.getValue());
                 }
             }
@@ -155,7 +156,7 @@ public class XsltTrilliumBridgeTransformer implements TrilliumBridgeTransformer 
 
             // Apply the transformation
             transformer.transform(xmlFile, resultStream);
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             throw new TransformException(ex);
         } finally {
             IOUtils.closeQuietly(xmlInputStream);

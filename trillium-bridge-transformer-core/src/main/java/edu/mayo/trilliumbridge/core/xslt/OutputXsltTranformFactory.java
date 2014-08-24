@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Factory for providing XSLTs for transformations.
  */
 public class OutputXsltTranformFactory {
 
@@ -26,41 +27,41 @@ public class OutputXsltTranformFactory {
         super();
         ObjectMapper mapper = new ObjectMapper();
 
-        List<Map<String,String>> jsonList;
+        List<Map<String, String>> jsonList;
         try {
             jsonList = mapper.readValue(this.resourceFactory.getResource(OUTPUT_FORMATS_JSON_PATH).getInputStream(), List.class);
         } catch (IOException e) {
             throw new IllegalStateException(e);
         }
 
-        for(final Map<String,String> json : jsonList) {
+        for (final Map<String, String> json : jsonList) {
             String useFor = json.get("useFor");
 
             List<XsltTrilliumBridgeTransformer.DocumentType> usedForList;
-            if(useFor.equals("BOTH")) {
+            if (useFor.equals("BOTH")) {
                 usedForList = Arrays.asList(XsltTrilliumBridgeTransformer.DocumentType.CCDA, XsltTrilliumBridgeTransformer.DocumentType.EPSOS);
             } else {
                 usedForList = Arrays.asList(XsltTrilliumBridgeTransformer.DocumentType.valueOf(useFor));
             }
 
-            for(XsltTrilliumBridgeTransformer.DocumentType type : usedForList) {
+            for (XsltTrilliumBridgeTransformer.DocumentType type : usedForList) {
                 transformMap.put(
-                    new OutputTransformKey(
-                            type,
-                            TrilliumBridgeTransformer.Format.valueOf(json.get("output"))),
+                        new OutputTransformKey(
+                                type,
+                                TrilliumBridgeTransformer.Format.valueOf(json.get("output"))),
 
-                    new InputStreamFactory() {
+                        new InputStreamFactory() {
 
-                        @Override
-                        public InputStream getInputStream() {
-                            try {
-                                return resourceFactory.getResource(OUTPUT_FORMATS_BASE_PATH + "/" + json.get("xslt")).getInputStream();
-                            } catch (IOException e) {
-                                throw new IllegalStateException(e);
+                            @Override
+                            public InputStream getInputStream() {
+                                try {
+                                    return resourceFactory.getResource(OUTPUT_FORMATS_BASE_PATH + "/" + json.get("xslt")).getInputStream();
+                                } catch (IOException e) {
+                                    throw new IllegalStateException(e);
+                                }
                             }
-                        }
 
-                    });
+                        });
             }
         }
     }
@@ -102,7 +103,7 @@ public class OutputXsltTranformFactory {
     protected InputStream getOutputTransform(TrilliumBridgeTransformer.Format format, XsltTrilliumBridgeTransformer.DocumentType documentType) {
         OutputTransformKey key = new OutputTransformKey(documentType, format);
 
-        if(! this.transformMap.containsKey(key)) {
+        if (!this.transformMap.containsKey(key)) {
             throw new UnsupportedOutputFormatException(format);
         } else {
             return this.transformMap.get(key).getInputStream();
