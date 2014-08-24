@@ -167,8 +167,68 @@ TBT_HOME
 ```
 Once ```TBT_HOME``` has been set, deploy the WAR file located in the ```webapp``` directory to the target web container. 
 
-## Testing
+## Java API
+To use the Java API directly, first add the Maven repository to your pom.xml file :
 
+```xml
+...
+<repository>
+  <id>informatics-releases</id>
+  <url>http://informatics.mayo.edu/maven/content/repositories/releases</url>
+</repository>
+...
+```
+Then, add the Maven dependency:
+
+```xml
+<dependency>
+    <artifactId>trillium-bridge-transformer-core</artifactId>
+    <groupId>edu.mayo</groupId>
+    <version>--version-here--</version>
+</dependency>
+```
+
+To get started using the API, instantiate the transfomer:
+
+```java
+TrilliumBridgeTransformer transformer = new XsltTrilliumBridgeTransformer();
+```
+
+The interface for the transformer is as follows:
+
+```java
+/**
+ * Transformation interface for converting XML files to and from CCDA and epSOS format.
+ */
+public interface TrilliumBridgeTransformer {
+
+    /**
+     * Valid output formats
+     */
+    public enum Format {XML, HTML, PDF}
+
+    /**
+     * Convert a CCDA XML document into epSOS format.
+     *
+     * @param ccdaStream the CCDA document
+     * @param epsosStream the output stream
+     * @param outputFormat the output format
+     */
+    public void ccdaToEpsos(InputStream ccdaStream, OutputStream epsosStream, Format outputFormat);
+
+    /**
+     * Convert an epSOS XML document into CCDA format
+     *
+     * @param epsosStream the epSOS document
+     * @param ccdaStream the output stream
+     * @param outputFormat the output format
+     */
+    public void epsosToCcda(InputStream epsosStream, OutputStream ccdaStream, Format outputFormat);
+
+}
+```
+
+## Testing
 From the ```trillium-bridge-transformer``` directory, run ```mvn clean test```
 
 ## Contributing changes
