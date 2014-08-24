@@ -1,5 +1,14 @@
 # _Trillium Bridge Transformer_
 
+- [Trillium Bridge Transformer Table Of Contents](#user-content-trillium-bridge-transformer)
+	- [Project Setup](#user-content-project-setup)
+	- [Build/Compile](#user-content-buildcompile)
+	- [Distribution Package](#user-content-distribution-package)
+	- [Testing](#user-content-testing)
+	- [Contributing changes](#user-content-contributing-changes)
+	- [License](#user-content-license)
+	
+
 ## Project Setup
 
 1. Install [Git](http://git-scm.com/book/en/Getting-Started-Installing-Git)
@@ -116,6 +125,8 @@ __(8)__ ```outputformats``` - specification of output format XSLT transformation
 }
 ]
 ```
+
+<a name="xslt">
 __(9)__ ```xslt``` - specification the main CCDA/epSOS XSLT transformations. This directory contains a ```xslt.properties``` configuration file in the following format:
 
 ```
@@ -132,6 +143,15 @@ __(10)__ ```error.log``` - the standard error log of the web application.
 __(11)__ ```output.log``` - the standard output log of the web application.
 
 __(12)__ ```trillium-bridge-transformer-webapp-{version}.war``` - the web application archive. This can be then deployed to an application server such as Tomcat, JBoss, etc.
+
+## Transformations
+There are two different transformation phases. The first phase transforms CCDA XML to epSOS XML (or vice versa). The next phase takes that resulting transformed XML and converts it to a desired output format (such as HTML).
+
+### Configuring the CCDA <-> epSOS Transformation
+The ```conf/xslt/xslt.properties``` file is the configuration file used to configure the XSLTs used to execute the transformation (see [here](#xslt) for more configuration information). By default, the command line applications and the web application will introspect this file and utilize the specified XSLTs.
+
+### Configuring the Output Format Transformation
+The ```conf/outputformats/outputformats.json``` file is the configuration file used to configure available output formats and the XSLTs used to implement them (see ... for more configuration information). By default, the command line applications and the web application will introspect this file and utilize the specified XSLTs.
 
 
 ## Testing
