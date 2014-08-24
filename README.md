@@ -2,7 +2,6 @@
 
 
 ## Project Setup
-
 1. Install [Git](http://git-scm.com/book/en/Getting-Started-Installing-Git)
 2. Install [Maven](http://maven.apache.org/download.cgi)
 3. Clone the repository using a Git Clone ```https://github.com/kevinpeterson/trillium-bridge-transformer.git```
