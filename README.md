@@ -110,7 +110,35 @@ __Transformations__
 
 __(7)__ ```nooptransform``` - the implementaion of the no-op direct copy CCDA <-> epSOS transform. This will be deprecated and replaced with a live transform.
 
-__(8)__ ```outputformats``` - specification of output format XSLT transformations. This directory contains a ```outputformats.json``` configuration file in the following format:
+__(8)__ ```outputformats``` - specification of output format XSLT transformations. See (here)[Configuring the Output Format Transformation] for more inforamation on output format configuration
+
+__(9)__ ```xslt``` - specification the main CCDA/epSOS XSLT transformations. See (here)[CConfiguring the CCDA <-> epSOS Transformation] for more infomation on CCDA/epSOS XSLT configuration.
+
+__Web Application__
+
+__(10)__ ```error.log``` - the standard error log of the web application.
+
+__(11)__ ```output.log``` - the standard output log of the web application.
+
+__(12)__ ```trillium-bridge-transformer-webapp-{version}.war``` - the web application archive. This can be then deployed to an application server such as Tomcat, JBoss, etc.
+
+## Transformations
+There are two different transformation phases. The first phase transforms CCDA XML to epSOS XML (or vice versa). The next phase takes that resulting transformed XML and converts it to a desired output format (such as HTML).
+
+### Configuring the CCDA <-> epSOS Transformation
+The ```conf/xslt/xslt.properties``` file is the configuration file used to configure the XSLTs used to execute the transformation, and had the following format:
+
+```
+xslt.epsos2ccda=noop.xsl
+xslt.ccda2epsos=noop.xsl
+```
+
+This file should contain two entries as show -- one for each type of transformation. The value of the ```xslt.epsos2ccda``` and ```xslt.ccda2epsos``` properties should be the relative path to the XSLT used for conversion.
+
+By default, the command line applications and the web application will introspect this file and utilize the specified XSLTs.
+
+### Configuring the Output Format Transformation
+The ```conf/outputformats/outputformats.json``` file is the configuration file used to configure available output formats and the XSLTs used to implement them, and has the following format:
 
 ```json
 [
@@ -125,34 +153,7 @@ __(8)__ ```outputformats``` - specification of output format XSLT transformation
 }
 ]
 ```
-
-<a name="xslt">
-__(9)__ ```xslt``` - specification the main CCDA/epSOS XSLT transformations. This directory contains a ```xslt.properties``` configuration file in the following format:
-
-```
-xslt.epsos2ccda=noop.xsl
-xslt.ccda2epsos=noop.xsl
-```
-
-This file should contain two entries as show -- one for each type of transformation. The value of the ```xslt.epsos2ccda``` and ```xslt.ccda2epsos``` properties should be the relative path to the XSLT used for conversion.
-
-__Web Application__
-
-__(10)__ ```error.log``` - the standard error log of the web application.
-
-__(11)__ ```output.log``` - the standard output log of the web application.
-
-__(12)__ ```trillium-bridge-transformer-webapp-{version}.war``` - the web application archive. This can be then deployed to an application server such as Tomcat, JBoss, etc.
-
-## Transformations
-There are two different transformation phases. The first phase transforms CCDA XML to epSOS XML (or vice versa). The next phase takes that resulting transformed XML and converts it to a desired output format (such as HTML).
-
-### Configuring the CCDA <-> epSOS Transformation
-The ```conf/xslt/xslt.properties``` file is the configuration file used to configure the XSLTs used to execute the transformation (see [here](#xslt) for more configuration information). By default, the command line applications and the web application will introspect this file and utilize the specified XSLTs.
-
-### Configuring the Output Format Transformation
-The ```conf/outputformats/outputformats.json``` file is the configuration file used to configure available output formats and the XSLTs used to implement them (see ... for more configuration information). By default, the command line applications and the web application will introspect this file and utilize the specified XSLTs.
-
+By default, the command line applications and the web application will introspect this file and utilize the specified XSLTs.
 
 ## Testing
 
