@@ -2,7 +2,7 @@
 
 ### _Bridging Patient Summaries across the Atlantic_
 
-> The Trillium Bridge support action extends the European Patient Summaries and Meaningful Use II, Transitions of Care in the United States to establish an interoperability bridge that will benefit EU and US citizens alike, advancing eHealth innovation and contributing to the triple win: quality care, sustainability and economic growth -- <cite>http://www.trilliumbridge.eu</cite>
+> The Trillium Bridge support action extends the European Patient Summaries and Meaningful Use II, Transitions of Care in the United States to establish an interoperability bridge that will benefit EU and US citizens alike, advancing eHealth innovation and contributing to the triple win: quality care, sustainability and economic growth --&nbsp;<cite>http://www.trilliumbridge.eu</cite>
 
 The _Trillium Bridge Transformer_ is a Java API, Command Line Interface, and Web-based Application to translate between epSOS
 Patient Summary documents and HL7 C-CDA Continuity of Care Documents (CCD).
