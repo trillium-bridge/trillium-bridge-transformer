@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MapEntryList xmlns="http://www.omg.org/spec/CTS2/1.1/MapVersion"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:core="http://www.omg.org/spec/CTS2/1.1/Core"
+    xsi:schemaLocation="http://www.omg.org/spec/CTS2/1.1/MapVersion http://www.omg.org/spec/cts2/130601/mapversion/MapEntryServices.xsd" complete="COMPLETE" numEntries="1">
+    <heading xmlns="http://www.omg.org/spec/CTS2/1.1/Core">
+        <resourceRoot></resourceRoot>
+        <resourceURI></resourceURI>
+        <accessDate>2015-02-07T21:01:24Z</accessDate>
+    </heading>
+    <entry>
+        <entry processingRule="FIRST_MATCH">
+            <assertedBy>
+                 <core:mapVersion uri="http://trilliumbridge.com/maps/CCDtoEPSOSHeader/version/v0.1">CCDtoEPSOSHeaderv0.1</core:mapVersion>
+                 <core:map uri="http://trilliumbridge.com/maps/CCDtoEPSOSHeader">CCDtoEPSOSHeader</core:map>
+            </assertedBy>
+            <mapFrom uri="http://loinc.org/id/60951-5">
+                <core:namespace>LOINC</core:namespace>
+                <core:name>60591-5</core:name>
+                <core:designation>Patient Summary</core:designation>
+            </mapFrom>
+            <mapSet processingRule="FIRST_MATCH" entryOrder="1">
+                <mapTarget entryOrder="1">
+                    <mapTo uri="http://loinc.org/id/34133-9">
+                        <core:namespace>LOINC</core:namespace>
+                        <core:name>34133-9</core:name>
+                        <core:designation>Summarization of Episode Note</core:designation>
+                    </mapTo>
+                </mapTarget>
+            </mapSet>
+        </entry>
+    </entry>
+</MapEntryList>

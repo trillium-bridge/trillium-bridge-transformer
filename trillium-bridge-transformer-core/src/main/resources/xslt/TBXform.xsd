@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    xmlns:tbxform="http://trilliumbridge.org/xform"
+    targetNamespace="http://trilliumbridge.org/xform">
+
+    <xs:simpleType name="ROOTS">
+        <xs:annotation>
+            <xs:documentation>Possible mapEntry roots</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="epSOS"/>
+            <xs:enumeration value="CCD"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="TRANSFORMATIONS">
+        <xs:annotation>
+            <xs:documentation>List of available transformations</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="changeTemplateRoots">
+                <xs:annotation>
+                    <xs:documentation>Change the template root from "fromids" to "toids" or remove if not specified</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="mapValueSet">
+                <xs:annotation>
+                    <xs:documentation>Transform the from value set to the to value set</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="newid">
+                <xs:annotation>
+                    <xs:documentation>Change the document identifier to indicate that a transformation has occurred</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="translateTitle">
+                <xs:annotation>
+                    <xs:documentation>A function that can (potentially) translate the language of the title</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="mapValueSet">
+                <xs:annotation>
+                    <xs:documentation>Map a code from one value set to a second</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="replaceCode">
+                <xs:annotation>
+                    <xs:documentation>Replace all occurrences of fromcode with tocode or remove if no to</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="function">
+        <xs:annotation>
+            <xs:documentation>An XSLT function to run against the current context. The outermost
+                context will be the node identified by the path. Subsequent contexts will be what is
+                returned from the previous process </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="entry" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="tbxform:TRANSFORMATIONS"/>
+        <xs:anyAttribute processContents="lax">
+            <xs:annotation>
+                <xs:documentation>A list of attributes (tag/values) to pass to the
+                    function</xs:documentation>
+            </xs:annotation>
+        </xs:anyAttribute>
+    </xs:complexType>
+
+
+
+    <xs:complexType name="mapEntry">
+        <xs:annotation>
+            <xs:documentation>A match path within the context.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="documentation" type="xs:string" minOccurs="0"/>
+            <xs:element name="frompath" type="xs:string" minOccurs="1" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>The path(s) to match in the source document</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="topath" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>The path(s) to insert into the target document. If absent no transformation is possible.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="transformation" type="tbxform:function" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>The set of functions that, when applied sequentially,
+                        transform the target of the frompath to a node for the
+                        topath</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="requirement" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="from" use="required" type="tbxform:ROOTS">
+            <xs:annotation>
+                <xs:documentation>The type of the FROM document</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="to" use="required" type="tbxform:ROOTS">
+            <xs:annotation>
+                <xs:documentation>The type of the TO document</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="invertable" use="required" type="xs:boolean">
+            <xs:annotation>
+                <xs:documentation>If True, from and to can be switched -- the conversion is bidirectional</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="reference" use="optional" type="xs:string">
+            <xs:annotation>
+                <xs:documentation>Reference to the source of the entry</xs:documentation>
+            </xs:annotation>
+        </xs:attribute>
+        
+    </xs:complexType>
+
+    <xs:element name="map" type="tbxform:map"/>
+    <xs:complexType name="map">
+        <xs:annotation>
+            <xs:documentation>A collection of mapEntries to transform a source document into a
+                target</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="entry" type="tbxform:mapEntry" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+
+    <xs:complexType name="valuesetmapentry">
+        <xs:sequence>
+            <xs:element name="base" type="xs:anyURI"/>
+            <xs:element name="pattern" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:ID" use="required"/>
+    </xs:complexType>
+    
+    <xs:element name="valuesetmap" type="tbxform:valuesetmap"/>
+    <xs:complexType name="valuesetmap">
+        <xs:sequence>
+            <xs:element name="entry" type="tbxform:valuesetmapentry" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+  
+    <xs:complexType name="translation">
+        <xs:annotation>
+            <xs:documentation>The translation of a string from one language to another</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="source" type="xs:string" minOccurs="1"/>
+            <xs:element name="target" type="xs:string" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:element name="translations" type="tbxform:translations"/>
+    <xs:complexType name="translations">
+        <xs:annotation>
+            <xs:documentation>A collection of translations from a source to a target language</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="entry" type="tbxform:translation" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="fromlanguage" type="xs:string" use="required"/>
+        <xs:attribute name="tolanguage" type="xs:string" use="required"/>
+    </xs:complexType>
+    
+
+</xs:schema>

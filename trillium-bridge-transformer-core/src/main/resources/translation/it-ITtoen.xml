@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<translations xmlns="http://trilliumbridge.org/xform"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://trilliumbridge.org/xform file:/Users/mrf7578/Development/git/kevinpeterson/trillium-bridge-transformer/trillium-bridge-transformer-core/src/main/resources/xslt/TBXform.xsd"
+    fromlanguage="it-IT" tolanguage="en">
+    <entry>
+        <source>Profilo Sanitario Sintentico (Patient Summary)</source>
+        <target>Patient Summary</target>
+    </entry>
+    <entry>
+        <source>Allergie, Reazioni Avverse ed Allarmi</source>
+        <target>Allergies, adverse reactions, alerts</target>
+    </entry>
+</translations>

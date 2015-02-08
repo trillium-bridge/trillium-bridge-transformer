@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<valuesetmap xmlns="http://trilliumbridge.org/xform"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://trilliumbridge.org/xform file:/Users/mrf7578/Development/git/kevinpeterson/trillium-bridge-transformer/trillium-bridge-transformer-core/src/main/resources/xslt/TBXform.xsd">
+    <entry name="CCDtoEPSOSHeader">
+        <base>../map/CCDtoEPSOS/version/v0.1/resolution.xml</base>
+        <pattern/>
+    </entry>
+</valuesetmap>
