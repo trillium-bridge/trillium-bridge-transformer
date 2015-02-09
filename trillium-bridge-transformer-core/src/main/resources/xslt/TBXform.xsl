@@ -22,6 +22,9 @@
     <xsl:param name="to">CCD</xsl:param>
     <xsl:param name="tolanguage">en</xsl:param>
     
+    <xsl:variable name="apos">'</xsl:variable>
+    <xsl:variable name="quot">"</xsl:variable>
+    
     <!-- Code system translator -->
     <xsl:function name="tbx:uriToEntityReference" as="element(tbx:conceptReference)">
         <xsl:param name="uri"/>
@@ -273,16 +276,34 @@
             </xsl:apply-templates>
         </xsl:copy>
     </xsl:template>
+    
+    <xsl:template name="refmark">
+         <xsl:choose>
+             <xsl:when test="../templateId">
+                 <xsl:value-of select="concat('[templateId/@root=', $quot, ../templateId[1]/@root, $quot, ']')"/>
+             </xsl:when>
+             <xsl:when test="../@typeCode">
+                 <xsl:value-of select="concat('[@typeCode=', $quot, ../@typeCode, $quot, ']')"/>
+             </xsl:when>
+             <xsl:when test="../@classCode">
+                 <xsl:value-of select="concat('[@typeCode=', $quot, ../@typeCode, $quot, ']')"/>
+             </xsl:when>
+             <xsl:otherwise/>
+         </xsl:choose>
+    </xsl:template>
 
     <xsl:template match="node()" xmlns="urn:hl7-org:v3">
         <xsl:param name="path"/>
         <xsl:param name="language"/>
 
-        <xsl:variable name="loc" select="concat($path, '/', name())"/>
+        <xsl:variable name="rm">
+            <xsl:call-template name="refmark"/>
+        </xsl:variable>
+        <xsl:variable name="loc" select="concat($path, $rm, '/', name())"/>
         <xsl:variable name="context" select="current()"/>
-
         <xsl:choose>
             <xsl:when test="$maps/tbx:map/tbx:entry[@from=$from and @to=$to and tbx:frompath=$loc]">
+<!--                PATH: <xsl:value-of select="$loc"/>|-->
                 <xsl:for-each
                     select="$maps/tbx:map/tbx:entry[@from=$from and @to=$to and tbx:frompath=$loc]/tbx:transformation">
                     <xsl:choose>

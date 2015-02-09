@@ -2,9 +2,9 @@
 <map xmlns="http://trilliumbridge.org/xform" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:v3="urn:hl7-org:v3"> xsi:schemaLocation="http://trilliumbridge.org/xform
     file:/Users/mrf7578/Development/git/kevinpeterson/trillium-bridge-transformer/trillium-bridge-transformer-core/src/main/resources/xslt/TBXform.xsd">
-        <entry from="epSOS" to="CCD" invertable="true">
+    <entry from="epSOS" to="CCD" invertable="true">
         <documentation>The root template identifier needs to be changed from epSOS to CCD</documentation>
-        <frompath>/ClinicalDocument/templateId</frompath>
+        <frompath>/ClinicalDocument[templateId/@root="1.3.6.1.4.1.12559.11.10.1.3.1.1.3"]/templateId</frompath>
         <topath>/ClinicalDocument/templateId</topath>
         <transformation name="changeTemplateRoots">
             <entry fromid="1.3.6.1.4.1.12559.11.10.1.3.1.1.3" toid="2.16.840.1.113883.10.20.22.1.2"/>
@@ -12,35 +12,35 @@
         </transformation>
     </entry>
     <entry from="epSOS" to="CCD" invertable="true">
-        <frompath>/ClinicalDocument/id</frompath>
+        <frompath>/ClinicalDocument[templateId/@root="1.3.6.1.4.1.12559.11.10.1.3.1.1.3"]/id</frompath>
         <topath>/ClinicalDocument/id</topath>
         <transformation name="newid"/>
     </entry>
     <entry from="epSOS" to="CCD" invertable="true">
-        <frompath>/ClinicalDocument/title</frompath>
-        <topath>/ClinicalDocument/title</topath>
+        <frompath>/ClinicalDocument[templateId/@root="1.3.6.1.4.1.12559.11.10.1.3.1.1.3"]/title</frompath>
+        <topath>/ClinicalDocument/2.16.840.1.113883.10.20.22.1.2/title</topath>
         <transformation name="translateTitle"/>
     </entry>
     <entry from="epSOS" to="CCD" invertable="true">
-        <frompath>/ClinicalDocument/code</frompath>
+        <frompath>/ClinicalDocument[templateId/@root="1.3.6.1.4.1.12559.11.10.1.3.1.1.3"]/code</frompath>
         <topath>/ClinicalDocument/code</topath>
         <transformation name="mapValueSet" map="CCDtoEPSOSHeader"/>
     </entry>
     <entry from="epSOS" to="CCD" invertable="true">
-        <frompath>/ClinicalDocument/component/structuredBody/component/section/templateId</frompath>
+        <frompath>/ClinicalDocument[templateId/@root="1.3.6.1.4.1.12559.11.10.1.3.1.1.3"]/component/structuredBody/component/section[templateId/@root="1.3.6.1.4.1.19376.1.5.3.1.3.13"]/templateId</frompath>
         <topath>/ClinicalDocument/component/structuredBody/component/section/templateId</topath>
         <transformation name="changeTemplateRoots">
-            <entry fromid="2.16.840.1.113883.10.20.1.2" toid="2.16.840.1.113883.10.20.22.2.6"/>
-            <entry fromid="1.3.6.1.4.1.19376.1.5.3.1.3.13" toid="2.16.840.1.113883.10.20.22.2.6.1"/>
+            <entry fromid="2.16.840.1.113883.10.20.1.2" toid="2.16.840.1.113883.10.20.22.2.6.1"/>
+            <entry fromid="1.3.6.1.4.1.19376.1.5.3.1.3.13" toid="2.16.840.1.113883.10.20.22.2.6"/>
         </transformation>
     </entry>
     <entry from="epSOS" to="CCD" invertable="true">
-        <frompath>/ClinicalDocument/component/structuredBody/component/section/title</frompath>
+        <frompath>/ClinicalDocument[templateId/@root="1.3.6.1.4.1.12559.11.10.1.3.1.1.3"]/component/structuredBody/component/section[templateId/@root="1.3.6.1.4.1.19376.1.5.3.1.3.13"]/title</frompath>
         <topath>/ClinicalDocument/component/structuredBody/component/section/title</topath>
         <transformation name="translateTitle"/>
     </entry>
     <entry from="epSOS" to="CCD" invertable="true">
-        <frompath>/ClinicalDocument/component/structuredBody/component/section/entry/act/code</frompath>
+        <frompath>/ClinicalDocument[templateId/@root="1.3.6.1.4.1.12559.11.10.1.3.1.1.3"]/component/structuredBody/component/section[templateId/@root="1.3.6.1.4.1.19376.1.5.3.1.3.13"]/entry[@typeCode="DRIV"]/act[templateId/@root="2.16.840.1.113883.10.20.1.27"]/code</frompath>
         <topath>/ClinicalDocument/component/structuredBody/component/section/entry/act/code</topath>
         <transformation name="replaceCode">
             <entry>
@@ -55,7 +55,7 @@
         </transformation>
     </entry>
     <entry from="epSOS" to="CCD" invertable="true">
-        <frompath>/ClinicalDocument/component/structuredBody/component/section/entry/act/templateId</frompath>
+        <frompath>/ClinicalDocument[templateId/@root="1.3.6.1.4.1.12559.11.10.1.3.1.1.3"]/component/structuredBody/component/section[templateId/@root="1.3.6.1.4.1.19376.1.5.3.1.3.13"]/entry[@typeCode="DRIV"]/act[templateId/@root="2.16.840.1.113883.10.20.1.27"]/templateId</frompath>
         <topath>/ClinicalDocument/component/structuredBody/component/section/entry/acttemplateId</topath>
         <transformation name="changeTemplateRoots">
             <entry fromid="2.16.840.1.113883.10.20.1.27" toid="2.16.840.1.113883.10.20.22.4.30"/>
@@ -64,7 +64,7 @@
         </transformation>
     </entry>
     <entry from="epSOS" to="CCD" invertable="true">
-        <frompath>/ClinicalDocument/component/structuredBody/component/section/entry/act/entryRelationship/observation/templateId</frompath>
+        <frompath>/ClinicalDocument[templateId/@root="1.3.6.1.4.1.12559.11.10.1.3.1.1.3"]/component/structuredBody/component/section[templateId/@root="1.3.6.1.4.1.19376.1.5.3.1.3.13"]/entry[@typeCode="DRIV"]/act[templateId/@root="2.16.840.1.113883.10.20.1.27"]/entryRelationship[@typeCode="SUBJ"]/observation[templateId/@root="2.16.840.1.113883.10.20.1.18"]/templateId</frompath>
         <topath>/ClinicalDocument/component/structuredBody/component/section/entry/act/entryRelationship/observation/templateId</topath>
         <transformation name="changeTemplateRoots">
             <entry fromid="2.16.840.1.113883.10.20.1.18" toid="2.16.840.1.113883.10.20.22.4.7"/>
@@ -74,18 +74,19 @@
         </transformation>
     </entry>
     <entry from="epSOS" to="CCD" invertable="true">
-        <frompath>/ClinicalDocument/component/structuredBody/component/section/entry/act/entryRelationship/observation/code</frompath>
+        <frompath>/ClinicalDocument[templateId/@root="1.3.6.1.4.1.12559.11.10.1.3.1.1.3"]/component/structuredBody/component/section[templateId/@root="1.3.6.1.4.1.19376.1.5.3.1.3.13"]/entry[@typeCode="DRIV"]/act[templateId/@root="2.16.840.1.113883.10.20.1.27"]/entryRelationship[@typeCode="SUBJ"]/observation[templateId/@root="2.16.840.1.113883.10.20.1.18"]/code</frompath>
         <topath>/ClinicalDocument/component/structuredBody/component/section/entry/act/entryRelationship/observation/code</topath>
         <transformation name="replaceCode">
             <entry>
                 <tocode>
-                    <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4" xmlns="urn:hl7-org:v3"/>
+                    <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4" xmlns="urn:hl7-org:v3"
+                    />
                 </tocode>
             </entry>
         </transformation>
     </entry>
     <entry from="epSOS" to="CCD" invertable="true">
-        <frompath>/ClinicalDocument/component/structuredBody/component/section/entry/act/entryRelationship/observation/value</frompath>
+        <frompath>/ClinicalDocument[templateId/@root="1.3.6.1.4.1.12559.11.10.1.3.1.1.3"]/component/structuredBody/component/section[templateId/@root="1.3.6.1.4.1.19376.1.5.3.1.3.13"]/entry[@typeCode="DRIV"]/act[templateId/@root="2.16.840.1.113883.10.20.1.27"]/entryRelationship[@typeCode="SUBJ"]/observation[templateId/@root="2.16.840.1.113883.10.20.1.18"]/value</frompath>
         <topath>/ClinicalDocument/component/structuredBody/component/section/entry/act/entryRelationship/observation/value</topath>
         <transformation name="replaceValue">
             <entry>
@@ -98,19 +99,17 @@
                 </fromValue>-->
                 <toValue>
                     <value xsi:type="CD" code="416098002" displayName="Drug allergy"
-                        codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"  xmlns="urn:hl7-org:v3"/>
+                        codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"
+                        xmlns="urn:hl7-org:v3"/>
                 </toValue>
             </entry>
         </transformation>
     </entry>
     <entry from="epSOS" to="CCD" invertable="true">
-        <frompath>/ClinicalDocument/component/structuredBody/component/section/text</frompath>
+        <frompath>/ClinicalDocument[templateId/@root="1.3.6.1.4.1.12559.11.10.1.3.1.1.3"]/component/structuredBody/component/section[templateId/@root="1.3.6.1.4.1.19376.1.5.3.1.3.13"]/text</frompath>
         <topath>/ClinicalDocument/component/structuredBody/component/section/text</topath>
         <transformation name="translateText"/>
     </entry>
-    
-    
-    
     <!--  
     
     <entry root="CCD" reference="7.1.1 Administrative Gender">
@@ -152,7 +151,7 @@
             FRT04 - The transformation will have to change the template ID from CCD to epSOS for the data element Country (Patient Country of Living) as per the Xpaths, the rest of the structure remains the same.  The mapping providing a common vocabulary for the value of this data element from the CTS2 server is listed in section 7.1.2.8.
         </requirement>
     </entry>
-    <entry root="epSOS" reference="7.1.2.2 Guardian's Country">
+    <entry root="epSOS" reference="7.1.2.2 Guardian"s Country">
         <frompath>/recordTarget/patientRole/addr/country</frompath>
         <fromvalueset>1.3.6.1.4.1.12559.11.10.1.3.1.42.4</fromvalueset>
         <topath>/recordTarget/patientRole/addr/country</topath>
@@ -161,7 +160,7 @@
             FRT05 - The transformation will have to change the template ID from epSOS to CCD for the data element Country (Guardian’s Country) as per the Xpaths, the rest of the structure remains the same.  The mapping providing a common vocabulary for the value of this data element from the CTS2 server is listed in section 7.1.2.8.
         </requirement>
     </entry>
-    <entry root="CCD" reference="7.1.2.1 Guardian's Country">
+    <entry root="CCD" reference="7.1.2.1 Guardian"s Country">
         <frompath>/recordTarget/patientRole/patient/guardian/addr/country</frompath>
         <fromvalueset>2.16.840.1.113883.3.88.12.80.63</fromvalueset>
         <topath>/recordTarget/patientRole/patient/guardian/addr/country</topath>
@@ -170,7 +169,7 @@
             FRT06 - The transformation will have to change the template ID from CCD to epSOS for the data element Country (Guardian’s Country) as per the Xpaths, the rest of the structure remains the same.  The mapping providing a common vocabulary for the value of this data element from the CTS2 server is listed in section 7.1.2.8.
         </requirement>
     </entry>
-    <entry root="epSOS" reference="7.1.2.3 Patient Contact's Country">
+    <entry root="epSOS" reference="7.1.2.3 Patient Contact"s Country">
         <frompath>/participant/associatedEntity/addr/country</frompath>
         <topath/>
         <requirement>
@@ -187,7 +186,7 @@
             FRT07 - The transformation will have to change the template ID and the structure from epSOS to CCD for the data element Country (Prefered HCP/ Legal Organization Country) as per the Xpaths. Please note that there are two possibilities to express the preferred HCP in epSOS as it is seen a point of contact for the patient. They both need to be mapped to the same element in CCD.  The mapping providing a common vocabulary for the value of this data element from the CTS2 server is listed in section 7.1.2.8.
         </requirement>
     </entry>
-    <entry root="CCD" reference="7.1.2.1 Guardian's Country">
+    <entry root="CCD" reference="7.1.2.1 Guardian"s Country">
         <frompath>/participant/associatedEntity/addr/country</frompath>
         <fromvalueset>2.16.840.1.113883.3.88.12.80.63</fromvalueset>
         <topath>/participant/associatedEntity/addr/country</topath>
@@ -198,7 +197,7 @@
         </requirement>
     </entry>
     
-    <entry root="epSOS" reference="7.1.2.5 Healthcare Facility's Country">
+    <entry root="epSOS" reference="7.1.2.5 Healthcare Facility"s Country">
         <frompath>/author/assignedAuthor/representedOrganization/addr/country</frompath>
         <fromvalueset>1.3.6.1.4.1.12559.11.10.1.3.1.42.4</fromvalueset>
         <topath>/author/assignedAuthor/addr/country</topath>
@@ -207,7 +206,7 @@
             FRT09 - The transformation will have to change the template ID from epSOS to CCD for the data element Country (Healthcare Facility’s Country) as per the Xpaths, the rest of the structure remains the same. An alternative is possible for expressing the same structure (see 7.1.2.5.3).  This must be supported as well. The mapping providing a common vocabulary for the value of this data element from the CTS2 server is listed in section 7.1.2.8
         </requirement>
     </entry>
-    <entry root="CCD" reference="7.1.2.5 Healthcare Facility's Country">
+    <entry root="CCD" reference="7.1.2.5 Healthcare Facility"s Country">
         <frompath>/author/assignedAuthor/representedOrganization/addr/country</frompath>
         <fromvalueset>2.16.840.1.113883.3.88.12.80.63</fromvalueset>
         <topath>/author/assignedAuthor/addr/country</topath>
@@ -216,7 +215,7 @@
             FRT10 - The transformation will have to change the template ID from CCD to epSOS for the data element Country (Healthcare Facility’s Country) as per the Xpaths, the rest of the structure remains the same. An alternative is possible for expressing the same structure (see 7.1.2.5.3).  This must be supported as well.  The mapping providing a common vocabulary for the value of this data element from the CTS2 server is listed in section 7.1.2.8.           
         </requirement>
     </entry>
-    <entry root="epSOS" reference="7.1.2.5 Healthcare Facility's Country (alternate path)">
+    <entry root="epSOS" reference="7.1.2.5 Healthcare Facility"s Country (alternate path)">
         <frompath>/documentationOf/serviceEvent/performer/assignedEntity/representedOrganization/addr/country</frompath>
         <fromvalueset>1.3.6.1.4.1.12559.11.10.1.3.1.42.4</fromvalueset>
         <topath>/documentationOf/serviceEvent/performer/assignedEntity/representedOrganization/addr/country</topath>
@@ -225,7 +224,7 @@
             FRT11 - The transformation will have to change the template ID from epSOS to CCD for the data element Country (Healthcare Facility’s Country) as per the Xpaths, the rest of the structure remains the same. An alternative is possible for expressing the same structure (see 7.1.2.5.1).  This must be supported as well.  The mapping providing a common vocabulary for the value of this data element from the CTS2 server is listed in section 7.1.2.8.
         </requirement>
     </entry>
-    <entry root="CCD" reference="7.1.2.5 Healthcare Facility's Country (alternate path)">
+    <entry root="CCD" reference="7.1.2.5 Healthcare Facility"s Country (alternate path)">
         <frompath>/documentationOf/serviceEvent/performer/assignedEntity/representedOrganization/addr/country</frompath>
         <fromvalueset>2.16.840.1.113883.3.88.12.80.63</fromvalueset>
         <topath>/documentationOf/serviceEvent/performer/assignedEntity/representedOrganization/addr/country</topath>

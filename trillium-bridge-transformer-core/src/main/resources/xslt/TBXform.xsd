@@ -43,11 +43,6 @@
                     <xs:documentation>A function that can (potentially) translate the language of the title</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
-            <xs:enumeration value="mapValueSet">
-                <xs:annotation>
-                    <xs:documentation>Map a code from one value set to a second</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
             <xs:enumeration value="replaceCode">
                 <xs:annotation>
                     <xs:documentation>Replace all occurrences of fromcode (or all codes if absent) with tocode or remove if no to</xs:documentation>
