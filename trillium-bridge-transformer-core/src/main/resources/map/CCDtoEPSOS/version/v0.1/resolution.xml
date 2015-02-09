@@ -14,14 +14,14 @@
                  <core:mapVersion uri="http://trilliumbridge.com/maps/CCDtoEPSOSHeader/version/v0.1">CCDtoEPSOSHeaderv0.1</core:mapVersion>
                  <core:map uri="http://trilliumbridge.com/maps/CCDtoEPSOSHeader">CCDtoEPSOSHeader</core:map>
             </assertedBy>
-            <mapFrom uri="http://loinc.org/id/60951-5">
+            <mapFrom uri="urn:oid:2.16.840.1.113883.6.1/60951-5">
                 <core:namespace>LOINC</core:namespace>
                 <core:name>60591-5</core:name>
                 <core:designation>Patient Summary</core:designation>
             </mapFrom>
             <mapSet processingRule="FIRST_MATCH" entryOrder="1">
                 <mapTarget entryOrder="1">
-                    <mapTo uri="http://loinc.org/id/34133-9">
+                    <mapTo uri="urn:oid:2.16.840.1.113883.6.1/34133-9">
                         <core:namespace>LOINC</core:namespace>
                         <core:name>34133-9</core:name>
                         <core:designation>Summarization of Episode Note</core:designation>
