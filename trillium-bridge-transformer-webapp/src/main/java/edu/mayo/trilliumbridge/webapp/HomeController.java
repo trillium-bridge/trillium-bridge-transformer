@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @Controller
@@ -17,7 +16,8 @@ public class HomeController {
     @Value("${app.version}")
     private String version;
 
-    @Resource(name="exampleCcdas")
+    //Unused
+    //@Resource(name="exampleCcdas")
     private List<ExampleCcda> exampleCcdas;
 
     @RequestMapping(
