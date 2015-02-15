@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://trilliumbridge.org/xform ../schema/TBXform.xsd">
     <entry name="CCDtoEPSOSHeader" entireMap="true">
-        <uripattern>../map/CCDtoEPSOS/version/v0.1/resolution.xml</uripattern>
+        <uripattern>../cts2fileservice/map/CCDtoEPSOS/version/v0.1/resolution.xml</uripattern>
     </entry>
     <entry name="NUCC_ISCO_ProviderType_VS" entireMap="false">
         <uripattern>http://rd.phast.fr/REST/sts_rest_beta_2/0004/map/NUCC_ISCO_ProviderType_VS/resolution?entity={code}</uripattern>

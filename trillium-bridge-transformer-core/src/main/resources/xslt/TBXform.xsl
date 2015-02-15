@@ -7,11 +7,11 @@
 
 
     <xsl:variable name="maps">
-        <xsl:copy-of select="document('FP7-SA610756-D3.1.xml')"/>
+        <xsl:copy-of select="document('../tbxform/FP7-SA610756-D3.1.xml')"/>
     </xsl:variable>
 
     <xsl:variable name="valuesets">
-        <xsl:copy-of select="document('ValueSetMaps.xml')"/>
+        <xsl:copy-of select="document('../tbxform/ValueSetMaps.xml')"/>
     </xsl:variable>
     
     <xsl:variable name="codesystems">
@@ -424,10 +424,5 @@
     <xsl:template name="cr">
         <xsl:value-of select="'&#xa;'"/>
     </xsl:template>
-    
-    <xsl:template match="text()">
-        <xsl:copy/>
-    </xsl:template>
-
 
 </xsl:stylesheet>
