@@ -1,43 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:v3="urn:hl7-org:v3"
-    xmlns:tbx="http://trilliumbridge.org/xform" 
-    exclude-result-prefixes="xs v3 tbx mapVersion core mapServices codeSystem"
-    version="2.0" 
-    xmlns:mapVersion="http://www.omg.org/spec/CTS2/1.1/MapVersion"
-    xmlns:mapServices="http://www.omg.org/spec/CTS2/1.1/MapEntryServices"
-    xmlns:codeSystem="http://schema.omg.org/spec/CTS2/1.0/CodeSystem"
-    xmlns:core="http://www.omg.org/spec/CTS2/1.1/Core" xpath-default-namespace="urn:hl7-org:v3">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:v3="urn:hl7-org:v3"
+    xmlns:tbx="http://trilliumbridge.org/xform" exclude-result-prefixes="xs v3 tbx mapVersion core mapServices codeSystem tbx" version="2.0"
+    xmlns:mapVersion="http://www.omg.org/spec/CTS2/1.1/MapVersion" xmlns:mapServices="http://www.omg.org/spec/CTS2/1.1/MapEntryServices"
+    xmlns:codeSystem="http://schema.omg.org/spec/CTS2/1.0/CodeSystem" xmlns:core="http://www.omg.org/spec/CTS2/1.1/Core"
+    xpath-default-namespace="urn:hl7-org:v3">
 
 
     <xsl:variable name="maps">
-        <xsl:copy-of select="doc('FP7-SA610756-D3.1.xml')"/>
+        <xsl:copy-of select="document('FP7-SA610756-D3.1.xml')"/>
     </xsl:variable>
 
     <xsl:variable name="valuesets">
-        <xsl:copy-of select="doc('ValueSetMaps.xml')"/>
+        <xsl:copy-of select="document('ValueSetMaps.xml')"/>
+    </xsl:variable>
+    
+    <xsl:variable name="codesystems">
+        <xsl:copy-of select="document('http://rd.phast.fr/REST/sts_rest_beta_2/0004/codesystems')"/>
     </xsl:variable>
 
     <xsl:param name="from">epSOS</xsl:param>
     <xsl:param name="to">CCD</xsl:param>
     <xsl:param name="tolanguage">en</xsl:param>
-    
+    <xsl:param name="showpaths" select="false()"/>
+    <xsl:param name="copycomments" select="true()"/>
+
     <xsl:variable name="apos">'</xsl:variable>
     <xsl:variable name="quot">"</xsl:variable>
-    
+
     <!-- Code system translator -->
     <xsl:function name="tbx:uriToEntityReference" as="element(tbx:conceptReference)">
         <xsl:param name="uri"/>
         <xsl:variable name="code" select="replace($uri, '.*/', '')"/>
         <xsl:variable name="codeSystemUri" select="replace($uri, '/.*','')"/>
-        <xsl:variable name="codeSystemEntry" 
-            select="document('http://rd.phast.fr/REST/sts_rest_beta_2/0004/codesystems')//codeSystem:entry[@about=$codeSystemUri]"/>
+        <xsl:variable name="codeSystemEntry"
+            select="$codesystems//codeSystem:entry[@about=$codeSystemUri]"/>
         <tbx:conceptReference uri="{$uri}" xmlns="http://www.omg.org/spec/CTS2/1.1/Core">
-            <core:namespace><xsl:value-of select="$codeSystemEntry/@codeSystemName"/></core:namespace>
-            <core:name><xsl:value-of select="$code"/></core:name>
+            <core:namespace>
+                <xsl:value-of select="$codeSystemEntry/@codeSystemName"/>
+            </core:namespace>
+            <core:name>
+                <xsl:value-of select="$code"/>
+            </core:name>
         </tbx:conceptReference>
     </xsl:function>
-    
+
 
     <!-- Terminology access routines
         
@@ -53,38 +59,56 @@
         <xsl:param name="vsmapentry"/>
         <xsl:param name="code"/>
         <xsl:param name="codeSystem"/>
-
-        <xsl:variable name="docroot">
-            <xsl:value-of
-                select="replace(replace($vsmapentry/tbx:uripattern, '\{code\}', $code), '\{codeSystem\}', $codeSystem)"/>
-        </xsl:variable>
+        <xsl:param name="displayName"/>
+        <xsl:if test="not($code or $codeSystem)">
+            <xsl:message select="concat('Code(',$code,') (', $codeSystem, ')')"></xsl:message>
+        </xsl:if>
 
         <xsl:variable name="target">
             <xsl:choose>
-                <xsl:when test="$vsmapentry/@entireMap='true'">
-                    <xsl:copy-of
-                        select="document($docroot)/mapVersion:MapEntryList/mapVersion:entry/mapVersion:entry[mapVersion:mapFrom/core:namespace=$codeSystem and mapVersion:mapFrom/core:name=$code]/mapVersion:mapSet/mapVersion:mapTarget/mapVersion:mapTo"/>
+                <xsl:when test="$vsmapentry/tbx:uripattern">
+                    <xsl:variable name="docroot">
+                        <xsl:value-of select="replace(replace($vsmapentry/tbx:uripattern, '\{code\}', $code), '\{codeSystem\}', $codeSystem)"/>
+                    </xsl:variable>
+                    <xsl:choose>
+                        <xsl:when test="$vsmapentry/@entireMap='true'">
+                            <xsl:copy-of
+                                select="document($docroot)/mapVersion:MapEntryList/mapVersion:entry/mapVersion:entry[mapVersion:mapFrom/core:namespace=$codeSystem and mapVersion:mapFrom/core:name=$code]/mapVersion:mapSet/mapVersion:mapTarget/mapVersion:mapTo"
+                            />
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:copy-of select="document($docroot)/mapServices:MapTargetListMsg/mapServices:mapTargetList/mapServices:entry/mapVersion:mapTo"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </xsl:when>
-                <xsl:otherwise>
-                    <xsl:copy-of
-                        select="document($docroot)/mapServices:MapTargetListMsg/mapServices:mapTargetList/mapServices:entry/mapVersion:mapTo"/>
-                </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        
-        <xsl:variable name="conceptReference" select="tbx:uriToEntityReference($target/mapVersion:mapTo/@uri)"/>
-        
 
-        <code codeSystem="{substring-after(substring-before($conceptReference/@uri,'/'), 'urn:oid:')}" codeSystemName="{$conceptReference/core:namespace}"
-            code="{$target/mapVersion:mapTo/core:name}" displayName="{$target/mapVersion:mapTo/core:designation}"
-            xmlns="urn:hl7-org:v3">
-            <translation>
-                <xsl:apply-templates select="@* | node()">
-                    <xsl:with-param name="path" select="$path"/>
-                    <xsl:with-param name="language" select="$language"/>
-                </xsl:apply-templates>
-            </translation>
-        </code>
+        <xsl:choose>
+            <xsl:when test="$target/mapVersion:mapTo">
+                <xsl:variable name="conceptReference" select="tbx:uriToEntityReference($target/mapVersion:mapTo/@uri)"/>
+                <code codeSystem="{substring-after(substring-before($conceptReference/@uri,'/'), 'urn:oid:')}"
+                    codeSystemName="{$conceptReference/core:namespace}" code="{$target/mapVersion:mapTo/core:name}"
+                    displayName="{$target/mapVersion:mapTo/core:designation}" xmlns="urn:hl7-org:v3">
+                    <translation>
+                        <xsl:apply-templates select="@* | node()">
+                            <xsl:with-param name="path" select="$path"/>
+                            <xsl:with-param name="language" select="$language"/>
+                        </xsl:apply-templates>
+                    </translation>
+                </code>
+            </xsl:when>
+            <xsl:otherwise>
+                <code displayName="{$displayName}" nullFlavor="NI" xmlns="urn:hl7-org:v3">
+                    <translation>
+                        <xsl:apply-templates select="@* | node()">
+                            <xsl:with-param name="path" select="$path"/>
+                            <xsl:with-param name="language" select="$language"/>
+                        </xsl:apply-templates>
+                    </translation>
+                </code>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template name="mapValueSet">
@@ -100,8 +124,8 @@
                         <xsl:with-param name="language" select="$language"/>
                         <xsl:with-param name="code" select="@code"/>
                         <xsl:with-param name="codeSystem" select="@codeSystemName"/>
-                        <xsl:with-param name="vsmapentry"
-                            select="$valuesets/tbx:valuesetmap/tbx:entry[@name=$args/@map]"/>
+                        <xsl:with-param name="displayName" select="@displayName"/>
+                        <xsl:with-param name="vsmapentry" select="$valuesets/tbx:valuesetmap/tbx:entry[@name=$args/@map]"/>
                     </xsl:call-template>
                 </xsl:when>
                 <xsl:otherwise>
@@ -127,8 +151,7 @@
             <xsl:choose>
                 <xsl:when test="$args/tbx:entry[@fromid=current()/@root]">
                     <xsl:if test="$args/tbx:entry[@fromid=current()/@root]/@toid">
-                        <templateId root="{$args/tbx:entry[@fromid=current()/@root]/@toid}"
-                            xmlns="urn:hl7-org:v3"/>
+                        <templateId root="{$args/tbx:entry[@fromid=current()/@root]/@toid}" xmlns="urn:hl7-org:v3"/>
                     </xsl:if>
                 </xsl:when>
                 <xsl:otherwise>
@@ -150,9 +173,7 @@
             <xsl:choose>
                 <xsl:when test="$args/tbx:entry[tbx:fromcode/v3:code=current()]">
                     <xsl:if test="$args/tbx:entry[tbx:fromcode/v3:code=current()]/tbx:tocode">
-                        <xsl:copy-of
-                            select="$args/tbx:entry[tbx:fromcode/v3:code=current()]/tbx:tocode/v3:code"
-                        />
+                        <xsl:copy-of select="$args/tbx:entry[tbx:fromcode/v3:code=current()]/tbx:tocode/v3:code"/>
                     </xsl:if>
                 </xsl:when>
                 <xsl:when test="not($args/tbx:entry/tbx:fromcode)">
@@ -180,9 +201,7 @@
             <xsl:choose>
                 <xsl:when test="$args/tbx:entry[tbx:fromValue/tbx:value=current()]">
                     <xsl:if test="$args/tbx:entry[tbx:toValue/v3:value=current()]/tbx:toValue">
-                        <xsl:copy-of
-                            select="$args/tbx:entry[tbx:fromValue/v3:value=current()]/tbx:toValue/v3:value"
-                        />
+                        <xsl:copy-of select="$args/tbx:entry[tbx:fromValue/v3:value=current()]/tbx:toValue/v3:value"/>
                     </xsl:if>
                 </xsl:when>
                 <xsl:when test="not($args/tbx:entry/tbx:fromValue)">
@@ -214,17 +233,20 @@
                 <br/>
                 <xsl:copy-of select="."/>
                 <paragraph>Warning: this translation has been generated by a software component</paragraph>
-                <br />
+                <br/>
                 <xsl:apply-templates mode="faketranslate"/>
-                <br />
+                <br/>
             </text>
         </xsl:for-each>
     </xsl:template>
+    
+    <xsl:template match="text()" priority="2" mode="faketranslate">
+        <xsl:value-of select="replace(., '[a-zA-Z]', 't')"/>
+    </xsl:template>
 
-    <xsl:template match="@* | node()" mode="faketranslate" xmlns="urn:hl7-org:v3">
+    <xsl:template match="@* | node()" mode="faketranslate" xmlns="urn:hl7-org:v3" priority="1">
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <xsl:value-of select="replace(., '[a-zA-Z]', 't')"/>
             <xsl:apply-templates select="node()" mode="faketranslate"/>
         </xsl:copy>
     </xsl:template>
@@ -247,8 +269,7 @@
         <xsl:param name="context"/>
 
         <xsl:for-each select="$context">
-            <xsl:variable name="transdoc"
-                select="concat('../translation/',$language, 'to', $tolanguage, '.xml')"/>
+            <xsl:variable name="transdoc" select="concat('../translation/',$language, 'to', $tolanguage, '.xml')"/>
             <xsl:variable name="translations" select="document($transdoc)/tbx:translations"/>
             <xsl:variable name="src" select="."/>
             <xsl:choose>
@@ -264,9 +285,6 @@
         </xsl:for-each>
     </xsl:template>
 
-    <xsl:template match="@*">
-        <xsl:copy/>
-    </xsl:template>
 
     <xsl:template match="//ClinicalDocument">
         <xsl:copy>
@@ -276,23 +294,44 @@
             </xsl:apply-templates>
         </xsl:copy>
     </xsl:template>
-    
-    <xsl:template name="refmark">
-         <xsl:choose>
-             <xsl:when test="../templateId">
-                 <xsl:value-of select="concat('[templateId/@root=', $quot, ../templateId[1]/@root, $quot, ']')"/>
-             </xsl:when>
-             <xsl:when test="../@typeCode">
-                 <xsl:value-of select="concat('[@typeCode=', $quot, ../@typeCode, $quot, ']')"/>
-             </xsl:when>
-             <xsl:when test="../@classCode">
-                 <xsl:value-of select="concat('[@typeCode=', $quot, ../@typeCode, $quot, ']')"/>
-             </xsl:when>
-             <xsl:otherwise/>
-         </xsl:choose>
-    </xsl:template>
 
-    <xsl:template match="node()" xmlns="urn:hl7-org:v3">
+    <xsl:template name="refmark">
+        <xsl:choose>
+            <xsl:when test="../templateId">
+                <xsl:value-of select="concat('[templateId/@root=', $quot, ../templateId[1]/@root, $quot, ']')"/>
+            </xsl:when>
+            <xsl:when test="../@typeCode">
+                <xsl:value-of select="concat('[@typeCode=', $quot, ../@typeCode, $quot, ']')"/>
+            </xsl:when>
+            <xsl:when test="../@classCode">
+                <xsl:value-of select="concat('[@classCode=', $quot, ../@classCode, $quot, ']')"/>
+            </xsl:when>
+            <xsl:otherwise/>
+        </xsl:choose>
+    </xsl:template>
+    
+    <!-- Core process - match all XML elements and transform -->
+    
+    <!-- Attributes never require direct transformation. They are always handled in the element context -->
+    <xsl:template match="@*">
+        <xsl:copy/>
+    </xsl:template>
+    
+    <!-- Comments and/or processing instructions can be transferred verbatim or removed depending on preferences -->
+    <xsl:template match="comment() | processing-instruction()">
+        <xsl:if test="$copycomments">
+            <xsl:copy/>
+        </xsl:if>
+    </xsl:template>
+    
+    <!-- Text is also evaluated in the context of a surrounding tag -->
+    <xsl:template match="text()">
+        <xsl:copy/>
+    </xsl:template>
+   
+    
+    <!-- Elements are where we do the actual work  -->
+    <xsl:template match="*" xmlns="urn:hl7-org:v3">
         <xsl:param name="path"/>
         <xsl:param name="language"/>
 
@@ -301,11 +340,16 @@
         </xsl:variable>
         <xsl:variable name="loc" select="concat($path, $rm, '/', name())"/>
         <xsl:variable name="context" select="current()"/>
+        <xsl:if test="$showpaths">
+            <xsl:text>
+</xsl:text>
+            <xsl:comment>PATH: <xsl:value-of select="$loc"/>    </xsl:comment>
+            <xsl:text>
+</xsl:text>
+        </xsl:if>
         <xsl:choose>
             <xsl:when test="$maps/tbx:map/tbx:entry[@from=$from and @to=$to and tbx:frompath=$loc]">
-<!--                PATH: <xsl:value-of select="$loc"/>|-->
-                <xsl:for-each
-                    select="$maps/tbx:map/tbx:entry[@from=$from and @to=$to and tbx:frompath=$loc]/tbx:transformation">
+                <xsl:for-each select="$maps/tbx:map/tbx:entry[@from=$from and @to=$to and tbx:frompath=$loc]/tbx:transformation">
                     <xsl:choose>
                         <xsl:when test="@name='changeTemplateRoots'">
                             <xsl:call-template name="changeTemplateRoots">
@@ -379,6 +423,10 @@
 
     <xsl:template name="cr">
         <xsl:value-of select="'&#xa;'"/>
+    </xsl:template>
+    
+    <xsl:template match="text()">
+        <xsl:copy/>
     </xsl:template>
 
 
