@@ -354,7 +354,7 @@
                     </xsl:otherwise>
                </xsl:choose>-->
                 <xsl:processing-instruction name="{name()}">
-                    <xsl:text>type="text/xsl" href="</xsl:text><xsl:value-of select="concat('resources/', $default, $quot)"/>
+                    <xsl:text>type="text/xsl" href="</xsl:text><xsl:value-of select="concat('../resources/', $default, $quot)"/>
                 </xsl:processing-instruction>
             </xsl:when>
             <xsl:otherwise>
