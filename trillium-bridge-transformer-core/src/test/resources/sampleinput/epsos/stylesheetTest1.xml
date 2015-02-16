@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- UPDATE DEMOGRAPHICS -->
+<?xml-stylesheet type="text/xsl" href="CDAz_IT.xsl"?>
+<ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:ext="urn:hl7-EE-DL-Ext:v1" xmlns:mif="urn:hl7-org:v3/mif" xmlns:ns="urn:hl7-org:v3" xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <languageCode code="it-IT"/>
+</ClinicalDocument>

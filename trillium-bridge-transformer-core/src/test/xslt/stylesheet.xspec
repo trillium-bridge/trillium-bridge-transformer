@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+    xmlns:tbx="http://trilliumbridge.org/xform" 
+    stylesheet="../../main/resources/xslt/TBXform.xsl">
+    <x:scenario label="Transform existing stylesheet">
+        <x:context>
+            <!-- UPDATE DEMOGRAPHICS -->
+            <?xml-stylesheet type="text/xsl" href="CCD_IT.xsl"?>
+            <ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:ext="urn:hl7-EE-DL-Ext:v1" xmlns:mif="urn:hl7-org:v3/mif" xmlns:ns="urn:hl7-org:v3" xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <languageCode code="it-IT"/>
+            </ClinicalDocument>
+        </x:context>
+        <x:expect label="switch to default">
+            <!-- UPDATE DEMOGRAPHICS -->
+            <?xml-stylesheet type="text/xsl" href="CCD.xsl"?>
+            <ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:ext="urn:hl7-EE-DL-Ext:v1" xmlns:mif="urn:hl7-org:v3/mif" xmlns:ns="urn:hl7-org:v3" xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                <languageCode code="en"/>
+            </ClinicalDocument>
+        </x:expect>
+    </x:scenario>
+</x:description>
