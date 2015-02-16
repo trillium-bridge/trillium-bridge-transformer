@@ -9,4 +9,12 @@
         <source>Allergie, Reazioni Avverse ed Allarmi</source>
         <target>Allergies, adverse reactions, alerts</target>
     </entry>
+    <entry>
+        <source>Tipo Allergia</source>
+        <target>Reaction Type</target>
+    </entry>
+    <entry>
+        <source>Tipo di Reazione</source>
+        <target>Clinical Manifestation</target>
+    </entry>
 </translations>

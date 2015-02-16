@@ -123,6 +123,10 @@
         <topath>/ClinicalDocument/code</topath>
         <transformation name="mapValueSet" map="ATC_NDF-RT_epSOSActiveIngredient_VS"/>
     </entry>
+    
+    <entry from="epSOS" to="CCD" invertable="true">
+        <frompath></frompath>
+    </entry>
     <!--  
     
     <entry root="CCD" reference="7.1.1 Administrative Gender">
