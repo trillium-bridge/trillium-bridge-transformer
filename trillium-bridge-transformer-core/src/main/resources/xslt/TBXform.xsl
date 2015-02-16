@@ -13,7 +13,7 @@
     <xsl:variable name="valuesets">
         <xsl:copy-of select="document('../tbxform/ValueSetMaps.xml')"/>
     </xsl:variable>
-    
+     
     <xsl:variable name="codesystems">
         <xsl:copy-of select="document('http://rd.phast.fr/REST/sts_rest_beta_2/0004/codesystems')"/>
     </xsl:variable>
@@ -318,11 +318,51 @@
     </xsl:template>
     
     <!-- Comments and/or processing instructions can be transferred verbatim or removed depending on preferences -->
-    <xsl:template match="comment() | processing-instruction()">
+    <xsl:template match="comment()">
         <xsl:if test="$copycomments">
             <xsl:copy/>
         </xsl:if>
     </xsl:template>
+    
+    <!-- Processing instruction transformations -->
+    <xsl:function name="tbx:subPIvariables" as="xs:string">
+        <xsl:param name="arg" as="xs:string"/>
+        <xsl:value-of select="replace(replace(replace($arg, '\{to\}', $to), '\{from\}', $from), '\{language\}', $tolanguage)"/>
+    </xsl:function>
+    
+    <!-- TODO: This is hard coded for xml-stylesheet at the moment -->
+    <xsl:template match="processing-instruction()">
+        <xsl:variable name="loc" select="concat('processing-instruction/', name())"/>
+        <xsl:choose>
+            <xsl:when test="$maps/tbx:map/tbx:entry[@from=$from and @to=$to and tbx:frompath=$loc]">
+                <xsl:variable name="mapentry" select="$maps/tbx:map/tbx:entry[@from=$from and @to=$to and tbx:frompath=$loc]/tbx:transformation/tbx:entry"/>
+                <xsl:variable name="value" select="concat(tbx:subPIvariables($mapentry/@value), '.xsl')"/>
+                <xsl:variable name="default" select="concat(tbx:subPIvariables($mapentry/@default), '.xsl')"/>
+                <xsl:choose>
+                    <xsl:when test="document($value)">
+                        <xsl:processing-instruction name="{name()}">
+                            <xsl:text>type="text/xsl" href="</xsl:text><xsl:value-of select="concat('resources/', $value, $quot)"/>
+                        </xsl:processing-instruction>
+                    </xsl:when>
+                    <xsl:when test="document($default)">
+                        <xsl:processing-instruction name="{name()}">
+                            <xsl:text>type="text/xsl" href="</xsl:text><xsl:value-of select="concat('resources/', $default, $quot)"/>
+                        </xsl:processing-instruction>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:comment select="concat('&lt;?', name(), ' ', ., '?>')"/>
+                    </xsl:otherwise>
+               </xsl:choose>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:if test="$copycomments">
+                    <xsl:copy-of select="."/>
+                </xsl:if>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
+
     
     <!-- Text is also evaluated in the context of a surrounding tag -->
     <xsl:template match="text()">

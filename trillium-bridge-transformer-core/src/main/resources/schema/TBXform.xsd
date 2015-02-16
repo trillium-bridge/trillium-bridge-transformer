@@ -58,6 +58,14 @@
                     <xs:documentation>Translate an arbitrary block of text</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
+            <xs:enumeration value="setStyleSheet">
+                <xs:annotation>
+                    <xs:documentation>Set the stylesheet in the document if one is already present
+                        Params: @value - template for from.  Includes {to} and {language} metavariables
+                                @default - default template if @from doesn't exit
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
         </xs:restriction>
     </xs:simpleType>
 
