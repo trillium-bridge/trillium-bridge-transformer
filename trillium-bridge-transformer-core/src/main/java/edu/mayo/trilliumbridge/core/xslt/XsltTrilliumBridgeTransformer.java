@@ -134,7 +134,8 @@ public class XsltTrilliumBridgeTransformer implements TrilliumBridgeTransformer 
             xsltFactory.setURIResolver(new URIResolver() {
                 @Override
                 public Source resolve(String href, String base) throws TransformerException {
-                    href = "/xslt/" + href;
+					if(!href.startsWith("http:"))
+                    	href = "/xslt/" + href;
                     try {
                         return new StreamSource(resourceFactory.getResource(href).getInputStream());
                     } catch (IOException e) {
