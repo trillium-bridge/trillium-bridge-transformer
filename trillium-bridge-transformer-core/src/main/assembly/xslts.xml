@@ -17,5 +17,21 @@
             <directory>src/main/resources/xslt</directory>
             <outputDirectory>xslt</outputDirectory>
         </fileSet>
+        <fileSet>
+            <directory>src/main/resources/cts2fileservice</directory>
+            <outputDirectory>cts2fileservice</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/resources/schema</directory>
+            <outputDirectory>schema</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/resources/tbxform</directory>
+            <outputDirectory>tbxform</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/resources/translation</directory>
+            <outputDirectory>translation</outputDirectory>
+        </fileSet>
     </fileSets>
 </assembly>
