@@ -338,7 +338,7 @@
                 <xsl:variable name="mapentry" select="$maps/tbx:map/tbx:entry[@from=$from and @to=$to and tbx:frompath=$loc]/tbx:transformation/tbx:entry"/>
                 <xsl:variable name="value" select="concat(tbx:subPIvariables($mapentry/@value), '.xsl')"/>
                 <xsl:variable name="default" select="concat(tbx:subPIvariables($mapentry/@default), '.xsl')"/>
-                <xsl:choose>
+               <!-- <xsl:choose>
                     <xsl:when test="document($value)">
                         <xsl:processing-instruction name="{name()}">
                             <xsl:text>type="text/xsl" href="</xsl:text><xsl:value-of select="concat('resources/', $value, $quot)"/>
@@ -352,7 +352,10 @@
                     <xsl:otherwise>
                         <xsl:comment select="concat('&lt;?', name(), ' ', ., '?>')"/>
                     </xsl:otherwise>
-               </xsl:choose>
+               </xsl:choose>-->
+                <xsl:processing-instruction name="{name()}">
+                    <xsl:text>type="text/xsl" href="</xsl:text><xsl:value-of select="concat('resources/', $default, $quot)"/>
+                </xsl:processing-instruction>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:if test="$copycomments">
