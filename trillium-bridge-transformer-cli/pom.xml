@@ -9,7 +9,7 @@
     </parent>
 
     <artifactId>trillium-bridge-transformer-cli</artifactId>
-    <name>Trillium Bridge Transfomer Command Line Interface</name>
+    <name>Trillium Bridge Transformer Command Line Interface</name>
 
     <properties>
         <jetty.runner.version>8.1.15.v20140411</jetty.runner.version>
