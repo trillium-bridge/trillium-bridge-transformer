@@ -2,6 +2,7 @@
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
     xmlns:tbx="http://trilliumbridge.org/xform" 
     stylesheet="../../main/resources/xslt/TBXform.xsl">
+    <x:param name="transform">../../resources/tbxform/FP7-SA610756-D3.1.xml</x:param>
     <x:scenario label="Transform existing stylesheet">
         <x:context>
             <!-- UPDATE DEMOGRAPHICS -->
@@ -12,7 +13,7 @@
         </x:context>
         <x:expect label="switch to default">
             <!-- UPDATE DEMOGRAPHICS -->
-            <?xml-stylesheet type="text/xsl" href="CCD.xsl"?>
+            <?xml-stylesheet type="text/xsl" href="resources/CCD.xsl"?>
             <ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:ext="urn:hl7-EE-DL-Ext:v1" xmlns:mif="urn:hl7-org:v3/mif" xmlns:ns="urn:hl7-org:v3" xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                 <languageCode code="en"/>
             </ClinicalDocument>

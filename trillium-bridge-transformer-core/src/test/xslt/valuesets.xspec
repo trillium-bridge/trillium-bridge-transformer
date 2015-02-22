@@ -2,6 +2,7 @@
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
     xmlns:tbx="http://trilliumbridge.org/xform" 
     stylesheet="../../main/resources/xslt/TBXform.xsl">
+    
     <x:scenario label="uri to conceptreference">
         <x:call function="tbx:uriToEntityReference">
             <x:param name="uri">urn:oid:2.16.840.1.113883.2.9.6.2.7/3251</x:param>
@@ -18,10 +19,14 @@
     
     
     <x:scenario label="local table">
+        
         <x:call template="mapValueSet">
-            <x:param name="path">/</x:param>
-            <x:param name="language">it-IT</x:param>
-            <x:param name="context">
+            <x:param name="absbase" select="''" tunnel="yes"/>
+            <x:param name="relbase" select="''" tunnel="yes"/>
+            <x:param name="id" select="id" tunnel="yes"/>
+            <x:param name="language" tunnel="yes">it-IT</x:param>
+            <x:param name="mapcontext" tunnel="yes"><n/></x:param>
+            <x:param name="context" tunnel="yes">
                 <code code="60591-5" displayName="Patient Summary"
                     codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" xmlns="urn:hl7-org:v3">
                     <translation displayName="Profilo Sanitario Sintentico"/>
@@ -44,9 +49,12 @@
     
     <x:scenario label="PHAST service">
         <x:call template="mapValueSet">
-            <x:param name="path">/</x:param>
-            <x:param name="language">it-IT</x:param>
-            <x:param name="context">
+            <x:param name="absbase" select="''" tunnel="yes"/>
+            <x:param name="relbase" select="''" tunnel="yes"/>
+            <x:param name="id" select="id" tunnel="yes"/>
+            <x:param name="language" tunnel="yes">it-IT</x:param>
+            <x:param name="mapcontext" tunnel="yes"><n/></x:param>
+            <x:param name="context" tunnel="yes">
                 <code code="126800000X" displayName="NUCC Dentisty Type thing"
                     codeSystem="tbd" codeSystemName="NUCC" xmlns="urn:hl7-org:v3">
                 </code>
@@ -66,9 +74,12 @@
     </x:scenario>
     <x:scenario label="Missing Code">
         <x:call template="mapValueSet">
-            <x:param name="path">/</x:param>
-            <x:param name="language">it-IT</x:param>
-            <x:param name="context">
+            <x:param name="absbase" select="''" tunnel="yes"/>
+            <x:param name="relbase" select="''" tunnel="yes"/>
+            <x:param name="id" select="id" tunnel="yes"/>
+            <x:param name="language" tunnel="yes">it-IT</x:param>
+            <x:param name="mapcontext" tunnel="yes"><n/></x:param>
+            <x:param name="context" tunnel="yes">
                 <code code="D10AF02"
                     displayName="erythromycin"
                     codeSystem="2.16.840.1.113883.6.73"
