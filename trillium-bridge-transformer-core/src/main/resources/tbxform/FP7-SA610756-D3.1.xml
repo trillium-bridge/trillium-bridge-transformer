@@ -10,6 +10,18 @@
             <entry value="{to}-{language}" default="{to}"/>
         </transformation>
     </entry>
+    
+    <entry from="epSOS" to="CCD" invertable="true" globals="true">
+        <frompath>/</frompath>
+        <entry invertable="true">
+             <documentation>All titles get location independent transformation</documentation>
+             <frompath>title</frompath>
+             <topath>title</topath>
+             <transformation name="translateTitle"/>
+        </entry>
+    </entry>
+    
+
 
     <entry from="epSOS" to="CCD" invertable="true">
         <documentation>Entry point for the epSOS to CCD transformation (and visa-versa)</documentation>
@@ -31,12 +43,6 @@
             <frompath>/id</frompath>
             <topath>/id</topath>
             <transformation name="newid"/>
-        </entry>
-        <entry invertable="true">
-            <documentation>Translate the document title</documentation>
-            <frompath>/title</frompath>
-            <topath>/title</topath>
-            <transformation name="translateTitle"/>
         </entry>
         <entry invertable="true">
             <documentation>Translate the identifying code</documentation>
@@ -62,11 +68,6 @@
                     <entry toid="2.16.840.1.113883.10.20.22.2.6"/>
                     <entry toid="2.16.840.1.113883.10.20.22.2.6.1"/>
                 </transformation>
-            </entry>
-            <entry invertable="true">
-                <frompath>/title</frompath>
-                <topath>/title</topath>
-                <transformation name="translateTitle"/>
             </entry>
             <entry invertable="true">
                 <frompath>/text</frompath>

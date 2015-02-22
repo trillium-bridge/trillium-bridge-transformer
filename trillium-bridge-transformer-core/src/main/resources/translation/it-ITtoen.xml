@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<translations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="http://trilliumbridge.org/xform ../schema/TBXform.xsd" xmlns="http://trilliumbridge.org/xform" fromlanguage="it-IT" tolanguage="en">
+<translations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://trilliumbridge.org/xform ../schema/TBXform.xsd"
+    xmlns="http://trilliumbridge.org/xform" fromlanguage="it-IT" tolanguage="en">
     <entry>
         <source>Profilo Sanitario Sintentico (Patient Summary)</source>
         <target>Patient Summary</target>
@@ -16,5 +16,41 @@
     <entry>
         <source>Tipo di Reazione</source>
         <target>Clinical Manifestation</target>
+    </entry>
+
+    <entry>
+        <source>Lista dei problemi attivi</source>
+        <target>Problem list</target>
+    </entry>
+    <entry>
+        <source>Terapie Farmacologiche</source>
+        <target>Medication Summary</target>
+    </entry>
+    <entry>
+        <source>Dispositivi medici in uso</source>
+        <target>History of medical device use</target>
+    </entry>
+    <entry>
+        <source>Procedure chirurgiche</source>
+        <target>Surgical Procedures</target>
+    </entry>
+    <entry>
+        <source>Storia delle malattie pregresse</source>
+        <target>History of past illness</target>
+    </entry>
+    <entry>
+        <source>Vaccinazioni</source>
+        <target>Vaccinations</target>
+    </entry>
+    <entry>
+        <source>Parametri Vitali</source>
+        <target>Blood Pressure</target>
+    </entry>
+    <entry>
+        <source>Stile di Vita e Contesto Sociale</source>
+        <target>Coded Social History</target>
+    </entry>
+    <entry>
+        <target>Results</target>
     </entry>
 </translations>

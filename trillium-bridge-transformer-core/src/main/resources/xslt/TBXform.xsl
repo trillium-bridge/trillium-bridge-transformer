@@ -60,11 +60,13 @@
         <xsl:param name="absbase" as="xs:string" tunnel="yes"/>
         <xsl:param name="relbase" as="xs:string" tunnel="yes"/>
         <xsl:param name="mapcontext" as="element()" tunnel="yes"/>
+        <xsl:param name="globals" tunnel="yes" required="no"/>
 
 
         <xsl:variable name="abspath" select="tbx:refmark($absbase, .)"/>
         <xsl:variable name="relpath" select="tbx:refmark($relbase, .)"/>
         <xsl:variable name="context" select="current()"/>
+        <xsl:variable name="globs" select="if($mapcontext/tbx:entry[@globals=true()]) then $mapcontext/tbx:entry[@globals=true()] else $globals"/>
 
         <xsl:if test="$showpaths">
             <xsl:value-of select="$cr"/>
@@ -72,6 +74,13 @@
             <xsl:value-of select="$cr"/>
         </xsl:if>
 
+        <xsl:if test="not(ends-with(replace($relpath, '\[[^\]]*\]', ''), $context/name()))">
+            <xsl:message terminate="yes">
+                <xsl:text>PATH Alignment error:</xsl:text>
+                <xsl:value-of select="concat($cr, $tab, 'relpath:', $relpath)"/>
+                <xsl:value-of select="concat($cr, $tab, 'node:', $context/name())"/>
+            </xsl:message>
+        </xsl:if>
 
         <!-- Process all forward direction map entries.
              If a map entry matches, it is the job of the function that it is applied to to apply the mapping to <i>all</i> of the 
@@ -79,7 +88,19 @@
         -->
         <xsl:variable name="mapmatch"
             select="$mapcontext/tbx:entry[(not(exists(@from)) or @from=$from) and (not(exists(@to)) or @to=$to) and tbx:frompath=$relpath]"/>
+        <xsl:variable name="globalmatch"
+            select="if($globs) then ($globs/tbx:entry[ends-with($relpath, tbx:frompath)]) else false()"/>
+       
         <xsl:choose>
+            <xsl:when test="$globalmatch">
+                <xsl:for-each select="$globalmatch/tbx:transformation">
+                    <xsl:call-template name="applyTransformations">
+                        <xsl:with-param name="context" select="$context" tunnel="yes" />
+                        <xsl:with-param name="globals" select="$globs" tunnel="yes"/>
+                        <xsl:with-param name="mapcontext" select="." tunnel="yes"/>
+                    </xsl:call-template>
+                </xsl:for-each>
+            </xsl:when>
             <!-- There is a map entry that matches -->
             <xsl:when test="$mapmatch">
                 <xsl:value-of select="tbx:debugging('MAPMATCH')"/>
@@ -93,6 +114,7 @@
                         <xsl:for-each select="$mapmatch/tbx:transformation">
                             <xsl:call-template name="applyTransformations">
                                 <xsl:with-param name="context" tunnel="yes" select="$contexts"/>
+                                <xsl:with-param name="globals" select="$globs" tunnel="yes"/>
                                 <xsl:with-param name="mapcontext" select="$mapmatch" tunnel="yes"/>
                             </xsl:call-template>
                         </xsl:for-each>
@@ -107,6 +129,7 @@
                                 <xsl:with-param name="absbase" select="$abspath" tunnel="yes"/>
                                 <xsl:with-param name="context" tunnel="yes" select="$context"/>
                                 <xsl:with-param name="relbase" select="''" tunnel="yes"/>
+                                <xsl:with-param name="globals" select="$globs" tunnel="yes"/>
                                 <xsl:with-param name="mapcontext" select="$mapmatch" tunnel="yes"/>
                             </xsl:apply-templates>
                         </xsl:copy>
@@ -118,6 +141,7 @@
                 <xsl:copy>
                     <xsl:apply-templates select="@* | node()" mode="inside">
                         <xsl:with-param name="absbase" select="$abspath" tunnel="yes"/>
+                        <xsl:with-param name="globals" select="$globs" tunnel="yes"/>
                         <xsl:with-param name="relbase" select="$relpath" tunnel="yes"/>
                     </xsl:apply-templates>
                 </xsl:copy>

@@ -137,6 +137,12 @@
                         <xs:documentation>The type of the TO document</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
+                <xs:attribute name="globals" use="optional" type="xs:boolean">
+                    <xs:annotation>
+                        <xs:documentation>True means that this set of transformations applies to all descendant nodes 
+                            ending in the supplied from/to name</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
