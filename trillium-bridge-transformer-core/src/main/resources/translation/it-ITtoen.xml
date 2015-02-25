@@ -11,13 +11,24 @@
     </entry>
     <entry>
         <source>Tipo Allergia</source>
-        <target>Reaction Type</target>
+        <target>Type of Allergy</target>
     </entry>
     <entry>
         <source>Tipo di Reazione</source>
         <target>Clinical Manifestation</target>
     </entry>
-
+    <entry>
+        <source>Descrizione del Problema</source>
+        <target>Active Problem</target>
+    </entry>
+    <entry>
+        <source>Data Insorgenza</source>
+        <target>Onset Date</target>
+    </entry>
+    <entry>
+        <source>Ipertensione Essenziale Non Specificata</source>
+        <target>Systolic essential hypertension</target>
+    </entry>
     <entry>
         <source>Lista dei problemi attivi</source>
         <target>Problem list</target>
@@ -51,6 +62,36 @@
         <target>Coded Social History</target>
     </entry>
     <entry>
-        <target>Results</target>
+        <source>Allergia a farmaco</source>
+        <target>Drug allergy</target>
     </entry>
+    <entry>
+        <source>Non-Fumatore</source>
+        <target>Non Smoker</target>
+    </entry>
+    <entry>
+        <source>Principio Attivo</source>
+        <target>Active Ingredient</target>
+    </entry>
+    <entry>
+        <source>Dosaggio</source>
+        <target>Dosage</target>
+    </entry>
+    <entry>
+        <source>Via di Somministrazione</source>
+        <target>Route of Administration</target>
+    </entry>
+    <entry>
+        <source>Data inizio terapia</source>
+        <target>Beginning Date</target>
+    </entry>
+    <entry>
+        <source>Data fine terapia</source>
+        <target>End Date</target>
+    </entry>
+    <entry>
+        <source>Nome Farmaco</source>
+        <target>Drug Name</target>
+    </entry>
+    
 </translations>

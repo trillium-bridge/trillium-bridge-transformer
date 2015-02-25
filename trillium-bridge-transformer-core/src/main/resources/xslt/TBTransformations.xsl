@@ -158,6 +158,44 @@
             </xsl:choose>
         </xsl:for-each>
     </xsl:template>
+    
+    <!-- ============================= replaceNode  ==========================
+        Replace the from node with the to node
+        $context - the elements to be mapped
+        $entry/frompath - node to remove
+        $entry/topath   - node to add
+        
+        NOTE: The debug reference below checks whether we are doing unit tests.
+        Unit tests (for some reason) leave white space in the inputs so some comparisons fail.
+        ====================================================================== -->
+    <xsl:template name="replaceNode" xmlns="urn:hl7-org:v3">
+        <xsl:param name="context" tunnel="yes"/>
+        <xsl:variable name="args" select="."/>
+        <xsl:for-each select="$context">
+            <!-- If we are adding content, copy the original -->
+            <xsl:if test="boolean($args/tbx:entry/@add)">
+                <xsl:copy-of select="."/>
+            </xsl:if>
+            <xsl:choose>
+                <xsl:when test="(not(boolean($args/tbx:entry/@add) or boolean($args/tbx:entry/@insert)) and $args/tbx:entry[tbx:fromValue/.=current()]) and not($debug)">
+                    <xsl:if test="$args/tbx:entry[tbx:fromValue/.=current()]/tbx:toValue">
+                        <xsl:copy-of select="$args/tbx:entry[tbx:fromValue/.=current()]/tbx:toValue/*"/>
+                    </xsl:if>
+                </xsl:when>
+                <xsl:when test="((boolean($args/tbx:entry/@add) or boolean($args/tbx:entry/@insert)) and not($args/tbx:entry/tbx:fromValue)) or $debug">
+                    <xsl:copy-of select="$args/tbx:entry/tbx:toValue/*"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:copy>
+                        <xsl:apply-templates select="node() | @*" mode="inside"/>
+                    </xsl:copy>
+                </xsl:otherwise>
+            </xsl:choose>
+            <xsl:if test="boolean($args/tbx:entry/@insert)">
+                <xsl:copy-of select="."/>
+            </xsl:if>
+        </xsl:for-each>
+    </xsl:template>
 
     <xsl:template name="translateText" xmlns="urn:hl7-org:v3">
         <xsl:param name="context" tunnel="yes"/>
@@ -241,6 +279,34 @@
             </xsl:choose>
         </xsl:for-each>
     </xsl:template>
+    
+    <!-- ============================= mapValueSetAndMove  ===================
+        Map the code referenced by the entry/sourcecode parameter and create a code at the current reference point
+        $context - id elements to be replaced
+        
+        ====================================================================== -->
+    <xsl:template name="mapValueSetAndMove">
+        <xsl:param name="context" tunnel="yes"/>
+        <xsl:variable name="args" select="."/>
+        
+        <xsl:variable name="innercontext" as="element()">
+            <entry invertable="false" xmlns="http://trilliumbridge.org/xform">
+                <frompath>/</frompath>
+                <entry>
+                    <documentation>Embedded context for mapValueSetAndMove</documentation>
+                    <frompath><xsl:value-of select="$args/tbx:entry/tbx:source"/></frompath>
+                    <transformation name="mapValueSet" map="{$args/@map}"/>
+                </entry>
+            </entry>
+        </xsl:variable>
+
+        <xsl:apply-templates select="$context/.." mode="inside">
+            <xsl:with-param name="relbase" select="''" tunnel="yes"/>
+            <xsl:with-param name="mapcontext" select="$innercontext" tunnel="yes"/>
+            <xsl:with-param name="matchonly" select="true()" tunnel="yes" as="xs:boolean"/>
+        </xsl:apply-templates>
+     
+    </xsl:template>
 
     <!-- ============================ -->
     <xsl:template name="applyTransformations">
@@ -269,6 +335,12 @@
             </xsl:when>
             <xsl:when test="@name='mapLanguage'">
                 <xsl:call-template name="mapLanguage"/>
+            </xsl:when>
+            <xsl:when test="@name='mapValueSetAndMove'">
+                <xsl:call-template name="mapValueSetAndMove"/>
+            </xsl:when>
+            <xsl:when test="@name='replaceNode'">
+                <xsl:call-template name="replaceNode"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:comment>UNMAPPED FUNCTION: <xsl:value-of select="@name"/></xsl:comment>

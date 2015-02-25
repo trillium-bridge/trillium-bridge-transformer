@@ -65,6 +65,16 @@
                     <xs:documentation>Map the from language code to the to language code.</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
+            <xs:enumeration value="replaceNode">
+                <xs:annotation>
+                    <xs:documentation>Replace an arbitrary node</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="mapValueSetAndMove">
+                <xs:annotation>
+                    <xs:documentation>Map the parameter source code and put the result in the target path</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
         </xs:restriction>
     </xs:simpleType>
 

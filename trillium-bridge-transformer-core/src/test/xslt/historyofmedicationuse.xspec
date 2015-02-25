@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+    stylesheet="../../main/resources/xslt/TBXform.xsl">
+    <x:param name="transform">../../resources/tbxform/FP7-SA610756-D3.1.xml</x:param>
+    <x:scenario label="recordTarget">
+        <x:context select="document('../../../test/resources/sampleinput/epsos/historyofmedicationuse.xml')"/>
+        <x:expect  select="document('../../../test/resources/sampleoutput/epsos/historyofmedicationuse.xml')"
+                   label="MedicationUseinCCDA" />
+    </x:scenario>
+</x:description>

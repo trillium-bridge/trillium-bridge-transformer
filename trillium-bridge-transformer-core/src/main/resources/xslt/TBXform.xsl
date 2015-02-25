@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-    xmlns:tbx="http://trilliumbridge.org/xform" exclude-result-prefixes="xs tbx" version="2.0" xpath-default-namespace="urn:hl7-org:v3">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tbx="http://trilliumbridge.org/xform"
+    exclude-result-prefixes="xs tbx" version="2.0" xpath-default-namespace="urn:hl7-org:v3">
     <xsl:output media-type="xml" indent="yes"/>
     <xsl:include href="TBTransformations.xsl"/>
 
@@ -55,12 +55,15 @@
         $relbase    - the relative path to this point within the surrounding context
         $language   - the language of the incoming document
         $mapcontext - the tbx:map context for transformation
+        $globals    - true means apply this map to every matching instance
+        $matchonly  - true means that we're doing a move and non matches shouldn't be copied
         =============================================================== -->
     <xsl:template match="*" xmlns="urn:hl7-org:v3" mode="inside">
         <xsl:param name="absbase" as="xs:string" tunnel="yes"/>
         <xsl:param name="relbase" as="xs:string" tunnel="yes"/>
         <xsl:param name="mapcontext" as="element()" tunnel="yes"/>
         <xsl:param name="globals" tunnel="yes" required="no"/>
+        <xsl:param name="matchonly" tunnel="yes" select="false()"/>
 
 
         <xsl:variable name="abspath" select="tbx:refmark($absbase, .)"/>
@@ -88,16 +91,16 @@
         -->
         <xsl:variable name="mapmatch"
             select="$mapcontext/tbx:entry[(not(exists(@from)) or @from=$from) and (not(exists(@to)) or @to=$to) and tbx:frompath=$relpath]"/>
-        <xsl:variable name="globalmatch"
-            select="if($globs) then ($globs/tbx:entry[ends-with($relpath, tbx:frompath)]) else false()"/>
-       
+        <xsl:variable name="globalmatch" select="if($globs) then ($globs/tbx:entry[ends-with($relpath, tbx:frompath)]) else false()"/>
+
         <xsl:choose>
             <xsl:when test="$globalmatch">
                 <xsl:for-each select="$globalmatch/tbx:transformation">
                     <xsl:call-template name="applyTransformations">
-                        <xsl:with-param name="context" select="$context" tunnel="yes" />
+                        <xsl:with-param name="context" select="$context" tunnel="yes"/>
                         <xsl:with-param name="globals" select="$globs" tunnel="yes"/>
                         <xsl:with-param name="mapcontext" select="." tunnel="yes"/>
+                        <xsl:with-param name="matchonly" select="false()" tunnel="yes"/>
                     </xsl:call-template>
                 </xsl:for-each>
             </xsl:when>
@@ -116,8 +119,19 @@
                                 <xsl:with-param name="context" tunnel="yes" select="$contexts"/>
                                 <xsl:with-param name="globals" select="$globs" tunnel="yes"/>
                                 <xsl:with-param name="mapcontext" select="$mapmatch" tunnel="yes"/>
+                                <xsl:with-param name="matchonly" select="false()" tunnel="yes"/>
                             </xsl:call-template>
                         </xsl:for-each>
+                    </xsl:when>
+                    <xsl:when test="$matchonly">
+                        <xsl:apply-templates select="@* | node()" mode="inside">
+                            <xsl:with-param name="absbase" select="$abspath" tunnel="yes"/>
+                            <xsl:with-param name="context" tunnel="yes" select="$context"/>
+                            <xsl:with-param name="relbase" select="''" tunnel="yes"/>
+                            <xsl:with-param name="globals" select="$globs" tunnel="yes"/>
+                            <xsl:with-param name="mapcontext" select="$mapmatch" tunnel="yes"/>
+                            <xsl:with-param name="matchonly" select="$matchonly" tunnel="yes"/>
+                        </xsl:apply-templates>
                     </xsl:when>
                     <!-- If no transformations, do the nested entries
                          NOTE: an entry can't have both.
@@ -131,6 +145,7 @@
                                 <xsl:with-param name="relbase" select="''" tunnel="yes"/>
                                 <xsl:with-param name="globals" select="$globs" tunnel="yes"/>
                                 <xsl:with-param name="mapcontext" select="$mapmatch" tunnel="yes"/>
+                                <xsl:with-param name="matchonly" select="$matchonly" tunnel="yes"/>
                             </xsl:apply-templates>
                         </xsl:copy>
                     </xsl:otherwise>
@@ -138,13 +153,26 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="tbx:debugging('TRAVERSE')"/>
-                <xsl:copy>
-                    <xsl:apply-templates select="@* | node()" mode="inside">
-                        <xsl:with-param name="absbase" select="$abspath" tunnel="yes"/>
-                        <xsl:with-param name="globals" select="$globs" tunnel="yes"/>
-                        <xsl:with-param name="relbase" select="$relpath" tunnel="yes"/>
-                    </xsl:apply-templates>
-                </xsl:copy>
+                <xsl:choose>
+                    <xsl:when test="$matchonly">
+                        <xsl:apply-templates select="@* | node()" mode="inside">
+                            <xsl:with-param name="absbase" select="$abspath" tunnel="yes"/>
+                            <xsl:with-param name="globals" select="$globs" tunnel="yes"/>
+                            <xsl:with-param name="relbase" select="$relpath" tunnel="yes"/>
+                            <xsl:with-param name="matchonly" tunnel="yes" select="$matchonly"/>
+                        </xsl:apply-templates>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:copy>
+                            <xsl:apply-templates select="@* | node()" mode="inside">
+                                <xsl:with-param name="absbase" select="$abspath" tunnel="yes"/>
+                                <xsl:with-param name="globals" select="$globs" tunnel="yes"/>
+                                <xsl:with-param name="relbase" select="$relpath" tunnel="yes"/>
+                                <xsl:with-param name="matchonly" tunnel="yes" select="$matchonly"/>
+                            </xsl:apply-templates>
+                        </xsl:copy>
+                    </xsl:otherwise>
+                </xsl:choose>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -183,14 +211,18 @@
          handled in the element context 
          ====================================================================== -->
     <xsl:template match="@*" mode="inside">
-        <xsl:copy/>
+        <xsl:param name="matchonly" tunnel="yes"/>
+        <xsl:if test="not($matchonly)">
+            <xsl:copy/>
+        </xsl:if>
     </xsl:template>
 
     <!-- ============================== default comment processor =============
          Comments can be transferred verbatim or removed depending on preferences 
          ====================================================================== -->
     <xsl:template match="comment()" mode="#all">
-        <xsl:if test="$copycomments">
+        <xsl:param name="matchonly" tunnel="yes" select="false()"/>
+        <xsl:if test="$copycomments and not($matchonly)">
             <xsl:copy/>
         </xsl:if>
     </xsl:template>
@@ -200,37 +232,39 @@
          ====================================================================== -->
     <xsl:template match="processing-instruction()" mode="#all">
         <xsl:param name="mapcontext" tunnel="yes" select="tbx:opendoc($transform)/tbx:map"/>
-
-        <xsl:variable name="relpath" select="concat('processing-instruction/', name())"/>
-        <xsl:variable name="mapmatch"
-            select="$mapcontext/tbx:entry[(not(exists(@from)) or @from=$from) and (not(exists(@to)) or @to=$to) and tbx:frompath=$relpath]"/>
-        <xsl:choose>
-            <xsl:when test="$mapmatch">
-                <xsl:variable name="mapentry" select="$mapmatch/tbx:transformation/tbx:entry"/>
-                <xsl:variable name="value" select="concat(tbx:subPIvariables($mapentry/@value), '.xsl')"/>
-                <xsl:variable name="default" select="concat(tbx:subPIvariables($mapentry/@default), '.xsl')"/>
-                <xsl:choose>
-                    <xsl:when test="doc-available($value)">
-                        <xsl:processing-instruction name="{name()}">
+        <xsl:param name="matchonly" tunnel="yes" select="false()"/>
+        <xsl:if test="not($matchonly)">
+            <xsl:variable name="relpath" select="concat('processing-instruction/', name())"/>
+            <xsl:variable name="mapmatch"
+                select="$mapcontext/tbx:entry[(not(exists(@from)) or @from=$from) and (not(exists(@to)) or @to=$to) and tbx:frompath=$relpath]"/>
+            <xsl:choose>
+                <xsl:when test="$mapmatch">
+                    <xsl:variable name="mapentry" select="$mapmatch/tbx:transformation/tbx:entry"/>
+                    <xsl:variable name="value" select="concat(tbx:subPIvariables($mapentry/@value), '.xsl')"/>
+                    <xsl:variable name="default" select="concat(tbx:subPIvariables($mapentry/@default), '.xsl')"/>
+                    <xsl:choose>
+                        <xsl:when test="doc-available($value)">
+                            <xsl:processing-instruction name="{name()}">
                             <xsl:text>type="text/xsl" href="</xsl:text><xsl:value-of select="concat('resources/', $value, $quot)"/>
                         </xsl:processing-instruction>
-                    </xsl:when>
-                    <xsl:when test="doc-available($default)">
-                        <xsl:processing-instruction name="{name()}">
+                        </xsl:when>
+                        <xsl:when test="doc-available($default)">
+                            <xsl:processing-instruction name="{name()}">
                             <xsl:text>type="text/xsl" href="</xsl:text><xsl:value-of select="concat('resources/', $default, $quot)"/>
                         </xsl:processing-instruction>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <xsl:comment select="concat('&lt;?', name(), ' ', ., '?>')"/>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:if test="$copycomments">
-                    <xsl:copy-of select="."/>
-                </xsl:if>
-            </xsl:otherwise>
-        </xsl:choose>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:comment select="concat('&lt;?', name(), ' ', ., '?>')"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:if test="$copycomments">
+                        <xsl:copy-of select="."/>
+                    </xsl:if>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:if>
     </xsl:template>
 
     <xsl:function name="tbx:subPIvariables" as="xs:string">
@@ -243,7 +277,10 @@
          Default is to copy
          ====================================================================== -->
     <xsl:template match="text()" mode="inside">
-        <xsl:value-of select="if (normalize-space(.)) then string(.) else ()"/>
+        <xsl:param name="matchonly" tunnel="yes"/>
+        <xsl:if test="not($matchonly)">
+            <xsl:value-of select="if (normalize-space(.)) then string(.) else ()"/>
+        </xsl:if>
     </xsl:template>
 
     <!-- ============================== Document open utility =================
@@ -263,7 +300,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:function>
-    
+
     <xsl:function name="tbx:debugging">
         <xsl:param name="msg" as="xs:string"/>
         <xsl:if test="$debugging">

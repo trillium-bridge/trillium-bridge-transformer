@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClinicalDocument xmlns="urn:hl7-org:v3"
+                  xmlns:epsos="urn:epsos-org:ep:medication"
+                  xmlns:ext="urn:hl7-EE-DL-Ext:v1"
+                  xmlns:mif="urn:hl7-org:v3/mif"
+                  xmlns:ns="urn:hl7-org:v3"
+                  xmlns:sch="http://www.ascc.net/xml/schematron"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <templateId root="2.16.840.1.113883.10.20.22.1.2"/>
+   <templateId root="2.16.840.1.113883.10.20.22.1.1"/>
+   <languageCode code="en"/>
+   <component>
+      <structuredBody>
+         <component>
+            <section>
+               <templateId root="2.16.840.1.113883.10.20.22.2.6"/>
+               <templateId root="2.16.840.1.113883.10.20.22.2.6.1"/>
+               <code code="48765-2"
+                     displayName="Allergies, adverse reactions, alerts"
+                     codeSystem="2.16.840.1.113883.6.1"
+                     codeSystemName="LOINC">
+                  <translation displayName="Allergie, Reazioni Avverse ed Allarmi"/>
+               </code>
+               <title>Allergies, adverse reactions, alerts</title>
+               <entry typeCode="DRIV">
+                  <act classCode="ACT" moodCode="EVN">
+                     <templateId root="2.16.840.1.113883.10.20.22.4.30"/>
+                     <id extension="allergy.1" root="2.16.470.1.100.1.1.1000.990.1"/>
+                     <code code="48765-2"
+                           codeSystem="2.16.840.1.113883.6.1"
+                           codeSystemName="LOINC"
+                           displayName="Allergies, adverse reactions, alerts"/>
+                     <statusCode code="active"/>
+                     <effectiveTime>
+                        <low value="199501"/>
+                     </effectiveTime>
+                     <entryRelationship inversionInd="false" typeCode="SUBJ">
+                        <observation classCode="OBS" moodCode="EVN">
+                           <templateId root="2.16.840.1.113883.10.20.22.4.7"/>
+                           <id extension="allergy.1.obs.1" root="2.16.470.1.100.1.1.1000.990.1"/>
+                           <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
+                           <text>
+                              <reference value="#allergy.1"/>
+                           </text>
+                           <statusCode code="completed"/>
+                           <effectiveTime>
+                              <low value="199501"/>
+                           </effectiveTime>
+                           <value xsi:type="CD">
+                              <originalText>
+                                 <reference value="#allergy.1"/>
+                              </originalText>
+                           </value>
+                           <participant typeCode="CSM">
+                              <participantRole classCode="MANU">
+                                 <playingEntity classCode="MMAT">
+                                    <code codeSystem="2.16.840.1.113883.3.26.1.5"
+                                          codeSystemName="NDF-RT"
+                                          code="N0000168575"
+                                          displayName="Gefarnate">
+                                       <translation code="A02BX07"
+                                                    displayName="gefarnate"
+                                                    codeSystem="2.16.840.1.113883.6.73"
+                                                    codeSystemName="Anatomical Therapeutic Chemical">
+                                          <originalText mediaType="text/xml">
+                                             <reference value="#agn_des.all.1"/>
+                                          </originalText>
+                                       </translation>
+                                    </code>
+                                 </playingEntity>
+                              </participantRole>
+                           </participant>
+                           <entryRelationship typeCode="MFST" inversionInd="true"><!-- a problem entry --><observation classCode="OBS" moodCode="EVN">
+                                 <templateId root="2.16.840.1.113883.10.20.22.4.9"/>
+                                 <id extension="allergy.1.obs.1.1" root="2.16.470.1.100.1.1.1000.990.1"/>
+                                 <!-- The code tells us that the observation is a symptom --><code code="418799008"
+                                       codeSystem="2.16.840.1.113883.6.96"
+                                       displayName="Finding reported by subject or history provider"
+                                       codeSystemName="SNOMED CT"/>
+                                 <text>
+                                    <reference value="#rea.all.1"/>
+                                 </text>
+                                 <statusCode code="completed"/>
+                                 <effectiveTime>
+                                    <low nullFlavor="UNK"/>
+                                 </effectiveTime>
+                                 <!-- The value tells us what the symptom (i.e. allergy manifestation) is --><!-- This is where anaphylaxy or angiooedema will be coded --><value xsi:type="CD"
+                                        code="200769008"
+                                        codeSystem="2.16.840.1.113883.6.96"
+                                        displayName="Atopic dermatitis and related conditions"
+                                        codeSystemName="SNOMED CT">
+                                    <originalText>
+                                       <reference value="#rea.all.1"/>
+                                    </originalText>
+                                 </value>
+                              </observation>
+                           </entryRelationship>
+                        </observation>
+                     </entryRelationship>
+                  </act>
+               </entry>
+            </section>
+         </component>
+      </structuredBody>
+   </component>
+</ClinicalDocument>
