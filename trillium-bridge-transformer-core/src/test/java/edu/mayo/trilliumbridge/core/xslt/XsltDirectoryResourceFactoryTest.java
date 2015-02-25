@@ -4,6 +4,8 @@ import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 
+import java.lang.reflect.Field;
+
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -11,16 +13,19 @@ import static org.junit.Assert.assertTrue;
 public class XsltDirectoryResourceFactoryTest {
 
     @Test
-    public void testGetResourceDefault() throws Exception {
-        XsltDirectoryResourceFactory factory = new XsltDirectoryResourceFactory();
+    public void testGetResourceDefaultAndOverride() throws Exception {
+        XsltDirectoryResourceFactory factory = XsltDirectoryResourceFactory.instance();
 
         assertTrue(factory.getResource("test") instanceof ClassPathResource);
-    }
 
-    @Test
-    public void testGetResourceOverride() throws Exception {
         System.setProperty(XsltDirectoryResourceFactory.TBT_HOME_PROP, "test");
-        XsltDirectoryResourceFactory factory = new XsltDirectoryResourceFactory();
+
+        // jack the instance to clear it
+        Field instance = XsltDirectoryResourceFactory.class.getDeclaredField("instance");
+        instance.setAccessible(true);
+        instance.set(null, null);
+
+        factory = XsltDirectoryResourceFactory.instance();
 
         assertTrue(factory.getResource("test") instanceof FileSystemResource);
         System.clearProperty(XsltDirectoryResourceFactory.TBT_HOME_PROP);

@@ -18,7 +18,9 @@ public class XsltDirectoryResourceFactory {
 
     private String envXsltDirOverride;
 
-    protected XsltDirectoryResourceFactory() {
+    private static XsltDirectoryResourceFactory instance;
+
+    private XsltDirectoryResourceFactory() {
         String prop = System.getProperty(TBT_HOME_PROP);
         if (prop != null) {
             this.envXsltDirOverride = prop + File.separator + TBT_CONF_DIR;
@@ -37,5 +39,13 @@ public class XsltDirectoryResourceFactory {
         } else {
             return new ClassPathResource(path);
         }
+    }
+
+    protected static synchronized XsltDirectoryResourceFactory instance() {
+        if(instance == null) {
+            instance = new XsltDirectoryResourceFactory();
+        }
+
+        return instance;
     }
 }
