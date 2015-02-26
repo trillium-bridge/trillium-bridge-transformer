@@ -158,28 +158,43 @@ __(9)__ ```outputformats``` - specification of output format XSLT transformation
 
 
 __Schema__
+
 __(10)__ ```schema``` - directory that carries XML Schemas
+
 __(11)__ ```CDA_R2_NormativeWebEdition2010``` - CDA schema directory for resolving CDA document headers
+
 __(12)__ ```TBXform.xsd``` - the XML Schema that defines the [transformation rules](#xform-rules), [value set maps](#vsmaps) and [language transformation](#langxform) tables
 
 
 __Transformation Tables__
+
 __(13)__ ```FP7-SA610756-D3.1.xml``` Transformation rules.  This is the primary table that controls the transform. The structure is defined by ```TBXform.xsd````
+
 __(14)__ ```ValueSetMaps.xml``` Value Set Mapping table.  This controls which file(s) or service(s) are used to resolve code and value maps. The structure is defined by ```TBXform.xsd````
 
 __(15)__ ```translations``` - Translation tables. File names are in the form "{from-language}-to-{to-language}.xml". The structure is defined by ```TBXform.xsd````
 
 
 __XSLT Files__ specification the main CCDA/epSOS XSLT transformations.
+
 __(16)__ ```CCD.xsl``` - Default client-side html formatter for CCD data
+
 __(17)__ ```CCD_IT.xsl``` -  Italian language html formatter for CCD data (example)
+
 __(18)__ ```CTS2Access.xsl``` - XSLT templates and functions for doing CTS2 based code and value transforms
+
 __(19)__ ```TBTransformations.xsl``` - XSLT function library for transformations
+
 __(20)__ ```TBXform.xsl``` - The main transformation engine that traverses an epSOS or CCD document and applies the rules in the transformation rules table
+
 __(21)__ ```ccda2epsos_options.json``` - Description of screen options (parameters) for the ccda to epsos transformation
+
 __(22)__ ```epsos2ccda.xsl``` -
+
 __(23)__ ```epsos2ccda_options.json``` - Description of screen options (parameters) for the epsos to ccda transformation
+
 __(24)__ ```noop.xsl``` -
+
 __(25)__ ```xslt.properties``` - Transformation configuration file. See [here](#configuring-the-ccda---epsos-transformation) for more information on CCDA/epSOS XSLT configuration.
 
 
