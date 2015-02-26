@@ -69,21 +69,20 @@
             </plugin>
 
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>1.9</version>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.7</version>
                 <executions>
                     <execution>
-                        <id>add-resource</id>
+                        <id>copy-scripts</id>
                         <phase>generate-resources</phase>
                         <goals>
-                            <goal>add-resource</goal>
+                            <goal>copy-resources</goal>
                         </goals>
                         <configuration>
+                            <outputDirectory>${project.build.directory}/scripts</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>${project.build.scriptSourceDirectory}</directory>
-                                    <targetPath>${project.build.directory}/scripts</targetPath>
                                     <filtering>true</filtering>
                                 </resource>
                             </resources>
@@ -91,7 +90,9 @@
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
+
     </build>
 
     <dependencies>

@@ -5,7 +5,6 @@ import edu.mayo.trilliumbridge.core.TrilliumBridgeTransformer;
 import edu.mayo.trilliumbridge.core.UnsupportedOutputFormatException;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -19,9 +18,9 @@ public class OutputXsltTranformFactory {
     private static final String OUTPUT_FORMATS_BASE_PATH = "/outputformats";
     private static final String OUTPUT_FORMATS_JSON_PATH = OUTPUT_FORMATS_BASE_PATH + "/outputformats.json";
 
-    private XsltDirectoryResourceFactory resourceFactory = new XsltDirectoryResourceFactory();
+    private XsltDirectoryResourceFactory resourceFactory = XsltDirectoryResourceFactory.instance();
 
-    private Map<OutputTransformKey, InputStreamFactory> transformMap = new HashMap<OutputTransformKey, InputStreamFactory>();
+    private Map<OutputTransformKey, javax.xml.transform.Transformer> transformMap = new HashMap<OutputTransformKey, javax.xml.transform.Transformer>();
 
     public OutputXsltTranformFactory() {
         super();
@@ -50,24 +49,10 @@ public class OutputXsltTranformFactory {
                                 type,
                                 TrilliumBridgeTransformer.Format.valueOf(json.get("output"))),
 
-                        new InputStreamFactory() {
-
-                            @Override
-                            public InputStream getInputStream() {
-                                try {
-                                    return resourceFactory.getResource(OUTPUT_FORMATS_BASE_PATH + "/" + json.get("xslt")).getInputStream();
-                                } catch (IOException e) {
-                                    throw new IllegalStateException(e);
-                                }
-                            }
-
-                        });
+                                XsltUtils.buildTransformer(
+                                                    resourceFactory.getResource(OUTPUT_FORMATS_BASE_PATH + "/" + json.get("xslt"))));
             }
         }
-    }
-
-    private interface InputStreamFactory {
-        InputStream getInputStream();
     }
 
     private class OutputTransformKey {
@@ -100,13 +85,13 @@ public class OutputXsltTranformFactory {
         }
     }
 
-    protected InputStream getOutputTransform(TrilliumBridgeTransformer.Format format, XsltTrilliumBridgeTransformer.DocumentType documentType) {
+    protected javax.xml.transform.Transformer getOutputTransform(TrilliumBridgeTransformer.Format format, XsltTrilliumBridgeTransformer.DocumentType documentType) {
         OutputTransformKey key = new OutputTransformKey(documentType, format);
 
         if (!this.transformMap.containsKey(key)) {
             throw new UnsupportedOutputFormatException(format);
         } else {
-            return this.transformMap.get(key).getInputStream();
+            return this.transformMap.get(key);
         }
     }
 }
