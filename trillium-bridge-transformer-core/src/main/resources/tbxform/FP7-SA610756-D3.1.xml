@@ -47,7 +47,7 @@
             <transformation name="mapLanguage"/>
         </transform>
         <context>
-            <root>/component/structuredBody</root>
+            <root>/component</root>
             <transform>
                 <path>/structuredBody</path>
                 <transformation name="addNode">

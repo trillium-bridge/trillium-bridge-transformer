@@ -71,6 +71,7 @@
         <xsl:variable name="relpath" select="tbx:refmark($relbase, .)"/>
         <xsl:variable name="context" select="current()"/>
 
+
         <!-- Debugging -->
         <xsl:if test="$showpaths">
             <xsl:value-of select="$cr"/>
@@ -133,7 +134,7 @@
                 <xsl:choose>
                     <!-- If this isn't the first match, ignore it completely -->
                     <xsl:when test="boolean(preceding-sibling::*[name()=$context/name()])">
-                        <xsl:value-of select="tbx:debugging('TRANSFORM duplicate')"/>
+                        <xsl:value-of select="tbx:debugging('TRANSFORM (succssor node)')"/>
                     </xsl:when>
                     
                     <!-- Otherwise apply the transformations -->
@@ -144,7 +145,7 @@
                             <xsl:value-of select="tbx:debugging(concat('TRANSFORM: ', @name))"/>
                             <xsl:call-template name="applyTransformations">
                                 <xsl:with-param name="context" tunnel="yes" select="$contexts"/>
-                                <xsl:with-param name="globals" select="boolean($transformmatch/@global)" tunnel="yes"/>
+                                <xsl:with-param name="globals" select="$allglobals" tunnel="yes"/>
                                 <xsl:with-param name="mapcontext" select="$mapcontext" tunnel="yes"/>
                                 <xsl:with-param name="matchonly" select="false()" tunnel="yes"/>
                             </xsl:call-template>
