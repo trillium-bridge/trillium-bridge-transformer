@@ -59,22 +59,41 @@ The ```trillium-bridge-transformer-cli-{version}-bin.{suffix}``` package will co
 │   ├── tbt-webapp             <- (5)
 │   └── tbt-webapp.bat         <- (6)
 ├── conf
-│   ├── nooptransform          <- (7)
-│   ├── outputformats          <- (8)
+│   ├── cts2fileservice        <- (7)
+│   │   └── map
+│   ├── nooptransform          <- (8)
+│   ├── outputformats          <- (9)
 │   │   ├── CDA.xsl
 │   │   └── outputformats.json
-│   └── xslt                   <- (9)
-│       ├── noop.xsl
-│       └── xslt.properties
+│   ├── schema                 <- (10)
+│   │   ├── CDA_R2_NormativeWebEdition2010  <- (11)
+│   │   └── TBXform.xsd        <- (12)
+│   ├── tbxform
+│   │   ├── FP7-SA610756-D3.1.xml    <- (13)
+│   │   └── ValueSetMaps.xml         <- (14)
+│   ├── translation            <- (15)
+│   │   ├── it-to-en.xml
+│   │   └── en-to-es.xml
+│   └── xslt
+│       ├── CCD.xsl            <- (16)
+│       ├── CCD-IT.xsl         <- (17)
+│       ├── CTS2Access.xsl     <- (18)
+│       ├── TBTransformations.xsl <- (19)
+│       ├── TBXform.xsl        <- (20)
+│       ├── ccda2epsos_options.json   <- (21)
+│       ├── epsos2ccda.xsl            <- (22)
+│       ├── epsos2ccda_options.json   <- (23)
+│       ├── noop.xsl           <- (24)
+│       └── xslt.properties    <- (25)
 ├── doc
 │   └── README.txt
 ├── lib
 │   └── *.jar <- Java jar dependencies
 └── webapp
     ├── logs
-    │   ├── error.log           <- (10)
-    │   └── output.log          <- (11)
-    └── trillium-bridge-transformer-webapp-{version}.war <- (12)
+    │   ├── error.log           <- (26)
+    │   └── output.log          <- (27)
+    └── trillium-bridge-transformer-webapp-{version}.war <- (28)
 ```
 #### Components
 __Launch Scripts__
@@ -98,6 +117,7 @@ All above commands allow the following parameters:
  
 example: ccda2epsos -f html ../my/ccda.xml
 ```
+
 __(5)__ ```tbt-webapp``` - the Unix launch file for the web applcation
 
 __(6)__ ```tbt-webapp.bat``` - the Windows launch file for the web applcation
@@ -125,22 +145,67 @@ example: tbt-webapp --port 5150
 
 By default, web app will bind to port ```8080``` and be available at http://localhost:8080/
 
+__Local CTS2 Service__
+__(7)__ ```cts2fileservice``` - the root directory for the local file-based CTS2 service.  This is the place where you can put maps that aren't available externally as
+well as resources that need to be cached locally.  The directory structure matches the CTS2 REST service interface.
+
 
 __Transformations__
 
-__(7)__ ```nooptransform``` - the implementaion of the no-op direct copy CCDA <-> epSOS transform. This will be deprecated and replaced with a live transform.
+__(8)__ ```nooptransform``` - the implementaion of the no-op direct copy CCDA <-> epSOS transform. This will be deprecated and replaced with a live transform.
 
-__(8)__ ```outputformats``` - specification of output format XSLT transformations. See [here](#configuring-the-output-format-transformation) for more inforamation on output format configuration
+__(9)__ ```outputformats``` - specification of output format XSLT transformations. See [here](#configuring-the-output-format-transformation) for more inforamation on output format configuration
 
-__(9)__ ```xslt``` - specification the main CCDA/epSOS XSLT transformations. See [here](#configuring-the-ccda---epsos-transformation) for more infomation on CCDA/epSOS XSLT configuration.
+
+__Schema__
+
+__(10)__ ```schema``` - directory that carries XML Schemas
+
+__(11)__ ```CDA_R2_NormativeWebEdition2010``` - CDA schema directory for resolving CDA document headers
+
+__(12)__ ```TBXform.xsd``` - the XML Schema that defines the [transformation rules](#xform-rules), [value set maps](#vsmaps) and [language transformation](#langxform) tables
+
+
+__Transformation Tables__
+
+__(13)__ ```FP7-SA610756-D3.1.xml``` Transformation rules.  This is the primary table that controls the transform. The structure is defined by ```TBXform.xsd````
+
+__(14)__ ```ValueSetMaps.xml``` Value Set Mapping table.  This controls which file(s) or service(s) are used to resolve code and value maps. The structure is defined by ```TBXform.xsd````
+
+__(15)__ ```translations``` - Translation tables. File names are in the form "{from-language}-to-{to-language}.xml". The structure is defined by ```TBXform.xsd````
+
+
+__XSLT Files__ specification the main CCDA/epSOS XSLT transformations.
+
+__(16)__ ```CCD.xsl``` - Default client-side html formatter for CCD data
+
+__(17)__ ```CCD_IT.xsl``` -  Italian language html formatter for CCD data (example)
+
+__(18)__ ```CTS2Access.xsl``` - XSLT templates and functions for doing CTS2 based code and value transforms
+
+__(19)__ ```TBTransformations.xsl``` - XSLT function library for transformations
+
+__(20)__ ```TBXform.xsl``` - The main transformation engine that traverses an epSOS or CCD document and applies the rules in the transformation rules table
+
+__(21)__ ```ccda2epsos_options.json``` - Description of screen options (parameters) for the ccda to epsos transformation
+
+__(22)__ ```epsos2ccda.xsl``` -
+
+__(23)__ ```epsos2ccda_options.json``` - Description of screen options (parameters) for the epsos to ccda transformation
+
+__(24)__ ```noop.xsl``` -
+
+__(25)__ ```xslt.properties``` - Transformation configuration file. See [here](#configuring-the-ccda---epsos-transformation) for more information on CCDA/epSOS XSLT configuration.
+
+
 
 __Web Application__
 
-__(10)__ ```error.log``` - the standard error log of the web application.
+__(26)__ ```error.log``` - the standard error log of the web application.
 
-__(11)__ ```output.log``` - the standard output log of the web application.
+__(27)__ ```output.log``` - the standard output log of the web application.
 
-__(12)__ ```trillium-bridge-transformer-webapp-{version}.war``` - the web application archive. This can be then deployed to an application server such as Tomcat, JBoss, etc.
+__(28)__ ```trillium-bridge-transformer-webapp-{version}.war``` - the web application archive. This can be then deployed to an application server such as Tomcat, JBoss, etc.
 
 ## Transformations
 There are two different transformation phases. The first phase transforms CCDA XML to epSOS XML (or vice versa). The next phase takes that resulting transformed XML and converts it to a desired output format (such as HTML).
@@ -149,8 +214,8 @@ There are two different transformation phases. The first phase transforms CCDA X
 The ```conf/xslt/xslt.properties``` file is the configuration file used to configure the XSLTs used to execute the transformation, and had the following format:
 
 ```
-xslt.epsos2ccda=noop.xsl
-xslt.ccda2epsos=noop.xsl
+xslt.epsos2ccda=TBXform.xsl
+xslt.ccda2epsos=TBXform.xsl
 ```
 
 This file should contain two entries as show -- one for each type of transformation. The value of the ```xslt.epsos2ccda``` and ```xslt.ccda2epsos``` properties should be the relative path to the XSLT used for conversion.
