@@ -29,5 +29,7 @@ public class XsltDirectoryResourceFactoryTest {
 
         assertTrue(factory.getResource("test") instanceof FileSystemResource);
         System.clearProperty(XsltDirectoryResourceFactory.TBT_HOME_PROP);
+
+        instance.set(null, null);
     }
 }

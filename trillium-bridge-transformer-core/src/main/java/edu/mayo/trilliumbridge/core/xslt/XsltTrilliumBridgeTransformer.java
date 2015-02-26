@@ -1,6 +1,9 @@
 package edu.mayo.trilliumbridge.core.xslt;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.mayo.trilliumbridge.core.TransformException;
+import edu.mayo.trilliumbridge.core.TransformOption;
+import edu.mayo.trilliumbridge.core.TransformOptionDefinition;
 import edu.mayo.trilliumbridge.core.TrilliumBridgeTransformer;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
@@ -9,14 +12,15 @@ import org.springframework.core.io.support.PropertiesLoaderUtils;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Properties;
 
 /**
  * The XSLT transformation logic.
  */
 public class XsltTrilliumBridgeTransformer implements TrilliumBridgeTransformer {
+
+    private ObjectMapper mapper = new ObjectMapper();
 
     private Logger log = Logger.getLogger(this.getClass());
 
@@ -29,7 +33,14 @@ public class XsltTrilliumBridgeTransformer implements TrilliumBridgeTransformer 
 
     protected enum DocumentType {CCDA, EPSOS}
 
+    private String EPSOS2CCDA_OPTIONS_FILE_PATH = "/xslt/epsos2ccda_options.json";
+    private String CCDA2EPSOS_OPTIONS_FILE_PATH = "/xslt/ccda2epsos_options.json";
+
     private OutputXsltTranformFactory xsltTranformFactory = new OutputXsltTranformFactory();
+
+    private Set<TransformOptionDefinition> epsosToCcdaOptions;
+
+    private Set<TransformOptionDefinition> ccdaToEpsosOptions;
 
     private static final String XSLT_BASE_PATH = "/xslt/";
     private static final String NO_OP_XSLT = "noop.xsl";
@@ -53,22 +64,25 @@ public class XsltTrilliumBridgeTransformer implements TrilliumBridgeTransformer 
                 this.resourceFactory.getResource(XSLT_BASE_PATH + properties.getProperty(EPSOS2CCDA_XSLT_PROP, NO_OP_XSLT)));
         this.ccda2epsosTransformer = XsltUtils.buildTransformer(
                 this.resourceFactory.getResource(XSLT_BASE_PATH + properties.getProperty(CCDA2EPSOS_XSLT_PROP, NO_OP_XSLT)));
+
+        this.epsosToCcdaOptions = this.getOptions(EPSOS2CCDA_OPTIONS_FILE_PATH);
+        this.ccdaToEpsosOptions = this.getOptions(CCDA2EPSOS_OPTIONS_FILE_PATH);
     }
 
     @Override
-    public void ccdaToEpsos(InputStream ccdaStream, OutputStream epsosStream, Format outputFormat) {
+    public void ccdaToEpsos(InputStream ccdaStream, OutputStream epsosStream, Format outputFormat, List<TransformOption> parameters) {
         this.doTransformAndFormat(
                 ccdaStream,
                 this.ccda2epsosTransformer,
-                this.getFormatXslt(outputFormat, DocumentType.EPSOS), epsosStream, null);
+                this.getFormatXslt(outputFormat, DocumentType.EPSOS), epsosStream, parameters);
     }
 
     @Override
-    public void epsosToCcda(InputStream epsosStream, OutputStream ccdaStream, Format outputFormat) {
+    public void epsosToCcda(InputStream epsosStream, OutputStream ccdaStream, Format outputFormat, List<TransformOption> parameters) {
         this.doTransformAndFormat(
                 epsosStream,
                 this.epsos2ccdaTransformer,
-                this.getFormatXslt(outputFormat, DocumentType.CCDA), ccdaStream, null);
+                this.getFormatXslt(outputFormat, DocumentType.CCDA), ccdaStream, parameters);
     }
 
     protected javax.xml.transform.Transformer getFormatXslt(Format outputFormat, DocumentType type) {
@@ -84,9 +98,10 @@ public class XsltTrilliumBridgeTransformer implements TrilliumBridgeTransformer 
             javax.xml.transform.Transformer documentXsltTransformer,
             javax.xml.transform.Transformer outputFormatXsltTransformer,
             OutputStream outputStream,
-            Map<String, String> parameters) {
+            List<TransformOption> transformOptions) {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
+        Map<String,String> parameters = this.toParameters(transformOptions);
         try {
             if (outputFormatXsltTransformer != null) {
                 this.transform(xmlInputStream, documentXsltTransformer, out, parameters);
@@ -99,6 +114,20 @@ public class XsltTrilliumBridgeTransformer implements TrilliumBridgeTransformer 
         }
     }
 
+    private Map<String, String> toParameters(List<TransformOption> transformOptions) {
+        if(transformOptions == null) {
+            return null;
+        }
+
+        Map<String,String> parameters = new HashMap<String,String>();
+
+        for(TransformOption option : transformOptions) {
+            parameters.put(option.getOptionName(), option.getOptionValue());
+        }
+
+        return parameters;
+    }
+
     protected void transform(
             InputStream xmlInputStream,
             javax.xml.transform.Transformer xsltTransformer,
@@ -108,21 +137,47 @@ public class XsltTrilliumBridgeTransformer implements TrilliumBridgeTransformer 
             // Source XML File
             StreamSource xmlFile = new StreamSource(xmlInputStream);
 
-            if (parameters != null) {
-                for (Entry<String, String> entry : parameters.entrySet()) {
-                    xsltTransformer.setParameter(entry.getKey(), entry.getValue());
+            synchronized (xsltTransformer) {
+                if (parameters != null) {
+                    for (Entry<String, String> entry : parameters.entrySet()) {
+                        xsltTransformer.setParameter(entry.getKey(), entry.getValue());
+                    }
                 }
+
+                // Send transformed output to the console
+                StreamResult resultStream = new StreamResult(outputStream);
+
+                // Apply the transformation
+                xsltTransformer.transform(xmlFile, resultStream);
+
+                xsltTransformer.reset();
             }
-
-            // Send transformed output to the console
-            StreamResult resultStream = new StreamResult(outputStream);
-
-            // Apply the transformation
-            xsltTransformer.transform(xmlFile, resultStream);
         } catch (Exception ex) {
             throw new TransformException(ex);
         } finally {
             IOUtils.closeQuietly(xmlInputStream);
         }
     }
+
+    @Override
+    public Set<TransformOptionDefinition> getCcdaToEpsosOptions() {
+        return this.ccdaToEpsosOptions;
+    }
+
+    @Override
+    public Set<TransformOptionDefinition> getEpsosToCcdaOptions() {
+        return this.epsosToCcdaOptions;
+    }
+
+    protected Set<TransformOptionDefinition> getOptions(String optionsPath) {
+        try {
+            return new HashSet<TransformOptionDefinition>(
+                    Arrays.asList(
+                        mapper.readValue(
+                            this.resourceFactory.getResource(optionsPath).getInputStream(), TransformOptionDefinition[].class)));
+        } catch (IOException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
 }

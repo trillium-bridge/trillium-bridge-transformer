@@ -1,0 +1,20 @@
+[
+    {
+        "optionName" : "nocomments",
+        "optionType" : "BOOLEAN",
+        "description" : "Turn on/off XML comments",
+        "defaultValue" : "true"
+    },
+    {
+        "optionName" : "some_string",
+        "optionType" : "STRING",
+        "description" : "Some string option..."
+    },
+    {
+        "optionName" : "some_dropdown",
+        "optionType" : "ENUM",
+        "description" : "Dropdown options....",
+        "defaultValue" : "second",
+        "allowedValues" : ["first", "second", "third"]
+    }
+]

@@ -1,3 +1,4 @@
+<!DOCTYPE HTML>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -14,6 +15,7 @@
 <script type="text/javascript" src="resources/include/syntaxhighlighter_3.0.83/scripts/shCore.js"></script>
 <script type="text/javascript" src="resources/include/syntaxhighlighter_3.0.83/scripts/shBrushJava.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js"></script>
+<script src="resources/js/home.js"></script>
 
 <link rel="stylesheet" href="resources/include/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="resources/include/bootstrap-fileupload/bootstrap-fileupload.min.css">
@@ -67,7 +69,7 @@
             <div id="my-tab-content" class="tab-content">
 
                 <div class="tab-pane active" id="fileUpload">
-                    <form action="ccda2epsos" enctype='multipart/form-data' name="fileUploadForm" id="fileUploadForm" method='post' class="form-inline well">
+                    <form autocomplete="off" action="ccda2epsos" enctype='multipart/form-data' name="fileUploadForm" id="fileUploadForm" method='post' class="form-inline well">
                         <div class="fileupload fileupload-new" data-provides="fileupload">
                             <div class="input-append">
                                 <div class="uneditable-input span5"><i class="icon-file fileupload-exists"></i>
@@ -100,6 +102,54 @@
                             </div>
                             <input type="hidden" id="formatOverride" name="formatOverride" value="XML"/>
 
+                            <div class="padTop">
+                                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#transformOptions" aria-expanded="false" aria-controls="collapseExample">
+                                    Transformation Parameters
+                                </button>
+                                <div id="transformOptions" class="collapse">
+                                    <div class="well">
+
+                                        <c:forEach var="tuple" items="${options}">
+
+                                            <div id="${tuple.name}">
+                                                <c:forEach var="option" items="${tuple.options}">
+                                                    <div>
+                                                        <label>
+                                                            <span>${option.optionName}: </span>
+                                                            <c:if test="${option.optionType == 'BOOLEAN'}">
+                                                                <input class="transformOptionCheckBox"
+                                                                       type="checkbox"
+                                                                       name="${option.optionName}"
+                                                                       rel="tooltip" data-placement="right" title="${option.description}"
+                                                                       value="true"
+                                                                       ${option.defaultValue == 'true' ? 'checked' : ''}>
+                                                            </c:if>
+                                                            <c:if test="${option.optionType == 'STRING'}">
+                                                                <input class="input"
+                                                                       type="text"
+                                                                       name="${option.optionName}"
+                                                                       rel="tooltip" data-placement="right" title="${option.description}"
+                                                                       value="${option.defaultValue}">
+                                                            </c:if>
+                                                            <c:if test="${option.optionType == 'ENUM'}">
+                                                                <select name="${option.optionName}"
+                                                                        rel="tooltip" data-placement="right" title="${option.description}">
+                                                                    <c:forEach var="value" items="${option.allowedValues}">
+                                                                        <option value="${value}" ${value == option.defaultValue ? 'selected' : ''}>${value}</option>
+                                                                    </c:forEach>
+                                                                </select>
+                                                            </c:if>
+                                                        </label>
+                                                    </div>
+                                                </c:forEach>
+                                            </div>
+
+                                        </c:forEach>
+
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </form>
                 </div>
@@ -126,74 +176,6 @@
                 Learn more
             </a>
         </p>
-
-        <script type="text/javascript">
-
-            String.prototype.xmlEscape = function() {
-                return $('<div/>').text(this.toString()).html();
-            };
-
-            jQuery(document).ready(function ($) {
-                $("[rel='tooltip']").tooltip();
-
-                $("#formatToggle .btn-group button").click(function () {
-                    $("#formatOverride").val($(this).text());
-                });
-
-                $("input[name='conversionType']").change(function() {
-                    var action = $(this).val();
-                    $("#fileUploadForm").attr("action", action);
-                });
-
-                $('#tabs').tab();
-
-                /* -------------------------------------- */
-                /* Re-enable when the examples are needed */
-                /* -------------------------------------- */
-                /*
-                var select2 = $("#ccdaExamplesSelect").select2({
-                    formatResult: format,
-                    escapeMarkup: function(m) { return m; }
-                }).data('select2');
-
-                function format(option) {
-                    return "<span class='label'>" + option.id + "</span> "+ option.text + "<i class='exampleCcdaXml'>show xml</i>";
-                }
-
-                select2.onSelect = (function(fn) {
-                    return function(data, options) {
-                        var target;
-
-                        if (options != null) {
-                            target = $(options.target);
-                        }
-
-                        if (target && target.hasClass('exampleCcdaXml')) {
-                            $.ajax({
-                                type: "GET",
-                                url: "examples/ccda/" + data.text,
-                                dataType: "xml",
-                                success: function(data, status, resp) {
-                                    $('#ccdaModal').modal('show');
-
-                                    $('#xmlValue').html(resp.responseText.xmlEscape());
-
-                                    $('#ccdaModal pre code').each(function(i, block) {
-                                        hljs.highlightBlock(block);
-                                    });
-
-                                }
-                            });
-
-                        } else {
-                            return fn.apply(this, arguments);
-                        }
-                    }
-                })(select2.onSelect);
-                */
-
-            });
-        </script>
 
     </div>
 

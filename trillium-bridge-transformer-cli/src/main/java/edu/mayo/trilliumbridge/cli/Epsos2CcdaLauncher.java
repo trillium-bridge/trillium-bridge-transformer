@@ -14,6 +14,7 @@ public class Epsos2CcdaLauncher extends AbstractBaseCliLauncher {
 
     @Override
     protected void doTransform(InputStream in, OutputStream out, TrilliumBridgeTransformer.Format format) throws Exception {
-        this.getTransformer().epsosToCcda(in, out, format);
+        //TODO: handle params here
+        this.getTransformer().epsosToCcda(in, out, format, null);
     }
 }

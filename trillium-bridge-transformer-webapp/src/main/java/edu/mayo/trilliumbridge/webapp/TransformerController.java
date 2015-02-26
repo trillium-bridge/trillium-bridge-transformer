@@ -23,10 +23,12 @@
  */
 package edu.mayo.trilliumbridge.webapp;
 
+import edu.mayo.trilliumbridge.core.TransformOption;
+import edu.mayo.trilliumbridge.core.TransformOptionDefinition;
 import edu.mayo.trilliumbridge.core.TrilliumBridgeTransformer;
-import edu.mayo.trilliumbridge.core.xslt.XsltTrilliumBridgeTransformer;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -37,6 +39,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.*;
 
 @Controller
 public class TransformerController {
@@ -47,7 +50,8 @@ public class TransformerController {
 
     private static final String INPUT_FILE_NAME = "file";
 
-    private TrilliumBridgeTransformer transformer = new XsltTrilliumBridgeTransformer();
+    @Autowired
+    private TrilliumBridgeTransformer transformer;
 
     private interface Transformer {
         void transform(InputStream in, OutputStream out, TrilliumBridgeTransformer.Format outputFormat);
@@ -56,7 +60,7 @@ public class TransformerController {
     @RequestMapping(value = "/epsos2ccda", method = RequestMethod.POST)
     @ResponseBody
     public void epsos2ccda(
-            HttpServletRequest request,
+            final HttpServletRequest request,
             HttpServletResponse response,
             @RequestHeader(value = "Accept", defaultValue = MediaType.APPLICATION_XML_VALUE) String accept,
             @RequestParam(value = "formatOverride", required = false) String formatOverride)
@@ -65,7 +69,7 @@ public class TransformerController {
 
             @Override
             public void transform(InputStream in, OutputStream out, TrilliumBridgeTransformer.Format outputFormat) {
-                transformer.epsosToCcda(in, out, outputFormat);
+                transformer.epsosToCcda(in, out, outputFormat, getParams(request.getParameterMap(), transformer.getEpsosToCcdaOptions()));
             }
 
         });
@@ -74,7 +78,7 @@ public class TransformerController {
     @RequestMapping(value = "/ccda2epsos", method = RequestMethod.POST)
     @ResponseBody
     public void ccda2epsos(
-            HttpServletRequest request,
+            final HttpServletRequest request,
             HttpServletResponse response,
             @RequestHeader(value = "Accept", defaultValue = MediaType.APPLICATION_XML_VALUE) String accept,
             @RequestParam(value = "formatOverride", required = false) String formatOverride)
@@ -83,10 +87,35 @@ public class TransformerController {
 
             @Override
             public void transform(InputStream in, OutputStream out, TrilliumBridgeTransformer.Format outputFormat) {
-                transformer.ccdaToEpsos(in, out, outputFormat);
+                transformer.ccdaToEpsos(in, out, outputFormat, getParams(request.getParameterMap(), transformer.getCcdaToEpsosOptions()));
             }
 
         });
+    }
+
+    private List<TransformOption> getParams(Map<String,String[]> formParams, Set<TransformOptionDefinition> options) {
+        if(formParams == null) {
+            return null;
+        }
+
+        List<TransformOption> returnList = new ArrayList<TransformOption>();
+
+        for(TransformOptionDefinition option : options) {
+            String key = option.getOptionName();
+
+            String[] values = formParams.get(key);
+
+            String value = null;
+            if(values == null && option.getOptionType().equals(TransformOptionDefinition.OptionType.BOOLEAN)) {
+                value = Boolean.FALSE.toString();
+            } else {
+                value = StringUtils.join(values, ',');
+            }
+
+            returnList.add(new TransformOption(key, value));
+        }
+
+        return returnList;
     }
 
     protected void doTransform(
