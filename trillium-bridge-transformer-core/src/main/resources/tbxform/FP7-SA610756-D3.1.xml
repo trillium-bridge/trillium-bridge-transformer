@@ -47,7 +47,7 @@
             <transformation name="mapLanguage"/>
         </transform>
         <context>
-            <root>/component</root>
+            <root>/component/structuredBody</root>
             <transform>
                 <path>/structuredBody</path>
                 <transformation name="addNode">
@@ -222,10 +222,13 @@
                             </arg>
                         </transformation>
                     </transform>
-                    <transform>
-                        <path>/value</path>
-                        <transformation name="mapValueSet" map="ICD_10_SNOMED_CT_epSOSIllnesses_VS"/>
-                    </transform>
+                    <context>
+                        <root>/entryRelationship[@typeCode="SUBJ"]/observation[templateId/@root="2.16.840.1.113883.10.20.1.28"]</root>
+                        <transform>
+                            <path>/value</path>
+                            <transformation name="mapValueSet" map="ICD_10_SNOMED_CT_epSOSIllnesses_VS"/>
+                        </transform>
+                    </context>
                 </context>
             </context>
             <!-- ======================= History of Medication Use ================================= -->
