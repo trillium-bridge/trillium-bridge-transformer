@@ -10,6 +10,12 @@
    <templateId root="2.16.840.1.113883.10.20.22.1.2"/>
    <templateId root="2.16.840.1.113883.10.20.22.1.1"/>
    <languageCode code="en"/>
+    <relatedDocument typeCode="XFRM">
+        <parentDocument>
+            <id extension="NONE"
+                root="NONE" />
+        </parentDocument>
+    </relatedDocument>
    <component>
       <structuredBody>
          <component>

@@ -2,6 +2,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tbx="http://trilliumbridge.org/xform"
     exclude-result-prefixes="xs tbx" version="2.0" xpath-default-namespace="urn:hl7-org:v3">
     <xsl:output media-type="xml" indent="yes"/>
+    <xsl:strip-space elements="*"/>
     <xsl:include href="TBTransformations.xsl"/>
 
     <xsl:param name="transform">../tbxform/FP7-SA610756-D3.1.xml</xsl:param>
@@ -28,7 +29,7 @@
         Note that this node doesn't get called in an xspec scenario, as the document is intercepted by the 
         xspec package itself.  Anything that is done here must also be repeated in the clinical document map
         ======================================================== -->
-    <xsl:template match="/">
+    <xsl:template match="/" xml:space="default">
         <xsl:apply-templates>
             <xsl:with-param name="mapcontext" select="tbx:opendoc($transform)/tbx:map" tunnel="yes"/>
         </xsl:apply-templates>
@@ -62,15 +63,12 @@
         <xsl:param name="absbase" as="xs:string" tunnel="yes"/>
         <xsl:param name="relbase" as="xs:string" tunnel="yes"/>
         <xsl:param name="mapcontext" as="element()" tunnel="yes"/>
-        <xsl:param name="globals" tunnel="yes"></xsl:param>
+        <xsl:param name="globals" as="element()*" tunnel="yes"/>
         <xsl:param name="matchonly" tunnel="yes" select="false()"/>
-        <xsl:param name="ignore" tunnel="yes"/>
-
 
         <xsl:variable name="abspath" select="tbx:refmark($absbase, .)"/>
         <xsl:variable name="relpath" select="tbx:refmark($relbase, .)"/>
         <xsl:variable name="context" select="current()"/>
-
 
         <!-- Debugging -->
         <xsl:if test="$showpaths">
@@ -95,19 +93,18 @@
             select="$mapcontext/tbx:transform[tbx:path=$relpath and not(@global=true())]"/>
         
         <!-- Global match rules are saved and carried across levels. -->
-        <xsl:variable name="localglobs" select="$mapcontext/tbx:transform[@global=true()]"/>
-        <xsl:variable name="allglobals" select="if($globals) then ($globals union $localglobs) else $localglobs"/>
+        <xsl:variable name="allglobals" select="$globals union $mapcontext/tbx:transform[@global=true()]"/>
         <xsl:variable name="globalmatch" select="$allglobals[ends-with($relpath, tbx:path)]"/>
             
         
         <!-- Error checks -->
-        <xsl:if test="boolean($contextmatch) and boolean($transformmatch)">
+       <!-- <xsl:if test="boolean($contextmatch) and boolean($transformmatch)">
             <xsl:message terminate="yes">
                 <xsl:text>Same path specified for both a transform and a context</xsl:text>
                 <xsl:copy-of select="$transformmatch"/>
                 <xsl:copy-of select="$contextmatch"/>
             </xsl:message>
-        </xsl:if>
+        </xsl:if>-->
         <xsl:if test="boolean($globalmatch) and boolean($transformmatch)">
             <xsl:message terminate="yes">
                 <xsl:text>Same path specified for both a norma transform and a global transform</xsl:text>
@@ -116,8 +113,8 @@
             </xsl:message>
         </xsl:if>
         
-        <xsl:choose>
-            <xsl:when test="$globalmatch">
+
+            <xsl:if test="$globalmatch">
                 <xsl:for-each select="$globalmatch/tbx:transformation">
                     <xsl:value-of select="tbx:debugging(concat('GLOBAL TRANSFORM: ', @name))"/>
                     <xsl:call-template name="applyTransformations">
@@ -127,9 +124,9 @@
                         <xsl:with-param name="matchonly" select="false()" tunnel="yes"/>
                     </xsl:call-template>
                 </xsl:for-each>
-            </xsl:when>
+            </xsl:if>
             
-            <xsl:when test="$transformmatch">
+            <xsl:if test="$transformmatch">
                 <!-- transformation node(s).  Apply the transformation rule -->
                 <xsl:choose>
                     <!-- If this isn't the first match, ignore it completely -->
@@ -144,7 +141,9 @@
                         <xsl:for-each select="$transformmatch/tbx:transformation">
                             <xsl:value-of select="tbx:debugging(concat('TRANSFORM: ', @name))"/>
                             <xsl:call-template name="applyTransformations">
-                                <xsl:with-param name="context" tunnel="yes" select="$contexts"/>
+                                <xsl:with-param name="absbase" select="$abspath" tunnel="yes"/>
+                                <xsl:with-param name="context" tunnel="yes" select="$context"/>
+                                <xsl:with-param name="relbase" select="$relpath" tunnel="yes"/>
                                 <xsl:with-param name="globals" select="$allglobals" tunnel="yes"/>
                                 <xsl:with-param name="mapcontext" select="$mapcontext" tunnel="yes"/>
                                 <xsl:with-param name="matchonly" select="false()" tunnel="yes"/>
@@ -152,9 +151,9 @@
                         </xsl:for-each>
                     </xsl:otherwise>
                 </xsl:choose>
-            </xsl:when>
+            </xsl:if>
             
-            <xsl:when test="$contextmatch">
+            <xsl:if test="$contextmatch">
                 <!-- Context node.  Set a new base context and descend -->
                 <xsl:value-of select="tbx:debugging('CONTEXT')"/>
                 <xsl:choose>
@@ -181,9 +180,9 @@
                         </xsl:copy>
                     </xsl:otherwise>
                 </xsl:choose>
-            </xsl:when>
+            </xsl:if>
             
-            <xsl:otherwise>
+            <xsl:if test="not($globalmatch or $contextmatch or $transformmatch)">
                 <!-- No context or transformation entry. Copy the node if $matchonly is false and proceed -->
                 <xsl:choose>
                     <xsl:when test="$matchonly">
@@ -207,8 +206,8 @@
                         </xsl:copy>
                     </xsl:otherwise>
                 </xsl:choose>
-            </xsl:otherwise> 
-        </xsl:choose>
+            </xsl:if>
+        
         
     </xsl:template>
 

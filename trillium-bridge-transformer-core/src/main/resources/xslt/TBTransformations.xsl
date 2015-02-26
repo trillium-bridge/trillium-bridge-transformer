@@ -6,6 +6,7 @@
     <xsl:include href="CTS2Access.xsl"/>
 
     <xsl:param name="debug" select="false()"/>
+    
 
     <!-- ============================= mapLanguage ==========================
         Map a language code.  Parameters:
@@ -156,6 +157,7 @@
             </xsl:choose>
         </xsl:for-each>
     </xsl:template>
+    
 
     <!-- ============================= addNode  ==========================
         Add the supplied node in at the current context
@@ -163,24 +165,54 @@
         $arg/@before=true - block to add before content
         $arg/@after=true - block to add after content
         ====================================================================== -->
-    <xsl:template name="addNode" xmlns="urn:hl7-org:v3">
+    <xsl:template name="addNode">
         <xsl:param name="context" tunnel="yes"/>
-        <xsl:param name="ignore" tunnel="yes" select="false()"/>
+
         <xsl:variable name="args" select="."/>
+        <xsl:if test="$args/@outside">
+                <xsl:for-each select="$args/tbx:arg[@before]/*">
+                    <xsl:copy>
+                        <xsl:apply-templates select="@* | node()" mode="substitute"/>
+                    </xsl:copy>
+                </xsl:for-each>
+        </xsl:if>
         <xsl:for-each select="$context">
             <xsl:copy>
-                <xsl:for-each select="$args/tbx:arg[@before]">
+                <xsl:for-each select="$args[not(@outside)]/tbx:arg[@before]">
                     <xsl:copy-of select="*"/>
                 </xsl:for-each>
-                <xsl:apply-templates select="node() | @*" mode="inside">
+                <xsl:apply-templates select="*" mode="inside">
                     <xsl:with-param name="ignore" select="true()" tunnel="yes"/>
                 </xsl:apply-templates>
-                <xsl:for-each  select="$args/tbx:arg[@after]">
+                <xsl:for-each  select="$args[not(@outside)]/tbx:arg[@after]">
                     <xsl:copy-of select="*"/>
                 </xsl:for-each>
             </xsl:copy>
         </xsl:for-each>
-        
+        <xsl:if test="$args/@outside">
+            <xsl:for-each select="$args/tbx:arg[@after]/*">
+                <xsl:copy>
+                    <xsl:apply-templates select="@* | node()" mode="substitute"/>
+                </xsl:copy>
+            </xsl:for-each>
+        </xsl:if>
+    </xsl:template>
+    
+    <xsl:template match="@*" mode="substitute">
+        <xsl:param name="id" tunnel="yes"/>
+        <xsl:attribute name="{name()}" select="replace(replace(., '\{id/@extension\}', if($id) then ($id/@extension) else 'NONE'), '\{id/@root\}', if($id) then ($id/@root) else 'NONE')"/>
+                                                                  
+    </xsl:template>
+    
+    <xsl:template match="text()" mode="substitute">
+        <xsl:param name="id" tunnel="yes"/>
+        <xsl:value-of select="replace(., '\{id\}', if($id) then $id/@extension else 'NONE')"/>
+    </xsl:template>
+    
+    <xsl:template match="*" mode="substitute">
+        <xsl:copy>
+            <xsl:apply-templates select="@* | node()" mode="substitute"/>
+        </xsl:copy>
     </xsl:template>
 
     <!-- ============================= replaceNode  ==========================
@@ -345,6 +377,7 @@
     <!-- ============================ -->
     <xsl:template name="applyTransformations">
         <xsl:param name="context" tunnel="yes"/>
+
         <xsl:choose>
             <xsl:when test="@name='changeTemplateRoots'">
                 <xsl:call-template name="changeTemplateRoots"/>
