@@ -67,6 +67,12 @@
             label="Blood Pressure in CCD" />
     </x:scenario>
     
+    <x:scenario label="Paolo">
+        <x:context select="document('../../../test/resources/sampleinput/epsos/RTD_PS_Paolo_IT_L3_v2.xml')"/>
+        <x:expect  select="document('../../../test/resources/sampleoutput/ccda/RTD_PS_Paolo_IT_L3_v2_CCD.xml')"
+            label="PAOLO in CCD" />
+    </x:scenario>
+    
     
     
     
