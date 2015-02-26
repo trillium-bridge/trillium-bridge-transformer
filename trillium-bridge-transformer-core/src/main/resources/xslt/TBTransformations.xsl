@@ -74,16 +74,16 @@
     <!-- ============================= changeTemplateRoots ===================
         Remove and add template identifiers.  Parameters:
         $context - the elements to be mapped
-        $args/@map - the name of the value set mapping entry
+        $args/@fromid - a template identifier to remove
+        $args/@toid - a template identifier to add
         ====================================================================== -->
-
     <xsl:template name="changeTemplateRoots">
         <xsl:param name="context" tunnel="yes"/>
         
         <xsl:variable name="args" select="."/>
         <xsl:for-each select="$context">
             <xsl:choose>
-                <xsl:when test="$args/tbx:entry[@fromid=current()/@root]">
+                <xsl:when test="$args/tbx:arg[@fromid=current()/@root]">
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:copy>
@@ -92,7 +92,7 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:for-each>
-        <xsl:for-each select="$args/tbx:entry/@toid">
+        <xsl:for-each select="$args/tbx:arg/@toid">
             <xsl:element name="templateId" namespace="urn:hl7-org:v3">
                 <xsl:attribute name="root" select="."/>
             </xsl:element>
@@ -111,13 +111,13 @@
         <xsl:variable name="args" select="."/>
         <xsl:for-each select="$context">
             <xsl:choose>
-                <xsl:when test="$args/tbx:entry[tbx:fromcode/code=current()]">
-                    <xsl:if test="$args/tbx:entry[tbx:fromcode/code=current()]/tbx:tocode">
-                        <xsl:copy-of select="$args/tbx:entry[tbx:fromcode/code=current()]/tbx:tocode/code"/>
+                <xsl:when test="$args/tbx:arg[tbx:fromcode/code=current()]">
+                    <xsl:if test="$args/tbx:arg[tbx:fromcode/code=current()]/tbx:tocode">
+                        <xsl:copy-of select="$args/tbx:arg[tbx:fromcode/code=current()]/tbx:tocode/code"/>
                     </xsl:if>
                 </xsl:when>
-                <xsl:when test="not($args/tbx:entry/tbx:fromcode)">
-                    <xsl:copy-of select="$args/tbx:entry/tbx:tocode/code"/>
+                <xsl:when test="not($args/tbx:arg/tbx:fromcode)">
+                    <xsl:copy-of select="$args/tbx:arg/tbx:tocode/code"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:copy>
@@ -142,13 +142,13 @@
         <xsl:variable name="args" select="."/>
         <xsl:for-each select="$context">
             <xsl:choose>
-                <xsl:when test="$args/tbx:entry[tbx:fromValue/value=current()] and not($debug)">
-                    <xsl:if test="$args/tbx:entry[tbx:fromValue/value=current()]/tbx:toValue">
-                        <xsl:copy-of select="$args/tbx:entry[tbx:fromValue/value=current()]/tbx:toValue/value"/>
+                <xsl:when test="$args/tbx:arg[tbx:fromValue/value=current()] and not($debug)">
+                    <xsl:if test="$args/tbx:arg[tbx:fromValue/value=current()]/tbx:toValue">
+                        <xsl:copy-of select="$args/tbx:arg[tbx:fromValue/value=current()]/tbx:toValue/value"/>
                     </xsl:if>
                 </xsl:when>
-                <xsl:when test="not($args/tbx:entry/tbx:fromValue) or $debug">
-                    <xsl:copy-of select="$args/tbx:entry/tbx:toValue/value"/>
+                <xsl:when test="not($args/tbx:arg/tbx:fromValue) or $debug">
+                    <xsl:copy-of select="$args/tbx:arg/tbx:toValue/value"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:copy>
@@ -159,31 +159,55 @@
         </xsl:for-each>
     </xsl:template>
     
+    <!-- ============================= addNode  ==========================
+        Add the supplied node in at the current context
+        $context - the elements to be mapped
+        $arg/frompath - node to remove
+        $arg/frompath/@insert - add 
+        $arg/topath   - node to add.
+        ====================================================================== -->
+    <xsl:template name="addNode" xmlns="urn:hl7-org:v3">
+        <xsl:param name="context" tunnel="yes"/>
+        <xsl:param name="inadd" tunnel="yes" select="false()"/>
+        <xsl:if test="$inadd=false()">
+             <xsl:variable name="args" select="."/>
+             <xsl:if test="not($args/@atend=true())">
+                 <xsl:copy-of select="$args/tbx:arg/*"/>
+             </xsl:if>
+             <xsl:if test="not($args/@nocopy=true())">
+                 <xsl:apply-templates select="$context" mode="inside">
+                     <xsl:with-param name="inadd" select="true()" tunnel="yes"/>
+                 </xsl:apply-templates>
+             </xsl:if>
+             <xsl:if test="$args/@atend=true()">
+                 <xsl:copy-of select="$args/tbx:arg/*"/>
+             </xsl:if>
+        </xsl:if>
+    </xsl:template>
+    
     <!-- ============================= replaceNode  ==========================
         Replace the from node with the to node
         $context - the elements to be mapped
-        $entry/frompath - node to remove
-        $entry/topath   - node to add
-        
-        NOTE: The debug reference below checks whether we are doing unit tests.
-        Unit tests (for some reason) leave white space in the inputs so some comparisons fail.
+        $arg/frompath - node to remove
+        $arg/frompath/@insert - add 
+        $arg/topath   - node to add.
         ====================================================================== -->
     <xsl:template name="replaceNode" xmlns="urn:hl7-org:v3">
         <xsl:param name="context" tunnel="yes"/>
         <xsl:variable name="args" select="."/>
         <xsl:for-each select="$context">
             <!-- If we are adding content, copy the original -->
-            <xsl:if test="boolean($args/tbx:entry/@add)">
+            <xsl:if test="boolean($args/tbx:arg/@add)">
                 <xsl:copy-of select="."/>
             </xsl:if>
             <xsl:choose>
-                <xsl:when test="(not(boolean($args/tbx:entry/@add) or boolean($args/tbx:entry/@insert)) and $args/tbx:entry[tbx:fromValue/.=current()]) and not($debug)">
-                    <xsl:if test="$args/tbx:entry[tbx:fromValue/.=current()]/tbx:toValue">
-                        <xsl:copy-of select="$args/tbx:entry[tbx:fromValue/.=current()]/tbx:toValue/*"/>
+                <xsl:when test="(not(boolean($args/tbx:arg/@add) or boolean($args/tbx:arg/@insert)) and $args/tbx:arg[tbx:fromValue/.=current()]) and not($debug)">
+                    <xsl:if test="$args/tbx:arg[tbx:fromValue/.=current()]/tbx:toValue">
+                        <xsl:copy-of select="$args/tbx:arg[tbx:fromValue/.=current()]/tbx:toValue/*"/>
                     </xsl:if>
                 </xsl:when>
-                <xsl:when test="((boolean($args/tbx:entry/@add) or boolean($args/tbx:entry/@insert)) and not($args/tbx:entry/tbx:fromValue)) or $debug">
-                    <xsl:copy-of select="$args/tbx:entry/tbx:toValue/*"/>
+                <xsl:when test="((boolean($args/tbx:arg/@add) or boolean($args/tbx:arg/@insert)) and not($args/tbx:arg/tbx:fromValue)) or $debug">
+                    <xsl:copy-of select="$args/tbx:arg/tbx:toValue/*"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:copy>
@@ -191,12 +215,16 @@
                     </xsl:copy>
                 </xsl:otherwise>
             </xsl:choose>
-            <xsl:if test="boolean($args/tbx:entry/@insert)">
+            <xsl:if test="boolean($args/tbx:arg/@insert)">
                 <xsl:copy-of select="."/>
             </xsl:if>
         </xsl:for-each>
     </xsl:template>
 
+    <!-- ============================= translateText  ==========================
+        Translate a text node
+        $context - the elements to be mapped
+        ====================================================================== -->
     <xsl:template name="translateText" xmlns="urn:hl7-org:v3">
         <xsl:param name="context" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
@@ -224,14 +252,14 @@
     <xsl:template match="text()" priority="2" mode="faketranslate">
         <xsl:param name="transdoc"/>
         <xsl:variable name="translations" select="document($transdoc)/tbx:translations"/>
-        <xsl:variable name="src" select="."/>
+        <xsl:variable name="src" select="normalize-space(.)"/>
 
         <xsl:choose>
             <xsl:when test="$translations/tbx:entry[tbx:source=$src]">
                 <xsl:value-of select="$translations/tbx:entry[tbx:source=$src]/tbx:target"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="replace($src, '[a-zA-Z]', 't')"/>
+                <xsl:value-of select="replace(., '[a-zA-Z]', 't')"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -246,19 +274,24 @@
         </xsl:copy>
     </xsl:template>
 
-    <!-- ============================= newid  ==========================
+    <!-- ============================= newid  ================================
         Generate a new identifier for the supplied node
         $context - id elements to be replaced
         ====================================================================== -->
     <xsl:template name="newid">
         <xsl:param name="context" tunnel="yes"/>
         <xsl:for-each select="$context">
-            <id xmlns="urn:hl7-org:v3" extension="{concat(@extension, '.1.1')}">
+            <id xmlns="urn:hl7-org:v3" extension="{concat(@extension, '.1')}">
                 <xsl:apply-templates select="@* except @extension" mode="inside"/>
             </id>
         </xsl:for-each>
     </xsl:template>
 
+    <!-- ============================= translateTitle  ================================
+        Translate a title node.  Really a simplified translate text
+        $context - id elements to be replaced
+        $language - from languate
+        ====================================================================== -->
     <xsl:template name="translateTitle">
         <xsl:param name="context" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
@@ -281,7 +314,7 @@
     </xsl:template>
     
     <!-- ============================= mapValueSetAndMove  ===================
-        Map the code referenced by the entry/sourcecode parameter and create a code at the current reference point
+        Map the code referenced by the arg/sourcecode parameter and create a code at the current reference point
         $context - id elements to be replaced
         
         ====================================================================== -->
@@ -290,14 +323,14 @@
         <xsl:variable name="args" select="."/>
         
         <xsl:variable name="innercontext" as="element()">
-            <entry invertable="false" xmlns="http://trilliumbridge.org/xform">
-                <frompath>/</frompath>
-                <entry>
+            <context invertable="false" xmlns="http://trilliumbridge.org/xform">
+                <root>/</root>
+                <transform>
                     <documentation>Embedded context for mapValueSetAndMove</documentation>
-                    <frompath><xsl:value-of select="$args/tbx:entry/tbx:source"/></frompath>
+                    <path><xsl:value-of select="$args/tbx:arg/tbx:source"/></path>
                     <transformation name="mapValueSet" map="{$args/@map}"/>
-                </entry>
-            </entry>
+                </transform>
+            </context>
         </xsl:variable>
 
         <xsl:apply-templates select="$context/.." mode="inside">
@@ -339,8 +372,8 @@
             <xsl:when test="@name='mapValueSetAndMove'">
                 <xsl:call-template name="mapValueSetAndMove"/>
             </xsl:when>
-            <xsl:when test="@name='replaceNode'">
-                <xsl:call-template name="replaceNode"/>
+            <xsl:when test="@name='addNode'">
+                <xsl:call-template name="addNode"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:comment>UNMAPPED FUNCTION: <xsl:value-of select="@name"/></xsl:comment>

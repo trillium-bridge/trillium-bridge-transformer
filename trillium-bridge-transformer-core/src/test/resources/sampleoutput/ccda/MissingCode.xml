@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClinicalDocument xmlns="urn:hl7-org:v3"
+                  xmlns:epsos="urn:epsos-org:ep:medication"
+                  xmlns:ext="urn:hl7-EE-DL-Ext:v1"
+                  xmlns:mif="urn:hl7-org:v3/mif"
+                  xmlns:ns="urn:hl7-org:v3"
+                  xmlns:sch="http://www.ascc.net/xml/schematron"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="urn:hl7-org:v3 file:///C:/Consulenze/_epSOS/Deliverables/WP3.9/3.9.1/Appendix%20B%20-%20Semantics/B1%20-%20Guidelines%20epSOS%20Schema/presc_disp_0625/presc_disp_0625/CDASchema/CDA_extended.xsd">
+   <templateId root="2.16.840.1.113883.10.20.22.1.2"/>
+   <templateId root="2.16.840.1.113883.10.20.22.1.1"/>
+   <languageCode code="en"/>
+   <component>
+      <structuredBody>
+         <component>
+            <section>
+               <templateId root="2.16.840.1.113883.10.20.22.2.6"/>
+               <templateId root="2.16.840.1.113883.10.20.22.2.6.1"/>
+               <code code="48765-2"
+                     displayName="Allergies, adverse reactions, alerts"
+                     codeSystem="2.16.840.1.113883.6.1"
+                     codeSystemName="LOINC">
+                  <translation displayName="Allergie, Reazioni Avverse ed Allarmi"/>
+               </code>
+               <title>Allergies, adverse reactions, alerts</title>
+               <entry typeCode="DRIV">
+                  <act classCode="ACT" moodCode="EVN">
+                     <templateId root="2.16.840.1.113883.10.20.22.4.30"/>
+                     <id extension="allergy.1" root="2.16.470.1.100.1.1.1000.990.1"/>
+                     <code code="48765-2"
+                           codeSystem="2.16.840.1.113883.6.1"
+                           codeSystemName="LOINC"
+                           displayName="Allergies, adverse reactions, alerts"/>
+                     <statusCode code="active"/>
+                     <effectiveTime>
+                        <low value="199501"/>
+                     </effectiveTime>
+                     <entryRelationship inversionInd="false" typeCode="SUBJ">
+                        <observation classCode="OBS" moodCode="EVN">
+                           <templateId root="2.16.840.1.113883.10.20.22.4.7"/>
+                           <participant typeCode="CSM">
+                              <participantRole classCode="MANU">
+                                 <playingEntity classCode="MMAT">
+                                    <code displayName="erythromycin" nullFlavor="NI">
+                                       <translation code="D10AF02"
+                                                    displayName="erythromycin"
+                                                    codeSystem="2.16.840.1.113883.6.73"
+                                                    codeSystemName="Anatomical Therapeutic Chemical">
+                                          <originalText mediaType="text/xml">
+                                             <reference value="#agn_des.all.1"/>
+                                          </originalText>
+                                       </translation>
+                                    </code>
+                                 </playingEntity>
+                              </participantRole>
+                           </participant>
+                        </observation>
+                     </entryRelationship>
+                  </act>
+               </entry>
+            </section>
+         </component>
+      </structuredBody>
+   </component>
+</ClinicalDocument>
