@@ -65,11 +65,8 @@
                     <xs:documentation>Map the from language code to the to language code.</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
-            <xs:enumeration value="replaceNode">
-                <xs:annotation>
-                    <xs:documentation>Replace an arbitrary node</xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
+            <xs:enumeration value="addNode"/>
+            <xs:enumeration value="removeNode"/>
             <xs:enumeration value="mapValueSetAndMove">
                 <xs:annotation>
                     <xs:documentation>Map the parameter source code and put the result in the target path</xs:documentation>
@@ -84,7 +81,7 @@
                 contexts will be what is returned from the previous process </xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="entry" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="arg" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute name="name" type="tbxform:TRANSFORMATIONS"/>
         <xs:anyAttribute processContents="lax">
@@ -93,6 +90,22 @@
             </xs:annotation>
         </xs:anyAttribute>
     </xs:complexType>
+    
+    <xs:complexType name="context">
+        <xs:annotation>
+            <xs:documentation>A node that establishes the context for the child map and context entries</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="documentation" type="xs:string" minOccurs="0"/>
+            <xs:element name="root" type="xs:string" minOccurs="1" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>The path to match in the source document</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="transform" type="tbxform:mapEntry" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="context" type="tbxform:context" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
 
     <xs:complexType name="mapEntry">
         <xs:annotation>
@@ -100,28 +113,23 @@
         </xs:annotation>
         <xs:sequence>
             <xs:element name="documentation" type="xs:string" minOccurs="0"/>
-            <xs:element name="frompath" type="xs:string" minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="path" type="xs:string" minOccurs="1" maxOccurs="unbounded">
                 <xs:annotation>
                     <xs:documentation>The path(s) to match in the source document</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="topath" type="xs:string" minOccurs="0" maxOccurs="unbounded">
-                <xs:annotation>
-                    <xs:documentation>The path(s) to insert into the target document. If absent no transformation is possible. </xs:documentation>
-                </xs:annotation>
-            </xs:element>
-            <xs:element name="transformation" type="tbxform:function" minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="transformation" type="tbxform:function" minOccurs="1" maxOccurs="unbounded">
                 <xs:annotation>
                     <xs:documentation>The set of functions that, when applied sequentially, transform the target of the frompath to a node for the
                         topath</xs:documentation>
                 </xs:annotation>
             </xs:element>
             <xs:element name="requirement" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-            <xs:element name="entry" type="tbxform:mapEntry" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
-        <xs:attribute name="invertable" use="required" type="xs:boolean">
+        <xs:attribute name="global" use="optional" type="xs:boolean">
             <xs:annotation>
-                <xs:documentation>If True, from and to can be switched -- the conversion is bidirectional</xs:documentation>
+                <xs:documentation>True means that this set of transformations applies to all descendant nodes
+                    in the context</xs:documentation>
             </xs:annotation>
         </xs:attribute>
         <xs:attribute name="reference" use="optional" type="xs:string">
@@ -136,7 +144,7 @@
             <xs:documentation>The outermost map entry, with the from/to information</xs:documentation>
         </xs:annotation>
         <xs:complexContent>
-            <xs:extension base="tbxform:mapEntry">
+            <xs:extension base="tbxform:context">
                 <xs:attribute name="from" use="required" type="tbxform:ROOTS">
                     <xs:annotation>
                         <xs:documentation>The type of the FROM document</xs:documentation>
@@ -145,12 +153,6 @@
                 <xs:attribute name="to" use="required" type="tbxform:ROOTS">
                     <xs:annotation>
                         <xs:documentation>The type of the TO document</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
-                <xs:attribute name="globals" use="optional" type="xs:boolean">
-                    <xs:annotation>
-                        <xs:documentation>True means that this set of transformations applies to all descendant nodes 
-                            ending in the supplied from/to name</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
             </xs:extension>
@@ -163,7 +165,7 @@
             <xs:documentation>A collection of mapEntries to transform a source document into a target</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="entry" type="tbxform:outerMapEntry" maxOccurs="unbounded"/>
+            <xs:element name="context" type="tbxform:outerMapEntry" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
 

@@ -2,599 +2,73 @@
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
     stylesheet="../../main/resources/xslt/TBXform.xsl">
     <x:param name="transform">../../resources/tbxform/FP7-SA610756-D3.1.xml</x:param>
-    <x:scenario label="Paolo Header">
-        <x:context>
-            <ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:ext="urn:hl7-EE-DL-Ext:v1" xmlns:mif="urn:hl7-org:v3/mif"
-                xmlns:ns="urn:hl7-org:v3" xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                xsi:schemaLocation="urn:hl7-org:v3 file:///C:/Consulenze/_epSOS/Deliverables/WP3.9/3.9.1/Appendix%20B%20-%20Semantics/B1%20-%20Guidelines%20epSOS%20Schema/presc_disp_0625/presc_disp_0625/CDASchema/CDA_extended.xsd">
-                <typeId extension="POCD_HD000040" root="2.16.840.1.113883.1.3"/>
-                <templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.1.3"/>
-                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.1.1"/>
-                <id extension="TB1" root="2.16.840.1.113883.19.5.99999.1"/>
-                <code code="60591-5" displayName="Patient Summary" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
-                    <translation displayName="Profilo Sanitario Sintentico"/>
-                </code>
-                <title>Profilo Sanitario Sintentico (Patient Summary)</title>
-                <effectiveTime value="20140501"/>
-                <confidentialityCode code="D" codeSystem="2.16.840.1.113883.5.25" codeSystemName="Confidentiality"/>
-                <languageCode code="it-IT"/>
-            </ClinicalDocument>
-        </x:context>
-        <x:expect label="RTD_PS_Paolo_IT_as_CCD">
-            <ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:ext="urn:hl7-EE-DL-Ext:v1" xmlns:mif="urn:hl7-org:v3/mif"
-                xmlns:ns="urn:hl7-org:v3" xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                xsi:schemaLocation="urn:hl7-org:v3 file:///C:/Consulenze/_epSOS/Deliverables/WP3.9/3.9.1/Appendix%20B%20-%20Semantics/B1%20-%20Guidelines%20epSOS%20Schema/presc_disp_0625/presc_disp_0625/CDASchema/CDA_extended.xsd">
-                <typeId extension="POCD_HD000040" root="2.16.840.1.113883.1.3"/>
-                <templateId root="2.16.840.1.113883.10.20.22.1.2"/>
-                <templateId root="2.16.840.1.113883.10.20.22.1.1"/>
-                <id extension="TB1.1.1" root="2.16.840.1.113883.19.5.99999.1"/>
-                <code codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" code="34133-9" displayName="Summarization of Episode Note">
-                    <translation code="60591-5" displayName="Patient Summary" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
-                        <translation displayName="Profilo Sanitario Sintentico"/>
-                    </translation>
-                </code>
-                <title>Patient Summary</title>
-                <effectiveTime value="20140501"/>
-                <confidentialityCode code="D" codeSystem="2.16.840.1.113883.5.25" codeSystemName="Confidentiality"/>
-                <languageCode code="en"/>
-            </ClinicalDocument>
-        </x:expect>
+    <x:scenario label="PaoloHeader">
+        <x:context select="document('../../../test/resources/sampleinput/epsos/PaoloHeader.xml')"/>
+        <x:expect  select="document('../../../test/resources/sampleoutput/ccda/PaoloHeader.xml')"
+            label="Paolo Header in CCD" />
     </x:scenario>
+  
     <x:scenario label="recordTarget">
-        <x:context>
-            <ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:ext="urn:hl7-EE-DL-Ext:v1" xmlns:mif="urn:hl7-org:v3/mif"
-                xmlns:ns="urn:hl7-org:v3" xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                xsi:schemaLocation="urn:hl7-org:v3 file:///C:/Consulenze/_epSOS/Deliverables/WP3.9/3.9.1/Appendix%20B%20-%20Semantics/B1%20-%20Guidelines%20epSOS%20Schema/presc_disp_0625/presc_disp_0625/CDASchema/CDA_extended.xsd">
-                <templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.1.3"/>
-                <languageCode code="it-IT"/>
-                <recordTarget>
-                    <patientRole>
-                        <id extension="CRRPLA47H13A794V" root="2.16.840.1.113883.2.9.4.3.2"/>
-                        <addr>
-                            <streetAddressLine>Via Sotto i Ponti, 15</streetAddressLine>
-                            <city>Bergamo</city>
-                            <postalCode>24121</postalCode>
-                            <state nullFlavor="UNK"/>
-                            <country>IT</country>
-                        </addr>
-                        <telecom nullFlavor="NI"/>
-                        <patient>
-                            <name>
-                                <family>CERRUTI</family>
-                                <given>PAOLO</given>
-                            </name>
-                            <administrativeGenderCode code="M" displayName="Male" codeSystem="2.16.840.1.113883.5.1" codeSystemName="AdministrativeGender"
-                                codeSystemVersion="913-20091020">
-                                <translation displayName="Maschio"/>
-                            </administrativeGenderCode>
-                            <birthTime value="19470613"/>
-                        </patient>
-                    </patientRole>
-                </recordTarget>
-            </ClinicalDocument>
-        </x:context>
-        <x:expect label="recordtarget as CCD">
-            <ClinicalDocument xmlns="urn:hl7-org:v3"
-                xmlns:epsos="urn:epsos-org:ep:medication"
-                xmlns:ext="urn:hl7-EE-DL-Ext:v1"
-                xmlns:mif="urn:hl7-org:v3/mif"
-                xmlns:ns="urn:hl7-org:v3"
-                xmlns:sch="http://www.ascc.net/xml/schematron"
-                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                xsi:schemaLocation="urn:hl7-org:v3 file:///C:/Consulenze/_epSOS/Deliverables/WP3.9/3.9.1/Appendix%20B%20-%20Semantics/B1%20-%20Guidelines%20epSOS%20Schema/presc_disp_0625/presc_disp_0625/CDASchema/CDA_extended.xsd">
-                <templateId root="2.16.840.1.113883.10.20.22.1.2"/>
-                <templateId root="2.16.840.1.113883.10.20.22.1.1"/>
-                <languageCode code="en"/>
-                <recordTarget>
-                    <patientRole>
-                        <id extension="CRRPLA47H13A794V" root="2.16.840.1.113883.2.9.4.3.2"/>
-                        <addr>
-                            <streetAddressLine>Via Sotto i Ponti, 15</streetAddressLine>
-                            <city>Bergamo</city>
-                            <postalCode>24121</postalCode>
-                            <state nullFlavor="UNK"/>
-                            <country>IT</country>
-                        </addr>
-                        <telecom nullFlavor="NI"/>
-                        <patient>
-                            <name>
-                                <family>CERRUTI</family>
-                                <given>PAOLO</given>
-                            </name>
-                            <administrativeGenderCode code="M"
-                                displayName="Male"
-                                codeSystem="2.16.840.1.113883.5.1"
-                                codeSystemName="AdministrativeGender"
-                                codeSystemVersion="913-20091020">
-                                <translation displayName="Maschio"/>
-                            </administrativeGenderCode>
-                            <birthTime value="19470613"/>
-                        </patient>
-                    </patientRole>
-                </recordTarget>
-            </ClinicalDocument>
-        </x:expect>
+        <x:context select="document('../../../test/resources/sampleinput/epsos/recordTarget.xml')"/>
+        <x:expect  select="document('../../../test/resources/sampleoutput/ccda/recordtarget.xml')"
+            label="Record Target in CCD" />
     </x:scenario>
 
     <x:scenario label="allergies-adverse-reactions-alerts">
-        <x:context>
-            <ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:ext="urn:hl7-EE-DL-Ext:v1" xmlns:mif="urn:hl7-org:v3/mif"
-                xmlns:ns="urn:hl7-org:v3" xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                xsi:schemaLocation="urn:hl7-org:v3 file:///C:/Consulenze/_epSOS/Deliverables/WP3.9/3.9.1/Appendix%20B%20-%20Semantics/B1%20-%20Guidelines%20epSOS%20Schema/presc_disp_0625/presc_disp_0625/CDASchema/CDA_extended.xsd">
-                <templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.1.3"/>
-                <languageCode code="it-IT"/>
-                <component>
-                    <structuredBody>
-                        <component>
-                            <section>
-                                <templateId root="2.16.840.1.113883.10.20.1.2"/>
-                                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.3.13"/>
-                                <code code="48765-2" displayName="Allergies, adverse reactions, alerts" codeSystem="2.16.840.1.113883.6.1"
-                                    codeSystemName="LOINC">
-                                    <translation displayName="Allergie, Reazioni Avverse ed Allarmi"/>
-                                </code>
-                                <title>Allergie, Reazioni Avverse ed Allarmi</title>
-                                <entry typeCode="DRIV">
-                                    <act classCode="ACT" moodCode="EVN">
-                                        <templateId root="2.16.840.1.113883.10.20.1.27"/>
-                                        <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5.1"/>
-                                        <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5.3"/>
-                                        <id extension="allergy.1" root="2.16.470.1.100.1.1.1000.990.1"/>
-                                        <code nullFlavor="NA"/>
-                                        <statusCode code="active"/>
-                                        <effectiveTime>
-                                            <low value="199501"/>
-                                        </effectiveTime>
-                                        <entryRelationship inversionInd="false" typeCode="SUBJ">
-                                            <observation classCode="OBS" moodCode="EVN">
-                                                <templateId root="2.16.840.1.113883.10.20.1.18"/>
-                                                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.6"/>
-                                                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5"/>
-                                                <templateId root="2.16.840.1.113883.10.20.1.28"/>
-                                                <id extension="allergy.1.obs.1" root="2.16.470.1.100.1.1.1000.990.1"/>
-                                                <code code="416098002" displayName="Drug allergy" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
-                                                <text>
-                                                    <reference value="#allergy.1"/>
-                                                </text>
-                                                <statusCode code="completed"/>
-                                                <effectiveTime>
-                                                    <low value="199501"/>
-                                                </effectiveTime>
-                                                <value xsi:type="CD">
-                                                    <originalText>
-                                                        <reference value="#allergy.1"/>
-                                                    </originalText>
-                                                </value>
-                                            </observation>
-                                        </entryRelationship>
-                                    </act>
-                                </entry>
-                            </section>
-                        </component>
-                    </structuredBody>
-                </component>
-            </ClinicalDocument>
-        </x:context>
-        <x:expect label="allergies-adverse-reactions-alerts as CCD">
-            <ClinicalDocument xmlns="urn:hl7-org:v3"
-                xmlns:epsos="urn:epsos-org:ep:medication"
-                xmlns:ext="urn:hl7-EE-DL-Ext:v1"
-                xmlns:mif="urn:hl7-org:v3/mif"
-                xmlns:ns="urn:hl7-org:v3"
-                xmlns:sch="http://www.ascc.net/xml/schematron"
-                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                xsi:schemaLocation="urn:hl7-org:v3 file:///C:/Consulenze/_epSOS/Deliverables/WP3.9/3.9.1/Appendix%20B%20-%20Semantics/B1%20-%20Guidelines%20epSOS%20Schema/presc_disp_0625/presc_disp_0625/CDASchema/CDA_extended.xsd">
-                <templateId root="2.16.840.1.113883.10.20.22.1.2"/>
-                <templateId root="2.16.840.1.113883.10.20.22.1.1"/>
-                <languageCode code="en"/>
-                <component>
-                    <structuredBody>
-                        <component>
-                            <section>
-                                <templateId root="2.16.840.1.113883.10.20.22.2.6"/>
-                                <templateId root="2.16.840.1.113883.10.20.22.2.6.1"/>
-                                <code code="48765-2"
-                                    displayName="Allergies, adverse reactions, alerts"
-                                    codeSystem="2.16.840.1.113883.6.1"
-                                    codeSystemName="LOINC">
-                                    <translation displayName="Allergie, Reazioni Avverse ed Allarmi"/>
-                                </code>
-                                <title>Allergies, adverse reactions, alerts</title>
-                                <entry typeCode="DRIV">
-                                    <act classCode="ACT" moodCode="EVN">
-                                        <templateId root="2.16.840.1.113883.10.20.22.4.30"/>
-                                        <id extension="allergy.1" root="2.16.470.1.100.1.1.1000.990.1"/>
-                                        <code code="48765-2"
-                                            codeSystem="2.16.840.1.113883.6.1"
-                                            codeSystemName="LOINC"
-                                            displayName="Allergies, adverse reactions, alerts"/>
-                                        <statusCode code="active"/>
-                                        <effectiveTime>
-                                            <low value="199501"/>
-                                        </effectiveTime>
-                                        <entryRelationship inversionInd="false" typeCode="SUBJ">
-                                            <observation classCode="OBS" moodCode="EVN">
-                                                <templateId root="2.16.840.1.113883.10.20.22.4.7"/>
-                                                <id extension="allergy.1.obs.1" root="2.16.470.1.100.1.1.1000.990.1"/>
-                                                <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"/>
-                                                <text>
-                                                    <reference value="#allergy.1"/>
-                                                </text>
-                                                <statusCode code="completed"/>
-                                                <effectiveTime>
-                                                    <low value="199501"/>
-                                                </effectiveTime>
-                                                <value xsi:type="CD"
-                                                    code="416098002"
-                                                    displayName="Drug allergy"
-                                                    codeSystem="2.16.840.1.113883.6.96"
-                                                    codeSystemName="SNOMED CT"/>
-                                            </observation>
-                                        </entryRelationship>
-                                    </act>
-                                </entry>
-                            </section>
-                        </component>
-                    </structuredBody>
-                </component>
-            </ClinicalDocument>
-        </x:expect>
+        <x:context select="document('../../../test/resources/sampleinput/epsos/recordTarget.xml')"/>
+        <x:expect  select="document('../../../test/resources/sampleoutput/ccda/recordtarget.xml')"
+            label="Allergies adverse reactions alerts in CCD" />
     </x:scenario>
 
     <x:scenario label="Test of text translation">
-        <x:context>
-            <ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:ext="urn:hl7-EE-DL-Ext:v1" xmlns:mif="urn:hl7-org:v3/mif"
-                xmlns:ns="urn:hl7-org:v3" xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                xsi:schemaLocation="urn:hl7-org:v3 file:///C:/Consulenze/_epSOS/Deliverables/WP3.9/3.9.1/Appendix%20B%20-%20Semantics/B1%20-%20Guidelines%20epSOS%20Schema/presc_disp_0625/presc_disp_0625/CDASchema/CDA_extended.xsd">
-                <templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.1.3"/>
-                <languageCode code="it-IT"/>
-                <component>
-                    <structuredBody>
-                        <component>
-                            <section>
-                                <templateId root="2.16.840.1.113883.10.20.1.2"/>
-                                <text>
-                                    <table border="1">
-                                        <tbody>
-                                            <tr>
-                                                <th>Tipo Allergia</th>
-                                                <th>Tipo di Reazione</th>
-                                            </tr>
-                                            <tr ID="allergy.1">
-                                                <td>
-                                                    <content ID="typ.all.1">Allergia a farmaco</content>: <content ID="agn_des.all.1"> Eritromicina </content>
-                                                    (ATC: <content ID="agn_cod.all.1"> D10AF02</content>), dal <content ID="on.all.1">1995</content>
-                                                </td>
-                                                <td ID="rea.all.1">Eruzione allergica</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </text>
-                            </section>
-                        </component>
-                    </structuredBody>
-                </component>
-            </ClinicalDocument>
-        </x:context>
-        <x:expect label="Translated text">
-            <ClinicalDocument xmlns="urn:hl7-org:v3"
-                xmlns:epsos="urn:epsos-org:ep:medication"
-                xmlns:ext="urn:hl7-EE-DL-Ext:v1"
-                xmlns:mif="urn:hl7-org:v3/mif"
-                xmlns:ns="urn:hl7-org:v3"
-                xmlns:sch="http://www.ascc.net/xml/schematron"
-                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                xsi:schemaLocation="urn:hl7-org:v3 file:///C:/Consulenze/_epSOS/Deliverables/WP3.9/3.9.1/Appendix%20B%20-%20Semantics/B1%20-%20Guidelines%20epSOS%20Schema/presc_disp_0625/presc_disp_0625/CDASchema/CDA_extended.xsd">
-                <templateId root="2.16.840.1.113883.10.20.22.1.2"/>
-                <templateId root="2.16.840.1.113883.10.20.22.1.1"/>
-                <languageCode code="en"/>
-                <component>
-                    <structuredBody>
-                        <component>
-                            <section>
-                                <templateId root="2.16.840.1.113883.10.20.22.2.6"/>
-                                <templateId root="2.16.840.1.113883.10.20.22.2.6.1"/>
-                                <text>
-                                    <paragraph>Original Text</paragraph>
-                                    <br/>
-                                    <text>
-                                        <table border="1">
-                                            <tbody>
-                                                <tr>
-                                                    <th>Tipo Allergia</th>
-                                                    <th>Tipo di Reazione</th>
-                                                </tr>
-                                                <tr ID="allergy.1">
-                                                    <td>
-                                                        <content ID="typ.all.1">Allergia a farmaco</content>: <content ID="agn_des.all.1"> Eritromicina </content>
-                                                        (ATC: <content ID="agn_cod.all.1"> D10AF02</content>), dal <content ID="on.all.1">1995</content>
-                                                    </td>
-                                                    <td ID="rea.all.1">Eruzione allergica</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </text>
-                                    <paragraph>Warning: this translation has been generated by a software component</paragraph>
-                                    <br/>
-                                    <table border="1">
-                                        <tbody>
-                                            <tr>
-                                                <th>Reaction Type</th>
-                                                <th>Clinical Manifestation</th>
-                                            </tr>
-                                            <tr ID="allergy.1">
-                                                <td>
-                                                    <content ID="typ.all.1">tttttttt t ttttttt</content>: <content ID="agn_des.all.1"> tttttttttttt </content>
-                                                    (ttt: <content ID="agn_cod.all.1"> t10tt02</content>), ttt <content ID="on.all.1">1995</content>
-                                                </td>
-                                                <td ID="rea.all.1">tttttttt ttttttttt</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <br/>
-                                </text>
-                            </section>
-                        </component>
-                    </structuredBody>
-                </component>
-            </ClinicalDocument>
-            
-        </x:expect>
-
+        <x:context select="document('../../../test/resources/sampleinput/epsos/TranslateText.xml')"/>
+        <x:expect  select="document('../../../test/resources/sampleoutput/ccda/TranslateText.xml')"
+            label="Text Translation Italian to English" />
     </x:scenario>
 
     <x:scenario label="Test Missing Code">
-        <x:context>
-            <ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:ext="urn:hl7-EE-DL-Ext:v1" xmlns:mif="urn:hl7-org:v3/mif"
-                xmlns:ns="urn:hl7-org:v3" xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                xsi:schemaLocation="urn:hl7-org:v3 file:///C:/Consulenze/_epSOS/Deliverables/WP3.9/3.9.1/Appendix%20B%20-%20Semantics/B1%20-%20Guidelines%20epSOS%20Schema/presc_disp_0625/presc_disp_0625/CDASchema/CDA_extended.xsd">
-                <templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.1.3"/>
-                <languageCode code="it-IT"/>
-                <component>
-                    <structuredBody>
-                        <component>
-                            <section>
-                                <templateId root="2.16.840.1.113883.10.20.1.2"/>
-                                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.3.13"/>
-                                <code code="48765-2" displayName="Allergies, adverse reactions, alerts" codeSystem="2.16.840.1.113883.6.1"
-                                    codeSystemName="LOINC">
-                                    <translation displayName="Allergie, Reazioni Avverse ed Allarmi"/>
-                                </code>
-                                <title>Allergie, Reazioni Avverse ed Allarmi</title>
-                                <entry typeCode="DRIV">
-                                    <act classCode="ACT" moodCode="EVN">
-                                        <templateId root="2.16.840.1.113883.10.20.1.27"/>
-                                        <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5.1"/>
-                                        <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5.3"/>
-                                        <id extension="allergy.1" root="2.16.470.1.100.1.1.1000.990.1"/>
-                                        <code nullFlavor="NA"/>
-                                        <statusCode code="active"/>
-                                        <effectiveTime>
-                                            <low value="199501"/>
-                                        </effectiveTime>
-                                        <entryRelationship inversionInd="false" typeCode="SUBJ">
-                                            <observation classCode="OBS" moodCode="EVN">
-                                                <templateId root="2.16.840.1.113883.10.20.1.18"/>
-                                                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.6"/>
-                                                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5"/>
-                                                <templateId root="2.16.840.1.113883.10.20.1.28"/>
-                                                <participant typeCode="CSM">
-                                                    <participantRole classCode="MANU">
-                                                        <playingEntity classCode="MMAT">
-                                                            <code code="D10AF02" displayName="erythromycin" codeSystem="2.16.840.1.113883.6.73"
-                                                                codeSystemName="Anatomical Therapeutic Chemical">
-                                                                <originalText mediaType="text/xml">
-                                                                    <reference value="#agn_des.all.1"/>
-                                                                </originalText>
-                                                            </code>
-                                                        </playingEntity>
-                                                    </participantRole>
-                                                </participant>
-                                            </observation>
-                                        </entryRelationship>
-                                    </act>
-                                </entry>
-                            </section>
-                        </component>
-                    </structuredBody>
-                </component>
-            </ClinicalDocument>
-        </x:context>
-        <x:expect label="Missing Code">
-            <ClinicalDocument xmlns="urn:hl7-org:v3"
-                xmlns:epsos="urn:epsos-org:ep:medication"
-                xmlns:ext="urn:hl7-EE-DL-Ext:v1"
-                xmlns:mif="urn:hl7-org:v3/mif"
-                xmlns:ns="urn:hl7-org:v3"
-                xmlns:sch="http://www.ascc.net/xml/schematron"
-                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                xsi:schemaLocation="urn:hl7-org:v3 file:///C:/Consulenze/_epSOS/Deliverables/WP3.9/3.9.1/Appendix%20B%20-%20Semantics/B1%20-%20Guidelines%20epSOS%20Schema/presc_disp_0625/presc_disp_0625/CDASchema/CDA_extended.xsd">
-                <templateId root="2.16.840.1.113883.10.20.22.1.2"/>
-                <templateId root="2.16.840.1.113883.10.20.22.1.1"/>
-                <languageCode code="en"/>
-                <component>
-                    <structuredBody>
-                        <component>
-                            <section>
-                                <templateId root="2.16.840.1.113883.10.20.22.2.6"/>
-                                <templateId root="2.16.840.1.113883.10.20.22.2.6.1"/>
-                                <code code="48765-2"
-                                    displayName="Allergies, adverse reactions, alerts"
-                                    codeSystem="2.16.840.1.113883.6.1"
-                                    codeSystemName="LOINC">
-                                    <translation displayName="Allergie, Reazioni Avverse ed Allarmi"/>
-                                </code>
-                                <title>Allergies, adverse reactions, alerts</title>
-                                <entry typeCode="DRIV">
-                                    <act classCode="ACT" moodCode="EVN">
-                                        <templateId root="2.16.840.1.113883.10.20.22.4.30"/>
-                                        <id extension="allergy.1" root="2.16.470.1.100.1.1.1000.990.1"/>
-                                        <code code="48765-2"
-                                            codeSystem="2.16.840.1.113883.6.1"
-                                            codeSystemName="LOINC"
-                                            displayName="Allergies, adverse reactions, alerts"/>
-                                        <statusCode code="active"/>
-                                        <effectiveTime>
-                                            <low value="199501"/>
-                                        </effectiveTime>
-                                        <entryRelationship inversionInd="false" typeCode="SUBJ">
-                                            <observation classCode="OBS" moodCode="EVN">
-                                                <templateId root="2.16.840.1.113883.10.20.22.4.7"/>
-                                                <participant typeCode="CSM">
-                                                    <participantRole classCode="MANU">
-                                                        <playingEntity classCode="MMAT">
-                                                            <code displayName="erythromycin" nullFlavor="NI">
-                                                                <translation code="D10AF02"
-                                                                    displayName="erythromycin"
-                                                                    codeSystem="2.16.840.1.113883.6.73"
-                                                                    codeSystemName="Anatomical Therapeutic Chemical">
-                                                                    <originalText mediaType="text/xml">
-                                                                        <reference value="#agn_des.all.1"/>
-                                                                    </originalText>
-                                                                </translation>
-                                                            </code>
-                                                        </playingEntity>
-                                                    </participantRole>
-                                                </participant>
-                                            </observation>
-                                        </entryRelationship>
-                                    </act>
-                                </entry>
-                            </section>
-                        </component>
-                    </structuredBody>
-                </component>
-            </ClinicalDocument>
-        </x:expect>
+        <x:context select="document('../../../test/resources/sampleinput/epsos/MissingCode.xml')"/>
+        <x:expect  select="document('../../../test/resources/sampleoutput/ccda/MissingCode.xml')"
+            label="Missing Code Transformation" />
     </x:scenario>
     
     <x:scenario label="Test EPSOS Participant">
-        <x:context>
-            <ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:ext="urn:hl7-EE-DL-Ext:v1" xmlns:mif="urn:hl7-org:v3/mif"
-                xmlns:ns="urn:hl7-org:v3" xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                xsi:schemaLocation="urn:hl7-org:v3 file:///C:/Consulenze/_epSOS/Deliverables/WP3.9/3.9.1/Appendix%20B%20-%20Semantics/B1%20-%20Guidelines%20epSOS%20Schema/presc_disp_0625/presc_disp_0625/CDASchema/CDA_extended.xsd">
-                <templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.1.3"/>
-                <languageCode code="it-IT"/>
-                <component>
-                    <structuredBody>
-                        <component>
-                            <section>
-                                <templateId root="2.16.840.1.113883.10.20.1.2"/>
-                                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.3.13"/>
-                                <code code="48765-2" displayName="Allergies, adverse reactions, alerts" codeSystem="2.16.840.1.113883.6.1"
-                                    codeSystemName="LOINC">
-                                    <translation displayName="Allergie, Reazioni Avverse ed Allarmi"/>
-                                </code>
-                                <title>Allergie, Reazioni Avverse ed Allarmi</title>
-                                <entry typeCode="DRIV">
-                                    <act classCode="ACT" moodCode="EVN">
-                                        <templateId root="2.16.840.1.113883.10.20.1.27"/>
-                                        <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5.1"/>
-                                        <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5.3"/>
-                                        <id extension="allergy.1" root="2.16.470.1.100.1.1.1000.990.1"/>
-                                        <code nullFlavor="NA"/>
-                                        <statusCode code="active"/>
-                                        <effectiveTime>
-                                            <low value="199501"/>
-                                        </effectiveTime>
-                                        <entryRelationship inversionInd="false" typeCode="SUBJ">
-                                            <observation classCode="OBS" moodCode="EVN">
-                                                <templateId root="2.16.840.1.113883.10.20.1.18"/>
-                                                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.6"/>
-                                                <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5"/>
-                                                <templateId root="2.16.840.1.113883.10.20.1.28"/>
-                                                <participant typeCode="CSM">
-                                                    <participantRole classCode="MANU">
-                                                        <playingEntity classCode="MMAT">
-                                                            <code code="A02BX07" displayName="gefarnate" codeSystem="2.16.840.1.113883.6.73"
-                                                                codeSystemName="Anatomical Therapeutic Chemical">
-                                                                <originalText mediaType="text/xml">
-                                                                    <reference value="#agn_des.all.1"/>
-                                                                </originalText>
-                                                            </code>
-                                                        </playingEntity>
-                                                    </participantRole>
-                                                </participant>
-                                            </observation>
-                                        </entryRelationship>
-                                    </act>
-                                </entry>
-                            </section>
-                        </component>
-                    </structuredBody>
-                </component>
-            </ClinicalDocument>
-        </x:context>
-        <x:expect label="EPSOS Participant as CCD">
-            <ClinicalDocument xmlns="urn:hl7-org:v3"
-                xmlns:epsos="urn:epsos-org:ep:medication"
-                xmlns:ext="urn:hl7-EE-DL-Ext:v1"
-                xmlns:mif="urn:hl7-org:v3/mif"
-                xmlns:ns="urn:hl7-org:v3"
-                xmlns:sch="http://www.ascc.net/xml/schematron"
-                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                xsi:schemaLocation="urn:hl7-org:v3 file:///C:/Consulenze/_epSOS/Deliverables/WP3.9/3.9.1/Appendix%20B%20-%20Semantics/B1%20-%20Guidelines%20epSOS%20Schema/presc_disp_0625/presc_disp_0625/CDASchema/CDA_extended.xsd">
-                <templateId root="2.16.840.1.113883.10.20.22.1.2"/>
-                <templateId root="2.16.840.1.113883.10.20.22.1.1"/>
-                <languageCode code="en"/>
-                <component>
-                    <structuredBody>
-                        <component>
-                            <section>
-                                <templateId root="2.16.840.1.113883.10.20.22.2.6"/>
-                                <templateId root="2.16.840.1.113883.10.20.22.2.6.1"/>
-                                <code code="48765-2"
-                                    displayName="Allergies, adverse reactions, alerts"
-                                    codeSystem="2.16.840.1.113883.6.1"
-                                    codeSystemName="LOINC">
-                                    <translation displayName="Allergie, Reazioni Avverse ed Allarmi"/>
-                                </code>
-                                <title>Allergies, adverse reactions, alerts</title>
-                                <entry typeCode="DRIV">
-                                    <act classCode="ACT" moodCode="EVN">
-                                        <templateId root="2.16.840.1.113883.10.20.22.4.30"/>
-                                        <id extension="allergy.1" root="2.16.470.1.100.1.1.1000.990.1"/>
-                                        <code code="48765-2"
-                                            codeSystem="2.16.840.1.113883.6.1"
-                                            codeSystemName="LOINC"
-                                            displayName="Allergies, adverse reactions, alerts"/>
-                                        <statusCode code="active"/>
-                                        <effectiveTime>
-                                            <low value="199501"/>
-                                        </effectiveTime>
-                                        <entryRelationship inversionInd="false" typeCode="SUBJ">
-                                            <observation classCode="OBS" moodCode="EVN">
-                                                <templateId root="2.16.840.1.113883.10.20.22.4.7"/>
-                                                <participant typeCode="CSM">
-                                                    <participantRole classCode="MANU">
-                                                        <playingEntity classCode="MMAT">
-                                                            <code codeSystem="2.16.840.1.113883.3.26.1.5"
-                                                                codeSystemName="NDF-RT"
-                                                                code="N0000168575"
-                                                                displayName="Gefarnate">
-                                                                <translation code="A02BX07"
-                                                                    displayName="gefarnate"
-                                                                    codeSystem="2.16.840.1.113883.6.73"
-                                                                    codeSystemName="Anatomical Therapeutic Chemical">
-                                                                    <originalText mediaType="text/xml">
-                                                                        <reference value="#agn_des.all.1"/>
-                                                                    </originalText>
-                                                                </translation>
-                                                            </code>
-                                                        </playingEntity>
-                                                    </participantRole>
-                                                </participant>
-                                            </observation>
-                                        </entryRelationship>
-                                    </act>
-                                </entry>
-                            </section>
-                        </component>
-                    </structuredBody>
-                </component>
-            </ClinicalDocument>
-        </x:expect>
+        <x:context select="document('../../../test/resources/sampleinput/epsos/EPSOSParticipant.xml')"/>
+        <x:expect  select="document('../../../test/resources/sampleoutput/ccda/EPSOSParticipant.xml')"
+            label="EPSOS Participant in CCD" />
     </x:scenario>
+    
+    <x:scenario label="History of Medication Use">
+        <x:context select="document('../../../test/resources/sampleinput/epsos/historyofmedicationuse.xml')"/>
+        <x:expect  select="document('../../../test/resources/sampleoutput/ccda/historyofmedicationuse.xml')"
+            label="History of Medication Use CCD" />
+    </x:scenario>
+    
+    <x:scenario label="History of Medical Device Use">
+        <x:context select="document('../../../test/resources/sampleinput/epsos/historyofmedicaldeviceuse.xml')"/>
+        <x:expect  select="document('../../../test/resources/sampleoutput/ccda/historyofmedicaldeviceuse.xml')"
+            label="History of Medical Device use in CCD" />
+    </x:scenario>
+    <x:scenario label="History of Procedures">
+        <x:context select="document('../../../test/resources/sampleinput/epsos/HistoryOfProcedures.xml')"/>
+        <x:expect  select="document('../../../test/resources/sampleoutput/ccda/HistoryOfProcedures.xml')"
+            label="History of Procedures in CCD" />
+    </x:scenario>
+    
+    <x:scenario label="History of Past Illness">
+        <x:context select="document('../../../test/resources/sampleinput/epsos/HistoryOfPastIllness.xml')"/>
+        <x:expect  select="document('../../../test/resources/sampleoutput/ccda/HistoryOfPastIllness.xml')"
+            label="History of Past Illness in CCD" />
+    </x:scenario>
+    
+    <x:scenario label="Blood Pressure">
+        <x:context select="document('../../../test/resources/sampleinput/epsos/BloodPressure.xml')"/>
+        <x:expect  select="document('../../../test/resources/sampleoutput/ccda/BloodPressure.xml')"
+            label="Blood Pressure in CCD" />
+    </x:scenario>
+    
+    
+    
     
    
 

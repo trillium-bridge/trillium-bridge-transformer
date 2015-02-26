@@ -6,6 +6,22 @@
         <target>Patient Summary</target>
     </entry>
     <entry>
+        <source>Eruzione allergica</source>
+        <target>Allergic rash</target>
+    </entry>
+    <entry>
+        <source>Eritromicina</source>
+        <target>Erythromycin</target>
+    </entry>
+    <entry>
+        <source>Appendicectomia</source>
+        <target>Appendicectomy</target>
+    </entry>
+    <entry>
+        <source>Tipo di Procedura</source>
+        <target>Type of Procedure</target>
+    </entry>
+    <entry>
         <source>Allergie, Reazioni Avverse ed Allarmi</source>
         <target>Allergies, adverse reactions, alerts</target>
     </entry>
@@ -92,6 +108,18 @@
     <entry>
         <source>Nome Farmaco</source>
         <target>Drug Name</target>
+    </entry>
+    <entry>
+        <source>Pressione Arteriosa Sistolica</source>
+        <target>Systolic Blood Pressure</target>
+    </entry>
+    <entry>
+        <source>Pressione Arteriosa Diastolica</source>
+        <target>Diastolic Blood Pressure</target>
+    </entry>
+    <entry>
+        <source>Data</source>
+        <target>Date</target>
     </entry>
     
 </translations>
