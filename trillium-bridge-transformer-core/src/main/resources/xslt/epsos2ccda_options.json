@@ -16,12 +16,5 @@
 	"optionName" : "translationbase",
         "optionType" : "STRING",
         "defaultValue" : "http://trilliumbridge.org"
-    },
-    /*{
-        "optionName" : "some_dropdown",
-        "optionType" : "ENUM",
-        "description" : "Dropdown options....",
-        "defaultValue" : "second",
-        "allowedValues" : ["first", "second", "third"]
-    }*/
+    }
 ]
