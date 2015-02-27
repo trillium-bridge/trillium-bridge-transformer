@@ -2,19 +2,26 @@
     {
         "optionName" : "nocomments",
         "optionType" : "BOOLEAN",
-        "description" : "Turn on/off XML comments",
+        "description" : "Don't transform comments",
+        "defaultValue" : "false"
+    },
+    {
+        "optionName" : "usebing",
+        "optionType" : "BOOLEAN",
+        "description" : "Use Microsoft Bing translator",
         "defaultValue" : "true"
     },
     {
-        "optionName" : "some_string",
+        "description" : "Bing translator gateway",
+	"optionName" : "translationbase",
         "optionType" : "STRING",
-        "description" : "Some string option..."
+        "defaultValue" : "http://trilliumbridge.org"
     },
-    {
+    /*{
         "optionName" : "some_dropdown",
         "optionType" : "ENUM",
         "description" : "Dropdown options....",
         "defaultValue" : "second",
         "allowedValues" : ["first", "second", "third"]
-    }
+    }*/
 ]
