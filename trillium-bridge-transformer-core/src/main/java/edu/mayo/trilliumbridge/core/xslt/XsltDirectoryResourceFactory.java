@@ -53,7 +53,7 @@ public class XsltDirectoryResourceFactory {
 			System.out.println(path);
 			Matcher m = xlatere.matcher(path);
 			if(m.matches()) {
-				return new ByteArrayResource( ("<string>" + translate(m.group(3), m.group(1), m.group(2)) + "</string>").getBytes());
+				return new ByteArrayResource( ("<string xmlns='http://schemas.microsoft.com/2003/10/Serialization'>" + translate(m.group(3), m.group(1), m.group(2)) + "</string>").getBytes());
 			}
             try {
                 return new UrlResource(path);
