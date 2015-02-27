@@ -5,7 +5,7 @@
     <xsl:strip-space elements="*"/>
     <xsl:include href="TBTransformations.xsl"/>
 
-    <xsl:param name="transform">../tbxform/FP7-SA610756-D3.1.xml</xsl:param>
+    <xsl:param name="transform">../tbxform/EPSOStoCCD.xml</xsl:param>
     <xsl:param name="from">epSOS</xsl:param>
     <xsl:param name="to">CCD</xsl:param>
     <xsl:param name="showpaths" select="false()"/>
@@ -130,8 +130,8 @@
                 <!-- transformation node(s).  Apply the transformation rule -->
                 <xsl:choose>
                     <!-- If this isn't the first match, ignore it completely -->
-                    <xsl:when test="boolean(preceding-sibling::*[name()=$context/name()])">
-                        <xsl:value-of select="tbx:debugging('TRANSFORM (succssor node)')"/>
+                    <xsl:when test="boolean(preceding-sibling::*[name()=$context/name()]) and not($context/name() = 'component')">
+                        <xsl:value-of select="tbx:debugging('TRANSFORM (successor node)')"/>
                     </xsl:when>
                     
                     <!-- Otherwise apply the transformations -->

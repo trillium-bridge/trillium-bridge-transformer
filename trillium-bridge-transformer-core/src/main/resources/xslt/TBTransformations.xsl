@@ -7,8 +7,11 @@
     <xsl:include href="CTS2Access.xsl"/>
 
     <xsl:param name="debug" select="false()"/>
-    <xsl:param name="translationbase">http://trilliumbridge.org</xsl:param>
+    <xsl:param name="translationbase">http://localhost:8099</xsl:param>
     <xsl:param name="usebing" select="true()"/>
+    
+    <xsl:variable name="textInFront" select="'^([a-zA-Z ]+).*'"/>
+    <xsl:variable name="textInBack" select="'.*([a-zA-Z]+)$'"/>
     
 
     <!-- ============================= mapLanguage ==========================
@@ -184,9 +187,7 @@
                 <xsl:for-each select="$args[not(@outside)]/tbx:arg[@before]">
                     <xsl:copy-of select="*"/>
                 </xsl:for-each>
-                <xsl:apply-templates select="*" mode="inside">
-                    <xsl:with-param name="ignore" select="true()" tunnel="yes"/>
-                </xsl:apply-templates>
+                <xsl:apply-templates select="*" mode="inside"/>
                 <xsl:for-each  select="$args[not(@outside)]/tbx:arg[@after]">
                     <xsl:copy-of select="*"/>
                 </xsl:for-each>
@@ -295,16 +296,27 @@
         <xsl:param name="translations" tunnel="yes"/>
         <xsl:param name="language" tunnel="yes"/>
         <xsl:variable name="src" select="normalize-space(.)"/>
+        <xsl:variable name="val">
+            <xsl:choose>
+                <xsl:when test="matches($src, $textInFront)">
+                    <xsl:value-of select="replace($src, $textInFront, '$1')"/>
+                </xsl:when>
+                <xsl:when test="matches($src, $textInBack)">
+                    <xsl:value-of select="replace($src, $textInBack, '$1')"/>
+                </xsl:when>
+                <xsl:otherwise/>
+            </xsl:choose>
+        </xsl:variable>
 
         <xsl:choose>
             <xsl:when test="$translations and $translations/tbx:entry[tbx:source=$src]">
                 <xsl:value-of select="$translations/tbx:entry[tbx:source=$src]/tbx:target"/>
             </xsl:when>
-            <xsl:when test="not($usebing)">
-                <xsl:value-of select="."/>
+            <xsl:when test="boolean($usebing) and string-length($val) > 0">
+                <xsl:value-of select="doc(concat($translationbase,'/from/', substring($language, 1, 2), '/to/', substring($tolanguage,1,2), '?text=', $src))/bx:string"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:value-of select="doc(concat($translationbase,'/from/', substring($language, 1, 2), '/to/', substring($tolanguage,1,2), '?text=', encode-for-uri($src)))/bx:string"/>
+                <xsl:value-of select="."/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -339,7 +351,7 @@
         <xsl:param name="language" tunnel="yes"/>
 
         <xsl:for-each select="$context">
-            <xsl:variable name="transdoc" select="concat('../translation/', $language, 'to', $tolanguage, '.xml')"/>
+            <xsl:variable name="transdoc" select="concat('../translation/', substring($language, 1, 2), 'to', $tolanguage, '.xml')"/>
             <xsl:variable name="translations" select="document($transdoc)/tbx:translations"/>
             <xsl:variable name="src" select="."/>
             <xsl:choose>
