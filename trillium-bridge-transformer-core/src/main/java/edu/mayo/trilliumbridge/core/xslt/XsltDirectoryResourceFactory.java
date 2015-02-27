@@ -1,12 +1,16 @@
 package edu.mayo.trilliumbridge.core.xslt;
 
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
+import org.springframework.core.io.*;
 
 import java.io.File;
 import java.net.MalformedURLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+
+import com.memetix.mst.language.Language;
+import com.memetix.mst.translate.Translate;
+
 
 /**
  */
@@ -15,6 +19,8 @@ public class XsltDirectoryResourceFactory {
     public static final String TBT_HOME_PROP = "TBT_HOME";
 
     public static final String TBT_CONF_DIR = "conf";
+
+	public static final Pattern xlatere = Pattern.compile("http://trilliumbridge.org/from/(\\p{Alpha}{2})/to/(\\p{Alpha}{2})\\?text=(.*)");
 
     private String envXsltDirOverride;
 
@@ -27,14 +33,35 @@ public class XsltDirectoryResourceFactory {
         }
     }
 
+	{
+		Translate.setClientId("TBXform");
+		Translate.setClientSecret("uIBJDNcc5K21BCsK/w2DBQNE4ezCebif0oyiIWAep0Y=");
+	}
+
+	protected String translate(String text, String from_language, String to_language) {
+
+		try {
+			return Translate.execute(text, Language.fromString(from_language), Language.fromString(to_language));
+		} catch (Exception e) {
+			return text;
+		}
+	}
+
     protected Resource getResource(String path) {
+
         if(path.startsWith("http:")) {
+			System.out.println(path);
+			Matcher m = xlatere.matcher(path);
+			if(m.matches()) {
+				return new ByteArrayResource( ("<string>" + translate(m.group(3), m.group(1), m.group(2)) + "</string>").getBytes());
+			}
             try {
                 return new UrlResource(path);
             } catch (MalformedURLException e) {
                 throw new RuntimeException(e);
             }
         } else if (this.envXsltDirOverride != null) {
+			System.out.println(this.envXsltDirOverride + File.separator + path);
             return new FileSystemResource(this.envXsltDirOverride + File.separator + path);
         } else {
             return new ClassPathResource(path);
