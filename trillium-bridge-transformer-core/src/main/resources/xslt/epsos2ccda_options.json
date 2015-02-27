@@ -12,8 +12,14 @@
         "defaultValue" : "true"
     },
     {
+      "optionName" : "tolanguage",
+      "optionType" : "STRING",
+      "description" : "Target Language",
+      "defaultValue" : "en"
+    },
+    {
         "description" : "Bing translator gateway",
-	"optionName" : "translationbase",
+        "optionName" : "translationbase",
         "optionType" : "STRING",
         "defaultValue" : "http://trilliumbridge.org"
     }

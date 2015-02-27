@@ -3,7 +3,9 @@ package edu.mayo.trilliumbridge.core.xslt;
 import org.springframework.core.io.*;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
+import java.net.URLDecoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -52,14 +54,16 @@ public class XsltDirectoryResourceFactory {
         if(path.startsWith("http:")) {
 			System.out.println(path);
 			Matcher m = xlatere.matcher(path);
-			if(m.matches()) {
-				return new ByteArrayResource( ("<string xmlns='http://schemas.microsoft.com/2003/10/Serialization'>" + translate(m.group(3), m.group(1), m.group(2)) + "</string>").getBytes());
-			}
-            try {
-                return new UrlResource(path);
-            } catch (MalformedURLException e) {
+			try {
+				if(m.matches())
+					return new ByteArrayResource( ("<string xmlns='http://schemas.microsoft.com/2003/10/Serialization'>" +
+							translate(URLDecoder.decode(m.group(3), "UTF-8"), m.group(1), m.group(2)) + "</string>").getBytes());
+				else
+                	return new UrlResource(path);
+            } catch (MalformedURLException | UnsupportedEncodingException e) {
                 throw new RuntimeException(e);
             }
+
         } else if (this.envXsltDirOverride != null) {
 			System.out.println(this.envXsltDirOverride + File.separator + path);
             return new FileSystemResource(this.envXsltDirOverride + File.separator + path);
