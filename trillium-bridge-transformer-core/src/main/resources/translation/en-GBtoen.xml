@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<translations xmlns="http://trilliumbridge.org/xform"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://trilliumbridge.org/xform ../schema/TBXform.xsd"
-    fromlanguage="en-GB" tolanguage="en">
-    <!-- Nothing gets changes -->
-</translations>
