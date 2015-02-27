@@ -79,6 +79,13 @@
             <version>9.6.0-4</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.memetix</groupId>
+            <artifactId>microsoft-translator-java-api</artifactId>
+            <version>0.6.2</version>
+            <type>jar</type>
+        </dependency>
+
         <!-- Test -->
         <dependency>
             <groupId>xmlunit</groupId>
