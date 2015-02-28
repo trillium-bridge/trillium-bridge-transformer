@@ -1,9 +1,15 @@
 [
     {
-        "optionName" : "nocomments",
+        "optionName" : "copycomments",
         "optionType" : "BOOLEAN",
-        "description" : "Don't transform comments",
-        "defaultValue" : "false"
+        "description" : "Include comments",
+        "defaultValue" : "true"
+    },
+    {
+      "optionName" : "copypi",
+      "optionType" : "BOOLEAN",
+      "description" : "Include processing instructions",
+      "defaultValue" : "true"
     },
     {
         "optionName" : "usebing",
