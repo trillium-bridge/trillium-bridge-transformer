@@ -65,8 +65,21 @@
                     <xs:documentation>Map the from language code to the to language code.</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
-            <xs:enumeration value="addNode"/>
-            <xs:enumeration value="removeNode"/>
+            <xs:enumeration value="addNode">
+                <xs:annotation>
+                    <xs:documentation>Add a node before or after the matched context</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="adjustEffectiveTime">
+                <xs:annotation>
+                    <xs:documentation>Change the structure of effectiveTime</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="changeAttribute">
+            <xs:annotation>
+                <xs:documentation>Change the value of an attribute</xs:documentation>
+            </xs:annotation>
+            </xs:enumeration>
             <xs:enumeration value="mapValueSetAndMove">
                 <xs:annotation>
                     <xs:documentation>Map the parameter source code and put the result in the target path</xs:documentation>
