@@ -106,7 +106,7 @@
                                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#transformOptions" aria-expanded="false" aria-controls="collapseExample">
                                     Transformation Parameters
                                 </button>
-                                <div id="transformOptions" class="collapse">
+                                <div id="transformOptions" class="expand">
                                     <div class="well">
 
                                         <c:forEach var="tuple" items="${options}">
