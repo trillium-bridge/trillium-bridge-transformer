@@ -31,7 +31,7 @@
             <x:param>en</x:param>
             <x:param>es</x:param>
         </x:call>
-        <x:expect label="trailing junk" select="'Como una aleación de aluminio (mg/DL) ___  '"/>
+        <x:expect label="trailing junk" select="'Como una aleación de aluminio (mg/dl) ___  '"/>
     </x:scenario>
     <x:scenario label="Embedding">
         <x:call function="tbx:translate">

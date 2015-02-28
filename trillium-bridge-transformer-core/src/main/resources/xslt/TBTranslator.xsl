@@ -7,9 +7,9 @@
     version="2.0">
     
     <xsl:param name="translationbase">http://localhost:8099</xsl:param>
-    <xsl:param name="usebing" select="false()"/>
+    <xsl:param name="usebing" select="true()"/>
     
-    <xsl:variable name="splitchunk" select="'(\P{L}*)([\p{L}\p{Zs}]+\p{L}\P{N})(.*)'"/>
+    <xsl:variable name="splitchunk" select="'(\P{L}*)(\p{L}[\p{L}\p{Zs}-]+\p{L}\p{P}?\P{N})(.*)'"/>
     
     <xsl:function name="tbx:trans" as="xs:string">
         <xsl:param name="translator"/>
@@ -25,7 +25,7 @@
                  <xsl:variable name="leading" select="replace($chunk, $splitchunk, '$1')"/>
                  <xsl:variable name="core" select="replace($chunk, $splitchunk, '$2')"/>
                  <xsl:variable name="trailing" select="replace($chunk, $splitchunk, '$3')"/>
-                 <xsl:value-of select="concat($leading, normalize-space(tbx:trans($translator, $core)), tbx:translateChunk($translator, $trailing))"/>
+                 <xsl:value-of select="concat($leading, tbx:trans($translator, $core), tbx:translateChunk($translator, $trailing))"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="$chunk"/>
