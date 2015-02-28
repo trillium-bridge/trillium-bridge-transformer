@@ -7,7 +7,7 @@
     version="2.0">
     
     <xsl:param name="translationbase">http://localhost:8099</xsl:param>
-    <xsl:param name="usebing" select="true()"/>
+    <xsl:param name="usebing" select="false()"/>
     
     <xsl:variable name="splitchunk" select="'(\P{L}*)([\p{L}\p{Zs}]+\p{L}\P{N})(.*)'"/>
     
@@ -39,7 +39,7 @@
         <xsl:param name="fromlanguage" as="xs:string"/>
         <xsl:param name="tolanguage" as="xs:string"/>
         <xsl:choose>
-            <xsl:when test="string-length(normalize-space($text))">
+            <xsl:when test="$usebing and string-length(normalize-space($text))">
                 <xsl:variable name="translator" select="concat($translationbase, '/from/', substring($fromlanguage, 1,2), '/to/', substring($tolanguage, 1, 2))"/>
                 <xsl:value-of select="tbx:translateChunk($translator, $text)"/>
             </xsl:when>
