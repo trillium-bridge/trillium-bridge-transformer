@@ -97,7 +97,7 @@
                                     <button type="button" class="btn active">XML</button>
                                     <button type="button" class="btn">HTML</button>
                                     <!-- PDF conversion currently disabled -->
-                                    <button type="button" class="btn disabled" rel="tooltip" data-placement="right" title="PDF Currenlty Unavailable">PDF</button>
+                                    <button type="button" class="btn disabled" rel="tooltip" data-placement="right" title="PDF Currently Unavailable">PDF</button>
                                 </div>
                             </div>
                             <input type="hidden" id="formatOverride" name="formatOverride" value="XML"/>
@@ -115,7 +115,7 @@
                                                 <c:forEach var="option" items="${tuple.options}">
                                                     <div>
                                                         <label>
-                                                            <span>${option.optionName}: </span>
+                                                            <span>${option.description}: </span>
                                                             <c:if test="${option.optionType == 'BOOLEAN'}">
                                                                 <input class="transformOptionCheckBox"
                                                                        type="checkbox"
