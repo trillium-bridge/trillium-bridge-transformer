@@ -52,12 +52,11 @@ public class XsltDirectoryResourceFactory {
     protected Resource getResource(String path) {
 
         if(path.startsWith("http:")) {
-			System.out.println(path);
 			Matcher m = xlatere.matcher(path);
 			try {
 				if(m.matches())
-					return new ByteArrayResource( ("<string xmlns='http://schemas.microsoft.com/2003/10/Serialization'>" +
-							translate(URLDecoder.decode(m.group(3), "UTF-8"), m.group(1), m.group(2)) + "</string>").getBytes());
+					return new ByteArrayResource( ("<string xmlns='http://schemas.microsoft.com/2003/10/Serialization/'>" +
+							translate(URLDecoder.decode(m.group(3), "UTF-8"), m.group(1), m.group(2)) + "</string>").getBytes("UTF-8"));
 				else
                 	return new UrlResource(path);
             } catch (MalformedURLException | UnsupportedEncodingException e) {
@@ -65,7 +64,6 @@ public class XsltDirectoryResourceFactory {
             }
 
         } else if (this.envXsltDirOverride != null) {
-			System.out.println(this.envXsltDirOverride + File.separator + path);
             return new FileSystemResource(this.envXsltDirOverride + File.separator + path);
         } else {
             return new ClassPathResource(path);

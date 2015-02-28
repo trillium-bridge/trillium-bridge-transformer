@@ -23,15 +23,15 @@ jQuery(document).ready(function ($) {
         if(! action) {
             action = $("input[name='conversionType']").val();
         }
-
-        if(action === 'epsos2ccda') {
-            $('#epsosToCcdaOptions').show();
-            $('#ccdaToepsosOptions').hide();
-        }
-        if(action === 'ccda2epsos') {
-            $('#epsosToCcdaOptions').hide();
-            $('#ccdaToepsosOptions').show();
-        }
+        $('#epsosToCcdaOptions').show();
+        //if(action === 'epsos2ccda') {
+        //    $('#epsosToCcdaOptions').show();
+        //    $('#ccdaToepsosOptions').hide();
+        //}
+        //if(action === 'ccda2epsos') {
+        //    $('#epsosToCcdaOptions').hide();
+        //    $('#ccdaToepsosOptions').show();
+        //}
     }
 
     $('#tabs').tab();

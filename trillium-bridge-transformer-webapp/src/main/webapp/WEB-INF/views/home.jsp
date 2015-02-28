@@ -58,8 +58,10 @@
 
         <div class="hero-unit">
 
-            <span class="title"> Trillium Bridge Transformer</span>
+            <span class="title"><a href="https://github.com/trillium-bridge/trillium-bridge-transformer/blob/master/README.md">Trillium Bridge Transformer</a></span>
             <img class="trillium-bridge-img" src="http://www.hl7italia.it/trillium/index_file/image308.png"/>
+
+
 
             <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
                 <li class="active"><a href="#fileUpload" data-toggle="tab">File Upload</a></li>
@@ -97,7 +99,7 @@
                                     <button type="button" class="btn active">XML</button>
                                     <button type="button" class="btn">HTML</button>
                                     <!-- PDF conversion currently disabled -->
-                                    <button type="button" class="btn disabled" rel="tooltip" data-placement="right" title="PDF Currenlty Unavailable">PDF</button>
+                                    <button type="button" class="btn disabled" rel="tooltip" data-placement="right" title="PDF Currently Unavailable">PDF</button>
                                 </div>
                             </div>
                             <input type="hidden" id="formatOverride" name="formatOverride" value="XML"/>
@@ -106,7 +108,7 @@
                                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#transformOptions" aria-expanded="false" aria-controls="collapseExample">
                                     Transformation Parameters
                                 </button>
-                                <div id="transformOptions" class="collapse">
+                                <div id="transformOptions" class="expand">
                                     <div class="well">
 
                                         <c:forEach var="tuple" items="${options}">
@@ -115,7 +117,7 @@
                                                 <c:forEach var="option" items="${tuple.options}">
                                                     <div>
                                                         <label>
-                                                            <span>${option.optionName}: </span>
+                                                            <span>${option.description}: </span>
                                                             <c:if test="${option.optionType == 'BOOLEAN'}">
                                                                 <input class="transformOptionCheckBox"
                                                                        type="checkbox"
@@ -171,11 +173,7 @@
 
         </div>
 
-        <p>
-            <a class="btn btn-primary btn-large" href="https://github.com/trillium-bridge/trillium-bridge-transformer/blob/master/README.md">
-                Learn more
-            </a>
-        </p>
+
 
     </div>
 
