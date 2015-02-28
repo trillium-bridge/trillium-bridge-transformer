@@ -1,28 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tbx="http://trilliumbridge.org/xform"
-    exclude-result-prefixes="xs tbx mapVersion core mapServices codeSystem tbx bx" version="2.0" xmlns:mapVersion="http://www.omg.org/spec/CTS2/1.1/MapVersion"
+    exclude-result-prefixes="xs tbx mapVersion core mapServices codeSystem tbx" version="2.0" xmlns:mapVersion="http://www.omg.org/spec/CTS2/1.1/MapVersion"
     xmlns:mapServices="http://www.omg.org/spec/CTS2/1.1/MapEntryServices" xmlns:codeSystem="http://schema.omg.org/spec/CTS2/1.0/CodeSystem"
-    xmlns:bx="http://schemas.microsoft.com/2003/10/Serialization/"
     xmlns:core="http://www.omg.org/spec/CTS2/1.1/Core" xpath-default-namespace="urn:hl7-org:v3">
     <xsl:include href="CTS2Access.xsl"/>
+    <xsl:include href="TBTranslator.xsl"/>
 
+    <!-- If true, we are being invoked in a XSPEC scenario -->
     <xsl:param name="debug" select="false()"/>
-    <xsl:param name="translationbase">http://localhost:8099</xsl:param>
-    <xsl:param name="usebing" select="true()"/>
     
-    <xsl:variable name="textInFront" select="'^([a-zA-Z ]+).*'"/>
-    <xsl:variable name="textInBack" select="'.*([a-zA-Z]+)$'"/>
+    <!-- Target language -->
+    <xsl:param name="tolanguage">en</xsl:param>
     
-
     <!-- ============================= mapLanguage ==========================
         Map a language code.  Parameters:
         $language - the language of the document itself
         $toLanguage - the target transformation language
         $context - the elements to be mapped
         ====================================================================== -->
-    <xsl:param name="tolanguage">en</xsl:param>
-
-    <!-- Map a language code from the from language to the to language -->
     <xsl:template name="mapLanguage">
         <xsl:param name="language" tunnel="yes"/>
         <xsl:param name="context" tunnel="yes"/>
@@ -47,12 +42,11 @@
         $context - the elements to be mapped
         $args/@map - the name of the value set mapping entry
         
-        NOTE: $args is a parameter to allow testing
+        NOTE: $args is a parameter to allow testing.  It is a variable in a runtime environment.
         ====================================================================== -->
     <xsl:template name="mapValueSet">
         <xsl:param name="language" tunnel="yes"/>
         <xsl:param name="context" tunnel="yes"/>
-
 
         <xsl:param name="args" select="."/>
         <xsl:for-each select="$context">
@@ -145,6 +139,7 @@
     <xsl:template name="replaceValue" xmlns="urn:hl7-org:v3">
         <xsl:param name="context" tunnel="yes"/>
         <xsl:variable name="args" select="."/>
+        
         <xsl:for-each select="$context">
             <xsl:choose>
                 <xsl:when test="$args/tbx:arg[tbx:fromValue/value=current()] and not($debug)">
@@ -202,17 +197,19 @@
         </xsl:if>
     </xsl:template>
     
+    <!-- addNode with attribute value substitution -->
     <xsl:template match="@*" mode="substitute">
         <xsl:param name="id" tunnel="yes"/>
-        <xsl:attribute name="{name()}" select="replace(replace(., '\{id/@extension\}', if($id) then ($id/@extension) else 'NONE'), '\{id/@root\}', if($id) then ($id/@root) else 'NONE')"/>
-                                                                  
+        <xsl:attribute name="{name()}" select="replace(replace(., '\{id/@extension\}', if($id) then ($id/@extension) else 'NONE'), '\{id/@root\}', if($id) then ($id/@root) else 'NONE')"/>                                          
     </xsl:template>
     
+    <!-- addNode with text value substitution -->
     <xsl:template match="text()" mode="substitute">
         <xsl:param name="id" tunnel="yes"/>
         <xsl:value-of select="replace(., '\{id\}', if($id) then $id/@extension else 'NONE')"/>
     </xsl:template>
     
+    <!-- addNode recursive element copy -->
     <xsl:template match="*" mode="substitute">
         <xsl:copy>
             <xsl:apply-templates select="@* | node()" mode="substitute"/>
@@ -259,6 +256,7 @@
     <!-- ============================= translateText  ==========================
         Translate a text node
         $context - the elements to be mapped
+        $language - the source language of the translation
         ====================================================================== -->
     <xsl:template name="translateText" xmlns="urn:hl7-org:v3">
         <xsl:param name="context" tunnel="yes"/>
@@ -266,8 +264,6 @@
 
         <xsl:variable name="args" select="."/>
 
-        <!-- This is where we fill in a fancy translation service.
-             The arguments to translateText could include the address of some web based translation -->
         <xsl:choose>
             <xsl:when test="substring($language, 1, 2) != substring($tolanguage, 1, 2)">
                  <xsl:for-each select="$context">
@@ -279,7 +275,7 @@
                          <br/>
                          <xsl:variable name="transdoc" select="concat('../translation/',$language, 'to', $tolanguage, '.xml')"/>
                          <xsl:variable name="translations" select="if(doc-available($transdoc)) then document($transdoc)/tbx:translations else ''"/>
-                         <xsl:apply-templates mode="faketranslate">
+                         <xsl:apply-templates mode="translatetext">
                              <xsl:with-param name="translations" select="$translations" tunnel="yes"/>
                          </xsl:apply-templates>
                          <br/>
@@ -287,49 +283,28 @@
                  </xsl:for-each>
             </xsl:when>
             <xsl:otherwise>
+                <!-- Don't translate if the to and from language are the same -->
                 <xsl:copy-of select="$context"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template match="text()" priority="2" mode="faketranslate">
+    <xsl:template match="text()" priority="2" mode="translatetext">
         <xsl:param name="translations" tunnel="yes"/>
-        <xsl:param name="language" tunnel="yes"/>
-        <xsl:variable name="src" select="normalize-space(.)"/>
-        <xsl:variable name="val">
-            <xsl:choose>
-                <xsl:when test="matches($src, $textInFront)">
-                    <xsl:value-of select="replace($src, $textInFront, '$1')"/>
-                </xsl:when>
-                <xsl:when test="matches($src, $textInBack)">
-                    <xsl:value-of select="replace($src, $textInBack, '$1')"/>
-                </xsl:when>
-                <xsl:otherwise/>
-            </xsl:choose>
-        </xsl:variable>
-
-        <xsl:choose>
-            <xsl:when test="$translations and $translations/tbx:entry[tbx:source=$src]">
-                <xsl:value-of select="$translations/tbx:entry[tbx:source=$src]/tbx:target"/>
-            </xsl:when>
-            <xsl:when test="boolean($usebing) and string-length($val) > 0">
-                <xsl:value-of select="doc(concat($translationbase,'/from/', substring($language, 1, 2), '/to/', substring($tolanguage,1,2), '?text=', encode-for-uri($src)))/bx:string"/>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:value-of select="."/>
-            </xsl:otherwise>
-        </xsl:choose>
+        <xsl:param name="language" tunnel="yes"/>  
+        <xsl:value-of select="tbx:translate(., $language, $tolanguage)"/>
     </xsl:template>
-
-    <xsl:template match="node()" mode="faketranslate" xmlns="urn:hl7-org:v3" priority="1">
+    
+    <xsl:template match="node()" mode="translatetext" xmlns="urn:hl7-org:v3" priority="1">
         <xsl:copy>
             <xsl:apply-templates select="@*" mode="inside"/>
-            <xsl:apply-templates select="node()" mode="faketranslate"/>
+            <xsl:apply-templates select="node()" mode="translatetext"/>
         </xsl:copy>
     </xsl:template>
 
     <!-- ============================= newid  ================================
-        Generate a new identifier for the supplied node
+        Generate a new identifier for the supplied node by concatenating ".1" 
+        on to the extension identifier.  Parameters:
         $context - id elements to be replaced
         ====================================================================== -->
     <xsl:template name="newid">
@@ -342,9 +317,10 @@
     </xsl:template>
 
     <!-- ============================= translateTitle  ================================
-        Translate a title node.  Really a simplified translate text
+        Translate a title node.  First try the translation document and, if unavailable 
+        and the text translator is available, give it a try. Parameters
         $context - id elements to be replaced
-        $language - from languate
+        $language - from language
         ====================================================================== -->
     <xsl:template name="translateTitle">
         <xsl:param name="context" tunnel="yes"/>
@@ -352,12 +328,17 @@
 
         <xsl:for-each select="$context">
             <xsl:variable name="transdoc" select="concat('../translation/', substring($language, 1, 2), 'to', $tolanguage, '.xml')"/>
-            <xsl:variable name="translations" select="document($transdoc)/tbx:translations"/>
+            <xsl:variable name="translations" select="if(doc-available($transdoc)) then document($transdoc)/tbx:translations else ''"/>
             <xsl:variable name="src" select="."/>
             <xsl:choose>
-                <xsl:when test="$translations/tbx:entry[tbx:source=$src]">
+                <xsl:when test="$translations and $translations/tbx:entry[tbx:source=$src]">
                     <title xmlns="urn:hl7-org:v3">
                         <xsl:value-of select="$translations/tbx:entry[tbx:source=$src]/tbx:target"/>
+                    </title>
+                </xsl:when>
+                <xsl:when test="$usebing">
+                    <title xmlns="urn:hl7-org:v3">
+                        <xsl:value-of select="tbx:translate($src, $language, $tolanguage)"/>
                     </title>
                 </xsl:when>
                 <xsl:otherwise>
@@ -397,7 +378,7 @@
 
     </xsl:template>
 
-    <!-- ============================ -->
+    <!-- ============= Main Function Dispatcher =============== -->
     <xsl:template name="applyTransformations">
         <xsl:param name="context" tunnel="yes"/>
 

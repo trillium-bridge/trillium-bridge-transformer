@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
     xmlns:tbx="http://trilliumbridge.org/xform" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     stylesheet="../../main/resources/xslt/TBXform.xsl">
     
     <x:scenario label="uri to conceptreference">
@@ -71,6 +72,43 @@
                 </translation>
             </code>
         </x:expect>
+    </x:scenario>
+    
+    <x:scenario label="Service with embedded space">
+    <x:call template="mapValueSet">
+        <x:param name="absbase" select="''" tunnel="yes"/>
+        <x:param name="relbase" select="''" tunnel="yes"/>
+        <x:param name="id" select="id" tunnel="yes"/>
+        <x:param name="language" tunnel="yes">it-IT</x:param>
+        <x:param name="mapcontext" tunnel="yes"><n/></x:param>
+        <x:param name="context" tunnel="yes">
+            <value xmlns="urn:hl7-org:v3" code="A52.9" displayName="Late syphilis, unspecified" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.44.2" codeSystemName="ICD-10" xsi:type="CD">
+                <originalText>
+                    <reference value="#des.prob.1"/>
+                </originalText>
+            </value>
+        </x:param>
+        <x:param name="args">
+            <transformation name="mapValueSet" map="ICD_10_SNOMED_CT_epSOSIllnesses_VS"/>
+        </x:param>
+    </x:call>
+    <x:expect label="Service with embedded space return">
+        <code xmlns="urn:hl7-org:v3"
+            codeSystem="2.16.840.1.113883.6.96"
+            codeSystemName="SNOMED CT"
+            code="266136003"
+            displayName="Acquired syphilis - late latent (disorder)">
+            <translation code="A52.9"
+                displayName="Late syphilis, unspecified"
+                codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.44.2"
+                codeSystemName="ICD-10"
+                xsi:type="CD">
+                <originalText>
+                    <reference value="#des.prob.1" />
+                </originalText>
+            </translation>
+        </code>
+    </x:expect>
     </x:scenario>
     <x:scenario label="Missing Code">
         <x:call template="mapValueSet">
