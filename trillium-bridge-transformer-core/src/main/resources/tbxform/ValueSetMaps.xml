@@ -20,4 +20,11 @@
     <entry name="ATC_RxNorm_epSOSActiveIngredient_VS" entireMap="false">
         <uripattern>http://rd.phast.fr/REST/sts_rest_beta_2/0004/map/ATC_RxNorm_epSOSActiveIngredient_VS/resolution?entity={code}</uripattern>
     </entry>
+    <entry name="NDF-RT_ATC_Drug_Class_VS" entireMap="false">
+        <uripattern>http://rd.phast.fr/REST/sts_rest_beta_2/0004/map/NDF-RT_ATC_Drug_Class_VS/resolution?entity={code}</uripattern>
+    </entry>
+    <entry name="SNOMED_CT_to_ICD_10_CCD_Problem_VS" entireMap="false">
+        <uripattern>http://rd.phast.fr/REST/sts_rest_beta_2/0004/map/SNOMED%20CT_to_ICD%2010_CCD_Problem_VS/resolution?entity={code}</uripattern>
+    </entry>
+    
 </valuesetmap>

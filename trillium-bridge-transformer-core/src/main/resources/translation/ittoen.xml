@@ -30,6 +30,10 @@
         <target>Type of Allergy</target>
     </entry>
     <entry>
+        <source>Farmaci</source>
+        <target>Medications</target>
+    </entry>
+    <entry>
         <source>Tipo di Reazione</source>
         <target>Clinical Manifestation</target>
     </entry>

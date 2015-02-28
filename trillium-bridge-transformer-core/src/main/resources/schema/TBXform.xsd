@@ -75,10 +75,15 @@
                     <xs:documentation>Change the structure of effectiveTime</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
+            <xs:enumeration value="adjustDoseQuantity">
+                <xs:annotation>
+                    <xs:documentation>Change the structure of doseQuantity</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
             <xs:enumeration value="changeAttribute">
-            <xs:annotation>
-                <xs:documentation>Change the value of an attribute</xs:documentation>
-            </xs:annotation>
+             <xs:annotation>
+                 <xs:documentation>Change the value of an attribute</xs:documentation>
+             </xs:annotation>
             </xs:enumeration>
             <xs:enumeration value="mapValueSetAndMove">
                 <xs:annotation>

@@ -415,6 +415,22 @@
             </xsl:copy>
         </xsl:for-each>
     </xsl:template>
+    
+    
+    <!-- ============= adjustDoseQuantity ===================
+        Change doseQuantity from a single entry to a nested entry
+        ====================================================== -->
+    <xsl:template name="adjustDoseQuantity">
+        <xsl:param name="context" tunnel="yes"/>
+        <xsl:variable name="args" select="."/>
+        <xsl:for-each select="$context">
+            <doseQuantity xmlns="urn:hl7-org:v3">
+                <xsl:apply-templates select="@* except (@value, @unit)" mode="inside"/>
+                 <low value="{@value}" unit="{@unit}"/>
+                 <high value="{@value}" unit="{@unit}"/>
+            </doseQuantity>
+        </xsl:for-each>
+    </xsl:template>
 
     <!-- ============= Main Function Dispatcher =============== -->
     <xsl:template name="applyTransformations">
@@ -456,6 +472,9 @@
             </xsl:when>
             <xsl:when test="@name='changeAttribute'">
                 <xsl:call-template name="changeAttribute"/>
+            </xsl:when>
+            <xsl:when test="@name='adjustDoseQuantity'">
+                <xsl:call-template name="adjustDoseQuantity"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:comment>UNMAPPED FUNCTION: <xsl:value-of select="@name"/></xsl:comment>
