@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec" xmlns:tbx="http://trilliumbridge.org/xform" stylesheet="../../main/resources/xslt/TBTranslator.xsl">
+    <x:import href=""/>
+    <x:scenario label="Single string">
+        <x:call function="tbx:translate">
+            <x:param>The rain in spain falls mainly on the plain</x:param>
+            <x:param>en</x:param>
+            <x:param>it</x:param>
+        </x:call>
+        <x:expect label="rain in italian" select="'La pioggia in Spagna cade principalmente sulla pianura'"/>
+    </x:scenario>
+    <x:scenario label="Same language">
+        <x:call function="tbx:translate">
+            <x:param>The rain in spain falls mainly on the plain</x:param>
+            <x:param>en</x:param>
+            <x:param>en</x:param>
+        </x:call>
+        <x:expect label="same language" select="'The rain in spain falls mainly on the plain'"/>
+    </x:scenario>
+    <x:scenario label="Leading junk">
+        <x:call function="tbx:translate">
+            <x:param>(17:00:00)  procrastination</x:param>
+            <x:param>en</x:param>
+            <x:param>de</x:param>
+        </x:call>
+        <x:expect label="leading junk" select="'(17:00:00)  Zaudern'"/>
+    </x:scenario>
+    <x:scenario label="Trailing junk">
+        <x:call function="tbx:translate">
+            <x:param>Aluminum as an alloy in (mg/dl) ___  </x:param>
+            <x:param>en</x:param>
+            <x:param>es</x:param>
+        </x:call>
+        <x:expect label="trailing junk" select="'Como una aleación de aluminio (mg/DL) ___  '"/>
+    </x:scenario>
+    <x:scenario label="Embedding">
+        <x:call function="tbx:translate">
+            <x:param>0now is the time 1 for all good men 2 to come to the aid 3 of their country? </x:param>
+            <x:param>en</x:param>
+            <x:param>sv</x:param>
+        </x:call>
+        <x:expect label="Embedding" select="'0nu är dags 1 för alla goda män 2 att komma till hjälp 3 av deras land? '"/>
+    </x:scenario>
+    <x:scenario label="backwards">
+        <x:call function="tbx:translate">
+            <x:param>0nu är dags 1 för alla goda män 2 att komma till hjälp 3 av deras land? </x:param>
+            <x:param>sv</x:param>
+            <x:param>en</x:param>
+        </x:call>
+        <x:expect label="backwards" select="'0now is the time 1 for all the good men 2 to get to the help 3 of their country? '"/>
+    </x:scenario>
+    <x:scenario label="Empty sequence">
+        <x:call function="tbx:translate">
+            <x:param select="' '"/>
+            <x:param>en</x:param>
+            <x:param>sv</x:param>
+        </x:call>
+        <x:expect label="empty sequence" select="' '"/>
+    </x:scenario>
+    <x:scenario label="Concept Code">
+        <x:call function="tbx:translate">
+            <x:param select="' A02BX07'"/>
+            <x:param>en</x:param>
+            <x:param>sv</x:param>
+        </x:call>
+        <x:expect label="Concept Code" select="' A02BX07'"/>
+    </x:scenario>
+    <x:scenario label="disruptive stuff">
+        <x:call function="tbx:translate">
+            <x:param>This &gt; is a / breaking thing !</x:param>
+            <x:param>en</x:param>
+            <x:param>sv</x:param>
+        </x:call>
+        <x:expect label="disruptive stuff" select="'Detta > är en / bryta sak !'"/>
+    </x:scenario>
+    
+    
+</x:description>
