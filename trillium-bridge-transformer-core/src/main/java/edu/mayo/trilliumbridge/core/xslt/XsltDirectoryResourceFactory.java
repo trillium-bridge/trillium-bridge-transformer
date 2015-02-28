@@ -50,7 +50,7 @@ public class XsltDirectoryResourceFactory {
 	}
 
     protected Resource getResource(String path) {
-
+//		System.out.println("GetResource: " + path);
         if(path.startsWith("http:")) {
 			Matcher m = xlatere.matcher(path);
 			try {

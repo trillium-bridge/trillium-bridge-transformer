@@ -8,9 +8,10 @@
     <xsl:param name="transform">../tbxform/EPSOStoCCD.xml</xsl:param>
     <xsl:param name="from">epSOS</xsl:param>
     <xsl:param name="to">CCD</xsl:param>
-    <xsl:param name="showpaths" select="false()"/>
-    <xsl:param name="copycomments" select="true()"/>
-    <xsl:param name="debugging" select="false()"/>
+    <xsl:param name="showpaths" select="'false'"/>
+    <xsl:param name="copycomments" select="'false'"/>
+    <xsl:param name="debugging" select="'false'"/>
+    <xsl:param name="copypi" select="'false'"/>
 
     <xsl:variable name="cr" select="'&#xa;'"/>
     <xsl:variable name="tab" select="'&#x9;'"/>
@@ -71,7 +72,7 @@
         <xsl:variable name="context" select="current()"/>
 
         <!-- Debugging -->
-        <xsl:if test="$showpaths">
+        <xsl:if test="$showpaths = 'true'">
             <xsl:value-of select="$cr"/>
             <xsl:comment><xsl:value-of select="concat($tab, 'FULL PATH:  ', $abspath, $cr, $tab, $tab, 'LOCAL PATH: ', $relpath, '  ')"/></xsl:comment>
             <xsl:value-of select="$cr"/>
@@ -256,7 +257,7 @@
          ====================================================================== -->
     <xsl:template match="comment()" mode="#all">
         <xsl:param name="matchonly" tunnel="yes" select="false()"/>
-        <xsl:if test="$copycomments and not($matchonly)">
+        <xsl:if test="$copycomments = 'true' and not($matchonly)">
             <xsl:copy/>
         </xsl:if>
     </xsl:template>
@@ -267,7 +268,7 @@
     <xsl:template match="processing-instruction()" mode="#all">
         <xsl:param name="mapcontext" tunnel="yes" select="tbx:opendoc($transform)/tbx:map"/>
         <xsl:param name="matchonly" tunnel="yes" select="false()"/>
-        <xsl:if test="not($matchonly)">
+        <xsl:if test="not($matchonly) and $copypi">
             <xsl:variable name="relpath" select="concat('processing-instruction/', name())"/>
             <xsl:variable name="mapmatch"
                 select="$mapcontext/tbx:entry[(not(exists(@from)) or @from=$from) and (not(exists(@to)) or @to=$to) and tbx:frompath=$relpath]"/>
@@ -293,7 +294,7 @@
                     </xsl:choose>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:if test="$copycomments">
+                    <xsl:if test="$copycomments = 'true'">
                         <xsl:copy-of select="."/>
                     </xsl:if>
                 </xsl:otherwise>
@@ -337,7 +338,7 @@
 
     <xsl:function name="tbx:debugging">
         <xsl:param name="msg" as="xs:string"/>
-        <xsl:if test="$debugging">
+        <xsl:if test="$debugging = 'true'">
             <xsl:value-of select="concat($cr,$tab, $tab, $msg, $cr)"/>
         </xsl:if>
     </xsl:function>

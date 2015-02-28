@@ -139,6 +139,7 @@ public class XsltTrilliumBridgeTransformer implements TrilliumBridgeTransformer 
 
             synchronized (xsltTransformer) {
                 if (parameters != null) {
+					xsltTransformer.clearParameters();
                     for (Entry<String, String> entry : parameters.entrySet()) {
                         xsltTransformer.setParameter(entry.getKey(), entry.getValue());
                     }
@@ -149,8 +150,8 @@ public class XsltTrilliumBridgeTransformer implements TrilliumBridgeTransformer 
 
                 // Apply the transformation
                 xsltTransformer.transform(xmlFile, resultStream);
-
-                xsltTransformer.reset();
+				xsltTransformer.clearParameters();
+//                xsltTransformer.reset();
             }
         } catch (Exception ex) {
             throw new TransformException(ex);
