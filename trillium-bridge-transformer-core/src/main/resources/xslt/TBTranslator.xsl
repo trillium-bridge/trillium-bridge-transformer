@@ -39,7 +39,7 @@
         <xsl:param name="fromlanguage" as="xs:string"/>
         <xsl:param name="tolanguage" as="xs:string"/>
         <xsl:choose>
-            <xsl:when test="$usebing and string-length(normalize-space($text))">
+            <xsl:when test="boolean($usebing) and string-length(normalize-space($text))">
                 <xsl:variable name="translator" select="concat($translationbase, '/from/', substring($fromlanguage, 1,2), '/to/', substring($tolanguage, 1, 2))"/>
                 <xsl:value-of select="tbx:translateChunk($translator, $text)"/>
             </xsl:when>

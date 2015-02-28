@@ -5,6 +5,9 @@
     <entry name="CCDtoEPSOSHeader" entireMap="true">
         <uripattern>../cts2fileservice/map/CCDtoEPSOS/version/v0.1/resolution.xml</uripattern>
     </entry>
+    <entry name="EPSOStoCCDHeader" entireMap="true">
+        <uripattern>../cts2fileservice/map/EPSOStoCCD/version/v0.1/resolution.xml</uripattern>
+    </entry>
     <entry name="NUCC_ISCO_ProviderType_VS" entireMap="false">
         <uripattern>http://rd.phast.fr/REST/sts_rest_beta_2/0004/map/NUCC_ISCO_ProviderType_VS/resolution?entity={code}</uripattern>
     </entry>
