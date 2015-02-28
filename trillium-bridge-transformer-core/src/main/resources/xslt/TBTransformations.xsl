@@ -313,7 +313,7 @@
                 <xsl:value-of select="$translations/tbx:entry[tbx:source=$src]/tbx:target"/>
             </xsl:when>
             <xsl:when test="boolean($usebing) and string-length($val) > 0">
-                <xsl:value-of select="doc(concat($translationbase,'/from/', substring($language, 1, 2), '/to/', substring($tolanguage,1,2), '?text=', $src))/bx:string"/>
+                <xsl:value-of select="doc(concat($translationbase,'/from/', substring($language, 1, 2), '/to/', substring($tolanguage,1,2), '?text=', encode-for-uri($src)))/bx:string"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="."/>

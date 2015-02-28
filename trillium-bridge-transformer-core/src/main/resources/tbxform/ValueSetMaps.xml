@@ -12,7 +12,7 @@
         <uripattern>http://rd.phast.fr/REST/sts_rest_beta_2/0004/map/ATC_NDF-RT_epSOSActiveIngredient_VS/resolution?entity={code}</uripattern>
     </entry>
     <entry name="ICD_10_SNOMED_CT_epSOSIllnesses_VS" entireMap="false">
-        <uripattern>http://rd.phast.fr/REST/sts_rest_beta_2/0004/map/ICD 10_SNOMED CT_epSOSIllnesses_VS/resolution?entity={code}</uripattern>
+        <uripattern>http://rd.phast.fr/REST/sts_rest_beta_2/0004/map/ICD%2010_SNOMED%20CT_epSOSIllnesses_VS/resolution?entity={code}</uripattern>
     </entry>
     <entry name="ATC_RxNorm_epSOSActiveIngredient_VS" entireMap="false">
         <uripattern>http://rd.phast.fr/REST/sts_rest_beta_2/0004/map/ATC_RxNorm_epSOSActiveIngredient_VS/resolution?entity={code}</uripattern>
