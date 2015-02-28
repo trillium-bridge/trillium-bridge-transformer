@@ -58,8 +58,10 @@
 
         <div class="hero-unit">
 
-            <span class="title"> Trillium Bridge Transformer</span>
+            <span class="title"><a href="https://github.com/trillium-bridge/trillium-bridge-transformer/blob/master/README.md">Trillium Bridge Transformer</a></span>
             <img class="trillium-bridge-img" src="http://www.hl7italia.it/trillium/index_file/image308.png"/>
+
+
 
             <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
                 <li class="active"><a href="#fileUpload" data-toggle="tab">File Upload</a></li>
@@ -171,11 +173,7 @@
 
         </div>
 
-        <p>
-            <a class="btn btn-primary btn-large" href="https://github.com/trillium-bridge/trillium-bridge-transformer/blob/master/README.md">
-                Learn more
-            </a>
-        </p>
+
 
     </div>
 
