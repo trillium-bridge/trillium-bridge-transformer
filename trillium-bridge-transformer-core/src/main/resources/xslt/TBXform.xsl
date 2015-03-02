@@ -128,7 +128,7 @@
                 <!-- transformation node(s).  Apply the transformation rule -->
                 <xsl:choose>
                     <!-- If this isn't the first match, ignore it completely -->
-                    <xsl:when test="boolean(preceding-sibling::*[name()=$context/name()]) and not($context/name() = 'component')">
+                    <xsl:when test="boolean(preceding-sibling::*[name()=$context/name()]) and $context/name() = 'templateId'">
                         <xsl:value-of select="tbx:debugging('TRANSFORM (successor node)')"/>
                     </xsl:when>
                     

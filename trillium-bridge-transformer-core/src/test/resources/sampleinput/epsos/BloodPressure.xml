@@ -7,9 +7,6 @@
     <languageCode code="it-IT"/>
     <component>
         <structuredBody>
-            
-            
-            <!--Blood Pressure -->
             <component>
                 <section>
                     <templateId root="2.16.840.1.113883.10.20.1.16"/>
@@ -45,7 +42,6 @@
                             <code code="46680005" displayName="Vital signs" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
                             <statusCode code="completed"/>
                             <effectiveTime value="20140502"/>
-                            <!-- one or more vital signs observations -->
                             <component typeCode="COMP">
                                 <observation classCode="OBS" moodCode="EVN">
                                     <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.13"/>

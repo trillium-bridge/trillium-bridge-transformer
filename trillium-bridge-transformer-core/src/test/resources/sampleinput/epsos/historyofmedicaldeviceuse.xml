@@ -7,7 +7,6 @@
 	<languageCode code="it-IT"/>
 	<component>
 		<structuredBody>
-			<!--history-of-medical-device-use-->
 			<component>
 				<section>
 					<templateId root="2.16.840.1.113883.10.20.1.7"/>
@@ -38,7 +37,6 @@
 					</entry>
 				</section>
 			</component>
-			<!--history-of-medical-device-use-->
 		</structuredBody>
 	</component>
 </ClinicalDocument>
