@@ -184,7 +184,7 @@
                 <xsl:for-each select="$args[not(@outside)]/tbx:arg[@before]">
                     <xsl:copy-of select="*"/>
                 </xsl:for-each>
-                <xsl:apply-templates select="*" mode="inside"/>
+                <xsl:apply-templates select="@* | node()" mode="inside"/>
                 <xsl:for-each  select="$args[not(@outside)]/tbx:arg[@after]">
                     <xsl:copy-of select="*"/>
                 </xsl:for-each>

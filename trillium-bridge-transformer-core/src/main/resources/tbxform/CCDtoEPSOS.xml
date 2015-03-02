@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xsi:schemaLocation="http://trilliumbridge.org/xform ../schema/TBXform.xsd"
-    xmlns:epsos="urn:epsos-org:ep:medication"
+<map xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://trilliumbridge.org/xform ../schema/TBXform.xsd"
     xmlns="http://trilliumbridge.org/xform">
 
     <context from="CCD" to="epSOS">
@@ -64,8 +62,8 @@
         <transform>
             <path>/documentationOf</path>
             <transformation name="addNode" outside="true">
-                <arg before="true" >
-                    <participant typeCode="IND"  xmlns="urn:hl7-org:v3">
+                <arg before="true">
+                    <participant typeCode="IND" xmlns="urn:hl7-org:v3">
                         <templateId root="1.3.6.1.4.1.19376.1.5.3.1.2.4"/>
                         <functionCode code="PCP" codeSystem="2.16.840.1.113883.5.88" codeSystemName="HL7 ParticipationFunction"/>
                         <associatedEntity classCode="PRS" nullFlavor="NA">
@@ -138,10 +136,11 @@
                     <transformation name="replaceCode">
                         <arg>
                             <fromcode>
-                                <code code="48765-2" codeSystem="2.16.840.1.113883.6.1"  xmlns="urn:hl7-org:v3"/>
+                                <code code="48765-2" codeSystem="2.16.840.1.113883.6.1" xmlns="urn:hl7-org:v3"/>
                             </fromcode>
                             <tocode>
-                                <code code="48765-2" displayName="Allergies, adverse reactions, alerts" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+                                <code code="48765-2" displayName="Allergies, adverse reactions, alerts" codeSystem="2.16.840.1.113883.6.1"
+                                    codeSystemName="LOINC"/>
                             </tocode>
                         </arg>
                     </transformation>
@@ -199,7 +198,8 @@
                             <transformation name="replaceCode">
                                 <arg>
                                     <tocode>
-                                        <code xsi:type="CD" code="419511003" displayName="Propensity to adverse reactions to drug" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" xmlns="urn:hl7-org:v3"/>
+                                        <code xsi:type="CD" code="419511003" displayName="Propensity to adverse reactions to drug"
+                                            codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" xmlns="urn:hl7-org:v3"/>
                                     </tocode>
                                 </arg>
                             </transformation>
@@ -222,7 +222,7 @@
                                             </originalText>
                                         </value>
                                     </toValue>
-                                   <!-- <fromValue>
+                                    <!-- <fromValue>
                                         <value xsi:type="CD" code="416098002" displayName="Drug allergy" codeSystem="2.16.840.1.113883.6.96"
                                             codeSystemName="SNOMED CT" xmlns="urn:hl7-org:v3"/>
                                     </fromValue>-->
@@ -240,8 +240,8 @@
                             </transformation>
                         </transform>
                         <context>
-                            <documentation>Chante the observation template identifiers</documentation>
-                            <root>/entryRelationship[typeCode="SUBJ"]/observation[templateId/@root="2.16.840.1.113883.10.20.22.4.28"]</root>
+                            <documentation>Change the observation template identifiers</documentation>
+                            <root>/entryRelationship[@typeCode="SUBJ"]/observation[templateId/@root="2.16.840.1.113883.10.20.22.4.28"]</root>
                             <transform>
                                 <path>/templateId</path>
                                 <transformation name="changeTemplateRoots">
@@ -252,42 +252,42 @@
                                 </transformation>
                             </transform>
                             <transform>
-                                <path>/code</path>
+                                <path>/statusCode</path>
                                 <transformation name="addNode" outside="1">
-                                    <arg>
+                                    <arg before="true">
                                         <text xmlns="urn:hl7-org:v3">
                                             <reference value="#allergy.1"/>
                                         </text>
                                     </arg>
                                 </transformation>
                             </transform>
-                            <context>
-                                <root>/entryRelationship[@typeCode="MFST"]/observation[templateId/@root="2.16.840.1.113883.10.20.22.4.9"]</root>
-                                <transform>
-                                    <path>/templateId</path>
-                                    <transformation name="changeTemplateRoots">		
-                                        <arg fromid="2.16.840.1.113883.10.20.22.4.9"/>
-                                        <arg toid="2.16.840.1.113883.10.20.1.54"/>
-                                        <arg toid="1.3.6.1.4.1.19376.1.5.3.1.4.5"/>
-                                        <arg toid="2.16.840.1.113883.10.20.1.28"/>
-                                    </transformation>
-                                </transform>
-                                <transform>
-                                    <path>/code</path>
-                                    <transformation name="replaceCode">
-                                        <arg>
-                                            <fromcode>
-                                                <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4" xmlns="urn:hl7-org:v3"/>
-                                            </fromcode>
-                                        </arg>
-                                        <arg>
-                                            <tocode>
-                                                <code nullFlavor="NA" xmlns="urn:hl7-org:v3"/>
-                                            </tocode>
-                                        </arg>
-                                    </transformation>
-                                </transform>
-                            </context>
+                        </context>
+                        <context>
+                            <root>/entryRelationship[@typeCode="MFST"]/observation[templateId/@root="2.16.840.1.113883.10.20.22.4.9"]</root>
+                            <transform>
+                                <path>/templateId</path>
+                                <transformation name="changeTemplateRoots">
+                                    <arg fromid="2.16.840.1.113883.10.20.22.4.9"/>
+                                    <arg toid="2.16.840.1.113883.10.20.1.54"/>
+                                    <arg toid="1.3.6.1.4.1.19376.1.5.3.1.4.5"/>
+                                    <arg toid="2.16.840.1.113883.10.20.1.28"/>
+                                </transformation>
+                            </transform>
+                            <transform>
+                                <path>/code</path>
+                                <transformation name="replaceCode">
+                                    <arg>
+                                        <!--<fromcode>
+                                            <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4" xmlns="urn:hl7-org:v3"/>
+                                        </fromcode>-->
+                                    </arg>
+                                    <arg>
+                                        <tocode>
+                                            <code nullFlavor="NA" xmlns="urn:hl7-org:v3"/>
+                                        </tocode>
+                                    </arg>
+                                </transformation>
+                            </transform>
                         </context>
                     </context>
                 </context>
@@ -338,13 +338,14 @@
                                     <formCode nullFlavor="NA" xmlns="urn:epsos-org:ep:medication"/>
                                     <ingredient classCode="ACTI" xmlns="urn:epsos-org:ep:medication">
                                         <quantity nullFlavor="NA">
-                                            <numerator nullFlavor="NA" xsi:type="epsos:PQ"/>
-                                            <denominator nullFlavor="NA" xsi:type="epsos:PQ"/>
+                                            <numerator nullFlavor="NA" xsi:type="PQ"/>
+                                            <denominator nullFlavor="NA" xsi:type="PQ"/>
                                         </quantity>
                                         <!-- TODO: Map needed from the above code to here... -->
-                                        <epsos:ingredient classCode="MMAT" determinerCode="KIND">
-                                            <epsos:code code="L02BG03" displayName="anastrozole" codeSystem="2.16.840.1.113883.6.73" codeSystemName="Anatomical Therapeutic Chemical"/>
-                                        </epsos:ingredient>
+                                        <ingredient classCode="MMAT" determinerCode="KIND" xmlns="urn:epsos-org:ep:medication">
+                                            <code code="L02BG03" displayName="anastrozole" codeSystem="2.16.840.1.113883.6.73"
+                                                codeSystemName="Anatomical Therapeutic Chemical"/>
+                                        </ingredient>
                                     </ingredient>
                                 </arg>
                             </transformation>
@@ -377,12 +378,13 @@
                                 <caption>Disclaimer</caption>
                                 <tbody>
                                     <tr>
-                                        <td>Closed problems have been moved to the History of Past Illnesses Section for compliance with the Patient Summary template</td>
+                                        <td>Closed problems have been moved to the History of Past Illnesses Section for compliance with the Patient Summary
+                                            template</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </arg>
-                        
+
                     </transformation>
                 </transform>
                 <context>
@@ -451,7 +453,7 @@
                 </context>
             </context>
             <!-- ======================= Past Problems ================================= -->
-            
+
             <!-- ======================= History of Medication Use ================================= -->
             <context>
                 <root>/component/section[templateId/@root="1.3.6.1.4.1.12559.11.10.1.3.1.2.3"]</root>

@@ -6,9 +6,9 @@
     <xsl:include href="TBTransformations.xsl"/>
 
     <xsl:param name="showpaths" select="'false'"/>
-    <xsl:param name="copycomments" select="'false'"/>
+    <xsl:param name="copycomments" select="'true'"/>
     <xsl:param name="debugging" select="'false'"/>
-    <xsl:param name="copypi" select="'false'"/>
+    <xsl:param name="copypi" select="'true'"/>
 
     <xsl:variable name="cr" select="'&#xa;'"/>
     <xsl:variable name="tab" select="'&#x9;'"/>
