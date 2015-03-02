@@ -34,7 +34,7 @@
                 </code>
             </x:param>
             <x:param name="args">
-                <transformation name="mapValueSet" map="CCDtoEPSOSHeader"/>
+                <transformation name="mapValueSet" map="EPSOStoCCDHeader"/>
             </x:param>
         </x:call>
         <x:expect label="local table return">

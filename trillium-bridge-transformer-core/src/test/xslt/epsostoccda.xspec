@@ -2,6 +2,11 @@
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
     stylesheet="../../main/resources/xslt/TBXform.xsl">
     <x:param name="transform">../../resources/tbxform/EPSOStoCCD.xml</x:param>
+    <x:scenario label="Last Add Only">
+        <x:context select="document('../../../test/resources/sampleinput/epsos/TestInsertAfter.xml')"/>
+        <x:expect  select="document('../../../test/resources/sampleoutput/ccda/TestInsertAfter.xml')"
+            label="Only one trailer" />
+    </x:scenario>
     <x:scenario label="PaoloHeader">
         <x:context select="document('../../../test/resources/sampleinput/epsos/PaoloHeader.xml')"/>
         <x:expect  select="document('../../../test/resources/sampleoutput/ccda/PaoloHeader.xml')"
@@ -72,7 +77,7 @@
         <x:expect  select="document('../../../test/resources/sampleoutput/ccda/RTD_PS_Paolo_IT_L3_v2_CCD.xml')"
             label="PAOLO in CCD" />
     </x:scenario>
-    
+
     
     
     

@@ -17,7 +17,8 @@
       </parentDocument>
    </relatedDocument>
    <component>
-      <structuredBody><!--history-of-procedures--><component>
+      <structuredBody>
+         <component>
             <section>
                <templateId root="2.16.840.1.113883.10.20.22.2.7"/>
                <templateId root="2.16.840.1.113883.10.20.22.2.7.1"/>

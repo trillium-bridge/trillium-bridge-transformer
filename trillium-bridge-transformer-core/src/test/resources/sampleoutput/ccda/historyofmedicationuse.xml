@@ -67,25 +67,25 @@
                            <th>Drug Name</th>
                            <th colspan="2">Active Ingredient</th>
                            <th>Dosage</th>
-                           <th>ttttttttt</th>
+                           <th>Posologia</th>
                            <th>Route of Administration</th>
                            <th>Beginning Date</th>
                            <th>End Date</th>
-                           <th>tttt</th>
+                           <th>Note</th>
                         </tr>
                         <tr>
-                           <td>ttttttttttt ttt*30 ttt 100tt</td>
-                           <td ID="cod.med.1">t07tt02</td>
-                           <td ID="sub.med.1">tttttttttt</td>
-                           <td ID="str.med.1">100 tt</td>
+                           <td>METOPROLOL SAN *30 CPR 100MG</td>
+                           <td ID="cod.med.1">C07AB02</td>
+                           <td ID="sub.med.1">Metoprolol</td>
+                           <td ID="str.med.1">100 mg</td>
                            <td>
-                              <content ID="num.med.1">1<content ID="form.med.1">ttttttttt</content>
-                              </content> ttt, <content ID="frq.med.1">ttttt tt ttttttttt</content>
+                              <content ID="num.med.1">1<content ID="form.med.1">Tablet</content>
+                              </content> die, <content ID="frq.med.1">before breakfast</content>
                            </td>
                            <td/>
                            <td ID="trt_beg.med.1">01-06-2014</td>
                            <td ID="trt_end.med.1"/>
-                           <td>ttttttt tttttttttttt</td>
+                           <td>Continuous Therapy</td>
                         </tr>
                      </tbody>
                   </table>
@@ -94,7 +94,7 @@
                <entry typeCode="DRIV">
                   <substanceAdministration classCode="SBADM" moodCode="INT">
                      <templateId root="2.16.840.1.113883.10.20.22.4.16"/>
-                     <!-- Fake ID using HL7 example OID. --><id extension="med.1" root="2.16.840.1.113883.19.5.99999.99.3"/>
+                     <id extension="med.1" root="2.16.840.1.113883.19.5.99999.99.3"/>
                      <text>
                         <reference value="#med.1"/>
                      </text>

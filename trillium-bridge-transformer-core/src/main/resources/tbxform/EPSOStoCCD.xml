@@ -39,7 +39,7 @@
         <transform>
             <documentation>Translate the identifying code</documentation>
             <path>/code</path>
-            <transformation name="mapValueSet" map="CCDtoEPSOSHeader"/>
+            <transformation name="mapValueSet" map="EPSOStoCCDHeader"/>
         </transform>
         <transform>
             <documentation>Translate the language</documentation>
@@ -59,12 +59,11 @@
             </transformation>
         </transform>
         <context>
-            <root>/component/structuredBody</root>
-
+            <root>/component/structuredBody</root>            
             <transform>
                 <path>/component</path>
                 <transformation name="addNode" outside="1">
-                    <arg afterz="1">
+                    <arg after="1">
                         <component xmlns="urn:hl7-org:v3">
                             <section nullFlavor="NI">
                                 <templateId root="2.16.840.1.113883.10.20.22.2.3"/>

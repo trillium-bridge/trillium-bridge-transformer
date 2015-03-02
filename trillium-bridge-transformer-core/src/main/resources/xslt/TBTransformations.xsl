@@ -170,6 +170,8 @@
         <xsl:param name="context" tunnel="yes"/>
 
         <xsl:variable name="args" select="."/>
+        <xsl:variable name="last" select="$context/../*[position()=last()] is $context"/>
+
         <xsl:if test="$args/@outside">
                 <xsl:for-each select="$args/tbx:arg[@before]/*">
                     <xsl:copy>
@@ -188,7 +190,7 @@
                 </xsl:for-each>
             </xsl:copy>
         </xsl:for-each>
-        <xsl:if test="$args/@outside">
+        <xsl:if test="$args/@outside and $last">
             <xsl:for-each select="$args/tbx:arg[@after]/*">
                 <xsl:copy>
                     <xsl:apply-templates select="@* | node()" mode="substitute"/>

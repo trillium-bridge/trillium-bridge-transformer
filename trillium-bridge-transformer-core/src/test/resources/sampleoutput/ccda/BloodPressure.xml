@@ -17,7 +17,8 @@
       </parentDocument>
    </relatedDocument>
    <component>
-      <structuredBody><!--Blood Pressure --><component>
+      <structuredBody>
+         <component>
             <section>
                <templateId root="2.16.840.1.113883.10.20.22.2.4"/>
                <templateId root="2.16.840.1.113883.10.20.22.2.4.1"/>
@@ -54,10 +55,10 @@
                      <tbody>
                         <tr>
                            <th>Date</th>
-                           <th>ttttttttt ttttttttt ttttttttt
-                                        (tt[tt])</th>
-                           <th>ttttttttt ttttttttt tttttttttt
-                                        (tt[tt])</th>
+                           <th>Systolic Blood Pressure
+                                        (mm[Hg])</th>
+                           <th>Diastolic Blood Pressure
+                                        (mm[Hg])</th>
                         </tr>
                         <tr ID="bld.1">
                            <td>02-05-2014</td>
@@ -78,7 +79,7 @@
                            codeSystemName="SNOMED CT"/>
                      <statusCode code="completed"/>
                      <effectiveTime value="20140502"/>
-                     <!-- one or more vital signs observations --><component typeCode="COMP">
+                     <component typeCode="COMP">
                         <observation classCode="OBS" moodCode="EVN">
                            <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
                            <id extension="vit.obs.1" root="2.16.470.1.100.1.1.1000.990.1"/>

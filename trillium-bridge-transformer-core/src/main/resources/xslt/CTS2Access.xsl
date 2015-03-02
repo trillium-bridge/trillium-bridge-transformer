@@ -47,11 +47,11 @@
     <xsl:template name="getMapEntry">
 
         <xsl:param name="language" tunnel="yes"/>
-        
         <xsl:param name="vsmapentry"/>
         <xsl:param name="code"/>
         <xsl:param name="codeSystem"/>
         <xsl:param name="displayName"/>
+
         <xsl:if test="not($code or $codeSystem)">
             <xsl:message terminate="yes" select="concat('Code(',$code,') (', $codeSystem, ')')"></xsl:message>
         </xsl:if>
