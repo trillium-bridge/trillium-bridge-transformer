@@ -65,11 +65,12 @@ The ```trillium-bridge-transformer-cli-{version}-bin.{suffix}``` package will co
 │   ├── outputformats          <- (9)
 │   │   ├── CDA.xsl
 │   │   └── outputformats.json
-│   ├── schema                 <- (10)
-│   │   ├── CDA_R2_NormativeWebEdition2010  <- (11)
-│   │   └── TBXform.xsd        <- (12)
+│   ├── schema
+│   │   ├── CDA_R2_NormativeWebEdition2010  <- (10)
+│   │   └── TBXform.xsd        <- (11)
 │   ├── tbxform
-│   │   ├── FP7-SA610756-D3.1.xml    <- (13)
+│   │   ├── CCDtoEPSOS.xml    <- (12)
+│   │   ├── EPSOStoCCD.xml    <- (13)
 │   │   └── ValueSetMaps.xml         <- (14)
 │   ├── translation            <- (15)
 │   │   ├── it-to-en.xml
@@ -80,10 +81,10 @@ The ```trillium-bridge-transformer-cli-{version}-bin.{suffix}``` package will co
 │       ├── CTS2Access.xsl     <- (18)
 │       ├── TBTransformations.xsl <- (19)
 │       ├── TBXform.xsl        <- (20)
-│       ├── ccda2epsos_options.json   <- (21)
-│       ├── epsos2ccda.xsl            <- (22)
-│       ├── epsos2ccda_options.json   <- (23)
-│       ├── noop.xsl           <- (24)
+│       ├── ccd2epsos.xsl      <- (21)
+│       ├── ccda2epsos_options.json   <- (22)
+│       ├── epsos2ccd.xsl      <- (23)
+│       ├── epsos2ccda_options.json   <- (24)
 │       └── xslt.properties    <- (25)
 ├── doc
 │   └── README.txt
@@ -159,20 +160,22 @@ __(9)__ ```outputformats``` - specification of output format XSLT transformation
 
 __Schema__
 
-__(10)__ ```schema``` - directory that carries XML Schemas
+__(10)__ ```CDA_R2_NormativeWebEdition2010``` - CDA schema directory for resolving CDA document headers
 
-__(11)__ ```CDA_R2_NormativeWebEdition2010``` - CDA schema directory for resolving CDA document headers
-
-__(12)__ ```TBXform.xsd``` - the XML Schema that defines the [transformation rules](#xform-rules), [value set maps](#vsmaps) and [language transformation](#langxform) tables
+__(11)__ ```TBXform.xsd``` - the XML Schema that defines the [transformation rules](#xform-rules), [value set maps](#vsmaps) and [language transformation](#langxform) tables
 
 
 __Transformation Tables__
 
-__(13)__ ```FP7-SA610756-D3.1.xml``` Transformation rules.  This is the primary table that controls the transform. The structure is defined by ```TBXform.xsd````
+__(12)__ ```CCDtoEPSOS.xml``` CCD to EPSOS transformation table. The structure is defined by ```TBXform.xsd````
+
+__(13)__ ```EPSOStoCCD.xml``` EPSOS to CCD transformation table. The structure is defined by ```TBXform.xsd````
 
 __(14)__ ```ValueSetMaps.xml``` Value Set Mapping table.  This controls which file(s) or service(s) are used to resolve code and value maps. The structure is defined by ```TBXform.xsd````
 
-__(15)__ ```translations``` - Translation tables. File names are in the form "{from-language}-to-{to-language}.xml". The structure is defined by ```TBXform.xsd````
+__Translation Tables__
+
+__(15)__ ```translations``` - Translation tables. File names are in the form "{from-language}to{to-language}.xml". The structure is defined by ```TBXform.xsd````
 
 
 __XSLT Files__ specification the main CCDA/epSOS XSLT transformations.
@@ -187,13 +190,13 @@ __(19)__ ```TBTransformations.xsl``` - XSLT function library for transformations
 
 __(20)__ ```TBXform.xsl``` - The main transformation engine that traverses an epSOS or CCD document and applies the rules in the transformation rules table
 
-__(21)__ ```ccda2epsos_options.json``` - Description of screen options (parameters) for the ccda to epsos transformation
+__(21)__ ```ccd2epsos.xsl``` - The entry point for CCD to EPSOS transforms
 
-__(22)__ ```epsos2ccda.xsl``` -
+__(22)__ ```ccda2epsos_options.json``` - Description of screen options (parameters) for the ccda to epsos transformation
 
-__(23)__ ```epsos2ccda_options.json``` - Description of screen options (parameters) for the epsos to ccda transformation
+__(23)__ ```epsos2ccd.xsl``` - The entry point for EPSOS to CCD transformations
 
-__(24)__ ```noop.xsl``` -
+__(24)__ ```epsos2ccda_options.json``` - Description of screen options (parameters) for the epsos to ccda transformation
 
 __(25)__ ```xslt.properties``` - Transformation configuration file. See [here](#configuring-the-ccda---epsos-transformation) for more information on CCDA/epSOS XSLT configuration.
 
