@@ -5,9 +5,6 @@
     <xsl:strip-space elements="*"/>
     <xsl:include href="TBTransformations.xsl"/>
 
-    <xsl:param name="transform">../tbxform/EPSOStoCCD.xml</xsl:param>
-    <xsl:param name="from">epSOS</xsl:param>
-    <xsl:param name="to">CCD</xsl:param>
     <xsl:param name="showpaths" select="'false'"/>
     <xsl:param name="copycomments" select="'false'"/>
     <xsl:param name="debugging" select="'false'"/>
