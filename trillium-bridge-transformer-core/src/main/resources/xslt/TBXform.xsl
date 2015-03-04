@@ -268,10 +268,10 @@
         <xsl:if test="not($matchonly) and $copypi">
             <xsl:variable name="relpath" select="concat('processing-instruction/', name())"/>
             <xsl:variable name="mapmatch"
-                select="$mapcontext/tbx:entry[(not(exists(@from)) or @from=$from) and (not(exists(@to)) or @to=$to) and tbx:frompath=$relpath]"/>
+                select="$mapcontext/tbx:context[@from=$from and @to=$to]/tbx:transform[tbx:path=$relpath]/node()"/>
             <xsl:choose>
                 <xsl:when test="$mapmatch">
-                    <xsl:variable name="mapentry" select="$mapmatch/tbx:transformation/tbx:entry"/>
+                    <xsl:variable name="mapentry" select="$mapmatch/tbx:arg"/>
                     <xsl:variable name="value" select="concat(tbx:subPIvariables($mapentry/@value), '.xsl')"/>
                     <xsl:variable name="default" select="concat(tbx:subPIvariables($mapentry/@default), '.xsl')"/>
                     <xsl:choose>
