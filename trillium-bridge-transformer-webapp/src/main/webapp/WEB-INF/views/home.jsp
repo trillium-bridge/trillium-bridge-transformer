@@ -71,7 +71,7 @@
             <div id="my-tab-content" class="tab-content">
 
                 <div class="tab-pane active" id="fileUpload">
-                    <form autocomplete="off" action="ccda2epsos" enctype='multipart/form-data' name="fileUploadForm" id="fileUploadForm" method='post' class="form-inline well">
+                    <form action="ccda2epsos" enctype='multipart/form-data' name="fileUploadForm" id="fileUploadForm" method='post' class="form-inline well">
                         <div class="fileupload fileupload-new" data-provides="fileupload">
                             <div class="input-append">
                                 <div class="uneditable-input span5"><i class="icon-file fileupload-exists"></i>
