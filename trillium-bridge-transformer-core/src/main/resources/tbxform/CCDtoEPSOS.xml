@@ -10,7 +10,7 @@
         <transform>
             <path>processing-instruction/xml-stylesheet</path>
             <transformation name="setStyleSheet">
-                <arg value="{to}-{language}" default="{to}"/>
+                <arg value="{to}-{language}" default="CCD"/>
             </transformation>
         </transform>
     </context>
