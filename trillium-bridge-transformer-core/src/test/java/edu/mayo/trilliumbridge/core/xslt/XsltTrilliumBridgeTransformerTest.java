@@ -6,18 +6,12 @@ import static org.junit.Assert.*;
 
 public class XsltTrilliumBridgeTransformerTest {
 
-    @Test
-    public void testCcdaToEpsosOptions() {
-        XsltTrilliumBridgeTransformer transformer = new XsltTrilliumBridgeTransformer();
-
-        assertNotNull(transformer.getCcdaToEpsosOptions());
-    }
 
     @Test
-    public void testEpsosToCcdaOptions() {
+    public void testTransformerParams() {
         XsltTrilliumBridgeTransformer transformer = new XsltTrilliumBridgeTransformer();
 
-        assertNotNull(transformer.getEpsosToCcdaOptions());
+        assertNotNull(transformer.getTransformerParams());
     }
 
 }

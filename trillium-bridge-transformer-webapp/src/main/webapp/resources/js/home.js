@@ -23,15 +23,7 @@ jQuery(document).ready(function ($) {
         if(! action) {
             action = $("input[name='conversionType']").val();
         }
-        $('#epsosToCcdaOptions').show();
-        //if(action === 'epsos2ccda') {
-        //    $('#epsosToCcdaOptions').show();
-        //    $('#ccdaToepsosOptions').hide();
-        //}
-        //if(action === 'ccda2epsos') {
-        //    $('#epsosToCcdaOptions').hide();
-        //    $('#ccdaToepsosOptions').show();
-        //}
+        $('#transformerParameters').show();
     }
 
     $('#tabs').tab();

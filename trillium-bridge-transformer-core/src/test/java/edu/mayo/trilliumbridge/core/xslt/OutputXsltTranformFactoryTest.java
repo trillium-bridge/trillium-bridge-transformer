@@ -11,7 +11,7 @@ public class OutputXsltTranformFactoryTest {
 
     @Test
     public void testCcdaHtml() {
-        OutputXsltTranformFactory factory = new OutputXsltTranformFactory();
+        OutputXsltTransformFactory factory = new OutputXsltTransformFactory();
 
         assertNotNull(
                 factory.getOutputTransform(

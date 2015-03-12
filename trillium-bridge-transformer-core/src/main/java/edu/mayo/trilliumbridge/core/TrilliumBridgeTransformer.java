@@ -36,6 +36,6 @@ public interface TrilliumBridgeTransformer {
 
     public Set<TransformOptionDefinition> getCcdaToEpsosOptions();
 
-    public Set<TransformOptionDefinition> getEpsosToCcdaOptions();
+    public Set<TransformOptionDefinition> getTransformerParams();
 
 }

@@ -37,8 +37,7 @@ public class HomeController {
         home.addObject("exampleCcdas", exampleCcdas);
         home.addObject("version", version);
         home.addObject("options", Arrays.asList(
-                new TransformNameAndOptions("ccdaToEpsosOptions", this.transformer.getCcdaToEpsosOptions()),
-                new TransformNameAndOptions("epsosToCcdaOptions", this.transformer.getEpsosToCcdaOptions())));
+                new TransformNameAndOptions("transformerParams", this.transformer.getTransformerParams())));
 
         return home;
     }
