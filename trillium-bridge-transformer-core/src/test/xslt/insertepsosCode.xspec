@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+    stylesheet="../../main/resources/xslt/ccd2epsos.xsl">
+    <x:param name="transform">../../resources/tbxform/CCDtoEPSOS.xml</x:param>
+    <x:scenario label="Insert Code Test">
+        <x:context select="document('../../../test/resources/sampleinput/ccda/insertepsosCode.xml')"/>
+        <x:expect  select="document('../../../test/resources/sampleoutput/epsos/insertepsosCode.xml')"
+            label="Code inserted" />
+    </x:scenario>
+</x:description>

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://trilliumbridge.org/xform ../schema/TBXform.xsd"
+<map xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://trilliumbridge.org/xform ../schema/TBXform.xsd"
+    xmlns:epsos="urn:epsos-org:ep:medication"
     xmlns="http://trilliumbridge.org/xform">
 
     <context from="CCD" to="epSOS">
@@ -99,7 +101,7 @@
             <transform>
                 <path>/component</path>
                 <transformation name="addNode" outside="1">
-                    <arg afterz="1">
+                    <arg after="1">
                         <component xmlns="urn:hl7-org:v3">
                             <section nullFlavor="NI">
                                 <templateId root="2.16.840.1.113883.10.20.22.2.3"/>
@@ -332,23 +334,28 @@
                             </transformation>
                         </transform>
                         <transform>
-                            <path>/code</path>
-                            <transformation name="addNode" outside="1">
-                                <arg after="true">
-                                    <formCode nullFlavor="NA" xmlns="urn:epsos-org:ep:medication"/>
-                                    <ingredient classCode="ACTI" xmlns="urn:epsos-org:ep:medication">
+                            <path>/manufacturedMaterial/code</path>
+                            <transformation name="mapValueSetAndAdd" outside="1" map="ATC_RxNorm_epSOSActiveIngredient_VS">
+                                <arg>
+                                    <source>/manufacturedMaterial/code</source>
+                                </arg>
+                                <arg name="target" after="true">
+                                    <epsos:formCode nullFlavor="NA"/>
+                                    <epsos:ingredient classCode="ACTI">
                                         <quantity nullFlavor="NA">
                                             <numerator nullFlavor="NA" xsi:type="PQ"/>
                                             <denominator nullFlavor="NA" xsi:type="PQ"/>
                                         </quantity>
-                                        <!-- TODO: Map needed from the above code to here... -->
-                                        <ingredient classCode="MMAT" determinerCode="KIND" xmlns="urn:epsos-org:ep:medication">
-                                            <code code="L02BG03" displayName="anastrozole" codeSystem="2.16.840.1.113883.6.73"
-                                                codeSystemName="Anatomical Therapeutic Chemical"/>
-                                        </ingredient>
-                                    </ingredient>
+                                    </epsos:ingredient>
+                                    <epsos:ingredient classCode="MMAT" determinerCode="KIND">
+                                        <code xmlns="urn:epsos-org:ep:medication"/>
+                                    </epsos:ingredient>
                                 </arg>
                             </transformation>
+                        </transform>
+                        <transform>
+                            <path></path>
+                            <transformation></transformation>
                         </transform>
                     </context>
                 </context>
@@ -489,7 +496,7 @@
                                     </fromcode>
                                 </arg>
                             </transformation>
-                            <transformation name="mapValueSetAndMove" map="ATC_RxNorm_epSOSActiveIngredient_VS">
+                            <transformation name="mapValueSetAndMove" map="RxNorm_ATC_Clinical_Drug_VS">
                                 <arg>
                                     <source>/manufacturedMaterial/epsos:ingredient[@classCode="ACTI"]/epsos:ingredient[@classCode="MMAT"]/epsos:code</source>
                                 </arg>

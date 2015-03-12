@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<translations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://trilliumbridge.org/xform ../schema/TBXform.xsd"
+    xmlns="http://trilliumbridge.org/xform" fromlanguage="es_ES" tolanguage="en">
+    <entry>
+        <source>Historia Clínica Resumida(Patient Summary)</source>
+        <target>Patient Summary</target>
+    </entry>
+    <entry>
+        <source>Erupción alérgica</source>
+        <target>Allergic rash</target>
+    </entry>
+    <entry>
+        <source>Eritromicina</source>
+        <target>Erythromycin</target>
+    </entry>
+    <entry>
+        <source>Apendicectomía</source>
+        <target>Appendicectomy</target>
+    </entry>
+    <entry>
+        <source>Tipo de Procedimiento</source>
+        <target>Type of Procedure</target>
+    </entry>
+    <entry>
+        <source>Allergias, reacciones adversas y alertas</source>
+        <target>Allergies, adverse reactions, alerts</target>
+    </entry>
+    <entry>
+        <source>Tipo de alergia</source>
+        <target>Type of Allergy</target>
+    </entry>
+    <entry>
+        <source>Manifestación clínica </source>
+        <target>Clinical Manifestation</target>
+    </entry>
+    <entry>
+        <source>Problemas activos</source>
+        <target>Active Problem</target>
+    </entry>
+    <entry>
+        <source>Fecha de inicio</source>
+        <target>Onset Date</target>
+    </entry>
+    <entry>
+        <source>Hipertensión sistólica</source>
+        <target>Systolic essential hypertension</target>
+    </entry>
+    <entry>
+        <source>Lista de problemas activos</source>
+        <target>Problem list</target>
+    </entry>
+    <entry>
+        <source>Medicación activa</source>
+        <target>Medication Summary</target>
+    </entry>
+    <entry>
+        <source>Dispositivos médicos</source>
+        <target>History of medical device use</target>
+    </entry>
+    <entry>
+        <source>Procedimientos quirúrgicos</source>
+        <target>Surgical Procedures</target>
+    </entry>
+    <entry>
+        <source>Problemas cerrados, inactivos o resueltos</source>
+        <target>History of past illness</target>
+    </entry>
+    <entry>
+        <source>Vacunaciones</source>
+        <target>Vaccinations</target>
+    </entry>
+    <entry>
+        <source>Tensión arterial</source>
+        <target>Blood Pressure</target>
+    </entry>
+    <entry>
+        <source>Historia Social</source>
+        <target>Coded Social History</target>
+    </entry>
+    <entry>
+        <source>Alergia medicamentosa</source>
+        <target>Drug allergy</target>
+    </entry>
+    <entry>
+        <source>No fumador</source>
+        <target>Non Smoker</target>
+    </entry>
+    <entry>
+        <source>Principio Activo</source>
+        <target>Active Ingredient</target>
+    </entry>
+    <entry>
+        <source>Dosis</source>
+        <target>Dosage</target>
+    </entry>
+    <entry>
+        <source>Via de administración</source>
+        <target>Route of Administration</target>
+    </entry>
+    <entry>
+        <source>Fecha de comienzo</source>
+        <target>Beginning Date</target>
+    </entry>
+    <entry>
+        <source>Fecha de fin</source>
+        <target>End Date</target>
+    </entry>
+    <entry>
+        <source>NNombre del medicamento</source>
+        <target>Drug Name</target>
+    </entry>
+    <entry>
+        <source>Tensión arterial sistólica</source>
+        <target>Systolic Blood Pressure</target>
+    </entry>
+    <entry>
+        <source>Tensión arterial diastólica</source>
+        <target>Diastolic Blood Pressure</target>
+    </entry>
+    <entry>
+        <source>Fecha</source>
+        <target>Date</target>
+    </entry>
+    
+</translations>

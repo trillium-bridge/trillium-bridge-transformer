@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" xmlns:core="http://www.omg.org/spec/CTS2/1.1/Core"
-    xmlns:tbxform="http://trilliumbridge.org/xform" targetNamespace="http://trilliumbridge.org/xform" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    xmlns:tbxform="http://trilliumbridge.org/xform" targetNamespace="http://trilliumbridge.org/xform" 
+    xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <xs:import namespace="http://www.omg.org/spec/CTS2/1.1/Core" schemaLocation="http://www.omg.org/spec/cts2/130601/core/Core.xsd"/>
 
 
@@ -21,73 +22,309 @@
         <xs:restriction base="xs:string">
             <xs:enumeration value="changeTemplateRoots">
                 <xs:annotation>
-                    <xs:documentation>Change the template root from "fromids" to "toids" or remove if not specified</xs:documentation>
+                    <xs:documentation>Change the template identifiers matching the given node. Fromids are removed, toids are added. Others are left as is
+                    Parameters:
+                    arg[@fromid] - template identifier to remove
+                    arg[@toid] - template identifier to add
+                    
+                    Example:
+                        <transform>
+                            <path>/templateId</path>
+                            <transformation name="changeTemplateRoots">
+                                <arg toid="1.3.6.1.4.1.12559.11.10.1.3.1.1.3"/>
+                                <arg toid="1.3.6.1.4.1.19376.1.5.3.1.1.1"/>
+                                <arg fromid="2.16.840.1.113883.10.20.22.1.2"/>
+                                <arg fromid="2.16.840.1.113883.10.20.22.1.1"/>
+                            </transformation>
+                        </transform>
+                    </xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
             <xs:enumeration value="mapValueSet">
                 <xs:annotation>
-                    <xs:documentation>Transform the from value set to the to value set</xs:documentation>
+                    <xs:documentation>Transform a code or value using the supplied value set
+                    Parameters:
+                    @map - the entry in the ValueSetMaps table to use in the transformation
+                    
+                    Example:
+                        <transform>
+                            <path>/participant[@typeCode="CSM"]/participantRole[@classCode="MANU"]/playingEntity[@classCode="MMAT"]/code</path>
+                            <transformation name="mapValueSet" map="ATC_NDF-RT_epSOSActiveIngredient_VS"/>
+                        </transform>
+                    </xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
             <xs:enumeration value="newid">
                 <xs:annotation>
-                    <xs:documentation>Change the document identifier to indicate that a transformation has occurred</xs:documentation>
+                    <xs:documentation>Create a new document identifier.  This is currently accomplished by appending ".1" to the old identifier
+                    Parameters: 
+                    (none)
+                    
+                    Example:
+                        <transform>
+                            <path>/id</path>
+                            <transformation name="newid"/>
+                        </transform>
+                    </xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
             <xs:enumeration value="translateTitle">
                 <xs:annotation>
-                    <xs:documentation>A function that can (potentially) translate the language of the title</xs:documentation>
+                    <xs:documentation>A function that can (potentially) translate the language of the title
+                    
+                    Parameters:
+                    language (global parameter) - the target language
+                    
+                    Example:
+                        <transform global="true">
+                            <path>/title</path>
+                            <transformation name="translateTitle"/>
+                        </transform>
+                    </xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
             <xs:enumeration value="replaceCode">
                 <xs:annotation>
-                    <xs:documentation>Replace all occurrences of fromcode (or all codes if absent) with tocode or remove if no to</xs:documentation>
+                    <xs:documentation>Replace all occurrences of fromcode (or all codes if absent) with tocode or remove if no to
+                    
+                    Parameters:
+                    arg/fromcode - if present must match to remove.  If absent, code is always removed
+                    arg/tocode - if present code to insert.  If absent, no code is inserted.
+                    
+                    Example:
+                        <transform>
+                            <path>/code</path>
+                            <transformation name="replaceCode">
+                                <arg>
+                                    <fromcode>
+                                        <code nullFlavor="NA" xmlns="urn:hl7-org:v3"/>
+                                    </fromcode>
+                                    <tocode>
+                                        <code code="CONC" codeSystem="2.16.840.1.113883.5.6" displayName="Concern" xmlns="urn:hl7-org:v3"/>
+                                    </tocode>
+                                </arg>
+                            </transformation>
+                        </transform>
+                    
+                    </xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
             <xs:enumeration value="replaceValue">
                 <xs:annotation>
-                    <xs:documentation>Replace all occurrences of frome with tovalue or remove if no to</xs:documentation>
+                    <xs:documentation>Replace all occurrences of fromcode (or all codes if absent) with tocode or remove if no to
+                        
+                     Parameters:
+                        arg/fromValue - if present must match to remove.  If absent, value is always removed
+                        arg/toValue - if present value to insert.  If absent, no value is inserted.
+                        
+                    Example:
+                        <transform>
+                            <path>/value</path>
+                            <transformation name="replaceValue">
+                                <arg>
+                                    <fromValue>
+                                        <value xsi:type="CD" xmlns="urn:hl7-org:v3">
+                                            <originalText>
+                                                <reference value="#allergy.1"/>
+                                            </originalText>
+                                        </value>
+                                    </fromValue>
+                                    <toValue>
+                                        <value xsi:type="CD" code="416098002" displayName="Drug allergy" codeSystem="2.16.840.1.113883.6.96"
+                                            codeSystemName="SNOMED CT" xmlns="urn:hl7-org:v3"/>
+                                    </toValue>
+                                </arg>
+                            </transformation>
+                        </transform>
+                    </xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
             <xs:enumeration value="translateText">
                 <xs:annotation>
-                    <xs:documentation>Translate an arbitrary block of text</xs:documentation>
+                    <xs:documentation>Translate an arbitrary block of text.  The translations tables are used for a first cut at the translations and,
+                    if nothing matches, the external translation tool is invoked.
+                    
+                    Parameters:
+                       (none)
+                    
+                     Example:
+                        <transform>
+                            <path>/text</path>
+                            <transformation name="translateText"/>
+                        </transform>
+                    
+                    </xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
             <xs:enumeration value="setStyleSheet">
                 <xs:annotation>
                     <xs:documentation>Set the stylesheet in the document if one is already present Params: @value - template for from. Includes {to} and
-                        {language} metavariables @default - default template if @from doesn't exit </xs:documentation>
+                        {language} metavariables @default - default template if @from doesn't exit 
+                    
+                    Parameters:
+                        arg/@value - language and target specific stylesheet
+                        arg/@default - default if @value sheet isn't present
+                    
+                    Example:
+                    
+                        <transform>
+                            <path>processing-instruction/xml-stylesheet</path>
+                            <transformation name="setStyleSheet">
+                                <arg value="{to}-{language}" default="{to}"/>
+                            </transformation>
+                        </transform>
+                    
+                    </xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
             <xs:enumeration value="mapLanguage">
                 <xs:annotation>
-                    <xs:documentation>Map the from language code to the to language code.</xs:documentation>
+                    <xs:documentation>Map the from language code to the to language code.
+                    
+                    Parameters:
+                       language (global parameter): target language
+                    
+                    Example:
+                        <transform>
+                            <documentation>Translate the language</documentation>
+                            <path>/languageCode</path>
+                            <transformation name="mapLanguage"/>
+                        </transform>
+                    </xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
             <xs:enumeration value="addNode">
                 <xs:annotation>
-                    <xs:documentation>Add a node before or after the matched context</xs:documentation>
+                    <xs:documentation>Add a node before or after the matched context
+                    
+                    Parameters:
+                       @outside - if present, add outside of the target node.  Othewise inside
+                       arg/@before - if present and true, add before the target
+                       arg/@after - if present add after the target
+                       arg - the node to add
+                       
+                    Example:
+                        <transform>
+                            <path>/component</path>
+                            <transformation name="addNode" outside="true">
+                                <arg before="true">
+                                    <relatedDocument typeCode="XFRM" xmlns="urn:hl7-org:v3">
+                                        <parentDocument>
+                                            <id extension="{id/@extension}" root="{id/@root}"/>
+                                        </parentDocument>
+                                    </relatedDocument>
+                                </arg>
+                            </transformation>
+                        </transform>
+                    </xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
             <xs:enumeration value="adjustEffectiveTime">
                 <xs:annotation>
-                    <xs:documentation>Change the structure of effectiveTime</xs:documentation>
+                    <xs:documentation>Change the structure of effectiveTime from <effectiveTime value="ttt"/> to
+                    <effectiveTime>
+                        <low value="ttt"/>
+                    </effectiveTime>
+                    
+                    Parameters:
+                       (none)
+                    
+                    Example:
+                        <transform>
+                            <path>/effectiveTime</path>
+                            <transformation name="adjustEffectiveTime"/>
+                        </transform>
+                    </xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
             <xs:enumeration value="adjustDoseQuantity">
                 <xs:annotation>
-                    <xs:documentation>Change the structure of doseQuantity</xs:documentation>
+                    <xs:documentation>Change the structure of doseQuantity from:
+                        <doseQuantity value="vvv" unit="uuu"/> to
+                        
+                        <doseQuantity>
+                            <low value="vvv" unit="uuu"/>
+                            <high value="vvv" unit="uuu"/>
+                        </doseQuantity>
+                        
+                    Parameters:
+                      (none)
+                      
+                    Example:
+                        <transform>
+                            <path>/doseQuantity</path>
+                            <transformation name="adjustDoseQuantity"/>
+                        </transform>
+                    
+                  </xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
             <xs:enumeration value="changeAttribute">
              <xs:annotation>
-                 <xs:documentation>Change the value of an attribute</xs:documentation>
+                 <xs:documentation>Change or add an attribute
+                 
+                 Parameters:
+                    @attribute - attribute to change
+                    arg - new value
+                 
+                 Example:
+                     <transform>
+                         <path>/entryRelationship</path>
+                         <transformation name="changeAttribute" attribute="inversionInd">
+                             <arg>false</arg>
+                         </transformation>
+                     </transform>
+                 </xs:documentation>
              </xs:annotation>
             </xs:enumeration>
             <xs:enumeration value="mapValueSetAndMove">
                 <xs:annotation>
-                    <xs:documentation>Map the parameter source code and put the result in the target path</xs:documentation>
+                    <xs:documentation>Map the parameter source code and put the result in the target path
+                    
+                    Parameters:
+                       @map - entry in the ValueSetMaps table to apply
+                       arg/source - path to source resource
+                    
+                    Example:
+                        <transformation name="mapValueSetAndMove" map="ATC_RxNorm_epSOSActiveIngredient_VS">
+                            <arg>
+                                <source>/manufacturedMaterial/epsos:ingredient[@classCode="ACTI"]/epsos:ingredient[@classCode="MMAT"]/epsos:code</source>
+                            </arg>
+                        </transformation></xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="mapValueSetAndAdd">
+                <xs:annotation>
+                    <xs:documentation>Map the referenced code using the supplied value set and insert it into the code slot in the
+                        target argument.  Take the result and do an addNode
+                        
+                    Parameters:
+                       @outside - addNode outside parameter
+                       @map - mapValueSet map parameter
+                       arg/source - mapValueSet source parameter
+                       arg[@name="target"] - addNode argument (w/ @before and @after)
+                    
+                    Example:
+                        <transform>
+                            <path>/manufacturedMaterial/code</path>
+                            <transformation name="mapValueSetAndAdd" outside="1" map="ATC_RxNorm_epSOSActiveIngredient_VS">
+                                <arg>
+                                    <source>/manufacturedMaterial/code</source>
+                                </arg>
+                                <arg name="target" after="true">
+                                    <epsos:formCode nullFlavor="NA"/>
+                                    <epsos:ingredient classCode="ACTI">
+                                        <quantity nullFlavor="NA">
+                                            <numerator nullFlavor="NA" xsi:type="PQ"/>
+                                            <denominator nullFlavor="NA" xsi:type="PQ"/>
+                                        </quantity>
+                                    </epsos:ingredient>
+                                    <epsos:ingredient classCode="MMAT" determinerCode="KIND">
+                                        <code xmlns="urn:epsos-org:ep:medication"/>
+                                    </epsos:ingredient>
+                                </arg>
+                            </transformation>
+                        </transform></xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
         </xs:restriction>
