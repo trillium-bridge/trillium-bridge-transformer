@@ -39,6 +39,14 @@
             <transformation name="newid"/>
         </transform>
         <transform>
+            <path>/confidentialityCode</path>
+            <transformation name="changeAttribute" attribute="displayName">
+                <arg>
+                    <value>NA</value>
+                </arg>
+            </transformation>
+        </transform>
+        <transform>
             <documentation>Translate the identifying code</documentation>
             <path>/code</path>
             <transformation name="mapValueSet" map="CCDtoEPSOSHeader"/>
