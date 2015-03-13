@@ -69,7 +69,7 @@ public class TransformerController {
 
             @Override
             public void transform(InputStream in, OutputStream out, TrilliumBridgeTransformer.Format outputFormat) {
-                transformer.epsosToCcda(in, out, outputFormat, getParams(request.getParameterMap(), transformer.getEpsosToCcdaOptions()));
+                transformer.epsosToCcda(in, out, outputFormat, getParams(request.getParameterMap(), transformer.getTransformerParams()));
             }
 
         });

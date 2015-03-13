@@ -6,10 +6,10 @@
                   xmlns:ns="urn:hl7-org:v3"
                   xmlns:sch="http://www.ascc.net/xml/schematron"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  xsi:schemaLocation="urn:hl7-org:v3 file:///C:/Consulenze/_epSOS/Deliverables/WP3.9/3.9.1/Appendix%20B%20-%20Semantics/B1%20-%20Guidelines%20epSOS%20Schema/presc_disp_0625/presc_disp_0625/CDASchema/CDA_extended.xsd">
+		  xsi:schemaLocation="../schema/CDASchema/CDA_extended.xsd">
    <templateId root="2.16.840.1.113883.10.20.22.1.2"/>
    <templateId root="2.16.840.1.113883.10.20.22.1.1"/>
-   <languageCode code="en"/>
+   <languageCode code="en-EN"/>
    <relatedDocument typeCode="XFRM">
       <parentDocument>
          <id extension="NONE" root="NONE"/>
@@ -68,7 +68,7 @@
                </entry>
             </section>
          </component>
-         <component>
+         <component xmlns:v3="urn:hl7-org:v3">
             <section nullFlavor="NI">
                <templateId root="2.16.840.1.113883.10.20.22.2.3"/>
                <templateId root="2.16.840.1.113883.10.20.22.2.3.1"/>

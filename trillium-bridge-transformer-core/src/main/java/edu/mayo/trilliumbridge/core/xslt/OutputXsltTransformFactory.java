@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * Factory for providing XSLTs for transformations.
  */
-public class OutputXsltTranformFactory {
+public class OutputXsltTransformFactory {
 
     private static final String OUTPUT_FORMATS_BASE_PATH = "/outputformats";
     private static final String OUTPUT_FORMATS_JSON_PATH = OUTPUT_FORMATS_BASE_PATH + "/outputformats.json";
@@ -22,7 +22,7 @@ public class OutputXsltTranformFactory {
 
     private Map<OutputTransformKey, javax.xml.transform.Transformer> transformMap = new HashMap<OutputTransformKey, javax.xml.transform.Transformer>();
 
-    public OutputXsltTranformFactory() {
+    public OutputXsltTransformFactory() {
         super();
         ObjectMapper mapper = new ObjectMapper();
 

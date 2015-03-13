@@ -4,17 +4,6 @@
     xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <xs:import namespace="http://www.omg.org/spec/CTS2/1.1/Core" schemaLocation="http://www.omg.org/spec/cts2/130601/core/Core.xsd"/>
 
-
-    <xs:simpleType name="ROOTS">
-        <xs:annotation>
-            <xs:documentation>Possible mapEntry roots</xs:documentation>
-        </xs:annotation>
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="epSOS"/>
-            <xs:enumeration value="CCD"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="TRANSFORMATIONS">
         <xs:annotation>
             <xs:documentation>List of available transformations</xs:documentation>
@@ -394,33 +383,13 @@
         </xs:attribute>
     </xs:complexType>
 
-    <xs:complexType name="outerMapEntry">
-        <xs:annotation>
-            <xs:documentation>The outermost map entry, with the from/to information</xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="tbxform:context">
-                <xs:attribute name="from" use="required" type="tbxform:ROOTS">
-                    <xs:annotation>
-                        <xs:documentation>The type of the FROM document</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
-                <xs:attribute name="to" use="required" type="tbxform:ROOTS">
-                    <xs:annotation>
-                        <xs:documentation>The type of the TO document</xs:documentation>
-                    </xs:annotation>
-                </xs:attribute>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
     <xs:element name="map" type="tbxform:map"/>
     <xs:complexType name="map">
         <xs:annotation>
             <xs:documentation>A collection of mapEntries to transform a source document into a target</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="context" type="tbxform:outerMapEntry" maxOccurs="unbounded"/>
+            <xs:element name="context" type="tbxform:context" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
 

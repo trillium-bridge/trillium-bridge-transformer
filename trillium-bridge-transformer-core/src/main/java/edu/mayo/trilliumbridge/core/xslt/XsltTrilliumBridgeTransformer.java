@@ -33,14 +33,12 @@ public class XsltTrilliumBridgeTransformer implements TrilliumBridgeTransformer 
 
     protected enum DocumentType {CCDA, EPSOS}
 
-    private String EPSOS2CCDA_OPTIONS_FILE_PATH = "/xslt/epsos2ccda_options.json";
-    private String CCDA2EPSOS_OPTIONS_FILE_PATH = "/xslt/ccda2epsos_options.json";
 
-    private OutputXsltTranformFactory xsltTranformFactory = new OutputXsltTranformFactory();
+	private String OPTIONS_FILE_PATH = "/xslt/transform_options.json";
 
-    private Set<TransformOptionDefinition> epsosToCcdaOptions;
+    private OutputXsltTransformFactory xsltTransformFactory = new OutputXsltTransformFactory();
 
-    private Set<TransformOptionDefinition> ccdaToEpsosOptions;
+	private Set<TransformOptionDefinition> transformOptions;
 
     private static final String XSLT_BASE_PATH = "/xslt/";
     private static final String NO_OP_XSLT = "noop.xsl";
@@ -65,8 +63,7 @@ public class XsltTrilliumBridgeTransformer implements TrilliumBridgeTransformer 
         this.ccda2epsosTransformer = XsltUtils.buildTransformer(
                 this.resourceFactory.getResource(XSLT_BASE_PATH + properties.getProperty(CCDA2EPSOS_XSLT_PROP, NO_OP_XSLT)));
 
-        this.epsosToCcdaOptions = this.getOptions(EPSOS2CCDA_OPTIONS_FILE_PATH);
-        this.ccdaToEpsosOptions = this.getOptions(CCDA2EPSOS_OPTIONS_FILE_PATH);
+		this.transformOptions = this.getOptions(OPTIONS_FILE_PATH);
     }
 
     @Override
@@ -87,7 +84,7 @@ public class XsltTrilliumBridgeTransformer implements TrilliumBridgeTransformer 
 
     protected javax.xml.transform.Transformer getFormatXslt(Format outputFormat, DocumentType type) {
         if (!outputFormat.equals(Format.XML)) {
-            return this.xsltTranformFactory.getOutputTransform(outputFormat, type);
+            return this.xsltTransformFactory.getOutputTransform(outputFormat, type);
         } else {
             return null;
         }
@@ -162,12 +159,12 @@ public class XsltTrilliumBridgeTransformer implements TrilliumBridgeTransformer 
 
     @Override
     public Set<TransformOptionDefinition> getCcdaToEpsosOptions() {
-        return this.ccdaToEpsosOptions;
+        return this.transformOptions;
     }
 
     @Override
-    public Set<TransformOptionDefinition> getEpsosToCcdaOptions() {
-        return this.epsosToCcdaOptions;
+    public Set<TransformOptionDefinition> getTransformerParams() {
+        return this.transformOptions;
     }
 
     protected Set<TransformOptionDefinition> getOptions(String optionsPath) {

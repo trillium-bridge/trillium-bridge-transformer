@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tbx="http://trilliumbridge.org/xform"
-    exclude-result-prefixes="xs tbx mapVersion core mapServices codeSystem tbx" version="2.0" xmlns:mapVersion="http://www.omg.org/spec/CTS2/1.1/MapVersion"
+    exclude-result-prefixes="xs v3 mapVersion core mapServices codeSystem tbx" version="2.0" xmlns:mapVersion="http://www.omg.org/spec/CTS2/1.1/MapVersion"
     xmlns:mapServices="http://www.omg.org/spec/CTS2/1.1/MapEntryServices" xmlns:codeSystem="http://schema.omg.org/spec/CTS2/1.0/CodeSystem"
-    xmlns:core="http://www.omg.org/spec/CTS2/1.1/Core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xpath-default-namespace="urn:hl7-org:v3">
+    xmlns:core="http://www.omg.org/spec/CTS2/1.1/Core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xpath-default-namespace="urn:hl7-org:v3"
+    xmlns:v3="urn:hl7-org:v3">
+    <xsl:import href="TBParameters.xsl"/>
     <xsl:include href="CTS2Access.xsl"/>
     <xsl:include href="TBTranslator.xsl"/>
 
     <!-- If true, we are being invoked in a XSPEC scenario -->
     <xsl:param name="debug" select="false()"/>
+    
+    <xsl:variable name="valuesets" as="element(tbx:valuesetmap)">
+        <xsl:copy-of select="document('../tbxform/ValueSetMaps.xml')/tbx:valuesetmap"/>
+    </xsl:variable>
 
-    <!-- Target language -->
-    <xsl:param name="tolanguage">en</xsl:param>
 
     <!-- ============================= mapLanguage ==========================
         Map a language code.  Parameters:
@@ -51,12 +55,12 @@
         <xsl:param name="args" select="."/>
         <xsl:for-each select="$context">
             <xsl:choose>
-                <xsl:when test="$valuesets/tbx:valuesetmap/tbx:entry[@name=$args/@map]">
+                <xsl:when test="$valuesets/tbx:entry[@name=$args/@map]">
                     <xsl:call-template name="getMapEntry">
                         <xsl:with-param name="code" select="@code"/>
                         <xsl:with-param name="codeSystem" select="@codeSystemName"/>
                         <xsl:with-param name="displayName" select="@displayName"/>
-                        <xsl:with-param name="vsmapentry" select="$valuesets/tbx:valuesetmap/tbx:entry[@name=$args/@map]"/>
+                        <xsl:with-param name="vsmapentry" select="$valuesets/tbx:entry[@name=$args/@map]"/>
                     </xsl:call-template>
                 </xsl:when>
                 <xsl:otherwise>
@@ -166,7 +170,7 @@
         $arg/@before=true - block to add before content
         $arg/@after=true - block to add after content
         ====================================================================== -->
-    <xsl:template name="addNode">
+    <xsl:template name="addNode" xmlns="urn:hl7-org:v3">
         <xsl:param name="context" tunnel="yes"/>
         <xsl:param name="args" select="." as="element()"/>
         <xsl:variable name="last" select="$context/../*[position()=last()] is $context"/>
@@ -338,7 +342,7 @@
         <xsl:param name="language" tunnel="yes"/>
 
         <xsl:for-each select="$context">
-            <xsl:variable name="transdoc" select="concat('../translation/', substring($language, 1, 2), 'to', $tolanguage, '.xml')"/>
+            <xsl:variable name="transdoc" select="concat('../translation/', substring($language, 1, 2), 'to', substring($tolanguage, 1, 2), '.xml')"/>
             <xsl:variable name="translations" select="if(doc-available($transdoc)) then document($transdoc)/tbx:translations else ''"/>
             <xsl:variable name="src" select="."/>
             <xsl:choose>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:tbx="http://trilliumbridge.org/xform"
+    exclude-result-prefixes="xs"
+    version="2.0">
+    
+    <!-- ===================================================================
+         tolanguage - target transformation language
+         =================================================================== -->
+    <xsl:param name="tolanguage">en-EN</xsl:param>
+    
+    <!-- ===================================================================
+         transform - the URI of the transformation rules document
+         =================================================================== -->
+    <xsl:param name="transform" as="element(tbx:map)"/>
+    
+    <!-- ===================================================================
+         schemalocation - the URI the target schemalocation
+         =================================================================== -->
+    <xsl:param name="schemaLocation" as="xs:anyURI" required="no"/>
+    
+    <!-- ===================================================================
+         copycomments - copy the comments from the source to the target document
+         =================================================================== -->
+    <xsl:param name="copycomments" select="'true'"/>
+    
+    <!-- ===================================================================
+         copypi - copy the processing instructions from the source to the target document
+         If 'false', the stylesheet processing instruction will not be copied
+         =================================================================== -->
+    <xsl:param name="copypi" select="'true'"/>    
+    
+    <!-- ===================================================================
+         showpaths - Show the relative and absolute paths of all statements as comments
+         Used for debugging
+         =================================================================== -->   
+    <xsl:param name="showpaths" select="'false'"/>
+
+    <!-- ===================================================================
+         debugging - Show the transformations that are invoked and other useful information 
+         =================================================================== --> 
+    <xsl:param name="debugging" select="'false'"/>
+
+</xsl:stylesheet>

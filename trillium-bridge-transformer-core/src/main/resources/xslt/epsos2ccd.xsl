@@ -11,6 +11,9 @@
     <!-- Transformation rules -->
     <xsl:param name="transform">../tbxform/EPSOStoCCD.xml</xsl:param>
     
+    <!-- Schema Location -->
+    <xsl:param name="schemaLocation">../schema/CDASchema/CDA_extended.xsd</xsl:param>
+    
     <!-- From direction -->
     <xsl:param name="from">epSOS</xsl:param>
     

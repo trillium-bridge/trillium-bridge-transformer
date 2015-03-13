@@ -9,8 +9,8 @@
    <templateId root="2.16.840.1.113883.10.20.22.1.2"/>
    <templateId root="2.16.840.1.113883.10.20.22.1.1"/>
    <id extension="TB1.1" root="2.16.840.1.113883.19.5.99999.1"/>
-   <languageCode code="en"/>
-   <relatedDocument typeCode="XFRM">
+   <languageCode code="en-EN"/>
+   <relatedDocument xmlns:v3="urn:hl7-org:v3" typeCode="XFRM">
       <parentDocument>
          <id extension="TB1" root="2.16.840.1.113883.19.5.99999.1"/>
       </parentDocument>
@@ -29,7 +29,7 @@
                <templateId root="2.16.840.1.113883.10.20.22.2.5.1"/>
             </section>
          </component>
-         <component>
+         <component xmlns:v3="urn:hl7-org:v3" >
             <section nullFlavor="NI">
                <templateId root="2.16.840.1.113883.10.20.22.2.3"/>
                <templateId root="2.16.840.1.113883.10.20.22.2.3.1"/>

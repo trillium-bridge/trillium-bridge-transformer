@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-    xsi:schemaLocation="http://trilliumbridge.org/xform ../schema/TBXform.xsd"
-    xmlns:epsos="urn:epsos-org:ep:medication"
+<map xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:epsos="urn:epsos-org:ep:medication" 
+    xsi:schemaLocation="http://trilliumbridge.org/xform ../schema/TBXform.xsd urn:epsos-org:ep:medication ../schema/CDASchema/POCD_MT000040_extended.xsd"
     xmlns="http://trilliumbridge.org/xform">
 
-    <context from="CCD" to="epSOS">
+    <context>
         <documentation>The stylesheet needs to be mapped from the appropriate type and langauge</documentation>
         <root/>
         <transform>
             <path>processing-instruction/xml-stylesheet</path>
             <transformation name="setStyleSheet">
-                <arg value="{to}-{language}" default="CCD"/>
+                <arg value="CCD-{language}" default="CCD"/>
             </transformation>
         </transform>
     </context>
 
-    <context from="CCD" to="epSOS">
+    <context>
         <documentation>Entry point for the CCD to epSOS transformation</documentation>
         <root>/ClinicalDocument[templateId/@root="2.16.840.1.113883.10.20.22.1.1"]</root>
         <transform global="true">
@@ -350,20 +350,20 @@
                                 <arg name="target" after="true">
                                     <epsos:formCode nullFlavor="NA"/>
                                     <epsos:ingredient classCode="ACTI">
-                                        <quantity nullFlavor="NA">
-                                            <numerator nullFlavor="NA" xsi:type="PQ"/>
-                                            <denominator nullFlavor="NA" xsi:type="PQ"/>
-                                        </quantity>
-                                    </epsos:ingredient>
-                                    <epsos:ingredient classCode="MMAT" determinerCode="KIND">
-                                        <code xmlns="urn:epsos-org:ep:medication"/>
+                                        <epsos:quantity>
+                                            <epsos:numerator nullFlavor="NA" xsi:type="epsos:PQ"/>
+                                            <epsos:denominator nullFlavor="NA" xsi:type="epsos:PQ"/>
+                                        </epsos:quantity>
+                                        <epsos:ingredient classCode="MMAT" determinerCode="KIND">
+                                            <epsos:code nullFlavor="NA"/>
+                                        </epsos:ingredient>
                                     </epsos:ingredient>
                                 </arg>
                             </transformation>
                         </transform>
                         <transform>
-                            <path></path>
-                            <transformation></transformation>
+                            <path/>
+                            <transformation/>
                         </transform>
                     </context>
                 </context>
