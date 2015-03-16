@@ -18,9 +18,9 @@
     <!-- ===================================================================
          schemalocation - the URI the target schemalocation
          =================================================================== -->
-    <xsl:param name="schemaLocation" as="xs:anyURI" required="no"/>
+    <xsl:param name="schemaLocation" as="xs:anyURI" required="no"/> 
     
-    <!-- ===================================================================
+    <!-- =================================================================
          copycomments - copy the comments from the source to the target document
          =================================================================== -->
     <xsl:param name="copycomments" select="'true'"/>

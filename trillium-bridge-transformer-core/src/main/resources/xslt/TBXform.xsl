@@ -211,7 +211,7 @@
     </xsl:function>
 
     <xsl:template match="@xsi:schemaLocation" mode="inside">
-        <xsl:attribute name="{name()}" select="if ($schemaLocation) then $schemaLocation else ."/>
+        <xsl:attribute name="{name()}" select="if ($schemaLocation = '/') then . else $schemaLocation"/>
     </xsl:template>
 
 
