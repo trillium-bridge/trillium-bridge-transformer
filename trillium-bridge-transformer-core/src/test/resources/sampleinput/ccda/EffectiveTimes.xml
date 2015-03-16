@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ClinicalDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:hl7-org:v3" xmlns:cda="urn:hl7-org:v3" 
+    xmlns:sdtc="urn:hl7-org:sdtc">
+    <realmCode code="US"/>
+    <effectiveTime value="201309150000-0400"/>
+    <templateId root="2.16.840.1.113883.10.20.22.1.1"/>
+    <documentationOf>
+        <serviceEvent classCode="PCPR">
+            <code code="185349003" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Check-up"/>
+            <effectiveTime>
+                <low value="201309081015"/>
+                <high value="201309081045"/>
+            </effectiveTime>
+        </serviceEvent>
+    </documentationOf>
+    <component>
+        <structuredBody>
+            <component>
+                <section>
+                    <templateId root="2.16.840.1.113883.10.20.22.2.6"/>
+                    <effectiveTime value="20070501"/>
+                    <effectiveTime>
+                        <low value="20070501"/>
+                    </effectiveTime>
+                    <effectiveTime xsi:type="IVL_TS">
+                        <low value="20130103"/>
+                        <high nullFlavor="NA"/>
+                    </effectiveTime>
+                    <effectiveTime xsi:type="IVL_TS">
+                        <low value="20130103"/>
+                        <high value="20180102"/>
+                    </effectiveTime>
+                    <effectiveTime xsi:type="IVL_TS" value="20130101"/>
+                    <effectiveTime xsi:type="IVL_TS">
+                        <low value="19930101"/>
+                    </effectiveTime>
+                </section>
+            </component>
+        </structuredBody>
+    </component>
+</ClinicalDocument>
+
