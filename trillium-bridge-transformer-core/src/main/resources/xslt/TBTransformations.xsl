@@ -4,7 +4,7 @@
     xmlns:mapServices="http://www.omg.org/spec/CTS2/1.1/MapEntryServices" xmlns:codeSystem="http://schema.omg.org/spec/CTS2/1.0/CodeSystem"
     xmlns:core="http://www.omg.org/spec/CTS2/1.1/Core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xpath-default-namespace="urn:hl7-org:v3"
     xmlns:v3="urn:hl7-org:v3">
-    <xsl:import href="TBParameters.xsl"/>
+    <xsl:include href="TBParameters.xsl"/>
     <xsl:include href="CTS2Access.xsl"/>
     <xsl:include href="TBTranslator.xsl"/>
 
