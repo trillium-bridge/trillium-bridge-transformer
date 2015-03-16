@@ -2,10 +2,9 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tbx="http://trilliumbridge.org/xform"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" exclude-result-prefixes="xs tbx" version="2.0" xpath-default-namespace="urn:hl7-org:v3">
     <xsl:import href="TBParameters.xsl"/>
+    <xsl:import href="TBTransformations.xsl"/>
     <xsl:output media-type="xml" indent="yes"/>
     <xsl:strip-space elements="*"/>
-
-    <xsl:include href="TBTransformations.xsl"/>
 
     <xsl:variable name="cr" select="'&#xa;'"/>
     <xsl:variable name="tab" select="'&#x9;'"/>
