@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
     stylesheet="../../main/resources/xslt/epsos2ccd.xsl">
+    <x:param name="usebing">false</x:param>
     <x:scenario label="Last Add Only">
         <x:context select="document('../../../test/resources/sampleinput/epsos/TestInsertAfter.xml')"/>
         <x:expect  select="document('../../../test/resources/sampleoutput/ccda/TestInsertAfter.xml')"
@@ -71,22 +72,32 @@
             label="Blood Pressure in CCD" />
     </x:scenario>
     
-    <x:param name="usbing">false</x:param>
-    <x:scenario label="Paolo">
+
+<!--    <x:scenario label="Paolo No Bing">
         <x:context select="document('../../../test/resources/sampleinput/epsos/RTD_PS_Paolo_IT_L3_v2.xml')"/>
         <x:expect  select="document('../../../test/resources/sampleoutput/ccda/RTD_PS_Paolo_IT_L3_v2_CCD_nobing.xml')"
             label="PAOLO in CCD no BING" />
-    </x:scenario>
+    </x:scenario>-->
     
-<!--    <x:param name="usbing">true</x:param>
-    <x:scenario label="Paolo">
+    <x:scenario label="Paolo Bing">
         <x:context select="document('../../../test/resources/sampleinput/epsos/RTD_PS_Paolo_IT_L3_v2.xml')"/>
         <x:expect  select="document('../../../test/resources/sampleoutput/ccda/RTD_PS_Paolo_IT_L3_v2_CCD_bing.xml')"
             label="PAOLO in CCD bing" />
-    </x:scenario>-->
+    </x:scenario>
 
+
+    <x:scenario label="MisingExtension">
+        <x:context select="document('../../../test/resources/sampleinput/epsos/TestExtension.xml')"/>
+        <x:expect  select="document('../../../test/resources/sampleoutput/ccda/TestExtension.xml')"
+            label="Missing Extension" />
+    </x:scenario>
     
     
+    <x:scenario label="TemplateIds">
+        <x:context select="document('../../../test/resources/sampleinput/epsos/TemplateId.xml')"/>
+        <x:expect  select="document('../../../test/resources/sampleoutput/ccda/TemplateId.xml')"
+            label="Template Identifiers" />
+    </x:scenario>
     
    
 

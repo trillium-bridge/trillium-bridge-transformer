@@ -6,11 +6,11 @@
                   xmlns:ns="urn:hl7-org:v3"
                   xmlns:sch="http://www.ascc.net/xml/schematron"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		  xsi:schemaLocation="../schema/CDASchema/CDA_extended.xsd">
+                  xsi:schemaLocation="../schema/CDASchema/CDA_extended.xsd">
    <templateId root="2.16.840.1.113883.10.20.22.1.2"/>
    <templateId root="2.16.840.1.113883.10.20.22.1.1"/>
    <languageCode code="en-EN"/>
-   <relatedDocument typeCode="XFRM">
+   <relatedDocument xmlns:v3="urn:hl7-org:v3" typeCode="XFRM">
       <parentDocument>
          <id extension="NONE" root="NONE"/>
       </parentDocument>
@@ -52,7 +52,7 @@
                         <tr ID="allergy.1">
                            <td>
                               <content ID="typ.all.1">Drug allergy</content>: <content ID="agn_des.all.1">Erythromycin</content>
-                                        (ATC: <content ID="agn_cod.all.1"> D10AF02</content>), from <content ID="on.all.1">1995</content>
+                                        (ATC: <content ID="agn_cod.all.1"> D10AF02</content>), dal <content ID="on.all.1">1995</content>
                            </td>
                            <td ID="rea.all.1">Allergic rash</td>
                         </tr>

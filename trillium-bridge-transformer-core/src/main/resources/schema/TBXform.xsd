@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" xmlns:core="http://www.omg.org/spec/CTS2/1.1/Core"
     xmlns:tbxform="http://trilliumbridge.org/xform" targetNamespace="http://trilliumbridge.org/xform" 
+    xmlns:v3="urn:hl7-org:v3"
     xmlns:epsos="urn:epsos-org:ep:medication" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <xs:import namespace="http://www.omg.org/spec/CTS2/1.1/Core" schemaLocation="http://www.omg.org/spec/cts2/130601/core/Core.xsd"/>
-
+    <xs:import namespace="urn:hl7-org:v3" schemaLocation="../schema/CDASchema/POCD_MT000040_extended.xsd"/>
+    
     <xs:simpleType name="TRANSFORMATIONS">
         <xs:annotation>
             <xs:documentation>List of available transformations</xs:documentation>
@@ -341,11 +343,17 @@
         </xs:annotation>
         <xs:sequence>
             <xs:element name="documentation" type="xs:string" minOccurs="0"/>
-            <xs:element name="root" type="xs:string" minOccurs="1" maxOccurs="unbounded">
+            <xs:element name="root" type="xs:string" minOccurs="1" maxOccurs="1">
                 <xs:annotation>
-                    <xs:documentation>The path to match in the source document</xs:documentation>
+                    <xs:documentation>A path to match in the source document</xs:documentation>
                 </xs:annotation>
             </xs:element>
+            <xs:element name="template" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation>A template to match in the root context</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            
             <xs:element name="transform" type="tbxform:mapEntry" minOccurs="0" maxOccurs="unbounded"/>
             <xs:element name="context" type="tbxform:context" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>

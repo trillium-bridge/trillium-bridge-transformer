@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
-    stylesheet="../../main/resources/xslt/TBXform.xsl">
-    <x:param name="transform">../../resources/tbxform/FP7-SA610756-D3.1.xml</x:param>
+    stylesheet="../../main/resources/xslt/epsos2ccd.xsl">
+    <x:param name="addDefaults">false</x:param>
     <x:scenario label="multiple-context-test">
         <x:context>
             <ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:ext="urn:hl7-EE-DL-Ext:v1" xmlns:mif="urn:hl7-org:v3/mif"
@@ -30,7 +30,14 @@
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                 <templateId root="2.16.840.1.113883.10.20.22.1.2"/>
                 <templateId root="2.16.840.1.113883.10.20.22.1.1"/>
-                <languageCode code="en"/>
+                <languageCode code="en-EN"/>
+                <relatedDocument xmlns:v3="urn:hl7-org:v3"
+                    typeCode="XFRM">
+                    <parentDocument>
+                        <id extension="NONE"
+                            root="NONE" />
+                    </parentDocument>
+                </relatedDocument>
                 <component>
                     <structuredBody>
                         <component>
@@ -43,7 +50,6 @@
                     </structuredBody>
                 </component>
             </ClinicalDocument>
-            
         </x:expect>
     </x:scenario>
 </x:description>

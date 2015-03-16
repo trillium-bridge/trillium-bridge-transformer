@@ -14,10 +14,4 @@
     <!-- Schema Location -->
     <xsl:param name="schemaLocation">../schema/CDASchema/CDA_extended.xsd</xsl:param>
     
-    <!-- From direction -->
-    <xsl:param name="from">epSOS</xsl:param>
-    
-    <!-- To direction -->
-    <xsl:param name="to">CCD</xsl:param>
-    
 </xsl:stylesheet>

@@ -10,7 +10,7 @@
 
     <!-- If true, we are being invoked in a XSPEC scenario -->
     <xsl:param name="debug" select="false()"/>
-    
+
     <xsl:variable name="valuesets" as="element(tbx:valuesetmap)">
         <xsl:copy-of select="document('../tbxform/ValueSetMaps.xml')/tbx:valuesetmap"/>
     </xsl:variable>
@@ -95,11 +95,13 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:for-each>
-        <xsl:for-each select="$args/tbx:arg/@toid">
-            <xsl:element name="templateId" namespace="urn:hl7-org:v3">
-                <xsl:attribute name="root" select="."/>
-            </xsl:element>
-        </xsl:for-each>
+        <xsl:if test="$context/../*[name()=$context/name()][position()=last()] is $context">
+            <xsl:for-each select="$args/tbx:arg/@toid">
+                <xsl:element name="templateId" namespace="urn:hl7-org:v3">
+                    <xsl:attribute name="root" select="."/>
+                </xsl:element>
+            </xsl:for-each>
+        </xsl:if>
     </xsl:template>
 
     <!-- ============================= replaceCode  ==========================
@@ -167,33 +169,53 @@
     <!-- ============================= addNode  ==========================
         Add the supplied node in at the current context
         $context - the elements to be mapped
+        @outside - if present, the nodes are added before (outside) the path.  If absent
+                   the nodes are added inside
+        @ifnot   - if present the node is only added if the templateId as the ifnot value is not
+                   already present in the resource.  (Used for adding default nodes).  @ifnot
+                   is ignored if the addDefaults parameter is false
         $arg/@before=true - block to add before content
         $arg/@after=true - block to add after content
         ====================================================================== -->
     <xsl:template name="addNode" xmlns="urn:hl7-org:v3">
         <xsl:param name="context" tunnel="yes"/>
         <xsl:param name="args" select="." as="element()"/>
-        <xsl:variable name="last" select="$context/../*[position()=last()] is $context"/>
+        <xsl:param name="xformnumber" as="xs:integer" tunnel="yes"/>
 
-        <xsl:if test="$args/@outside">
+        <xsl:variable name="last" select="$context/../*[position()=last()] is $context" as="xs:boolean"/>
+        <xsl:variable name="doInsert" as="xs:boolean">
+            <xsl:value-of select="boolean(not(@ifnot) or ($addDefaults='true' and not($context//templateId[@root=$args/@ifnot])))"/>
+        </xsl:variable>
+
+        <xsl:if test="$args/@outside and $doInsert">
             <xsl:for-each select="$args/tbx:arg[@before]/*">
                 <xsl:copy>
                     <xsl:apply-templates select="@* | node()" mode="substitute"/>
                 </xsl:copy>
             </xsl:for-each>
         </xsl:if>
+
         <xsl:for-each select="$context">
-            <xsl:copy>
-                <xsl:for-each select="$args[not(@outside)]/tbx:arg[@before]">
-                    <xsl:copy-of select="*"/>
-                </xsl:for-each>
-                <xsl:apply-templates select="@* | node()" mode="inside"/>
-                <xsl:for-each select="$args[not(@outside)]/tbx:arg[@after]">
-                    <xsl:copy-of select="*"/>
-                </xsl:for-each>
-            </xsl:copy>
+            <xsl:if test="$xformnumber = 1">
+                <xsl:copy>
+                    <xsl:if test="$doInsert">
+                        <xsl:for-each select="$args[not(@outside)]/tbx:arg[@before]">
+                            <xsl:copy-of select="*"/>
+                        </xsl:for-each>
+                    </xsl:if>
+
+                    <xsl:apply-templates select="@* | node()" mode="inside"/>
+
+                    <xsl:if test="$doInsert">
+                        <xsl:for-each select="$args[not(@outside)]/tbx:arg[@after]">
+                            <xsl:copy-of select="*"/>
+                        </xsl:for-each>
+                    </xsl:if>
+                </xsl:copy>
+            </xsl:if>
         </xsl:for-each>
-        <xsl:if test="$args/@outside and $last">
+
+        <xsl:if test="exists($args/@outside) and $last and $doInsert">
             <xsl:for-each select="$args/tbx:arg[@after]/*">
                 <xsl:copy>
                     <xsl:apply-templates select="@* | node()" mode="substitute"/>
@@ -325,7 +347,7 @@
     <xsl:template name="newid">
         <xsl:param name="context" tunnel="yes"/>
         <xsl:for-each select="$context">
-            <id xmlns="urn:hl7-org:v3" extension="{concat(@extension, '.1')}">
+            <id xmlns="urn:hl7-org:v3" extension="{if (@extension) then concat(@extension, '.1') else '1'}">
                 <xsl:apply-templates select="@* except @extension" mode="inside"/>
             </id>
         </xsl:for-each>
@@ -408,6 +430,7 @@
     </xsl:template>
 
     <!-- ============================= mapValueSetAndAdd  ===================
+        Map the value set referenced by the current context into the "code" node in the node to add
 
         ====================================================================== -->
     <xsl:template name="mapValueSetAndAdd">
@@ -436,7 +459,7 @@
 
     <xsl:template match="*" mode="replaceCode">
         <xsl:param name="replacement" as="element()" tunnel="yes"/>
-        
+
         <xsl:copy>
             <xsl:choose>
                 <xsl:when test="local-name()='code'">
@@ -462,8 +485,36 @@
         <xsl:for-each select="$context">
             <effectiveTime xmlns="urn:hl7-org:v3">
                 <xsl:apply-templates select="@* except @value" mode="inside"/>
-                <low value="{@value}"/>
-                <xsl:apply-templates select="node() except low" mode="inside"/>
+                <xsl:choose>
+                    <xsl:when test="low">
+                        <xsl:copy-of select="low"/>
+                    </xsl:when>
+                    <xsl:when test="@value">
+                        <low value="{@value}"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <low nullFlavor="NA"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+                <xsl:choose>
+                    <xsl:when test="high">
+                        <xsl:copy-of select="high"/>
+                    </xsl:when>
+                    <xsl:when test="@xsi:type='IVL_TS'">
+                        <xsl:choose>
+                            <xsl:when test="@value">
+                                <high value="{@value}"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <high nullFlavor="NA"/>
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <high value="{if(@value) then @value else low/@value}"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+                <xsl:apply-templates select="node() except (low, high)" mode="inside"/>
             </effectiveTime>
         </xsl:for-each>
     </xsl:template>

@@ -5,9 +5,7 @@
     xmlns:bx="http://schemas.microsoft.com/2003/10/Serialization/"
     exclude-result-prefixes="xs tbx"
     version="2.0">
-    
-    <xsl:param name="translationbase">http://localhost:8099</xsl:param>
-    <xsl:param name="usebing" select="'true'"/>
+    <xsl:import href="TBParameters.xsl"/>
     
     <xsl:variable name="splitchunk" select="'(\P{L}*)(\p{L}[\p{L}\p{Zs}-]+\p{L}\p{P}?\P{N})(.*)'"/>
     

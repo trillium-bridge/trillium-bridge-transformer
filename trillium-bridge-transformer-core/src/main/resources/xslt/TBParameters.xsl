@@ -26,10 +26,26 @@
     <xsl:param name="copycomments" select="'true'"/>
     
     <!-- ===================================================================
+         translationbase - the base URI of the Bing translator gateway
+         =================================================================== -->
+    <xsl:param name="translationbase">http://localhost:8099</xsl:param>
+    
+    <!-- ===================================================================
+         usebing - true means use the bing translation gateway
+         =================================================================== -->
+    <xsl:param name="usebing" select="'true'"/>
+    
+    <!-- ===================================================================
          copypi - copy the processing instructions from the source to the target document
          If 'false', the stylesheet processing instruction will not be copied
          =================================================================== -->
-    <xsl:param name="copypi" select="'true'"/>    
+    <xsl:param name="copypi" select="'true'"/>
+    
+    <!-- ===================================================================
+         addDefaults - If true, addNodes with ifnot are processed.  If false
+          they are ignored (for testing)
+         =================================================================== -->   
+    <xsl:param name="addDefaults" select="'true'"/>
     
     <!-- ===================================================================
          showpaths - Show the relative and absolute paths of all statements as comments

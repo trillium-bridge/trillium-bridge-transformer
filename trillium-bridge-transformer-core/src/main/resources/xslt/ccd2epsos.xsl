@@ -12,10 +12,4 @@
     <!-- Transformation rules -->
     <xsl:param name="transform">../tbxform/CCDtoEPSOS.xml</xsl:param>
     
-    <!-- From direction -->
-    <xsl:param name="from">CCD</xsl:param>
-    
-    <!-- To direction -->
-    <xsl:param name="to">epSOS</xsl:param>
-    
 </xsl:stylesheet>

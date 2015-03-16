@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec" stylesheet="../../main/resources/xslt/epsos2ccd.xsl">
+
+    <x:param name="usebing">false</x:param>
+    <x:scenario label="Paolo No Bing">
+        <x:context select="document('../../../test/resources/sampleinput/epsos/RTD_PS_Paolo_IT_L3_v2.xml')"/>
+        <x:expect select="document('../../../test/resources/sampleoutput/ccda/RTD_PS_Paolo_IT_L3_v2_CCD_nobing.xml')" label="PAOLO in CCD no BING"/>
+    </x:scenario>
+
+
+
+</x:description>

@@ -57,20 +57,13 @@
     <xsl:template match="*" xmlns="urn:hl7-org:v3" mode="inside">
         <xsl:param name="absbase" as="xs:string" tunnel="yes"/>
         <xsl:param name="relbase" as="xs:string" tunnel="yes"/>
-        <xsl:param name="mapcontext" as="element()" tunnel="yes"/>
+        <xsl:param name="mapcontext" as="element()+" tunnel="yes"/>
         <xsl:param name="globals" as="element()*" tunnel="yes"/>
         <xsl:param name="matchonly" tunnel="yes" select="false()"/>
 
         <xsl:variable name="abspath" select="tbx:refmark($absbase, .)"/>
         <xsl:variable name="relpath" select="tbx:refmark($relbase, .)"/>
         <xsl:variable name="context" select="current()"/>
-
-        <!-- Debugging -->
-        <xsl:if test="$showpaths = 'true'">
-            <xsl:value-of select="$cr"/>
-            <xsl:comment><xsl:value-of select="concat($tab, 'FULL PATH:  ', $abspath, $cr, $tab, $tab, 'LOCAL PATH: ', $relpath, '  ')"/></xsl:comment>
-            <xsl:value-of select="$cr"/>
-        </xsl:if>
 
         <!-- Error checks -->
         <xsl:if test="not(ends-with(replace($relpath, '\[[^\]]*\]', ''), $context/name()))">
@@ -82,12 +75,19 @@
         </xsl:if>
 
         <!-- Look for a matching context or transformation match -->
-        <xsl:variable name="contextmatch" select="$mapcontext/tbx:context[tbx:root=$relpath]"/>
+        <xsl:variable name="contextmatch" select="$mapcontext/tbx:context[tbx:root=$relpath and (not(tbx:template) or tbx:template = $context/templateId/@root)]"/>
         <xsl:variable name="transformmatch" select="$mapcontext/tbx:transform[tbx:path=$relpath and not(@global=true())]"/>
 
         <!-- Global match rules are saved and carried across levels. -->
         <xsl:variable name="allglobals" select="$globals union $mapcontext/tbx:transform[@global=true()]"/>
         <xsl:variable name="globalmatch" select="$allglobals[ends-with($relpath, tbx:path)]"/>
+        
+        <!-- Debugging -->
+        <xsl:if test="$showpaths = 'true'">
+            <xsl:value-of select="$cr"/>
+            <xsl:comment><xsl:value-of select="concat($tab, 'FULL PATH:  ', $abspath, $cr, $tab, $tab, 'LOCAL PATH: ', $relpath, '  ')"/></xsl:comment>
+            <xsl:value-of select="$cr"/>
+        </xsl:if>
 
         <xsl:if test="boolean($globalmatch) and boolean($transformmatch)">
             <xsl:message terminate="yes">
@@ -97,10 +97,9 @@
             </xsl:message>
         </xsl:if>
 
-
         <xsl:if test="$globalmatch">
             <xsl:for-each select="$globalmatch/tbx:transformation">
-                <xsl:value-of select="tbx:debugging(concat('GLOBAL TRANSFORM: ', @name))"/>
+                <xsl:copy-of select="tbx:debugging(concat('GLOBAL TRANSFORM: ', @name))"/>
                 <xsl:call-template name="applyTransformations">
                     <xsl:with-param name="context" select="$context" tunnel="yes"/>
                     <xsl:with-param name="globals" select="$allglobals" tunnel="yes"/>
@@ -112,34 +111,26 @@
 
         <xsl:if test="$transformmatch">
             <!-- transformation node(s).  Apply the transformation rule -->
-            <xsl:choose>
-                <!-- If this isn't the first match, ignore it completely -->
-                <xsl:when test="boolean(preceding-sibling::*[name()=$context/name()]) and $context/name() = 'templateId'">
-                    <xsl:value-of select="tbx:debugging('TRANSFORM (successor node)')"/>
-                </xsl:when>
+            <xsl:variable name="contexts" select="../*[name()=$context/name()]"/>
 
-                <!-- Otherwise apply the transformations -->
-                <xsl:otherwise>
-                    <xsl:variable name="contexts" select="../*[name()=$context/name()]"/>
-
-                    <xsl:for-each select="$transformmatch/tbx:transformation">
-                        <xsl:value-of select="tbx:debugging(concat('TRANSFORM: ', @name))"/>
-                        <xsl:call-template name="applyTransformations">
-                            <xsl:with-param name="absbase" select="$abspath" tunnel="yes"/>
-                            <xsl:with-param name="context" tunnel="yes" select="$context"/>
-                            <xsl:with-param name="relbase" select="$relpath" tunnel="yes"/>
-                            <xsl:with-param name="globals" select="$allglobals" tunnel="yes"/>
-                            <xsl:with-param name="mapcontext" select="$mapcontext" tunnel="yes"/>
-                            <xsl:with-param name="matchonly" select="false()" tunnel="yes"/>
-                        </xsl:call-template>
-                    </xsl:for-each>
-                </xsl:otherwise>
-            </xsl:choose>
+            <xsl:for-each select="$transformmatch/tbx:transformation">
+                <xsl:copy-of select="tbx:debugging(concat('TRANSFORM: ', @name))"/>
+                <xsl:call-template name="applyTransformations">
+                    <xsl:with-param name="absbase" select="$abspath" tunnel="yes"/>
+                    <xsl:with-param name="context" tunnel="yes" select="$context"/>
+                    <xsl:with-param name="relbase" select="$relpath" tunnel="yes"/>
+                    <xsl:with-param name="globals" select="$allglobals" tunnel="yes"/>
+                    <xsl:with-param name="mapcontext" select="$mapcontext" tunnel="yes"/>
+                    <xsl:with-param name="matchonly" select="false()" tunnel="yes"/>
+                    <xsl:with-param name="xformnumber" select="position()" tunnel="yes"/>
+                </xsl:call-template>
+            </xsl:for-each>
+            
         </xsl:if>
 
         <xsl:if test="$contextmatch">
             <!-- Context node.  Set a new base context and descend -->
-            <xsl:value-of select="tbx:debugging('CONTEXT')"/>
+            <xsl:copy-of select="tbx:debugging(concat('CONTEXT: ', if($contextmatch/tbx:template) then $contextmatch/tbx:template[1] else $contextmatch/tbx:root, '   '))"/>
             <xsl:choose>
                 <xsl:when test="boolean($contextmatch/@global)">
                     <xsl:for-each select="$contextmatch/tbx:transformation">
@@ -170,7 +161,7 @@
             <!-- No context or transformation entry. Copy the node if $matchonly is false and proceed -->
             <xsl:choose>
                 <xsl:when test="$matchonly">
-                    <xsl:value-of select="tbx:debugging('IGNORE')"/>
+                    <xsl:copy-of select="tbx:debugging('IGNORE')"/>
                     <xsl:apply-templates select="@* | node()" mode="inside">
                         <xsl:with-param name="absbase" select="$abspath" tunnel="yes"/>
                         <xsl:with-param name="globals" select="$allglobals" tunnel="yes"/>
@@ -179,7 +170,7 @@
                     </xsl:apply-templates>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:value-of select="tbx:debugging('COPY')"/>
+                    <xsl:copy-of select="tbx:debugging('COPY')"/>
                     <xsl:copy>
                         <xsl:apply-templates select="@* | node()" mode="inside">
                             <xsl:with-param name="absbase" select="$abspath" tunnel="yes"/>
@@ -208,9 +199,6 @@
         <xsl:param name="context"/>
         <xsl:variable name="base" select="concat($root, '/', $context/name())"/>
         <xsl:choose>
-            <xsl:when test="$context/templateId">
-                <xsl:value-of select="concat($base, '[templateId/@root=', $quot, $context/templateId[1]/@root, $quot, ']')"/>
-            </xsl:when>
             <xsl:when test="$context/@typeCode">
                 <xsl:value-of select="concat($base,'[@typeCode=', $quot, $context/@typeCode, $quot, ']')"/>
             </xsl:when>
@@ -322,10 +310,10 @@
         </xsl:choose>
     </xsl:function>
 
-    <xsl:function name="tbx:debugging">
+    <xsl:function name="tbx:debugging" as="node()*">
         <xsl:param name="msg" as="xs:string"/>
         <xsl:if test="$debugging = 'true'">
-            <xsl:value-of select="concat($cr,$tab, $tab, $msg, $cr)"/>
+            <xsl:comment select="concat($tab, $tab, $msg)"/>
         </xsl:if>
     </xsl:function>
 
