@@ -5,7 +5,6 @@
     xmlns:bx="http://schemas.microsoft.com/2003/10/Serialization/"
     exclude-result-prefixes="xs tbx"
     version="2.0">
-    <xsl:include href="TBParameters.xsl"/>
     
     <xsl:variable name="splitchunk" select="'(\P{L}*)(\p{L}[\p{L}\p{Zs}-]+\p{L}\p{P}?\P{N})(.*)'"/>
     
