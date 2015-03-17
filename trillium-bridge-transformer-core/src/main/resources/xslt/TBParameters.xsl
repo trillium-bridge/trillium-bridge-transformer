@@ -16,9 +16,9 @@
     <xsl:param name="transform" as="element(tbx:map)"/>
     
     <!-- ===================================================================
-         schemalocation - the URI the target schemalocation
+         schemalocation - the URI the target schemalocation "/" means none
          =================================================================== -->
-    <xsl:param name="schemaLocation" as="xs:anyURI" required="no"/> 
+    <xsl:param name="schemaLocation" as="xs:anyURI">/</xsl:param> 
     
     <!-- =================================================================
          copycomments - copy the comments from the source to the target document
