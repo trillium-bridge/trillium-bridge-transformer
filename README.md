@@ -46,7 +46,7 @@ and
 
 ## Download/Install
 <<<<<<< HEAD
-Download the latest [ZIP](http://informatics.mayo.edu/maven/content/repositories/releases/edu/mayo/trillium-bridge-transformer-cli/1.0.0.RC4/trillium-bridge-transformer-cli-1.0.0.RC4-bin.zip) or [TAR.GZ](http://informatics.mayo.edu/maven/content/repositories/releases/edu/mayo/trillium-bridge-transformer-cli/1.0.0.RC4/trillium-bridge-transformer-cli-1.0.0.RC4-bin.tar.gz) binary distribution. For installation, extract the archive to the desired location on the filesystem.
+Download the latest [ZIP](http://informatics.mayo.edu/maven/content/repositories/releases/edu/mayo/trillium-bridge-transformer-cli/1.0.0.RC5-SNAPSHOT/trillium-bridge-transformer-cli-1.0.0.RC5-SNAPSHOT-bin.zip) or [TAR.GZ](http://informatics.mayo.edu/maven/content/repositories/releases/edu/mayo/trillium-bridge-transformer-cli/1.0.0.RC5-SNAPSHOT/trillium-bridge-transformer-cli-1.0.0.RC5-SNAPSHOT-bin.tar.gz) binary distribution. For installation, extract the archive to the desired location on the filesystem.
 =======
 Download the latest [ZIP](http://informatics.mayo.edu/maven/content/repositories/releases/edu/mayo/trillium-bridge-transformer-cli/1.0.0.RC4-SNAPSHOT/trillium-bridge-transformer-cli-1.0.0.RC4-SNAPSHOT-bin.zip) or [TAR.GZ](http://informatics.mayo.edu/maven/content/repositories/releases/edu/mayo/trillium-bridge-transformer-cli/1.0.0.RC4-SNAPSHOT/trillium-bridge-transformer-cli-1.0.0.RC4-SNAPSHOT-bin.tar.gz) binary distribution. For installation, extract the archive to the desired location on the filesystem.
 >>>>>>> 7bda531fd0c1ab01422dab0d5c0b86a6d47eb08b
