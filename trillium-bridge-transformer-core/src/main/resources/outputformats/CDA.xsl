@@ -255,9 +255,7 @@
 	
 	<!--      Tables   -->
 	<xsl:template match="n1:table/@*|n1:thead/@*|n1:tfoot/@*|n1:tbody/@*|n1:colgroup/@*|n1:col/@*|n1:tr/@*|n1:th/@*|n1:td/@*">
-		<xsl:copy>
-			<xsl:apply-templates/>
-		</xsl:copy>
+		<xsl:copy/>
 	</xsl:template>
 
 	<xsl:template match="n1:table">
