@@ -5,7 +5,7 @@
     <parent>
         <artifactId>trillium-bridge-transformer</artifactId>
         <groupId>edu.mayo</groupId>
-        <version>1.0.0.RC4</version>
+        <version>1.0.0.RC5-SNAPSHOT</version>
     </parent>
 
     <artifactId>trillium-bridge-transformer-cli</artifactId>
