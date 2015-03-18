@@ -45,8 +45,7 @@ and
     trillium-bridge-transformer-cli-{version}-bin.tar.gz
 
 ## Download/Install
-Download the latest [ZIP](m-bridge-transformer-cli/maven-metadata.xml (387 B at 1.3 KB/sec)
-Uploading: http://informatics.mayo.edu/maven/content/repositories/snapshots/edu/mayo/trillium-bridge-transformer-cli/1.0.0.RC5-SNAPSHOT/trillium-bridge-transformer-cli-1.0.0.RC5-20150318.185001-4-bin.zip) or [TAR.GZ](http://informatics.mayo.edu/maven/content/repositories/snapshots/edu/mayo/trillium-bridge-transformer-cli/1.0.0.RC5-SNAPSHOT/trillium-bridge-transformer-cli-1.0.0.RC5-20150318.185001-4-bin.tar.gz) binary distribution. For installation, extract the archive to the desired location on the filesystem.
+Download the latest [ZIP](http://informatics.mayo.edu/maven/content/repositories/snapshots/edu/mayo/trillium-bridge-transformer-cli/1.0.0.RC5-SNAPSHOT/trillium-bridge-transformer-cli-1.0.0.RC5-20150318.185001-4-bin.zip) or [TAR.GZ](http://informatics.mayo.edu/maven/content/repositories/snapshots/edu/mayo/trillium-bridge-transformer-cli/1.0.0.RC5-SNAPSHOT/trillium-bridge-transformer-cli-1.0.0.RC5-20150318.185001-4-bin.tar.gz) binary distribution. For installation, extract the archive to the desired location on the filesystem.
 t the archive to the desired location on the filesystem.
 
 
