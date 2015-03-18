@@ -45,6 +45,7 @@ public class TransformerControllerTest {
     }
 
     @Test
+    @Ignore
     public void testCcda2Epsos() throws Exception {
         String testContent = "<test>content</test>";
 
