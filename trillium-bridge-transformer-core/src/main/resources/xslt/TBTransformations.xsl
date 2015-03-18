@@ -227,13 +227,13 @@
     <xsl:template match="@*" mode="substitute">
         <xsl:param name="id" tunnel="yes"/>
         <xsl:attribute name="{name()}"
-            select="replace(replace(., '\{id/@extension\}', if($id) then ($id/@extension) else 'NONE'), '\{id/@root\}', if($id) then ($id/@root) else 'NONE')"/>
+            select="replace(replace(., '\{id/@extension\}', if($id/@extension) then ($id/@extension) else 'NONE'), '\{id/@root\}', if($id) then ($id/@root) else 'NONE')"/>
     </xsl:template>
 
     <!-- addNode with text value substitution -->
     <xsl:template match="text()" mode="substitute">
         <xsl:param name="id" tunnel="yes"/>
-        <xsl:value-of select="replace(., '\{id\}', if($id) then $id/@extension else 'NONE')"/>
+        <xsl:value-of select="replace(., '\{id\}', if($id/@extension) then $id/@extension else 'NONE')"/>
     </xsl:template>
 
     <!-- addNode recursive element copy -->

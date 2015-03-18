@@ -6,6 +6,10 @@
     exclude-result-prefixes="xs tbx"
     version="2.0">
     
+    <!-- Matches (1) a leading string of non letters (\P{L})
+                 (2) a letter (\p{L}) followed by one or more letters, spaces \p{Zs}, dashes followed by
+                 (3) a letter \p{L} followed by an optional punctuation character \p{P} followed by a non-number (\P{N})
+      -->
     <xsl:variable name="splitchunk" select="'(\P{L}*)(\p{L}[\p{L}\p{Zs}-]+\p{L}\p{P}?\P{N})(.*)'"/>
     
     <xsl:function name="tbx:trans" as="xs:string">
