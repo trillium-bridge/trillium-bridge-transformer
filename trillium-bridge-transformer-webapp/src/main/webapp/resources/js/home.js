@@ -3,12 +3,25 @@ String.prototype.xmlEscape = function() {
     return $('<div/>').text(this.toString()).html();
 };
 
+(function () {
+    var protocol = location.href.substr(0, location.href.indexOf("://"));
+    var restOfUrl = location.href.substr(location.href.indexOf("://") + "://".length);
+    if (restOfUrl.match(/(trillium-bridge$)/)) {
+        location.href = protocol + "://" + restOfUrl + '/';
+    }
+    else if (restOfUrl.match(/trillium-bridge\?/)) {
+        location.href = protocol + '://' + restOfUrl.replace(/trillium-bridge\?/, 'trillium-bridge/?')
+    }
+})();
+
 jQuery(document).ready(function ($) {
     $("[rel='tooltip']").tooltip();
 
     $("#formatToggle .btn-group button").click(function () {
         $("#formatOverride").val($(this).text());
     });
+
+
 
     showHideOptions();
 

@@ -28,12 +28,12 @@
     <!-- ===================================================================
          translationbase - the base URI of the Bing translator gateway
          =================================================================== -->
-    <xsl:param name="translationbase">http://localhost:8099</xsl:param>
+    <xsl:param name="translationbase">http://informatics.mayo.edu/trillium-bridge/gateway</xsl:param>
     
     <!-- ===================================================================
          usebing - true means use the bing translation gateway
          =================================================================== -->
-    <xsl:param name="usebing" select="'true'"/>
+    <xsl:param name="usebing" select="'false'"/>
     
     <!-- ===================================================================
          copypi - copy the processing instructions from the source to the target document
