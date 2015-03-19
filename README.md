@@ -28,7 +28,7 @@ Patient Summary documents and HL7 C-CDA Continuity of Care Documents (CCD).
 1. Install [Java SDK 7+](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html)
 2. * Install [Git](http://git-scm.com/book/en/Getting-Started-Installing-Git)
 3. * Install [Maven](http://maven.apache.org/download.cgi)
-4. * Clone the repository using a Git Clone ```https://github.com/kevinpeterson/trillium-bridge-transformer.git```
+4. * Clone the repository using a Git Clone ```https://github.com/trillium-bridge/trillium-bridge-transformer.git```
 
 (*) Not necessary unless bulding/compiling. See [downloads](#downloadinstall) for binary distributions. 
 
@@ -45,7 +45,7 @@ and
     trillium-bridge-transformer-cli-{version}-bin.tar.gz
 
 ## Download/Install
-Download the latest [ZIP](http://informatics.mayo.edu/maven/content/repositories/snapshots/edu/mayo/trillium-bridge-transformer-cli/1.0.0.RC5-SNAPSHOT/trillium-bridge-transformer-cli-1.0.0.RC5-20150318.185001-4-bin.zip) or [TAR.GZ](http://informatics.mayo.edu/maven/content/repositories/snapshots/edu/mayo/trillium-bridge-transformer-cli/1.0.0.RC5-SNAPSHOT/trillium-bridge-transformer-cli-1.0.0.RC5-20150318.185001-4-bin.tar.gz) binary distribution. For installation, extract the archive to the desired location on the filesystem.
+Download the latest [ZIP](http://informatics.mayo.edu/maven/content/repositories/releases/edu/mayo/trillium-bridge-transformer-cli/1.0.0.RC5/trillium-bridge-transformer-cli-1.0.0.RC5-bin.zip) or [TAR.GZ](http://informatics.mayo.edu/maven/content/repositories/releases/edu/mayo/trillium-bridge-transformer-cli/1.0.0.RC5/trillium-bridge-transformer-cli-1.0.0.RC5-bin.tar.gz) binary distribution. For installation, extract the archive to the desired location on the filesystem.
 t the archive to the desired location on the filesystem.
 
 
