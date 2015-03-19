@@ -36,6 +36,11 @@
     <xsl:param name="usebing" select="'false'"/>
     
     <!-- ===================================================================
+         transform - URI base for redirects
+         =================================================================== -->
+    <xsl:param name="base" as="xs:string">trillium-bridge</xsl:param>
+
+    <!-- ===================================================================
          copypi - copy the processing instructions from the source to the target document
          If 'false', the stylesheet processing instruction will not be copied
          =================================================================== -->
