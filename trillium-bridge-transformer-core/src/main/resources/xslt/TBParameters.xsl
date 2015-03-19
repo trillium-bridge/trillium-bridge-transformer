@@ -28,7 +28,7 @@
     <!-- ===================================================================
          translationbase - the base URI of the Bing translator gateway
          =================================================================== -->
-    <xsl:param name="translationbase">http://informatics.mayo.edu/trillium-bridge/gateway</xsl:param>
+    <xsl:param name="translationbase">http://informatics.mayo.edu/trillium-bridge/translate</xsl:param>
     
     <!-- ===================================================================
          usebing - true means use the bing translation gateway
