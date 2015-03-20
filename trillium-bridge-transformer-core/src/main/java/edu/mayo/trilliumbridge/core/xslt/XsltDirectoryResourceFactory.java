@@ -22,7 +22,7 @@ public class XsltDirectoryResourceFactory {
 
     public static final String TBT_CONF_DIR = "conf";
 
-	public static final Pattern xlatere = Pattern.compile("http://trilliumbridge.org/from/(\\p{Alpha}{2})/to/(\\p{Alpha}{2})\\?text=(.*)");
+	public static final Pattern xlatere = Pattern.compile("internal/from/(\\p{Alpha}{2})/to/(\\p{Alpha}{2})\\?text=(.*)");
 
     private String envXsltDirOverride;
 
@@ -51,7 +51,7 @@ public class XsltDirectoryResourceFactory {
 
     protected Resource getResource(String path) {
 		System.out.println("GetResource: " + path);
-        if(path.startsWith("http:")) {
+        if(path.startsWith("http:") || path.startsWith("internal/")) {
 			Matcher m = xlatere.matcher(path);
 			try {
 				if(m.matches())

@@ -2,14 +2,14 @@
     {
         "optionName" : "copycomments",
         "optionType" : "BOOLEAN",
-        "description" : "Include comments",
+        "description" : "Include comments in output document",
         "defaultValue" : "true"
     },
     {
       "optionName" : "copypi",
       "optionType" : "BOOLEAN",
       "description" : "Include processing instructions",
-      "defaultValue" : "true"
+      "defaultValue" : "false"
     },
     {
         "optionName" : "usebing",
@@ -24,9 +24,9 @@
       "defaultValue" : "en"
     },
     {
-        "description" : "Bing translator gateway",
+        "description" : "Bing translator gateway. 'internal' means use webapp",
         "optionName" : "translationbase",
         "optionType" : "STRING",
-        "defaultValue" : "http://trilliumbridge.org"
+        "defaultValue" : "internal"
     }
 ]

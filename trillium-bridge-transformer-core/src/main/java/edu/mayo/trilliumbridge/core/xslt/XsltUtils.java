@@ -23,7 +23,7 @@ public final class XsltUtils {
         xsltFactory.setURIResolver(new URIResolver() {
             @Override
             public Source resolve(String href, String base) throws TransformerException {
-                if(!href.startsWith("http:"))
+                if(!href.startsWith("http:") && !href.startsWith("internal/"))
                     href = "/xslt/" + href;
                 try {
                     return new StreamSource(resourceFactory.getResource(href).getInputStream());
