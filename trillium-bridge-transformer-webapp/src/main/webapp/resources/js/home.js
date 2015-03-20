@@ -6,11 +6,11 @@ String.prototype.xmlEscape = function() {
 (function () {
     var protocol = location.href.substr(0, location.href.indexOf("://"));
     var restOfUrl = location.href.substr(location.href.indexOf("://") + "://".length);
-    if (restOfUrl.match(/(trillium-bridge$)/)) {
+    if (restOfUrl.match(/(bridge$)/)) {
         location.href = protocol + "://" + restOfUrl + '/';
     }
-    else if (restOfUrl.match(/trillium-bridge\?/)) {
-        location.href = protocol + '://' + restOfUrl.replace(/trillium-bridge\?/, 'trillium-bridge/?')
+    else if (restOfUrl.match(/bridge\?/)) {
+        location.href = protocol + '://' + restOfUrl.replace(/bridge\?/, 'bridge/?')
     }
 })();
 
