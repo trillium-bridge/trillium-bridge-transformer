@@ -1,0 +1,749 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- UPDATE DEMOGRAPHICS -->
+<?xml-stylesheet type="text/xsl" href="../resources/CCD.xsl"?>
+<ClinicalDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="urn:hl7-org:v3 ../schema/CDASchema/POCD_MT000040_extended.xsd" xmlns="urn:hl7-org:v3" xmlns:ns="urn:hl7-org:v3"
+ xmlns:mif="urn:hl7-org:v3/mif" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:ext="urn:hl7-EE-DL-Ext:v1">
+	<!-- header-section -->
+	<typeId extension="POCD_HD000040" root="2.16.840.1.113883.1.3"/>
+	<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.1.3"/>
+	<templateId root="1.3.6.1.4.1.19376.1.5.3.1.1.1"/>
+	<id extension="TB1" root="2.16.840.1.113883.19.5.99999.1"/>
+	<code code="60591-5" displayName="Patient Summary" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+		<translation displayName="Profilo Sanitario Sintentico"/>
+	</code>
+	<title>Profilo Sanitario Sintentico (Patient Summary)</title>
+	<effectiveTime value="20140501"/>
+	<confidentialityCode code="D" codeSystem="2.16.840.1.113883.5.25" codeSystemName="Confidentiality"/>
+	<languageCode code="it-IT"/>
+	<!--patient-data-->
+	<recordTarget>
+		<patientRole>
+			<id extension="CRRPLA47H13A794V" root="2.16.840.1.113883.2.9.4.3.2"/>
+			<addr>
+				<streetAddressLine>Via Sotto i Ponti, 15</streetAddressLine>
+				<city>Bergamo</city>
+				<postalCode>24121</postalCode>
+				<state nullFlavor="UNK"/>
+				<country>IT</country>
+			</addr>
+			<telecom nullFlavor="NI"/>
+			<patient>
+				<name>
+					<family>CERRUTI</family>
+					<given>PAOLO</given>
+				</name>
+				<administrativeGenderCode code="M" displayName="Male" codeSystem="2.16.840.1.113883.5.1" codeSystemName="AdministrativeGender" codeSystemVersion="913-20091020">
+					<translation displayName="Maschio"/>
+				</administrativeGenderCode>
+				<birthTime value="19470613"/>
+			</patient>
+		</patientRole>
+	</recordTarget>
+	<!-- patient-data -->
+	<!-- author-data -->
+	<author>
+		<time nullFlavor="UNK"/>
+		<assignedAuthor>
+			<!-- Fake ID using HL7 example OID. -->
+			<id extension="DCTTRLXX12345" root="2.16.840.1.113883.19.5.99999.99.2"/>
+			<addr>
+				<streetAddressLine>Viale Galilei, 123</streetAddressLine>
+				<city>Bergamo</city>
+				<postalCode>24121</postalCode>
+				<state nullFlavor="UNK"/>
+				<country>IT</country>
+			</addr>
+			<telecom use="WP" value="tel:+3912325455335"/>
+			<telecom use="WP" value="mailto:trillium@foo.eu"/>
+			<assignedPerson>
+				<name>
+					<family>DOCTOR</family>
+					<given>TRILLIUM</given>
+				</name>
+			</assignedPerson>
+			<representedOrganization>
+				<!-- Fake ID using HL7 example OID. -->
+				<id extension="aabbcc" root="2.16.840.1.113883.19.5.99999.99.3"/>
+				<name>Ospedale di Trillium Bridge</name>
+				<telecom use="WP" value="tel:+35625455335"/>
+				<telecom use="WP" value="mailto:trillium@foo.eu"/>
+				<addr>
+					<streetAddressLine>Viale Galilei, 123</streetAddressLine>
+					<city>Bergamo</city>
+					<postalCode>24121</postalCode>
+					<state nullFlavor="UNK"/>
+					<country>IT</country>
+				</addr>
+			</representedOrganization>
+		</assignedAuthor>
+	</author>
+	<!--author-data-->
+	<!--custodian-data-->
+	<custodian>
+		<assignedCustodian>
+			<representedCustodianOrganization>
+				<!-- Fake ID using HL7 example OID. -->
+				<id extension="aabbcc" root="2.16.840.1.113883.19.5.99999.99.3"/>
+				<name>Ospedale di Trillium Bridge</name>
+				<telecom use="WP" value="tel:+35625455335"/>
+				<addr>
+					<streetAddressLine>Viale Galilei, 123</streetAddressLine>
+					<city>Bergamo</city>
+					<postalCode>24121</postalCode>
+					<state nullFlavor="UNK"/>
+					<country>IT</country>
+				</addr>
+			</representedCustodianOrganization>
+		</assignedCustodian>
+	</custodian>
+	<!--custodian-data-->
+	<!--legal-authenticator-data-->
+	<legalAuthenticator>
+		<time value="20140501"/>
+		<signatureCode code="S"/>
+		<assignedEntity>
+			<!-- Fake ID using HL7 example OID. -->
+			<id extension="DCTTRLXX12345" root="2.16.840.1.113883.19.5.99999.99.2"/>
+			<addr>
+				<streetAddressLine>Viale Galilei, 123</streetAddressLine>
+				<city>Bergamo</city>
+				<postalCode>24121</postalCode>
+				<state nullFlavor="UNK"/>
+				<country>IT</country>
+			</addr>
+			<telecom use="WP" value="tel:+3912325455335"/>
+			<telecom use="WP" value="mailto:trillium@foo.eu"/>
+			<assignedPerson>
+				<name>
+					<family>DOCTOR</family>
+					<given>TRILLIUM</given>
+				</name>
+			</assignedPerson>
+			<representedOrganization>
+				<!-- Fake ID using HL7 example OID. -->
+				<id extension="aabbcc" root="2.16.840.1.113883.19.5.99999.99.3"/>
+				<name>Ospedale di Trillium Bridge</name>
+				<telecom use="WP" value="tel:+35625455335"/>
+				<telecom use="WP" value="mailto:trillium@foo.eu"/>
+				<addr>
+					<streetAddressLine>Viale Galilei, 123</streetAddressLine>
+					<city>Bergamo</city>
+					<postalCode>24121</postalCode>
+					<state nullFlavor="UNK"/>
+					<country>IT</country>
+				</addr>
+			</representedOrganization>
+		</assignedEntity>
+	</legalAuthenticator>
+	<!-- legal-authenticator-data -->
+	<!-- participant-hcp-organization-data -->
+	<participant typeCode="IND">
+		<templateId root="1.3.6.1.4.1.19376.1.5.3.1.2.4"/>
+		<functionCode code="PCP" codeSystem="2.16.840.1.113883.5.88" codeSystemName="HL7 ParticipationFunction"/>
+		<associatedEntity classCode="PRS">
+			<!-- Fake ID using HL7 example OID. -->
+			<id extension="DCTTRLXX12345" root="2.16.840.1.113883.19.5.99999.99.2"/>
+			<addr>
+				<streetAddressLine>Viale Galilei, 123</streetAddressLine>
+				<city>Bergamo</city>
+				<postalCode>24121</postalCode>
+				<state nullFlavor="UNK"/>
+				<country>IT</country>
+			</addr>
+			<telecom use="WP" value="tel:+3912325455335"/>
+			<telecom use="WP" value="mailto:trillium@foo.eu"/>
+			<associatedPerson>
+				<name>
+					<family>DOCTOR</family>
+					<given>TRILLIUM</given>
+				</name>
+			</associatedPerson>
+		</associatedEntity>
+	</participant>
+	<!--participant-hcp-organization-data-->
+	<documentationOf>
+		<serviceEvent>
+			<effectiveTime>
+				<low nullFlavor="UNK"/>
+				<high value="20140501"/>
+			</effectiveTime>
+		</serviceEvent>
+	</documentationOf>
+	<relatedDocument typeCode="XFRM">
+		<parentDocument>
+			<id extension="TB1.1" root="2.16.840.1.113883.19.5.99999.1"/>
+		</parentDocument>
+	</relatedDocument>
+	<relatedDocument typeCode="APND">
+		<parentDocument>
+			<id extension="TB1.2" root="2.16.840.1.113883.19.5.99999.1"/>
+		</parentDocument>
+	</relatedDocument>
+	<!--header-section-->
+	<!--medical-sections-->
+	<component>
+		<structuredBody>
+			<!--allergies-adverse-reactions-alerts-->
+			<component>
+				<section>
+					<templateId root="2.16.840.1.113883.10.20.1.2"/>
+					<templateId root="1.3.6.1.4.1.19376.1.5.3.1.3.13"/>
+					<code code="48765-2" displayName="Allergies, adverse reactions, alerts" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC">
+						<translation displayName="Allergie, Reazioni Avverse ed Allarmi"/>
+					</code>
+					<title>Allergie, Reazioni Avverse ed Allarmi</title>
+					<text>
+						<table border="1">
+							<tbody>
+								<tr>
+									<th>Tipo Allergia</th>
+									<th>Tipo di Reazione</th>
+								</tr>
+								<tr ID="allergy.1">
+									<td>
+										<content ID="typ.all.1">Allergia a farmaco</content>: <content ID="agn_des.all.1"> Eritromicina </content> (ATC: <content ID="agn_cod.all.1"> D10AF02</content>), dal <content ID="on.all.1">1995</content>
+									</td>
+									<td ID="rea.all.1">Eruzione allergica</td>
+								</tr>
+							</tbody>
+						</table>
+					</text>
+					<entry typeCode="DRIV">
+						<act classCode="ACT" moodCode="EVN">
+							<templateId root="2.16.840.1.113883.10.20.1.27"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5.1"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5.3"/>
+							<id extension="allergy.1" root="2.16.470.1.100.1.1.1000.990.1"/>
+							<code nullFlavor="NA"/>
+							<statusCode code="active"/>
+							<effectiveTime>
+								<low value="199501"/>
+							</effectiveTime>
+							<entryRelationship inversionInd="false" typeCode="SUBJ">
+								<observation classCode="OBS" moodCode="EVN">
+									<templateId root="2.16.840.1.113883.10.20.1.18"/>
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.6"/>
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5"/>
+									<templateId root="2.16.840.1.113883.10.20.1.28"/>
+									<id extension="allergy.1.obs.1" root="2.16.470.1.100.1.1.1000.990.1"/>
+									<code code="416098002" displayName="Drug allergy" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
+									<text>
+										<reference value="#allergy.1"/>
+									</text>
+									<statusCode code="completed"/>
+									<effectiveTime>
+										<low value="199501"/>
+									</effectiveTime>
+									<value xsi:type="CD">
+										<originalText>
+											<reference value="#allergy.1"/>
+										</originalText>
+									</value>
+									<participant typeCode="CSM">
+										<participantRole classCode="MANU">
+											<playingEntity classCode="MMAT">
+												<code code="A02BX07" displayName="gefarnate" codeSystem="2.16.840.1.113883.6.73"
+													codeSystemName="Anatomical Therapeutic Chemical">													
+													<originalText mediaType="text/xml">
+														<reference value="#agn_des.all.1"/>
+													</originalText>
+												</code>
+											</playingEntity>
+										</participantRole>
+									</participant>
+									<entryRelationship typeCode="MFST" inversionInd="true">
+										<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.6.1"/>
+										<!-- a problem entry -->
+										<observation classCode="OBS" moodCode="EVN">
+											<templateId root="2.16.840.1.113883.10.20.1.54"/>
+											<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5"/>
+											<templateId root="2.16.840.1.113883.10.20.1.28"/>
+											<id extension="allergy.1.obs.1.1" root="2.16.470.1.100.1.1.1000.990.1"/>
+											<!-- The code tells us that the observation is a symptom -->
+											<code code="418799008" codeSystem="2.16.840.1.113883.6.96" displayName="Finding reported by subject or history provider" codeSystemName="SNOMED CT"/>
+											<text>
+												<reference value="#rea.all.1"/>
+											</text>
+											<statusCode code="completed"/>
+											<effectiveTime>
+												<low nullFlavor="UNK"/>
+											</effectiveTime>
+											<!-- The value tells us what the symptom (i.e. allergy manifestation) is -->
+											<!-- This is where anaphylaxy or angiooedema will be coded -->
+											<value xsi:type="CD" code="200769008" codeSystem="2.16.840.1.113883.6.96" displayName="Atopic dermatitis and related conditions" codeSystemName="SNOMED CT">
+												<originalText>
+													<reference value="#rea.all.1"/>
+												</originalText>
+											</value>
+										</observation>
+									</entryRelationship>
+								</observation>
+							</entryRelationship>
+						</act>
+					</entry>
+				</section>
+			</component>
+			<!--allergies-adverse-reactions-alerts-->
+			<!--problem-list-->
+			<component>
+				<section>
+					<templateId root="2.16.840.1.113883.10.20.1.11"/>
+					<templateId root="1.3.6.1.4.1.19376.1.5.3.1.3.6"/>
+					<code code="11450-4" displayName="Problem list" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+					<title>Lista dei problemi attivi</title>
+					<text>
+						<table border="1">
+							<tbody>
+								<tr>
+									<th>Descrizione del Problema</th>
+									<th>Data Insorgenza</th>
+									<th colspan="2">Diagnosi</th>
+								</tr>
+								<tr ID="problem.1">
+									<td/>
+									<td>2008</td>
+									<td>I10</td>
+									<td ID="des.prob.1">Ipertensione Essenziale Non Specificata</td>
+								</tr>
+							</tbody>
+						</table>
+					</text>
+					<entry typeCode="DRIV">
+						<act classCode="ACT" moodCode="EVN">
+							<templateId root="2.16.840.1.113883.10.20.1.27"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5.1"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5.2"/>
+							<id extension="problem.1" root="2.16.470.1.100.1.1.1000.990.1"/>
+							<code nullFlavor="NA"/>
+							<statusCode code="active"/>
+							<effectiveTime>
+								<low value="200801"/>
+							</effectiveTime>
+							<entryRelationship inversionInd="false" typeCode="SUBJ">
+								<observation classCode="OBS" moodCode="EVN">
+									<templateId root="2.16.840.1.113883.10.20.1.28"/>
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5"/>
+									<id extension="problem.1.obs.1" root="2.16.470.1.100.1.1.1000.990.1"/>
+									<code code="55607006" displayName="Problem" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
+									<text>
+										<reference value="#des.prob.1"/>
+									</text>
+									<statusCode code="completed"/>
+									<effectiveTime>
+										<low value="200801"/>
+									</effectiveTime>
+									<value code="I10" displayName="Essential (primary) hypertension" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.44.2" codeSystemName="ICD-10" xsi:type="CD">
+										<originalText>
+											<reference value="#des.prob.1"/>
+										</originalText>
+									</value>
+								</observation>
+							</entryRelationship>
+						</act>
+					</entry>
+				</section>
+			</component>
+			<!--problem-list-->
+			<!--history-of-medication-use-->
+			<component>
+				<section>
+					<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.2.3"/>
+					<templateId root="2.16.840.1.113883.10.20.1.8"/>
+					<code code="10160-0" displayName="History of medication use" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+					<title>Terapie Farmacologiche</title>
+					<text>
+				<table border="1">
+							<tbody>
+								<tr>
+									<th>Nome Farmaco</th>
+									<th colspan="2">Principio Attivo</th>
+									<th>Dosaggio</th>
+									<th>Posologia</th>
+									<th>Via di Somministrazione</th>
+									<th>Data inizio terapia</th>
+									<th>Data fine terapia</th>
+									<th>Note</th>
+								</tr>
+								<tr>
+									<td>METOPROLOLO SAN*30 CPR 100MG</td>
+									<td ID="cod.med.1">C07AB02</td>
+									<td ID="sub.med.1">Metoprolol</td>
+									<td ID="str.med.1">100 mg</td>
+									<td>
+										<content ID="num.med.1">1<content ID="form.med.1">compressa</content>
+										</content> die, <content ID="frq.med.1">prima di colazione</content>
+									</td>
+									<td/>
+									<td ID="trt_beg.med.1">01-06-2014</td>
+									<td ID="trt_end.med.1"/>
+									<td>Terapia Continuativa</td>
+								</tr>
+							</tbody>
+						</table>
+					</text>
+					<entry typeCode="DRIV">
+						<substanceAdministration classCode="SBADM" moodCode="INT">
+							<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.4"/>
+							<templateId root="2.16.840.1.113883.10.20.1.24"/>
+							<!-- Fake ID using HL7 example OID. -->
+							<id extension="med.1" root="2.16.840.1.113883.19.5.99999.99.3"/>
+							<text>
+								<reference value="#med.1"/>
+							</text>
+							<statusCode code="active"/>
+							<effectiveTime xsi:type="IVL_TS">
+								<low value="20140601"/>
+								<high nullFlavor="NA"/>
+							</effectiveTime>
+							<effectiveTime xsi:type="EIVL_TS" operator="A">
+								<event code="ACM" codeSystem="2.16.840.1.113883.5.139" displayName="before breakfast"/>
+							</effectiveTime>
+							<doseQuantity>
+								<low value="1" unit="1"/>
+								<high value="1" unit="1"/>
+							</doseQuantity>
+							<consumable>
+								<manufacturedProduct>
+									<templateId root="2.16.840.1.113883.10.20.1.53"/>
+									<manufacturedMaterial>
+										<code nullFlavor="NA"/>
+										<epsos:formCode code="10219000" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.44.1" displayName="Tablet">
+											<epsos:originalText>
+												<epsos:reference value="#form.med.1"/>
+											</epsos:originalText>
+										</epsos:formCode>
+										<epsos:ingredient classCode="ACTI">
+											<epsos:quantity>
+												<epsos:numerator value="100" unit="mg" xsi:type="epsos:PQ"/>
+												<epsos:denominator value="1" unit="1" xsi:type="epsos:PQ"/>
+											</epsos:quantity>
+											<epsos:ingredient classCode="MMAT" determinerCode="KIND">
+												<epsos:code code="C07AB02" displayName="metoprolol" codeSystem="2.16.840.1.113883.6.73" codeSystemName="Anatomical Therapeutic Chemical">
+													<epsos:originalText>
+														<epsos:reference value="#cod.med.1"/>
+													</epsos:originalText>
+												</epsos:code>
+											</epsos:ingredient>
+										</epsos:ingredient>
+									</manufacturedMaterial>
+								</manufacturedProduct>
+							</consumable>
+						</substanceAdministration>
+					</entry>
+				</section>
+			</component>
+			<!--history-of-medication-use-->
+			<!--history-of-medical-device-use-->
+			<component>
+				<section>
+					<templateId root="2.16.840.1.113883.10.20.1.7"/>
+					<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.2.4"/>
+					<templateId root="1.3.6.1.4.1.19376.1.5.3.1.1.5.3.5"/>
+					<code code="46264-8" displayName="History of medical device use" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+					<title>Dispositivi medici in uso</title>
+					<text>
+							<list>
+							<item ID="dev.1">Nessun dispositivo medico in uso</item>
+						</list>
+					</text>
+					<entry typeCode="DRIV">
+						<supply classCode="SPLY" moodCode="EVN" nullFlavor="NA">
+							<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.5"/>
+							<text>
+								<reference value="#dev.1"/>
+							</text>
+							<effectiveTime nullFlavor="NA"/>
+							<participant typeCode="DEV" nullFlavor="NA">
+								<participantRole classCode="MANU">
+									<playingDevice classCode="DEV" determinerCode="INSTANCE">
+										<code nullFlavor="NA"/>
+									</playingDevice>
+								</participantRole>
+							</participant>
+						</supply>
+					</entry>
+				</section>
+			</component>
+			<!--history-of-medical-device-use-->
+			<!--history-of-procedures-->
+			<component>
+				<section>
+					<templateId root="1.3.6.1.4.1.19376.1.5.3.1.3.11"/>
+					<templateId root="1.3.6.1.4.1.19376.1.5.3.1.3.12"/>
+					<templateId root="2.16.840.1.113883.10.20.1.12"/>
+					<code code="47519-4" displayName="History of Procedures" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+					<title>Procedure chirurgiche</title>
+					<text>
+				<table border="1">
+							<tbody>
+								<tr>
+									<th>Data</th>
+									<th>Tipo di Procedura</th>
+								</tr>
+								<tr>
+									<td>1963</td>
+									<td ID="des.proc.1">Appendicectomia</td>
+								</tr>
+							</tbody>
+						</table>
+					</text>
+					<entry typeCode="DRIV">
+						<procedure classCode="PROC" moodCode="EVN">
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.19"/>
+							<templateId root="2.16.840.1.113883.10.20.1.29"/>
+							<id extension="proc.1" root="2.16.470.1.100.1.1.1000.990.1"/>
+							<code code="80146002" displayName="Appendicectomy" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT">
+								<originalText>
+									<reference value="#des.proc.1"/>
+								</originalText>
+							</code>
+							<text>
+								<reference value="#des.proc.1"/>
+							</text>
+							<statusCode code="completed"/>
+							<effectiveTime value="1963"/>
+						</procedure>
+					</entry>
+				</section>
+			</component>
+			<!--history-of-procedures-->
+									<!--history-of-past-illness -->
+			<component>
+				<section>
+					<templateId root="1.3.6.1.4.1.19376.1.5.3.1.3.8"/>
+					<code code="11348-0" displayName="History of past illness" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+					<title>Storia delle malattie pregresse</title>
+					<text>
+											<list>
+							<item ID="pastProb.1">Il paziente non riferisce episodi recenti di <content ID="des.pastProb.1">emicrania</content>
+							</item>
+							<item ID="pastProb.2">
+								<content ID="des.pastProb.2">Frattura del collo del femore </content>sinistro</item>
+						</list>
+			
+					</text>
+					<entry typeCode="DRIV">
+						<act classCode="ACT" moodCode="EVN">
+							<templateId root="2.16.840.1.113883.10.20.1.27"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5.1"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5.2"/>
+							<id extension="problem.1" root="2.16.470.1.100.1.1.1000.990.1"/>
+							<code nullFlavor="NA"/>
+							<statusCode code="completed"/>
+							<effectiveTime>
+								<low value="198201"/>
+								<high value="199801"/>
+							</effectiveTime>
+							<entryRelationship inversionInd="false" typeCode="SUBJ">
+								<observation classCode="OBS" moodCode="EVN">
+									<templateId root="2.16.840.1.113883.10.20.1.28"/>
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5"/>
+									<id extension="problem.1.obs.1" root="2.16.470.1.100.1.1.1000.990.1"/>
+									<code code="55607006" displayName="Problem" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
+									<text>
+										<reference value="#pastProb.1"/>
+									</text>
+									<statusCode code="completed"/>
+									<effectiveTime>
+										<low value="198201"/>
+										<high value="199801"/>
+									</effectiveTime>
+									<value code="G43" displayName="Migraine" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.44.2" codeSystemName="ICD-10" xsi:type="CD">
+										<originalText>
+											<reference value="#des.pastProb.1"/>
+										</originalText>
+									</value>
+								</observation>
+							</entryRelationship>
+						</act>
+					</entry>
+					<entry typeCode="DRIV">
+						<act classCode="ACT" moodCode="EVN">
+							<templateId root="2.16.840.1.113883.10.20.1.27"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5.1"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5.2"/>
+							<id extension="problem.2" root="2.16.470.1.100.1.1.1000.990.1"/>
+							<code nullFlavor="NA"/>
+							<statusCode code="completed"/>
+							<effectiveTime>
+								<low value="20071212"/>
+								<high nullFlavor="UNK"/>
+							</effectiveTime>
+							<entryRelationship inversionInd="false" typeCode="SUBJ">
+								<observation classCode="OBS" moodCode="EVN">
+									<templateId root="2.16.840.1.113883.10.20.1.28"/>
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5"/>
+									<id extension="problem.2.obs.1" root="2.16.470.1.100.1.1.1000.990.1"/>
+									<code code="55607006" displayName="Problem" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
+									<text>
+										<reference value="#pastProb.2"/>
+									</text>
+									<statusCode code="completed"/>
+									<effectiveTime>
+										<low value="20071212"/>
+										<high nullFlavor="UNK"/>
+									</effectiveTime>
+									<!-- S72.0 Fracture of neck of femur ? -->
+									<value code="S72" displayName="Fracture of femur" codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.44.2" codeSystemName="ICD-10" xsi:type="CD">
+										<originalText>
+											<reference value="#des.pastProb.2"/>
+										</originalText>
+									</value>
+								</observation>
+							</entryRelationship>
+						</act>
+					</entry>
+				</section>
+			</component>
+			<!--history-of-past-illness-->
+			<!--History of immunizations-->
+			<component>
+				<section>
+					<templateId root="2.16.840.1.113883.10.20.1.6"/>
+					<templateId root="1.3.6.1.4.1.19376.1.5.3.1.3.23"/>
+					<code code="11369-6" displayName="History of immunizations" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+					<title>Vaccinazioni</title>
+					<text>
+<list>
+							<item ID="vac.1">31-10-2013: Vaccinazione per <content ID="des.vac.1">Polmonite da Pneumococco</content> [Prevnar 13]</item>
+						</list>
+					</text>
+					<entry typeCode="COMP" contextConductionInd="true">
+						<substanceAdministration classCode="SBADM" moodCode="EVN" negationInd="false">
+							<templateId root="2.16.840.1.113883.10.20.1.24"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.12"/>
+							<id extension="vac.1" root="2.16.470.1.100.1.1.1000.990.1"/>
+							<code code="IMMUNIZ" codeSystem="2.16.840.1.113883.5.4" codeSystemName="ActCode"/>
+							<text>
+								<reference value="#vac.1"/>
+							</text>
+							<statusCode code="completed"/>
+							<effectiveTime value="20131031"/>
+							<doseQuantity value="1" unit="1"/>
+							<consumable typeCode="CSM">
+								<manufacturedProduct classCode="MANU">
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"/>
+									<templateId root="2.16.840.1.113883.10.20.1.53"/>
+									<manufacturedMaterial classCode="MMAT" determinerCode="KIND">
+										<code code="333598008" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Pneumococcal vaccine">
+											<originalText>
+												<reference value="#des.vac.1"/>
+											</originalText>
+										</code>
+										<name>Prevnar 13</name>
+									</manufacturedMaterial>
+								</manufacturedProduct>
+							</consumable>
+						</substanceAdministration>
+					</entry>
+				</section>
+			</component>
+			<!--History of immunizations-->
+			<!--Blood Pressure -->
+			<component>
+				<section>
+					<templateId root="2.16.840.1.113883.10.20.1.16"/>
+					<templateId root="1.3.6.1.4.1.19376.1.5.3.1.3.25"/>
+					<templateId root="1.3.6.1.4.1.19376.1.5.3.1.1.5.3.2"/>
+					<id extension="vit.1" root="2.16.470.1.100.1.1.1000.990.1"/>
+					<code code="8716-3" displayName="Physical findings" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+					<title>Parametri Vitali</title>
+					<text>
+	<table border="1">
+							<tbody>
+								<tr>
+									<th>Data</th>
+									<th>Pressione Arteriosa Sistolica
+									(mm[Hg])</th>
+									<th>Pressione Arteriosa Diastolica
+									(mm[Hg])</th>
+								</tr>
+								<tr ID="bld.1">
+									<td>02-05-2014</td>
+									<td ID="dia.bld.1">90</td>
+									<td ID="sys.bld.1">130</td>
+								</tr>
+							</tbody>
+						</table>
+					</text>
+					<entry>
+						<organizer classCode="CLUSTER" moodCode="EVN">
+							<templateId root="2.16.840.1.113883.10.20.1.32"/>
+							<templateId root="2.16.840.1.113883.10.20.1.35"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.13.1"/>
+							<id extension="vit.org.1" root="2.16.470.1.100.1.1.1000.990.1"/>
+							<code code="46680005" displayName="Vital signs" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
+							<statusCode code="completed"/>
+							<effectiveTime value="20140502"/>
+							<!-- one or more vital signs observations -->
+							<component typeCode="COMP">
+								<observation classCode="OBS" moodCode="EVN">
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.13"/>
+									<templateId root="2.16.840.1.113883.10.20.1.31"/>
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.13.2"/>
+									<id extension="vit.obs.1" root="2.16.470.1.100.1.1.1000.990.1"/>
+									<code code="8462-4" displayName="Diastolic blood pressure" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+									<text>
+										<reference value="#dia.bld.1"/>
+									</text>
+									<statusCode code="completed"/>
+									<effectiveTime value="20140502"/>
+									<value xsi:type="PQ" value="90" unit="mm[Hg]"/>
+								</observation>
+							</component>
+							<component typeCode="COMP">
+								<observation classCode="OBS" moodCode="EVN">
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.13"/>
+									<templateId root="2.16.840.1.113883.10.20.1.31"/>
+									<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.13.2"/>
+									<id extension="vit.obs.1" root="2.16.470.1.100.1.1.1000.990.1"/>
+									<code code="8480-6" displayName="Systolic blood pressure" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+									<text>
+										<reference value="#sys.bld.1"/>
+									</text>
+									<statusCode code="completed"/>
+									<effectiveTime value="20140502"/>
+									<value xsi:type="PQ" value="130" unit="mm[Hg]"/>
+								</observation>
+							</component>
+						</organizer>
+					</entry>
+				</section>
+			</component>
+			<!--Social History-->
+			<component>
+				<section>
+					<templateId root="2.16.840.1.113883.10.20.1.15"/>
+					<templateId root="1.3.6.1.4.1.19376.1.5.3.1.3.16"/>
+					<templateId root="1.3.6.1.4.1.19376.1.5.3.1.3.16.1"/>
+					<id extension="soc.1" root="2.16.470.1.100.1.1.1000.990.1"/>
+					<code code="29762-2" displayName="Social history" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"/>
+					<title>Stile di Vita e Contesto Sociale</title>
+					<text>
+				<list>
+							<item ID="soc.1">Non-Fumatore</item>
+						</list>
+					</text>
+					<entry typeCode="DRIV">
+						<observation classCode="OBS" moodCode="EVN">
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.13"/>
+							<templateId root="2.16.840.1.113883.10.20.1.33"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.13.4"/>
+							<id extension="soc.obs.1" root="2.16.470.1.100.1.1.1000.990.1"/>
+							<code code="229819007" displayName="Tobacco use and exposure" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
+							<text>
+								<reference value="#soc.1"/>
+							</text>
+							<statusCode code="completed"/>
+							<effectiveTime value="20140413"/>
+							<value xsi:type="PQ" value="0" unit="{pack}/d"/>
+						</observation>
+					</entry>
+				</section>
+			</component>
+			<!--Social History-->
+		</structuredBody>
+	</component>
+	<!--medical-sections-->
+</ClinicalDocument>

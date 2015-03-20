@@ -211,7 +211,7 @@
     </xsl:function>
 
     <xsl:template match="@xsi:schemaLocation" mode="inside">
-        <xsl:attribute name="{name()}" select="if ($schemaLocation = '/') then . else $schemaLocation"/>
+        <xsl:attribute name="{name()}" select="if ($schemaLocation = '/') then . else concat(substring-before(.,' '),' ', $schemaLocation)"/>
     </xsl:template>
 
 
@@ -242,7 +242,7 @@
     <xsl:template match="processing-instruction()" mode="#all">
         <xsl:param name="mapcontext" tunnel="yes" select="tbx:opendoc($transform)/tbx:map"/>
         <xsl:param name="matchonly" tunnel="yes" select="false()"/>
-        <xsl:if test="not($matchonly) and boolean($copypi)">
+        <xsl:if test="not($matchonly) and $copypi='true'">
             <xsl:variable name="relpath" select="concat('processing-instruction/', name())"/>
             <xsl:variable name="mapmatch" select="$mapcontext/tbx:context/tbx:transform[tbx:path=$relpath]/node()"/>
             <xsl:choose>
@@ -253,12 +253,12 @@
                     <xsl:choose>
                         <xsl:when test="doc-available($value)">
                             <xsl:processing-instruction name="{name()}">
-                            <xsl:text>type="text/xsl" href="</xsl:text><xsl:value-of select="concat(if($base) then concat($base,'/') else '', 'resources/', $value, $quot)"/>
+                            <xsl:text>type="text/xsl" href="</xsl:text><xsl:value-of select="concat(if($base='/') then '' else concat($base,'/'), 'resources/', $value, $quot)"/>
                         </xsl:processing-instruction>
                         </xsl:when>
                         <xsl:when test="doc-available($default)">
                             <xsl:processing-instruction name="{name()}">
-                            <xsl:text>type="text/xsl" href="</xsl:text><xsl:value-of select="concat(if($base) then concat($base,'/') else '', 'resources/', $default, $quot)"/>
+                            <xsl:text>type="text/xsl" href="</xsl:text><xsl:value-of select="concat(if($base='/') then '' else concat($base,'/'), 'resources/', $default, $quot)"/>
                         </xsl:processing-instruction>
                         </xsl:when>
                         <xsl:otherwise>

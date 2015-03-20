@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <translations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xmlns="http://trilliumbridge.org/xform"
-              fromlanguage="en"
-              tolanguage="es_ES"
-              xsi:schemaLocation="http://trilliumbridge.org/xform ../schema/TBXform.xsd">
+ xsi:schemaLocation="http://trilliumbridge.org/xform http://informatics.mayo.edu/trillium-bridge/bridge/resources/schema/TBXform.xsd"
+ xmlns="http://trilliumbridge.org/xform" fromlanguage="en" tolanguage="es_ES">
     <entry>
         <target>Historia Clínica Resumida(Patient Summary)</target>
         <source>Patient Summary</source>

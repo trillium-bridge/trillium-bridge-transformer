@@ -1,0 +1,1253 @@
+<!-- Document ID: 447438 -->
+
+  <ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <realmCode code="US"></realmCode>
+    <typeId extension="POCD_HD000040" root="2.16.840.1.113883.1.3"></typeId>
+    <templateId root="1.2.840.114350.1.72.1.51693"></templateId>
+    <templateId root="2.16.840.1.113883.10.20.22.1.1"></templateId>
+    <templateId root="2.16.840.1.113883.10.20.22.1.2"></templateId>
+    <id assigningAuthorityName="EPC" root="1.2.840.114350.1.13.114.3.7.8.688883.11264"></id>
+    <code code="34133-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Summarization of Episode Note"></code>
+    <title>Continuity of Care Document</title>
+    <effectiveTime value="20150115080507-1000"></effectiveTime>
+    <confidentialityCode code="N" codeSystem="2.16.840.1.113883.5.25"></confidentialityCode>
+    <languageCode code="en-US"></languageCode>
+    <setId assigningAuthorityName="EPC" extension="e4c63414-1d9f-11e4-b3a6-f7022539f5c5" root="1.2.840.114350.1.13.114.3.7.1.1"></setId>
+    <versionNumber value="5"></versionNumber>
+    <recordTarget>
+      <patientRole>
+        <id extension="KHI7090600" root="1.2.840.114350.1.13.114.3.7.3.688884.100"></id>
+        <addr use="HP">
+          <streetAddressLine>321 Prince St.</streetAddressLine>
+          <city>San Diego</city>
+          <state>CA</state>
+          <postalCode>92111</postalCode>
+          <country>USA</country>
+        </addr>
+        <telecom use="HP" value="tel:+1-619-555-1212"></telecom>
+        <patient>
+          <name use="L">
+            <given>Martha</given>
+            <family>Token</family>
+          </name>
+          <administrativeGenderCode code="F" codeSystem="2.16.840.1.113883.5.1" codeSystemName="AdministrativeGenderCode" displayName="Female"></administrativeGenderCode>
+          <birthTime value="19710516"></birthTime>
+          <maritalStatusCode nullFlavor="UNK"></maritalStatusCode>
+          <raceCode nullFlavor="UNK"></raceCode>
+          <ethnicGroupCode codeSystem="2.16.840.1.113883.6.238" codeSystemName="CDC Race and Ethnicity" nullFlavor="UNK"></ethnicGroupCode>
+          <languageCommunication>
+            <languageCode code="eng"></languageCode>
+            <preferenceInd value="true"></preferenceInd>
+          </languageCommunication>
+        </patient>
+        <providerOrganization>
+          <id extension="213" root="1.2.840.114350.1.13.114.3.7.2.688879"></id>
+          <name>Kaiser Permanente Hawaii - REGNHIM</name>
+          <telecom use="WP" value="tel:+1-808-432-5033"></telecom>
+          <addr nullFlavor="NA">
+            <city>Honolulu</city>
+            <state>HI</state>
+            <postalCode>96819</postalCode>
+          </addr>
+        </providerOrganization>
+      </patientRole>
+    </recordTarget>
+    <author>
+      <time value="20150115080507"></time>
+      <assignedAuthor>
+        <id extension="7.9" root="1.2.840.114350.1.1"></id>
+        <addr nullFlavor="NA">
+          <streetAddressLine nullFlavor="UNK"></streetAddressLine>
+          <city nullFlavor="UNK"></city>
+        </addr>
+        <telecom nullFlavor="NA"></telecom>
+        <assignedAuthoringDevice>
+          <manufacturerModelName>Epic - Version 7.9</manufacturerModelName>
+          <softwareName>Epic - Version 7.9</softwareName>
+        </assignedAuthoringDevice>
+        <representedOrganization>
+          <id extension="213" root="1.2.840.114350.1.13.114.3.7.2.688879"></id>
+          <name>Kaiser Permanente Hawaii - REGNHIM</name>
+          <telecom use="WP" value="tel:+1-808-432-5033"></telecom>
+          <addr nullFlavor="NA">
+            <city>Honolulu</city>
+            <state>HI</state>
+            <postalCode>96819</postalCode>
+          </addr>
+        </representedOrganization>
+      </assignedAuthor>
+    </author>
+    <custodian>
+      <assignedCustodian>
+        <representedCustodianOrganization>
+          <id extension="213" root="1.2.840.114350.1.13.114.3.7.2.688879"></id>
+          <name>Kaiser Permanente Hawaii - REGNHIM</name>
+          <telecom use="WP" value="tel:+1-808-432-5033"></telecom>
+          <addr nullFlavor="NA">
+            <city>Honolulu</city>
+            <state>HI</state>
+            <postalCode>96819</postalCode>
+          </addr>
+        </representedCustodianOrganization>
+      </assignedCustodian>
+    </custodian>
+    <documentationOf typeCode="DOC">
+      <serviceEvent classCode="PCPR">
+        <effectiveTime>
+          <low value="19710516"></low>
+          <high value="20150115"></high>
+        </effectiveTime>
+        <performer typeCode="PRF">
+          <templateId root="2.16.840.1.113883.3.88.11.32.4"></templateId>
+          <templateId root="2.16.840.1.113883.3.88.11.83.4"></templateId>
+          <templateId root="1.3.6.1.4.1.19376.1.5.3.1.2.3"></templateId>
+          <functionCode code="PCP" codeSystem="2.16.840.1.113883.5.88" codeSystemName="ParticipationFunction" displayName="Primary Care Provider">
+            <originalText>Primary Care Provider</originalText>
+          </functionCode>
+          <time>
+            <low nullFlavor="NI"></low>
+            <high nullFlavor="PINF"></high>
+          </time>
+          <assignedEntity nullFlavor="NI">
+            <id nullFlavor="NA"></id>
+            <addr nullFlavor="NA"></addr>
+            <telecom nullFlavor="NA"></telecom>
+            <assignedPerson nullFlavor="NA">
+              <name nullFlavor="NA"></name>
+            </assignedPerson>
+          </assignedEntity>
+        </performer>
+      </serviceEvent>
+    </documentationOf>
+    <component>
+      <structuredBody>
+        <component>
+          <section>
+            <code code="X-DOCCMT" displayName="Document Comments"></code>
+            <title>Source Comments</title>
+            <text>NOTE: The information displayed by Care Epic is extracted from the completemedical record and may not identify all current or past patient conditions.See below for further instructions regarding Mental Health and CDRP patients.
+              <footnote>Kaiser Permanente Hawaii - REGNHIM</footnote>
+            </text>
+          </section>
+        </component>
+        <component>
+          <section>
+            <templateId root="2.16.840.1.113883.10.20.22.2.6.1"></templateId>
+            <id root="0a05a028-9ce1-11e4-bdee-f7022539f5c5"></id>
+            <code code="48765-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Allergies, Adverse Reactions, Alerts"></code>
+            <title>Active Allergies and Adverse Reactions</title>
+            <text>
+              <table>
+                <colgroup>
+                  <col width="25%"></col>
+                  <col width="13%"></col>
+                  <col width="12%"></col>
+                  <col width="25%"></col>
+                  <col width="25%"></col>
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>Allergen</th>
+                    <th>Noted Date</th>
+                    <th>Severity</th>
+                    <th>Reactions</th>
+                    <th>Comments</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ID="allergy2">
+                    <td ID="allergy2allergen">Penicillins Class</td>
+                    <td ID="allergy2noted">10/15/2014</td>
+                    <td ID="allergy2severity">Medium</td>
+                    <td>
+                      <content ID="allergy2reaction1">Nausea and/or Vomiting</content>
+                    </td>
+                    <td ID="allergy2comments"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </text>
+            <entry>
+              <act classCode="ACT" moodCode="EVN">
+                <templateId root="2.16.840.1.113883.10.20.22.4.30"></templateId>
+                <id extension="7990214" root="1.2.840.114350.1.13.114.3.7.2.768076"></id>
+                <code code="48765-2" codeSystem="2.16.840.1.113883.6.1"></code>
+                <statusCode code="active"></statusCode>
+                <effectiveTime>
+                  <low value="20141015"></low>
+                </effectiveTime>
+                <entryRelationship inversionInd="false" typeCode="SUBJ">
+                  <observation classCode="OBS" moodCode="EVN" negationInd="false">
+                    <templateId root="2.16.840.1.113883.10.20.22.4.7"></templateId>
+                    <id extension="7990214" root="1.2.840.114350.1.13.114.3.7.2.768076"></id>
+                    <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"></code>
+                    <text>
+                      <reference value="#allergy2"></reference>
+                    </text>
+                    <statusCode code="completed"></statusCode>
+                    <effectiveTime>
+                      <low value="20141015"></low>
+                      <high nullFlavor="PINF"></high>
+                    </effectiveTime>
+                    <value code="419511003" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="propensity to adverse reactions to drug" xsi:type="CD"></value>
+                    <author>
+                      <time value="20141015"></time>
+                      <assignedAuthor>
+                        <id extension="O894019" root="1.2.840.114350.1.13.114.3.7.2.697780"></id>
+                        <addr nullFlavor="UNK"></addr>
+                        <telecom nullFlavor="UNK"></telecom>
+                        <assignedPerson>
+                          <name>
+                            <given>Manikandan</given>
+                            <family>Murugaiah</family>
+                          </name>
+                        </assignedPerson>
+                        <representedOrganization>
+                          <id extension="213" root="1.2.840.114350.1.13.114.3.7.2.688879"></id>
+                          <name>Kaiser Permanente Hawaii - REGNHIM</name>
+                          <telecom use="WP" value="tel:+1-808-432-5033"></telecom>
+                          <addr nullFlavor="NA">
+                            <city>Honolulu</city>
+                            <state>HI</state>
+                            <postalCode>96819</postalCode>
+                          </addr>
+                        </representedOrganization>
+                      </assignedAuthor>
+                    </author>
+                    <participant typeCode="CSM">
+                      <participantRole classCode="MANU">
+                        <playingEntity classCode="MMAT">
+                          <code code="N0000011281" codeSystem="2.16.840.1.113883.3.26.1.5" codeSystemName="NDF-RT">
+                            <originalText>
+                              <reference value="#allergy2allergen"></reference>
+                            </originalText>
+                          </code>
+                          <name>PENICILLINS CLASS</name>
+                        </playingEntity>
+                      </participantRole>
+                    </participant>
+                    <entryRelationship inversionInd="true" typeCode="MFST">
+                      <observation classCode="OBS" moodCode="EVN">
+                        <templateId root="2.16.840.1.113883.10.20.22.4.9"></templateId>
+                        <id extension="4" root="1.2.840.114350.1.13.114.3.7.4.768076.3008"></id>
+                        <code code="RXNASSESS"></code>
+                        <text>
+                          <reference value="#allergy2reaction1"></reference>
+                        </text>
+                        <statusCode code="completed"></statusCode>
+                        <effectiveTime>
+                          <low value="20141015"></low>
+                          <high nullFlavor="PINF"></high>
+                        </effectiveTime>
+                        <value xsi:type="CD">
+                          <originalText>
+                            <reference value="#allergy2reaction1"></reference>
+                          </originalText>
+                        </value>
+                      </observation>
+                    </entryRelationship>
+                    <entryRelationship inversionInd="true" typeCode="SUBJ">
+                      <observation classCode="OBS" moodCode="EVN">
+                        <templateId root="2.16.840.1.113883.10.20.22.4.8"></templateId>
+                        <code code="SEV" codeSystem="2.16.840.1.113883.5.4" codeSystemName="ActCode" displayName="Severity"></code>
+                        <text>
+                          <reference value="#allergy2severity"></reference>
+                        </text>
+                        <statusCode code="completed"></statusCode>
+                        <value code="6736007" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Moderate" xsi:type="CD"></value>
+                      </observation>
+                    </entryRelationship>
+                    <entryRelationship inversionInd="true" typeCode="REFR">
+                      <observation classCode="OBS" moodCode="EVN">
+                        <templateId root="2.16.840.1.113883.10.20.22.4.28"></templateId>
+                        <code code="33999-4" codeSystem="2.16.840.1.113883.6.1" displayName="Status"></code>
+                        <statusCode code="completed"></statusCode>
+                        <value code="55561003" codeSystem="2.16.840.1.113883.6.96" displayName="Active" xsi:type="CE"></value>
+                      </observation>
+                    </entryRelationship>
+                  </observation>
+                </entryRelationship>
+              </act>
+            </entry>
+          </section>
+        </component>
+        <component>
+          <section>
+            <templateId root="2.16.840.1.113883.10.20.22.2.1.1"></templateId>
+            <id root="0a7801d6-9ce1-11e4-bdee-f7022539f5c5"></id>
+            <code code="10160-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="HISTORY OF MEDICATION USE"></code>
+            <title>Current Medications</title>
+            <text>
+              <table>
+                <colgroup>
+                  <col width="25%"></col>
+                  <col width="25%"></col>
+                  <col width="13%"></col>
+                  <col width="12%"></col>
+                  <col width="8%"></col>
+                  <col width="8%"></col>
+                  <col width="9%"></col>
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>Prescription</th>
+                    <th>Sig.</th>
+                    <th>Disp.</th>
+                    <th>Refills</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ID="currx3">
+                    <td ID="med3">ANASTROZOLE 1 MG ORAL TAB</td>
+                    <td ID="sig3">1 mg daily</td>
+                    <td>
+                      <paragraph>30</paragraph>
+                    </td>
+                    <td>1</td>
+                    <td>01/03/2013</td>
+                    <td></td>
+                    <td>Active</td>
+                  </tr>
+                </tbody>
+              </table>
+            </text>
+            <entry>
+              <substanceAdministration classCode="SBADM" moodCode="INT">
+                <templateId root="2.16.840.1.113883.10.20.22.4.16"></templateId>
+                <id extension="75386984" root="1.2.840.114350.1.13.114.3.7.2.798268"></id>
+                <text mediaType="text/xml">
+                  <reference value="#sig3"></reference>
+                </text>
+                <statusCode code="completed"></statusCode>
+                <effectiveTime xsi:type="IVL_TS">
+                  <low value="20130103"></low>
+                  <high nullFlavor="UNK"></high>
+                </effectiveTime>
+                <routeCode code="C38288" codeSystem="2.16.840.1.113883.3.26.1.1" codeSystemName="NCI Thesaurus" displayName="Oral"></routeCode>
+                <consumable typeCode="CSM">
+                  <manufacturedProduct classCode="MANU">
+                    <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"></templateId>
+                    <templateId root="2.16.840.1.113883.10.20.1.53"></templateId>
+                    <templateId root="2.16.840.1.113883.3.88.11.32.9"></templateId>
+                    <templateId root="2.16.840.1.113883.3.88.11.83.8.2"></templateId>
+                    <templateId root="2.16.840.1.113883.3.249.11.100.13"></templateId>
+                    <templateId root="2.16.840.1.113883.10.20.22.4.23"></templateId>
+                    <manufacturedMaterial>
+                      <code code="199224" codeSystem="2.16.840.1.113883.6.88" codeSystemName="RxNorm" displayName="Anastrozole 1 Mg Oral Tab">
+                        <originalText>
+                          <reference value="#med3"></reference>
+                        </originalText>
+                        <translation code="51991-620-10" codeSystem="2.16.840.1.113883.6.69" codeSystemName="NDC" displayName="Anastrozole 1 Mg Oral Tab"></translation>
+                        <translation code="157712" codeSystem="2.16.840.1.113883.6.208" codeSystemName="NDDF (First DataBank)" displayName="Anastrozole 1 Mg Oral Tab"></translation>
+                      </code>
+                    </manufacturedMaterial>
+                  </manufacturedProduct>
+                </consumable>
+                <author>
+                  <time value="20140806183556+0000"></time>
+                  <assignedAuthor>
+                    <id extension="HI3161" root="1.2.840.114350.1.13.114.3.7.2.836982"></id>
+                    <addr>
+                      <streetAddressLine>80 MAHALANI STREET</streetAddressLine>
+                      <city>WAILUKU</city>
+                      <state>HI</state>
+                      <postalCode>96793</postalCode>
+                    </addr>
+                    <telecom nullFlavor="UNK"></telecom>
+                    <assignedPerson>
+                      <name>
+                        <given>Specsurgone</given>
+                        <family>Xmdox</family>
+                      </name>
+                    </assignedPerson>
+                    <representedOrganization>
+                      <id extension="213" root="1.2.840.114350.1.13.114.3.7.2.688879"></id>
+                      <name>Kaiser Permanente Hawaii - REGNHIM</name>
+                      <telecom use="WP" value="tel:+1-808-432-5033"></telecom>
+                      <addr nullFlavor="NA">
+                        <city>Honolulu</city>
+                        <state>HI</state>
+                        <postalCode>96819</postalCode>
+                      </addr>
+                    </representedOrganization>
+                  </assignedAuthor>
+                </author>
+                <entryRelationship typeCode="SUBJ">
+                  <observation classCode="OBS" moodCode="EVN">
+                    <code code="73639000" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Prescription Drug"></code>
+                    <statusCode code="completed"></statusCode>
+                  </observation>
+                </entryRelationship>
+                <entryRelationship inversionInd="true" typeCode="SUBJ">
+                  <act classCode="ACT" moodCode="INT">
+                    <templateId root="2.16.840.1.113883.10.20.22.4.20"></templateId>
+                    <code code="311401005" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"></code>
+                    <text>
+                      <reference value="#sig3"></reference>
+                    </text>
+                    <statusCode code="completed"></statusCode>
+                    <author>
+                      <time value="20140806183556+0000"></time>
+                      <assignedAuthor>
+                        <id extension="HI3161" root="1.2.840.114350.1.13.114.3.7.2.836982"></id>
+                        <addr>
+                          <streetAddressLine>80 MAHALANI STREET</streetAddressLine>
+                          <city>WAILUKU</city>
+                          <state>HI</state>
+                          <postalCode>96793</postalCode>
+                        </addr>
+                        <telecom nullFlavor="UNK"></telecom>
+                        <assignedPerson>
+                          <name>
+                            <given>Specsurgone</given>
+                            <family>Xmdox</family>
+                          </name>
+                        </assignedPerson>
+                        <representedOrganization>
+                          <id extension="213" root="1.2.840.114350.1.13.114.3.7.2.688879"></id>
+                          <name>Kaiser Permanente Hawaii - REGNHIM</name>
+                          <telecom use="WP" value="tel:+1-808-432-5033"></telecom>
+                          <addr nullFlavor="NA">
+                            <city>Honolulu</city>
+                            <state>HI</state>
+                            <postalCode>96819</postalCode>
+                          </addr>
+                        </representedOrganization>
+                      </assignedAuthor>
+                    </author>
+                  </act>
+                </entryRelationship>
+                <entryRelationship typeCode="REFR">
+                  <supply classCode="SPLY" moodCode="INT">
+                    <templateId root="2.16.840.1.113883.10.20.22.4.17"></templateId>
+                    <id extension="75386984" root="1.2.840.114350.1.13.114.3.7.2.798268"></id>
+                    <statusCode code="completed"></statusCode>
+                    <repeatNumber value="2"></repeatNumber>
+                    <product>
+                      <manufacturedProduct classCode="MANU">
+                        <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.2"></templateId>
+                        <templateId root="2.16.840.1.113883.10.20.1.53"></templateId>
+                        <templateId root="2.16.840.1.113883.3.88.11.32.9"></templateId>
+                        <templateId root="2.16.840.1.113883.3.88.11.83.8.2"></templateId>
+                        <templateId root="2.16.840.1.113883.3.249.11.100.13"></templateId>
+                        <templateId root="2.16.840.1.113883.10.20.22.4.23"></templateId>
+                        <manufacturedMaterial>
+                          <code code="199224" codeSystem="2.16.840.1.113883.6.88" codeSystemName="RxNorm" displayName="Anastrozole 1 Mg Oral Tab">
+                            <originalText>
+                              <reference value="#med3"></reference>
+                            </originalText>
+                            <translation code="51991-620-10" codeSystem="2.16.840.1.113883.6.69" codeSystemName="NDC" displayName="Anastrozole 1 Mg Oral Tab"></translation>
+                            <translation code="157712" codeSystem="2.16.840.1.113883.6.208" codeSystemName="NDDF (First DataBank)" displayName="Anastrozole 1 Mg Oral Tab"></translation>
+                          </code>
+                        </manufacturedMaterial>
+                      </manufacturedProduct>
+                    </product>
+                  </supply>
+                </entryRelationship>
+                <entryRelationship typeCode="REFR">
+                  <observation classCode="OBS" moodCode="EVN">
+                    <templateId root="2.16.840.1.113883.10.20.1.47"></templateId>
+                    <code code="33999-4" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Status"></code>
+                    <statusCode code="completed"></statusCode>
+                    <value code="55561003" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Active" xsi:type="CE"></value>
+                  </observation>
+                </entryRelationship>
+              </substanceAdministration>
+            </entry>
+          </section>
+        </component>
+        <component>
+          <section>
+            <templateId root="2.16.840.1.113883.10.20.22.2.5.1"></templateId>
+            <id root="0a8adc3e-9ce1-11e4-bdee-f7022539f5c5"></id>
+            <code code="11450-4" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="PROBLEM LIST"></code>
+            <title>Active Problems</title>
+            <text>
+              <table>
+                <colgroup>
+                  <col width="25%"></col>
+                  <col width="75%"></col>
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>Problem</th>
+                    <th>Noted Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ID="problem4" styleCode="normRow">
+                    <td ID="problem4name" styleCode="header">FEMALE BREAST INFILTRATING DUCTAL CARCINOMA, STAGE 2</td>
+                    <td>10/15/2014</td>
+                  </tr>
+                </tbody>
+              </table>
+            </text>
+            <entry>
+              <act classCode="ACT" moodCode="EVN">
+                <templateId root="2.16.840.1.113883.10.20.22.4.3"></templateId>
+                <id extension="7991011" root="1.2.840.114350.1.13.114.3.7.2.768076"></id>
+                <code code="CONC" codeSystem="2.16.840.1.113883.5.6"></code>
+                <statusCode code="active"></statusCode>
+                <effectiveTime>
+                  <low value="20141015"></low>
+                </effectiveTime>
+                <entryRelationship inversionInd="false" typeCode="SUBJ">
+                  <observation classCode="OBS" moodCode="EVN">
+                    <templateId root="2.16.840.1.113883.10.20.22.4.4"></templateId>
+                    <id extension="7991011" root="1.2.840.114350.1.13.114.3.7.2.768076"></id>
+                    <code code="55607006" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Problem"></code>
+                    <text>
+                      <reference value="#problem4name"></reference>
+                    </text>
+                    <statusCode code="completed"></statusCode>
+                    <effectiveTime>
+                      <low value="20141015"></low>
+                    </effectiveTime>
+                    <value code="422479008" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="FEMALE BREAST INFILTRATING DUCTAL CARCINOMA, STAGE 2" xsi:type="CD">
+                      <originalText>
+                        <reference value="#problem4name"></reference>
+                      </originalText>
+                      <translation code="174.9" codeSystem="2.16.840.1.113883.6.103" codeSystemName="ICD-9CM" displayName="FEMALE BREAST INFILTRATING DUCTAL CARCINOMA, STAGE 2"></translation>
+                      <translation code="C50.919" codeSystem="2.16.840.1.113883.6.90" codeSystemName="ICD-10-CM" displayName="FEMALE BREAST INFILTRATING DUCTAL CARCINOMA, STAGE 2"></translation>
+                    </value>
+                    <author>
+                      <time value="20141015204406+0000"></time>
+                      <assignedAuthor>
+                        <id extension="O894019" root="1.2.840.114350.1.13.114.3.7.2.697780"></id>
+                        <addr nullFlavor="UNK"></addr>
+                        <telecom nullFlavor="UNK"></telecom>
+                        <assignedPerson>
+                          <name>
+                            <given>Manikandan</given>
+                            <family>Murugaiah</family>
+                          </name>
+                        </assignedPerson>
+                        <representedOrganization>
+                          <id extension="213" root="1.2.840.114350.1.13.114.3.7.2.688879"></id>
+                          <name>Kaiser Permanente Hawaii - REGNHIM</name>
+                          <telecom use="WP" value="tel:+1-808-432-5033"></telecom>
+                          <addr nullFlavor="NA">
+                            <city>Honolulu</city>
+                            <state>HI</state>
+                            <postalCode>96819</postalCode>
+                          </addr>
+                        </representedOrganization>
+                      </assignedAuthor>
+                    </author>
+                    <entryRelationship typeCode="REFR">
+                      <observation classCode="OBS" moodCode="EVN">
+                        <code code="33999-4" codeSystem="2.16.840.1.113883.6.1" displayName="Status"></code>
+                        <statusCode code="completed"></statusCode>
+                        <effectiveTime>
+                          <low value="20141015"></low>
+                        </effectiveTime>
+                        <value code="55561003" codeSystem="2.16.840.1.113883.6.96" displayName="Active" xsi:type="CE"></value>
+                      </observation>
+                    </entryRelationship>
+                  </observation>
+                </entryRelationship>
+              </act>
+            </entry>
+          </section>
+        </component>
+        <component>
+          <section>
+            <templateId root="2.16.840.1.113883.10.20.22.2.20"></templateId>
+            <id root="0a9664dc-9ce1-11e4-bdee-f7022539f5c5"></id>
+            <code code="11348-0" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="HISTORY OF PAST ILLNESS"></code>
+            <title>Resolved Problems</title>
+            <text>
+              <table>
+                <colgroup>
+                  <col width="25%"></col>
+                  <col width="12%"></col>
+                  <col width="63%"></col>
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>Problem</th>
+                    <th>Noted Date</th>
+                    <th>Resolved Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ID="problem5" styleCode="normRow">
+                    <td ID="problem5name" styleCode="header">FEMALE BREAST CANCER, LEFT BREAST</td>
+                    <td>08/06/2014</td>
+                    <td>08/06/2014</td>
+                  </tr>
+                  <tr ID="problem6" styleCode="altRow">
+                    <td ID="problem6name" styleCode="header">MENOPAUSAL HOT FLASHES</td>
+                    <td>08/06/2014</td>
+                    <td>10/15/2014</td>
+                  </tr>
+                </tbody>
+              </table>
+            </text>
+            <entry>
+              <observation classCode="OBS" moodCode="EVN">
+                <templateId root="2.16.840.1.113883.10.20.22.4.4"></templateId>
+                <id extension="7990212" root="1.2.840.114350.1.13.114.3.7.2.768076"></id>
+                <code code="55607006" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Problem"></code>
+                <text>
+                  <reference value="#problem5name"></reference>
+                </text>
+                <statusCode code="completed"></statusCode>
+                <effectiveTime>
+                  <low value="20140806"></low>
+                  <high value="20140806"></high>
+                </effectiveTime>
+                <value nullFlavor="UNK" xsi:type="CD">
+                  <originalText>
+                    <reference value="#problem5name"></reference>
+                  </originalText>
+                  <translation code="174.9" codeSystem="2.16.840.1.113883.6.103" codeSystemName="ICD-9CM" displayName="FEMALE BREAST CANCER, LEFT BREAST"></translation>
+                  <translation code="C50.912" codeSystem="2.16.840.1.113883.6.90" codeSystemName="ICD-10-CM" displayName="FEMALE BREAST CANCER, LEFT BREAST"></translation>
+                </value>
+                <author>
+                  <time value="20140806183400+0000"></time>
+                  <assignedAuthor>
+                    <id extension="HI3161" root="1.2.840.114350.1.13.114.3.7.2.697780"></id>
+                    <addr nullFlavor="UNK"></addr>
+                    <telecom nullFlavor="UNK"></telecom>
+                    <assignedPerson>
+                      <name>
+                        <given>Specsurgone</given>
+                        <family>Xmdox</family>
+                      </name>
+                    </assignedPerson>
+                    <representedOrganization>
+                      <id extension="213" root="1.2.840.114350.1.13.114.3.7.2.688879"></id>
+                      <name>Kaiser Permanente Hawaii - REGNHIM</name>
+                      <telecom use="WP" value="tel:+1-808-432-5033"></telecom>
+                      <addr nullFlavor="NA">
+                        <city>Honolulu</city>
+                        <state>HI</state>
+                        <postalCode>96819</postalCode>
+                      </addr>
+                    </representedOrganization>
+                  </assignedAuthor>
+                </author>
+                <entryRelationship typeCode="REFR">
+                  <observation classCode="OBS" moodCode="EVN">
+                    <code code="33999-4" codeSystem="2.16.840.1.113883.6.1" displayName="Status"></code>
+                    <statusCode code="completed"></statusCode>
+                    <effectiveTime>
+                      <low value="20140806"></low>
+                      <high value="20140806"></high>
+                    </effectiveTime>
+                    <value code="413322009" codeSystem="2.16.840.1.113883.6.96" displayName="Resolved" xsi:type="CE"></value>
+                  </observation>
+                </entryRelationship>
+              </observation>
+            </entry>
+            <entry>
+              <observation classCode="OBS" moodCode="EVN">
+                <templateId root="2.16.840.1.113883.10.20.22.4.4"></templateId>
+                <id extension="7990213" root="1.2.840.114350.1.13.114.3.7.2.768076"></id>
+                <code code="55607006" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Problem"></code>
+                <text>
+                  <reference value="#problem6name"></reference>
+                </text>
+                <statusCode code="completed"></statusCode>
+                <effectiveTime>
+                  <low value="20140806"></low>
+                  <high value="20141015"></high>
+                </effectiveTime>
+                <value code="198436008" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="MENOPAUSAL HOT FLASHES" xsi:type="CD">
+                  <originalText>
+                    <reference value="#problem6name"></reference>
+                  </originalText>
+                  <translation code="627.2" codeSystem="2.16.840.1.113883.6.103" codeSystemName="ICD-9CM" displayName="MENOPAUSAL HOT FLASHES"></translation>
+                  <translation code="N95.1" codeSystem="2.16.840.1.113883.6.90" codeSystemName="ICD-10-CM" displayName="MENOPAUSAL HOT FLASHES"></translation>
+                </value>
+                <author>
+                  <time value="20141015204203+0000"></time>
+                  <assignedAuthor>
+                    <id extension="O894019" root="1.2.840.114350.1.13.114.3.7.2.697780"></id>
+                    <addr nullFlavor="UNK"></addr>
+                    <telecom nullFlavor="UNK"></telecom>
+                    <assignedPerson>
+                      <name>
+                        <given>Manikandan</given>
+                        <family>Murugaiah</family>
+                      </name>
+                    </assignedPerson>
+                    <representedOrganization>
+                      <id extension="213" root="1.2.840.114350.1.13.114.3.7.2.688879"></id>
+                      <name>Kaiser Permanente Hawaii - REGNHIM</name>
+                      <telecom use="WP" value="tel:+1-808-432-5033"></telecom>
+                      <addr nullFlavor="NA">
+                        <city>Honolulu</city>
+                        <state>HI</state>
+                        <postalCode>96819</postalCode>
+                      </addr>
+                    </representedOrganization>
+                  </assignedAuthor>
+                </author>
+                <entryRelationship typeCode="REFR">
+                  <observation classCode="OBS" moodCode="EVN">
+                    <code code="33999-4" codeSystem="2.16.840.1.113883.6.1" displayName="Status"></code>
+                    <statusCode code="completed"></statusCode>
+                    <effectiveTime>
+                      <low value="20140806"></low>
+                      <high value="20141015"></high>
+                    </effectiveTime>
+                    <value code="413322009" codeSystem="2.16.840.1.113883.6.96" displayName="Resolved" xsi:type="CE"></value>
+                  </observation>
+                </entryRelationship>
+              </observation>
+            </entry>
+          </section>
+        </component>
+        <component>
+          <section>
+            <templateId root="2.16.840.1.113883.10.20.1.3"></templateId>
+            <templateId root="2.16.840.1.113883.3.88.11.83.127"></templateId>
+            <templateId root="1.3.6.1.4.1.19376.1.5.3.1.1.5.3.3"></templateId>
+            <templateId root="2.16.840.1.113883.10.20.22.2.22"></templateId>
+            <code code="46240-8" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="HISTORY OF ENCOUNTERS"></code>
+            <title>Encounters from 10/15/2014 to 01/15/2015</title>
+            <text>
+              <table>
+                <colgroup>
+                  <col width="10%"></col>
+                  <col width="15%"></col>
+                  <col width="25%"></col>
+                  <col width="25%"></col>
+                  <col width="25%"></col>
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Specialty</th>
+                    <th>Providers</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ID="encounter7" styleCode="normRow">
+                    <td>01/15/2015</td>
+                    <td ID="type12">Office Visit</td>
+                    <td ID="type12specialty">Internal Medicine</td>
+                    <td>
+                      <paragraph>Provider, Kp</paragraph>
+                    </td>
+                    <td></td>
+                  </tr>
+                  <tr ID="encounter8" styleCode="altRow">
+                    <td>01/08/2015</td>
+                    <td ID="type13">Office Visit</td>
+                    <td ID="type13specialty">Internal Medicine</td>
+                    <td>
+                      <paragraph>Provider, Kp</paragraph>
+                    </td>
+                    <td></td>
+                  </tr>
+                  <tr ID="encounter9" styleCode="normRow">
+                    <td>01/06/2015</td>
+                    <td ID="type14">Office Visit</td>
+                    <td ID="type14specialty">Internal Medicine</td>
+                    <td>
+                      <paragraph>Provider, Kp</paragraph>
+                    </td>
+                    <td></td>
+                  </tr>
+                  <tr ID="encounter10" styleCode="altRow">
+                    <td>10/22/2014</td>
+                    <td ID="type15">Office Visit</td>
+                    <td ID="type15specialty">Administration</td>
+                    <td>
+                      <paragraph>Xmdox, Specsurgfour, MD</paragraph>
+                    </td>
+                    <td></td>
+                  </tr>
+                  <tr ID="encounter11" styleCode="normRow">
+                    <td>10/15/2014</td>
+                    <td ID="type16">Office Visit</td>
+                    <td ID="type16specialty">Internal Medicine</td>
+                    <td>
+                      <paragraph>Provider, Kp</paragraph>
+                    </td>
+                    <td ID="encounter11desc">Female Breast Infiltrating Ductal Carcinoma, Stage 2 (Primary Dx)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </text>
+            <entry>
+              <encounter classCode="ENC" moodCode="EVN">
+                <templateId root="2.16.840.1.113883.10.20.22.4.49"></templateId>
+                <id assigningAuthorityName="EPIC" extension="100279475" root="1.2.840.114350.1.13.114.3.7.3.698084.8"></id>
+                <code nullFlavor="OTH">
+                  <translation code="101" codeSystem="1.2.840.114350.1.13.114.3.7.4.698084.30" codeSystemName="Epic.EncounterType" displayName="Office Visit">
+                    <originalText>
+                      <reference value="#type12"></reference>
+                    </originalText>
+                  </translation>
+                </code>
+                <text>
+                  <reference nullFlavor="NA"></reference>
+                </text>
+                <statusCode code="normal"></statusCode>
+                <effectiveTime>
+                  <low value="20150115"></low>
+                </effectiveTime>
+                <performer typeCode="PRF">
+                  <assignedEntity classCode="ASSIGNED">
+                    <id extension="1" root="1.2.840.114350.1.13.114.3.7.2.836982"></id>
+                    <addr nullFlavor="UNK"></addr>
+                    <telecom nullFlavor="UNK"></telecom>
+                    <assignedPerson>
+                      <name>
+                        <given>Kp</given>
+                        <family>Provider</family>
+                      </name>
+                    </assignedPerson>
+                    <representedOrganization>
+                      <name nullFlavor="UNK"></name>
+                      <telecom nullFlavor="UNK"></telecom>
+                      <addr nullFlavor="UNK"></addr>
+                    </representedOrganization>
+                  </assignedEntity>
+                </performer>
+                <participant typeCode="LOC">
+                  <templateId root="2.16.840.1.113883.10.20.22.4.32"></templateId>
+                  <participantRole classCode="SDLOC">
+                    <id extension="1200110002" root="1.2.840.114350.1.13.114.3.7.2.686980"></id>
+                    <code nullFlavor="UNK">
+                      <originalText>
+                        <reference value="#type12specialty"></reference>
+                      </originalText>
+                    </code>
+                    <playingEntity classCode="PLC">
+                      <name>INTERNAL MEDICINE</name>
+                      <desc>Internal Medicine</desc>
+                    </playingEntity>
+                  </participantRole>
+                </participant>
+                <participant typeCode="ORG">
+                  <participantRole>
+                    <id extension="213" root="1.2.840.114350.1.13.114.3.7.2.688879"></id>
+                    <playingEntity>
+                      <name>Kaiser Permanente Hawaii - REGNHIM</name>
+                    </playingEntity>
+                  </participantRole>
+                </participant>
+              </encounter>
+            </entry>
+            <entry>
+              <encounter classCode="ENC" moodCode="EVN">
+                <templateId root="2.16.840.1.113883.10.20.22.4.49"></templateId>
+                <id assigningAuthorityName="EPIC" extension="100279032" root="1.2.840.114350.1.13.114.3.7.3.698084.8"></id>
+                <code nullFlavor="OTH">
+                  <translation code="101" codeSystem="1.2.840.114350.1.13.114.3.7.4.698084.30" codeSystemName="Epic.EncounterType" displayName="Office Visit">
+                    <originalText>
+                      <reference value="#type13"></reference>
+                    </originalText>
+                  </translation>
+                </code>
+                <text>
+                  <reference nullFlavor="NA"></reference>
+                </text>
+                <statusCode code="normal"></statusCode>
+                <effectiveTime>
+                  <low value="20150108"></low>
+                </effectiveTime>
+                <performer typeCode="PRF">
+                  <assignedEntity classCode="ASSIGNED">
+                    <id extension="1" root="1.2.840.114350.1.13.114.3.7.2.836982"></id>
+                    <addr nullFlavor="UNK"></addr>
+                    <telecom nullFlavor="UNK"></telecom>
+                    <assignedPerson>
+                      <name>
+                        <given>Kp</given>
+                        <family>Provider</family>
+                      </name>
+                    </assignedPerson>
+                    <representedOrganization>
+                      <name nullFlavor="UNK"></name>
+                      <telecom nullFlavor="UNK"></telecom>
+                      <addr nullFlavor="UNK"></addr>
+                    </representedOrganization>
+                  </assignedEntity>
+                </performer>
+                <participant typeCode="LOC">
+                  <templateId root="2.16.840.1.113883.10.20.22.4.32"></templateId>
+                  <participantRole classCode="SDLOC">
+                    <id extension="1200110002" root="1.2.840.114350.1.13.114.3.7.2.686980"></id>
+                    <code nullFlavor="UNK">
+                      <originalText>
+                        <reference value="#type13specialty"></reference>
+                      </originalText>
+                    </code>
+                    <playingEntity classCode="PLC">
+                      <name>INTERNAL MEDICINE</name>
+                      <desc>Internal Medicine</desc>
+                    </playingEntity>
+                  </participantRole>
+                </participant>
+                <participant typeCode="ORG">
+                  <participantRole>
+                    <id extension="213" root="1.2.840.114350.1.13.114.3.7.2.688879"></id>
+                    <playingEntity>
+                      <name>Kaiser Permanente Hawaii - REGNHIM</name>
+                    </playingEntity>
+                  </participantRole>
+                </participant>
+              </encounter>
+            </entry>
+            <entry>
+              <encounter classCode="ENC" moodCode="EVN">
+                <templateId root="2.16.840.1.113883.10.20.22.4.49"></templateId>
+                <id assigningAuthorityName="EPIC" extension="100278952" root="1.2.840.114350.1.13.114.3.7.3.698084.8"></id>
+                <code nullFlavor="OTH">
+                  <translation code="101" codeSystem="1.2.840.114350.1.13.114.3.7.4.698084.30" codeSystemName="Epic.EncounterType" displayName="Office Visit">
+                    <originalText>
+                      <reference value="#type14"></reference>
+                    </originalText>
+                  </translation>
+                </code>
+                <text>
+                  <reference nullFlavor="NA"></reference>
+                </text>
+                <statusCode code="normal"></statusCode>
+                <effectiveTime>
+                  <low value="20150106"></low>
+                </effectiveTime>
+                <performer typeCode="PRF">
+                  <assignedEntity classCode="ASSIGNED">
+                    <id extension="1" root="1.2.840.114350.1.13.114.3.7.2.836982"></id>
+                    <addr nullFlavor="UNK"></addr>
+                    <telecom nullFlavor="UNK"></telecom>
+                    <assignedPerson>
+                      <name>
+                        <given>Kp</given>
+                        <family>Provider</family>
+                      </name>
+                    </assignedPerson>
+                    <representedOrganization>
+                      <name nullFlavor="UNK"></name>
+                      <telecom nullFlavor="UNK"></telecom>
+                      <addr nullFlavor="UNK"></addr>
+                    </representedOrganization>
+                  </assignedEntity>
+                </performer>
+                <participant typeCode="LOC">
+                  <templateId root="2.16.840.1.113883.10.20.22.4.32"></templateId>
+                  <participantRole classCode="SDLOC">
+                    <id extension="1200110002" root="1.2.840.114350.1.13.114.3.7.2.686980"></id>
+                    <code nullFlavor="UNK">
+                      <originalText>
+                        <reference value="#type14specialty"></reference>
+                      </originalText>
+                    </code>
+                    <playingEntity classCode="PLC">
+                      <name>INTERNAL MEDICINE</name>
+                      <desc>Internal Medicine</desc>
+                    </playingEntity>
+                  </participantRole>
+                </participant>
+                <participant typeCode="ORG">
+                  <participantRole>
+                    <id extension="213" root="1.2.840.114350.1.13.114.3.7.2.688879"></id>
+                    <playingEntity>
+                      <name>Kaiser Permanente Hawaii - REGNHIM</name>
+                    </playingEntity>
+                  </participantRole>
+                </participant>
+              </encounter>
+            </entry>
+            <entry>
+              <encounter classCode="ENC" moodCode="EVN">
+                <templateId root="2.16.840.1.113883.10.20.22.4.49"></templateId>
+                <id assigningAuthorityName="EPIC" extension="100274466" root="1.2.840.114350.1.13.114.3.7.3.698084.8"></id>
+                <code nullFlavor="OTH">
+                  <translation code="101" codeSystem="1.2.840.114350.1.13.114.3.7.4.698084.30" codeSystemName="Epic.EncounterType" displayName="Office Visit">
+                    <originalText>
+                      <reference value="#type15"></reference>
+                    </originalText>
+                  </translation>
+                </code>
+                <text>
+                  <reference nullFlavor="NA"></reference>
+                </text>
+                <statusCode code="normal"></statusCode>
+                <effectiveTime>
+                  <low value="20141022"></low>
+                </effectiveTime>
+                <performer typeCode="PRF">
+                  <assignedEntity classCode="ASSIGNED">
+                    <id extension="HI3164" root="1.2.840.114350.1.13.114.3.7.2.836982"></id>
+                    <addr>
+                      <streetAddressLine>3288 MOANALUA ROAD</streetAddressLine>
+                      <city>HONOLULU</city>
+                      <state>HI</state>
+                      <postalCode>96819</postalCode>
+                    </addr>
+                    <telecom nullFlavor="UNK"></telecom>
+                    <assignedPerson>
+                      <name>
+                        <given>Specsurgfour</given>
+                        <family>Xmdox</family>
+                      </name>
+                    </assignedPerson>
+                    <representedOrganization>
+                      <name nullFlavor="UNK"></name>
+                      <telecom nullFlavor="UNK"></telecom>
+                      <addr nullFlavor="UNK"></addr>
+                    </representedOrganization>
+                  </assignedEntity>
+                </performer>
+                <participant typeCode="LOC">
+                  <templateId root="2.16.840.1.113883.10.20.22.4.32"></templateId>
+                  <participantRole classCode="SDLOC">
+                    <id extension="1200330003" root="1.2.840.114350.1.13.114.3.7.2.686980"></id>
+                    <code nullFlavor="UNK">
+                      <originalText>
+                        <reference value="#type15specialty"></reference>
+                      </originalText>
+                    </code>
+                    <playingEntity classCode="PLC">
+                      <name>PATIENT ACCOUNTING</name>
+                      <desc>Administration</desc>
+                    </playingEntity>
+                  </participantRole>
+                </participant>
+                <participant typeCode="ORG">
+                  <participantRole>
+                    <id extension="213" root="1.2.840.114350.1.13.114.3.7.2.688879"></id>
+                    <playingEntity>
+                      <name>Kaiser Permanente Hawaii - REGNHIM</name>
+                    </playingEntity>
+                  </participantRole>
+                </participant>
+              </encounter>
+            </entry>
+            <entry>
+              <encounter classCode="ENC" moodCode="EVN">
+                <templateId root="2.16.840.1.113883.10.20.22.4.49"></templateId>
+                <id assigningAuthorityName="EPIC" extension="100274110" root="1.2.840.114350.1.13.114.3.7.3.698084.8"></id>
+                <code nullFlavor="OTH">
+                  <translation code="101" codeSystem="1.2.840.114350.1.13.114.3.7.4.698084.30" codeSystemName="Epic.EncounterType" displayName="Office Visit">
+                    <originalText>
+                      <reference value="#type16"></reference>
+                    </originalText>
+                  </translation>
+                </code>
+                <text>
+                  <reference value="#encounter11desc"></reference>
+                </text>
+                <statusCode code="normal"></statusCode>
+                <effectiveTime>
+                  <low value="20141015"></low>
+                </effectiveTime>
+                <performer typeCode="PRF">
+                  <assignedEntity classCode="ASSIGNED">
+                    <id extension="1" root="1.2.840.114350.1.13.114.3.7.2.836982"></id>
+                    <addr nullFlavor="UNK"></addr>
+                    <telecom nullFlavor="UNK"></telecom>
+                    <assignedPerson>
+                      <name>
+                        <given>Kp</given>
+                        <family>Provider</family>
+                      </name>
+                    </assignedPerson>
+                    <representedOrganization>
+                      <name nullFlavor="UNK"></name>
+                      <telecom nullFlavor="UNK"></telecom>
+                      <addr nullFlavor="UNK"></addr>
+                    </representedOrganization>
+                  </assignedEntity>
+                </performer>
+                <participant typeCode="LOC">
+                  <templateId root="2.16.840.1.113883.10.20.22.4.32"></templateId>
+                  <participantRole classCode="SDLOC">
+                    <id extension="1200070014" root="1.2.840.114350.1.13.114.3.7.2.686980"></id>
+                    <code nullFlavor="UNK">
+                      <originalText>
+                        <reference value="#type16specialty"></reference>
+                      </originalText>
+                    </code>
+                    <playingEntity classCode="PLC">
+                      <name>INTERNAL MEDICINE</name>
+                      <desc>Internal Medicine</desc>
+                    </playingEntity>
+                  </participantRole>
+                </participant>
+                <participant typeCode="ORG">
+                  <participantRole>
+                    <id extension="213" root="1.2.840.114350.1.13.114.3.7.2.688879"></id>
+                    <playingEntity>
+                      <name>Kaiser Permanente Hawaii - REGNHIM</name>
+                    </playingEntity>
+                  </participantRole>
+                </participant>
+                <entryRelationship typeCode="RSON">
+                  <observation classCode="OBS" moodCode="EVN">
+                    <templateId root="2.16.840.1.113883.10.20.1.28"></templateId>
+                    <templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.5"></templateId>
+                    <id extension="33327" root="1.2.840.114350.1.13.114.3.7.2.696871"></id>
+                    <code code="55607006" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Problem"></code>
+                    <text>FEMALE BREAST INFILTRATING DUCTAL CARCINOMA, STAGE 2</text>
+                    <statusCode code="completed"></statusCode>
+                    <effectiveTime nullFlavor="UNK">
+                      <low nullFlavor="UNK"></low>
+                    </effectiveTime>
+                    <value code="174.9" codeSystem="2.16.840.1.113883.6.103" codeSystemName="ICD-9CM" displayName="FEMALE BREAST INFILTRATING DUCTAL CARCINOMA, STAGE 2" xsi:type="CD"></value>
+                  </observation>
+                </entryRelationship>
+                <entryRelationship inversionInd="true" typeCode="RSON">
+                  <act classCode="ACT" moodCode="EVN">
+                    <code code="COMMENT" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC"></code>
+                    <text>
+                      <reference value="#encounter11desc"></reference>
+                    </text>
+                    <statusCode code="completed"></statusCode>
+                    <author>
+                      <time value="20141015"></time>
+                      <assignedAuthor>
+                        <id extension="1" root="1.2.840.114350.1.13.114.3.7.2.836982"></id>
+                        <addr nullFlavor="UNK"></addr>
+                        <telecom nullFlavor="UNK"></telecom>
+                        <assignedPerson>
+                          <name>
+                            <given>Kp</given>
+                            <family>Provider</family>
+                          </name>
+                        </assignedPerson>
+                        <representedOrganization>
+                          <id extension="213" root="1.2.840.114350.1.13.114.3.7.2.688879"></id>
+                          <name>Kaiser Permanente Hawaii - REGNHIM</name>
+                          <telecom use="WP" value="tel:+1-808-432-5033"></telecom>
+                          <addr nullFlavor="NA">
+                            <city>Honolulu</city>
+                            <state>HI</state>
+                            <postalCode>96819</postalCode>
+                          </addr>
+                        </representedOrganization>
+                      </assignedAuthor>
+                    </author>
+                  </act>
+                </entryRelationship>
+              </encounter>
+            </entry>
+          </section>
+        </component>
+        <component>
+          <section>
+            <templateId root="2.16.840.1.113883.10.20.1.15"></templateId>
+            <templateId root="1.3.6.1.4.1.19376.1.5.3.1.3.16"></templateId>
+            <templateId root="2.16.840.1.113883.10.20.22.2.17"></templateId>
+            <code code="29762-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Social history"></code>
+            <title>Social History</title>
+            <text>
+              <table>
+                <colgroup>
+                  <col width="25%"></col>
+                  <col width="13%"></col>
+                  <col width="12%"></col>
+                  <col width="10%"></col>
+                  <col width="15%"></col>
+                  <col width="25%"></col>
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>Tobacco Use</th>
+                    <th>Types</th>
+                    <th>Packs/Day</th>
+                    <th>Years Used</th>
+                    <th>Date</th>
+                    <th>Comments</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Unknown if ever smoked</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </text>
+            <entry>
+              <observation classCode="OBS" moodCode="EVN">
+                <templateId root="2.16.840.1.113883.10.20.22.4.78"></templateId>
+                <code code="ASSERTION" codeSystem="2.16.840.1.113883.5.4"></code>
+                <statusCode code="completed"></statusCode>
+                <effectiveTime>
+                  <low nullFlavor="NASK"></low>
+                </effectiveTime>
+                <value code="266927001" codeSystem="2.16.840.1.113883.6.96" displayName="Unknown if ever smoked" xsi:type="CD"></value>
+              </observation>
+            </entry>
+          </section>
+        </component>
+        <component>
+          <section>
+            <templateId root="2.16.840.1.113883.10.20.1.10"></templateId>
+            <templateId root="1.3.6.1.4.1.19376.1.5.3.1.3.31"></templateId>
+            <templateId root="2.16.840.1.113883.3.88.11.83.124"></templateId>
+            <templateId root="2.16.840.1.113883.10.20.2.7"></templateId>
+            <templateId root="2.16.840.1.113883.10.20.22.2.10"></templateId>
+            <code code="18776-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Treatment plan"></code>
+            <title>Plan of Care</title>
+            <text>
+              <paragraph>Not on file</paragraph>
+            </text>
+          </section>
+        </component>
+        <component>
+          <section>
+            <templateId root="2.16.840.1.113883.10.20.22.2.3.1"></templateId>
+            <id root="0ab65c9c-9ce1-11e4-bdee-f7022539f5c5"></id>
+            <code code="30954-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="STUDIES SUMMARY"></code>
+            <title>Results from 10/15/2014 to 01/15/2015</title>
+            <text>
+              <content ID="nof19">Not on file</content>
+            </text>
+            <entry typeCode="DRIV">
+              <organizer classCode="BATTERY" moodCode="EVN" nullFlavor="NI">
+                <templateId root="2.16.840.1.113883.10.20.22.4.1"></templateId>
+                <id nullFlavor="NI"></id>
+                <code nullFlavor="UNK"></code>
+                <statusCode code="completed"></statusCode>
+                <effectiveTime>
+                  <low nullFlavor="UNK"></low>
+                </effectiveTime>
+                <component>
+                  <observation classCode="OBS" moodCode="EVN">
+                    <templateId root="2.16.840.1.113883.10.20.22.4.2"></templateId>
+                    <id nullFlavor="NI"></id>
+                    <code nullFlavor="UNK"></code>
+                    <text>
+                      <reference nullFlavor="UNK"></reference>
+                    </text>
+                    <statusCode code="completed"></statusCode>
+                    <effectiveTime nullFlavor="UNK"></effectiveTime>
+                    <value nullFlavor="NA" xsi:type="ST"></value>
+                  </observation>
+                </component>
+              </organizer>
+            </entry>
+          </section>
+        </component>
+        <component>
+          <section>
+            <code code="X-DOCCMT" displayName="Document Comments"></code>
+            <title>Additional Source Comments</title>
+            <text> FOR RECORDS PERTAINING TO PATIENTS WHO ARE OR HAVE BEEN ENROLLED IN ACHEMICAL DEPENDENCY/SUBSTANCE ABUSE PROGRAM - PLEASE NOTE:  Some of theenclosed information may contain records from the patient&apos;s treatment in asubstanceabuse program that are protected by Federal confidentiality rules (42CFR part2).  The Federal rules prohibit you from making any further disclosureof thisinformation unless further disclosure is expressly permitted by thewrittenconsent of the person to whom it pertains or as otherwise permitted by42 CFRpart 2.  A general authorization for the release of medical orotherinformation is NOT sufficient for this purpose.  The Federal rulesrestrict anyuse of the information to criminally investigate or prosecute anyalcohol ordrug abuse patient. FOR RECORDS PERTAINING TO PATIENTS WHO ARERECEIVING OR HAVE RECEIVED MENTALHEALTH SERVICES - PLEASE NOTE:  Some of theenclosed information may containrecords from the patient&apos;s mental healthtreatment that are protected understate law, which prohibit you from making anyfurther disclosure of thisinformation unless further disclosure is expresslypermitted by the writtenconsent of the person to whom it pertains or asotherwise permitted by state law.  Further disclosure in violation of state lawmay result in civil orcriminal penalties.DEPENDENCY/SUBSTANCE ABUSE PROGRAM - PLEASE NOTE:  Some of the enclosedinformation may contain records from the patient&apos;s treatment in a substanceabuse program that are protected by Federal confidentiality rules (42 CFR part2).  The Federal rules prohibit you from making any further disclosure of thisinformation unless further disclosure is expressly permitted by the writtenconsent of the person to whom it pertains or as otherwise permitted by 42 CFRpart 2.  A general authorization for the release of medical or otherinformation is NOT sufficient for this purpose.  The Federal rules restrict anyuse of the information to criminally investigate or prosecute any alcohol ordrug abuse patient. FOR RECORDS PERTAINING TO PATIENTS WHO ARE RECEIVING OR HAVE RECEIVED MENTALHEALTH SERVICES - PLEASE NOTE:  Some of the enclosed information may containrecords from the patient&apos;s mental health treatment that are protected understate law, which prohibit you from making any further disclosure of thisinformation unless further disclosure is expressly permitted by the writtenconsent of the person to whom it pertains or as otherwise permitted by statelaw.  Further disclosure in violation of state law may result in civil orcriminal penalties.
+              <footnote>Kaiser Permanente Hawaii - REGNHIM</footnote>
+            </text>
+          </section>
+        </component>
+      </structuredBody>
+    </component>
+  </ClinicalDocument>
+

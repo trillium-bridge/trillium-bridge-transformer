@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:v3="urn:hl7-org:v3"
-    xsi:schemaLocation="http://trilliumbridge.org/xform ../schema/TBXform.xsd urn:hl7-org:v3 ../schema/CDASchema/POCD_MT000040_extended.xsd"
-    xmlns="http://trilliumbridge.org/xform">
+ xsi:schemaLocation="http://trilliumbridge.org/xform http://informatics.mayo.edu/trillium-bridge/bridge/resources/schema/TBXform.xsd"
+ xmlns="http://trilliumbridge.org/xform" xmlns:v3="urn:hl7-org:v3">
 
     <context>
         <documentation>The stylesheet needs to be mapped from the appropriate type and langauge</documentation>

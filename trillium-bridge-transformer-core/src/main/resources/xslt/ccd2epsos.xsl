@@ -12,4 +12,7 @@
     <!-- Transformation rules -->
     <xsl:param name="transform">../tbxform/CCDtoEPSOS.xml</xsl:param>
     
+    <!-- Target schemaa location -->
+    <xsl:param name="schemaLocation">../schema/CDASchema/POCD_MT000040_extended.xsd</xsl:param>
+    
 </xsl:stylesheet>

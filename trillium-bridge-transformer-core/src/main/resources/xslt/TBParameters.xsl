@@ -18,7 +18,7 @@
     <!-- ===================================================================
          schemalocation - the URI the target schemalocation "/" means none
          =================================================================== -->
-    <xsl:param name="schemaLocation" as="xs:anyURI">/</xsl:param> 
+    <xsl:param name="schemaLocation" as="xs:anyURI">resources/schema/CDASchema</xsl:param> 
     
     <!-- =================================================================
          copycomments - copy the comments from the source to the target document
@@ -38,7 +38,7 @@
     <!-- ===================================================================
          transform - URI base for redirects
          =================================================================== -->
-    <xsl:param name="base" as="xs:string">trillium-bridge</xsl:param>
+    <xsl:param name="base" as="xs:string">/</xsl:param>
 
     <!-- ===================================================================
          copypi - copy the processing instructions from the source to the target document

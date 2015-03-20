@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:epsos="urn:epsos-org:ep:medication"
-    xsi:schemaLocation="http://trilliumbridge.org/xform ../schema/TBXform.xsd urn:epsos-org:ep:medication ../schema/CDASchema/POCD_MT000040_extended.xsd"
-    xmlns="http://trilliumbridge.org/xform">
+<map xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://trilliumbridge.org/xform http://informatics.mayo.edu/trillium-bridge/bridge/resources/schema/TBXform.xsd"
+ xmlns="http://trilliumbridge.org/xform" xmlns:epsos="urn:epsos-org:ep:medication">
 
     <context>
         <documentation>The stylesheet needs to be mapped from the appropriate type and langauge</documentation>
