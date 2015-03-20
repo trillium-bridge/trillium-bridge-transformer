@@ -2,7 +2,7 @@
 <!-- UPDATE DEMOGRAPHICS -->
 <?xml-stylesheet type="text/xsl" href="../resources/CCD.xsl"?>
 <ClinicalDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="urn:hl7-org:v3 ../schema/CDASchema/POCD_MT000040_extended.xsd" xmlns="urn:hl7-org:v3" xmlns:ns="urn:hl7-org:v3"
+	xsi:schemaLocation="urn:hl7-org:v3 http://informatics.mayo.edu/trillium-bridge/bridge/resources/schema/CDASchema/POCD_MT000040_extended.xsd" xmlns="urn:hl7-org:v3" xmlns:ns="urn:hl7-org:v3"
  xmlns:mif="urn:hl7-org:v3/mif" xmlns:epsos="urn:epsos-org:ep:medication" xmlns:sch="http://www.ascc.net/xml/schematron" xmlns:ext="urn:hl7-EE-DL-Ext:v1">
 	<!-- header-section -->
 	<typeId extension="POCD_HD000040" root="2.16.840.1.113883.1.3"/>

@@ -13,6 +13,6 @@
     <xsl:param name="transform">../tbxform/CCDtoEPSOS.xml</xsl:param>
     
     <!-- Target schemaa location -->
-    <xsl:param name="schemaLocation">../schema/CDASchema/POCD_MT000040_extended.xsd</xsl:param>
+    <xsl:param name="schemaLocation">http://informatics.mayo.edu/trillium-bridge/bridge/resources/schema/CDASchema/POCD_MT000040_extended.xsd</xsl:param>
     
 </xsl:stylesheet>

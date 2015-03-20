@@ -12,6 +12,6 @@
     <xsl:param name="transform">../tbxform/EPSOStoCCD.xml</xsl:param>
     
     <!-- Schema Location -->
-    <xsl:param name="schemaLocation">../schema/CDASchema/CDA_extended.xsd</xsl:param>
+    <xsl:param name="schemaLocation">http://informatics.mayo.edu/trillium-bridge/bridge/resources/schema/CDASchema/CDA_extended.xsd</xsl:param>
     
 </xsl:stylesheet>
