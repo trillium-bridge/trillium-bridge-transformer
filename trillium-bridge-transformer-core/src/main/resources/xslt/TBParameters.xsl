@@ -28,12 +28,12 @@
     <!-- ===================================================================
          translationbase - the base URI of the Bing translator gateway
          =================================================================== -->
-    <xsl:param name="translationbase">http://informatics.mayo.edu/trillium-bridge/translate</xsl:param>
+    <xsl:param name="translationbase">http://informatics.mayo.edu/trillium-bridge/translator</xsl:param>
     
     <!-- ===================================================================
          usebing - true means use the bing translation gateway
          =================================================================== -->
-    <xsl:param name="usebing" select="'false'"/>
+    <xsl:param name="usebing" select="'true'"/>
     
     <!-- ===================================================================
          transform - URI base for redirects
