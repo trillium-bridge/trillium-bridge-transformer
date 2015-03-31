@@ -138,8 +138,8 @@
                               </epsos:formCode>
                               <epsos:ingredient classCode="ACTI">
                                  <epsos:quantity>
-                                    <epsos:numerator value="100" unit="mg" xsi:type="epsos:PQ"/>
-                                    <epsos:denominator value="1" unit="1" xsi:type="epsos:PQ"/>
+                                    <epsos:numerator value="100" unit="mg" xsi:type="PQ"/>
+                                    <epsos:denominator value="1" unit="1" xsi:type="PQ"/>
                                  </epsos:quantity>
                                  <epsos:ingredient classCode="MMAT" determinerCode="KIND">
                                     <epsos:code code="C07AB02"

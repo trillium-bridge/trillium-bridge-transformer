@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ClinicalDocument xmlns="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:epsos="urn:epsos-org:ep:medication">
+	<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.1.3"/>
+	<templateId root="1.3.6.1.4.1.19376.1.5.3.1.1.1"/>
+	<component>
+		<structuredBody>
+			<component>
+				<section>
+					<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.2.3"/>
+					<templateId root="2.16.840.1.113883.10.20.1.8"/>
+					<entry typeCode="DRIV">
+						<substanceAdministration classCode="SBADM" moodCode="INT">
+							<templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.3.4"/>
+							<templateId root="2.16.840.1.113883.10.20.1.24"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7"/>
+							<templateId root="1.3.6.1.4.1.19376.1.5.3.1.4.7.1"/>
+							<consumable>
+								<manufacturedProduct>
+								    <templateId root="2.16.840.1.113883.10.20.1.53"/>
+									<manufacturedMaterial>
+										<epsos:ingredient classCode="ACTI">
+											<epsos:quantity>
+												<epsos:numerator value="100" unit="mg" xsi:type="epsos:PQ"/>
+											    <epsos:numerator value="100" unit="mg" xsi:type="epsos:AQ"/>
+											    <epsos:numerator value="100" unit="mg" xsi:type="MQ"/>
+											    <epsos:numerator value="100" unit="mg" xsi:type="v3:AQ"/>
+												<epsos:denominator value="1" unit="1" xsi:type="epsos:PQ"/>
+											    <epsos:numerator value="100" unit="mg" xsi:type="epsos:AQ"/>
+											    <epsos:numerator value="100" unit="mg" xsi:type="MQ"/>
+											    <epsos:numerator value="100" unit="mg" xsi:type="v3:AQ"/>
+											    <epsos:numerator value="100" unit="mg"/>
+											</epsos:quantity>
+										</epsos:ingredient>
+									</manufacturedMaterial>
+								</manufacturedProduct>
+							</consumable>
+						</substanceAdministration>
+					</entry>
+				</section>
+			</component>
+		</structuredBody>
+	</component>
+	<!--medical-sections-->
+</ClinicalDocument>
+

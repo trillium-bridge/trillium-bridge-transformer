@@ -90,7 +90,7 @@
 
         <xsl:if test="boolean($globalmatch) and boolean($transformmatch)">
             <xsl:message terminate="yes">
-                <xsl:text>Same path specified for both a norma transform and a global transform</xsl:text>
+                <xsl:text>Same path specified for both a normal transform and a global transform</xsl:text>
                 <xsl:copy-of select="$transformmatch"/>
                 <xsl:copy-of select="$globalmatch"/>
             </xsl:message>

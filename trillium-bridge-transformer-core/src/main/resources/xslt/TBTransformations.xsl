@@ -4,6 +4,8 @@
     xmlns:mapServices="http://www.omg.org/spec/CTS2/1.1/MapEntryServices" xmlns:codeSystem="http://schema.omg.org/spec/CTS2/1.0/CodeSystem"
     xmlns:core="http://www.omg.org/spec/CTS2/1.1/Core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xpath-default-namespace="urn:hl7-org:v3"
     xmlns:v3="urn:hl7-org:v3">
+    <!-- WARNING:  Comment this line out before submitting.  The Saxon library complains bitterly when this is here... -->
+<!--    <xsl:include href="TBParameters.xsl"/>-->
     <xsl:include href="CTS2Access.xsl"/>
     <xsl:include href="TBTranslator.xsl"/>
 
@@ -227,7 +229,8 @@
     <xsl:template match="@*" mode="substitute">
         <xsl:param name="id" tunnel="yes"/>
         <xsl:attribute name="{name()}"
-            select="replace(replace(., '\{id/@extension\}', if($id/@extension) then ($id/@extension) else 'NONE'), '\{id/@root\}', if($id) then ($id/@root) else 'NONE')"/>
+            select="replace(replace(., '\{id/@extension\}', if($id/@extension) then ($id/@extension) else 'NONE'), '\{id/@root\}', if($id) then ($id/@root) else 'NONE')"
+        />
     </xsl:template>
 
     <!-- addNode with text value substitution -->
@@ -533,6 +536,31 @@
         </xsl:for-each>
     </xsl:template>
 
+    <!-- ============== changeXSINamespace ===============
+        Change the namespace of an xsi:type element.
+        Arguments:
+        @from - if present, only change namespaces of this type.  Else change any namespace
+        @to   - if present, change to this namespace. Else remove the namespace
+        @type - if present, only change type(s) in this list, else change all types
+        ==================================================  -->
+    <xsl:template name="changeXSINamespace">
+        <xsl:param name="context" tunnel="yes"/>
+        <xsl:variable name="args" select="."/>
+        <xsl:for-each select="$context">
+            <xsl:copy>
+                <xsl:apply-templates select="@*[not(name()= 'xsi:type')]" mode="inside"/>
+                <xsl:if test="@xsi:type">
+                    <xsl:variable name="ns" select="substring-before(@xsi:type, ':')"/>
+                    <xsl:variable name="n" select="if($ns) then substring-after(@xsi:type, ':') else @xsi:type"/>
+                    <xsl:variable name="tns" select="if( (not($args/@type) or $n = tokenize($args/@type, ' ')) and
+                                                         (not($args/@from) or $args/@from=$ns)) then $args/@to else $ns"/>
+                    <xsl:attribute name="xsi:type" select="concat($tns, if($tns) then ':' else '', $n)"/>
+                </xsl:if>
+                <xsl:apply-templates select="node()" mode="inside"/>
+            </xsl:copy>
+        </xsl:for-each>
+    </xsl:template>
+
 
     <!-- ============= adjustDoseQuantity ===================
         Change doseQuantity from a single entry to a nested entry
@@ -595,6 +623,9 @@
             </xsl:when>
             <xsl:when test="@name='mapValueSetAndAdd'">
                 <xsl:call-template name="mapValueSetAndAdd"/>
+            </xsl:when>
+            <xsl:when test="@name='changeXSINamespace'">
+                <xsl:call-template name="changeXSINamespace"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:comment>UNMAPPED FUNCTION: <xsl:value-of select="@name"/></xsl:comment>

@@ -9,6 +9,9 @@ String.prototype.xmlEscape = function() {
     if (restOfUrl.match(/(bridge$)/)) {
         location.href = protocol + "://" + restOfUrl + '/';
     }
+    else if (!restOfUrl.match(/\//)) {
+        location.href = location.href + '/';
+    }
     else if (restOfUrl.match(/bridge\?/)) {
         location.href = protocol + '://' + restOfUrl.replace(/bridge\?/, 'bridge/?')
     }

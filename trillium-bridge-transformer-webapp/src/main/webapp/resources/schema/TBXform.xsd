@@ -318,6 +318,23 @@
                         </transform></xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
+            <xs:enumeration value="changeXSINamespace">
+                <xs:annotation>
+                    <xs:documentation>Change the namespace of an xsi:type element
+                        
+                        Parameters:
+                        @from - from namespace.  If absent, change all.
+                        @to   - to namespace.  If absent, remove the namespace
+                        @type - list of types to apply change to.
+                        
+                        Example:
+                        <transform global="true">
+                            <path>/manufacturedMaterial/epsos:ingredient</path>
+                            <transformation name="changeXSINamespace" from="epsos"/>
+                        </transform>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
         </xs:restriction>
     </xs:simpleType>
 

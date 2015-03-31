@@ -297,7 +297,13 @@
                                 </arg>
                             </transformation>
                         </transform>
-
+                        <context>
+                            <root>/manufacturedMaterial/epsos:ingredient[@classCode="ACTI"]</root>
+                            <transform global="true">
+                              <path></path>
+                              <transformation name="changeXSINamespace" from="epsos"/>
+                            </transform>
+                        </context>
                     </context>
                 </context>
             </context>
