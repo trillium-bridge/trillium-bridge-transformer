@@ -190,12 +190,12 @@ public class TransformerController {
                 responseFormat);
 
         try {
+            response.setContentType(contentType);
             response.getOutputStream().write(baos.toByteArray());
         } finally {
             IOUtils.closeQuietly(baos);
         }
 
-        response.setContentType(contentType);
     }
 
     /**
