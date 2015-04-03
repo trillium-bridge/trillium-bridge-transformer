@@ -303,7 +303,7 @@
             <xsl:otherwise>
                 <xsl:message terminate="yes">
                     <xsl:text>Unable to open </xsl:text>
-                    <xsl:value-of select="$docname"/>
+                    <xsl:value-of select="resolve-uri($docname)"/>
                 </xsl:message>
             </xsl:otherwise>
         </xsl:choose>

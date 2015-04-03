@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClinicalDocument xmlns="urn:hl7-org:v3"
+                  xmlns:epsos="urn:epsos-org:ep:medication"
+                  xmlns:ext="urn:hl7-EE-DL-Ext:v1"
+                  xmlns:mif="urn:hl7-org:v3/mif"
+                  xmlns:ns="urn:hl7-org:v3"
+                  xmlns:sch="http://www.ascc.net/xml/schematron"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <templateId root="1.3.6.1.4.1.12559.11.10.1.3.1.1.1"/>
+   <entry classCode="KP1">
+      <code codeSystem="2.16.840.1.113883.6.73"
+            codeSystemName="ATC"
+            code="J01C"
+            displayName="BETA-LACTAM ANTIBACTERIALS, PENICILLINS">
+         <translation code="N0000011281"
+                      codeSystem="2.16.840.1.113883.3.26.1.5"
+                      codeSystemName="NDF-RT"/>
+      </code>
+   </entry>
+   <entry classCode="KP2">
+      <code codeSystem=""
+            codeSystemName="SNOMED CT"
+            code="256259004"
+            displayName="Pollen (substance) ">
+         <translation code="235616"
+                      codeSystem="2.16.840.1.113883.6.88"
+                      codeSystemName="RxNorm"/>
+      </code>
+   </entry>
+   <entry classCode="KP3">
+      <code codeSystem="2.16.840.1.113883.6.3"
+            codeSystemName="ICD-10"
+            code="C50.9"
+            displayName="Malignant neoplasm: Breast, unspecified">
+         <translation code="422479008"
+                      codeSystem="2.16.840.1.113883.6.96"
+                      codeSystemName="SNOMED CT"
+                      displayName="FEMALE BREAST INFILTRATING DUCTAL CARCINOMA, STAGE 2"
+                      xsi:type="CD"/>
+      </code>
+   </entry>
+   <entry classCode="KP4">
+      <code codeSystem="2.16.840.1.113883.6.73"
+            codeSystemName="ATC"
+            code="L02BG03"
+            displayName="anastrozole">
+         <translation code="199224"
+                      codeSystem="2.16.840.1.113883.6.88"
+                      codeSystemName="RxNorm"
+                      displayName="Anastrozole 1 Mg Oral Tab"/>
+      </code>
+   </entry>
+   <entry classCode="es1">
+      <code codeSystem="2.16.840.1.113883.6.88"
+            codeSystemName="RxNorm"
+            code="4053"
+            displayName="Erythromycin">
+         <translation code="D10AF02"
+                      displayName="erythromycin"
+                      codeSystem="2.16.840.1.113883.6.73"
+                      codeSystemName="Anatomical Therapeutic Chemical"/>
+      </code>
+   </entry>
+   <entry classCode="es2">
+      <code codeSystem="2.16.840.1.113883.6.96"
+            codeSystemName="SNOMED CT"
+            code="5962100"
+            displayName="Essential hypertension (Disorder)">
+         <translation code="I10"
+                      displayName="Essential (primary) hypertension"
+                      codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.44.2"
+                      codeSystemName="ICD-10"
+                      xsi:type="CD"/>
+      </code>
+   </entry>
+   <entry classCode="es3">
+      <code codeSystem="2.16.840.1.113883.6.88"
+            codeSystemName="RxNorm"
+            code="6918"
+            displayName="Metoprolol">
+         <translation code="C07AB02"
+                      displayName="metoprolol"
+                      codeSystem="2.16.840.1.113883.6.73"
+                      codeSystemName="Anatomical Therapeutic Chemical"/>
+      </code>
+   </entry>
+   <entry classCode="es4">
+      <code codeSystem="2.16.840.1.113883.6.96"
+            codeSystemName="SNOMED CT"
+            code="193028008"
+            displayName="Sick headache (disorder)">
+         <translation code="G43"
+                      displayName="Migraine"
+                      codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.44.2"
+                      codeSystemName="ICD-10"
+                      xsi:type="CD"/>
+      </code>
+   </entry>
+   <entry classCode="es5">
+      <code codeSystem="2.16.840.1.113883.6.96"
+            codeSystemName="SNOMED CT"
+            code="71620000"
+            displayName="Fracture of femur (disorder)">
+         <translation code="S72"
+                      displayName="Fracture of femur"
+                      codeSystem="1.3.6.1.4.1.12559.11.10.1.3.1.44.2"
+                      codeSystemName="ICD-10"
+                      xsi:type="CD"/>
+      </code>
+   </entry>
+   <entry classCode="es6">
+      <code codeSystem="2.16.840.1.113883.12.292"
+            codeSystemName="CVX"
+            code="109"
+            displayName="pneumococcal, unspecified formulation">
+         <translation code="333598008"
+                      codeSystem="2.16.840.1.113883.6.96"
+                      codeSystemName="SNOMED CT"
+                      displayName="Pneumococcal vaccine"/>
+      </code>
+   </entry>
+</ClinicalDocument>

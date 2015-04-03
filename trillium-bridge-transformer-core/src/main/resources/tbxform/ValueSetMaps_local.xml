@@ -9,31 +9,31 @@
         <uripattern>../cts2fileservice/map/EPSOStoCCD/version/v0.1/resolution.xml</uripattern>
     </entry>
     <entry name="NUCC_ISCO_ProviderType_VS" entireMap="false">
-        <uripattern>http://rd.phast.fr/REST/sts_rest_beta_2/0004/map/NUCC_ISCO_ProviderType_VS/resolution?entity={code}</uripattern>
+        <uripattern>../cts2fileservice/map/NUCC_ISCO_ProviderType_VS/resolution/{code}.xml</uripattern>
     </entry>
     <entry name="ATC_NDF-RT_epSOSActiveIngredient_VS" entireMap="false">
-        <uripattern>http://rd.phast.fr/REST/sts_rest_beta_2/0004/map/ATC_NDF-RT_epSOSActiveIngredient_VS/resolution?entity={code}</uripattern>
+        <uripattern>../cts2fileservice/map/ATC_NDF-RT_epSOSActiveIngredient_VS/resolution/{code}.xml</uripattern>
     </entry>
     <entry name="ICD_10_SNOMED_CT_epSOSIllnesses_VS" entireMap="false">
-        <uripattern>http://rd.phast.fr/REST/sts_rest_beta_2/0004/map/ICD%2010_SNOMED%20CT_epSOSIllnesses_VS/resolution?entity={code}</uripattern>
+        <uripattern>../cts2fileservice/map/ICD 2010_SNOMED CT_epSOSIllnesses_VS/resolution/{code}.xml</uripattern>
     </entry>
     <entry name="ATC_RxNorm_epSOSActiveIngredient_VS" entireMap="false">
-        <uripattern>http://rd.phast.fr/REST/sts_rest_beta_2/0004/map/ATC_RxNorm_epSOSActiveIngredient_VS/resolution?entity={code}</uripattern>
+        <uripattern>../cts2fileservice/map/ATC_RxNorm_epSOSActiveIngredient_VS/resolution/{code}.xml</uripattern>
     </entry>
     <entry name="NDF-RT_ATC_Drug_Class_VS" entireMap="false">
-        <uripattern>http://rd.phast.fr/REST/sts_rest_beta_2/0004/map/NDF-RT_ATC_Drug_Class_VS/resolution?entity={code}</uripattern>
+        <uripattern>../cts2fileservice/map/NDF-RT_ATC_Drug_Class_VS/resolution/{code}.xml</uripattern>
     </entry>
     <entry name="SNOMED_CT_to_ICD_10_CCD_Problem_VS" entireMap="false">
-        <uripattern>http://rd.phast.fr/REST/sts_rest_beta_2/0004/map/SNOMED%20CT_to_ICD%2010_CCD_Problem_VS/resolution?entity={code}</uripattern>
+        <uripattern>../cts2fileservice/map/SNOMED CT_to_ICD 2010_CCD_Problem_VS/resolution/{code}.xml</uripattern>
     </entry>
     <entry name="RxNorm_ATC_Clinical_Drug_VS" entireMap="false">
-        <uripattern>http://rd.phast.fr/REST/sts_rest_beta_2/0004/map/RxNorm_ATC_Clinical_Drug_VS/resolution?entity={code}</uripattern>
+        <uripattern>../cts2fileservice/map/RxNorm_ATC_Clinical_Drug_VS/resolution/{code}.xml</uripattern>
     </entry>
     <entry name="RxNORM_TO_SNOMED_CT" entireMap="false">
         <uripattern>../cts2fileservice/map/RxNORM_TO_SNOMED_CT/resolution/{code}.xml</uripattern>
     </entry>
     <entry name="SNOMED_CT_CVX_epSOSVaccine_VS" entireMap="false">
-        <uripattern>http://rd.phast.fr/REST/sts_rest_beta_2/0004/map/SNOMED CT_CVX_ epSOSVaccine_VS/resolution?entity={code}</uripattern>
+        <uripattern>../cts2fileservice/map/SNOMED CT_CVX_ epSOSVaccine_VS/resolution/{code}.xml</uripattern>
     </entry>
     
 </valuesetmap>

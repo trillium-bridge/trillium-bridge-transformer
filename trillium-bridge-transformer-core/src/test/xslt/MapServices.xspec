@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<x:description xmlns:x="http://www.jenitennison.com/xslt/xspec"
+    stylesheet="DemoCodes.xsl">
+    <x:scenario label="PHAST Service Test">
+        <x:context select="document('../../../test/resources/sampleinput/generic/DemoMapSet.xml')"/>
+        <x:expect  select="document('../../../test/resources/sampleoutput/generic/DemoMapSet_PHAST.xml')"
+            label="PHAST Map Services" />
+    </x:scenario>   
+</x:description>

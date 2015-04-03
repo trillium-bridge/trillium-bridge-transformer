@@ -1,0 +1,21 @@
+<MapTargetListMsg xsi:schemaLocation="http://www.omg.org/spec/CTS2/1.1/MapEntryServices http://www.omg.org/spec/cts2/130601/mapversion/MapEntryServices.xsd"
+    xmlns="http://www.omg.org/spec/CTS2/1.1/MapEntryServices" xmlns:mapVersion="http://www.omg.org/spec/CTS2/1.1/MapVersion"
+    xmlns:core="http://www.omg.org/spec/CTS2/1.1/Core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <core:heading>
+        <core:resourceRoot>http://rd.phast.fr/REST/sts_rest_beta_2/0004/</core:resourceRoot>
+        <core:resourceURI>map/ICD%2010_SNOMED%20CT_epSOSIllnesses_VS/resolution?entity=G43</core:resourceURI>
+        <core:parameter arg="entity">
+            <core:val>G43</core:val>
+        </core:parameter>
+        <core:accessDate>2015-04-03T18:01:02Z</core:accessDate>
+    </core:heading>
+    <mapTargetList>
+        <entry entryOrder="1">
+            <mapVersion:mapTo uri="urn:oid:2.16.840.1.113883.6.96/51254007">
+                <core:namespace>SCT</core:namespace>
+                <core:name>193028008</core:name>
+                <core:designation>Sick headache (disorder)</core:designation>
+            </mapVersion:mapTo>
+        </entry>
+    </mapTargetList>
+</MapTargetListMsg>

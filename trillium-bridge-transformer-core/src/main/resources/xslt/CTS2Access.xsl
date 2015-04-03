@@ -8,9 +8,11 @@
     xmlns:mapServices="http://www.omg.org/spec/CTS2/1.1/MapEntryServices" 
     exclude-result-prefixes="xs tbx core codeSystem mapVersion mapServices"
     version="2.0">
+    <!-- WARNING:  Comment this line out before submitting.  The Saxon library complains bitterly when this is here... -->
+<!--    <xsl:include href="TBParameters.xsl"/>-->
     
     <xsl:variable name="codesystems" as="element(codeSystem:CodeSystemCatalogEntryDirectory)">
-        <xsl:copy-of select="document('http://rd.phast.fr/REST/sts_rest_beta_2/0004/codesystems')/codeSystem:CodeSystemCatalogEntryDirectory"/>
+        <xsl:copy-of select="document($codesystemsdirectoryfile)/codeSystem:CodeSystemCatalogEntryDirectory"/>
     </xsl:variable>
     
     

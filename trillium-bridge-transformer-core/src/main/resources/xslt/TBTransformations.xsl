@@ -5,7 +5,7 @@
     xmlns:core="http://www.omg.org/spec/CTS2/1.1/Core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xpath-default-namespace="urn:hl7-org:v3"
     xmlns:v3="urn:hl7-org:v3">
     <!-- WARNING:  Comment this line out before submitting.  The Saxon library complains bitterly when this is here... -->
-    <xsl:include href="TBParameters.xsl"/>
+<!--    <xsl:include href="TBParameters.xsl"/>-->
     <xsl:include href="CTS2Access.xsl"/>
     <xsl:include href="TBTranslator.xsl"/>
 
@@ -13,7 +13,7 @@
     <xsl:param name="debug" select="false()"/>
 
     <xsl:variable name="valuesets" as="element(tbx:valuesetmap)">
-        <xsl:copy-of select="document('../tbxform/ValueSetMaps.xml')/tbx:valuesetmap"/>
+        <xsl:copy-of select="document($valuesetmapfile)/tbx:valuesetmap"/>
     </xsl:variable>
 
 

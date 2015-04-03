@@ -62,5 +62,15 @@
          debugging - Show the transformations that are invoked and other useful information 
          =================================================================== --> 
     <xsl:param name="debugging" select="'false'"/>
+     
+     <!-- ==================================================================
+          value set map file location.  Location is relative to the xslt directory
+          ================================================================== -->
+     <xsl:param name="valuesetmapfile">../tbxform/ValueSetMaps.xml</xsl:param>
+     
+     <!-- ==================================================================
+          Code systems directory location.  Location is relative to the xslt directory
+          ================================================================== -->
+     <xsl:param name="codesystemsdirectoryfile">http://rd.phast.fr/REST/sts_rest_beta_2/0004/codesystems</xsl:param>
 
 </xsl:stylesheet>
