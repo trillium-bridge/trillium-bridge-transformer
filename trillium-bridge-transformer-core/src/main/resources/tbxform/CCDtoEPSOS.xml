@@ -357,6 +357,7 @@
             <context>
                 <root>/component/section</root>
                 <template>2.16.840.1.113883.10.20.22.2.1</template>
+                <template>2.16.840.1.113883.10.20.22.2.1.1</template>
                 <transform>
                     <path>/templateId</path>
                     <transformation name="changeTemplateRoots">
