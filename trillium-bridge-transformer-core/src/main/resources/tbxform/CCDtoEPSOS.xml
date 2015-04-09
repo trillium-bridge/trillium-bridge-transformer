@@ -394,7 +394,38 @@
                         </transform>
                         <transform>
                             <path>/manufacturedMaterial/code</path>
-                            <transformation name="mapValueSetAndAdd" outside="1" map="ATC_RxNorm_epSOSActiveIngredient_VS">
+                            <transformation name="mapValueSetAndAdd" outside="1" map="RxNorm_ATC_Clinical_Drug_VS">
+                                <arg>
+                                    <source>/manufacturedMaterial/code</source>
+                                </arg>
+                                <arg name="target" after="true">
+                                    <epsos:formCode nullFlavor="NA"/>
+                                    <epsos:ingredient classCode="ACTI">
+                                        <epsos:quantity>
+                                            <epsos:numerator nullFlavor="NA" xsi:type="epsos:PQ"/>
+                                            <epsos:denominator nullFlavor="NA" xsi:type="epsos:PQ"/>
+                                        </epsos:quantity>
+                                        <epsos:ingredient classCode="MMAT" determinerCode="KIND">
+                                            <epsos:code nullFlavor="NA"/>
+                                        </epsos:ingredient>
+                                    </epsos:ingredient>
+                                </arg>
+                            </transformation>
+                        </transform>
+                    </context>
+                    <context>
+                        <root>/consumable[@typeCode="CSM"]/manufacturedProduct[@classCode="MANU"]</root>
+                        <template>2.16.840.1.113883.10.20.22.4.23</template>
+                        <transform>
+                            <path>/templateId</path>
+                            <transformation name="changeTemplateRoots">
+                                <arg fromid="2.16.840.1.113883.10.20.22.4.23"/>
+                                <arg toid="2.16.840.1.113883.10.20.1.53"/>
+                            </transformation>
+                        </transform>
+                        <transform>
+                            <path>/manufacturedMaterial/code</path>
+                            <transformation name="mapValueSetAndAdd" outside="1" map="RxNorm_ATC_Clinical_Drug_VS">
                                 <arg>
                                     <source>/manufacturedMaterial/code</source>
                                 </arg>
