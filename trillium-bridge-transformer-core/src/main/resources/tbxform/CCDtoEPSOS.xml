@@ -402,8 +402,8 @@
                                     <epsos:formCode nullFlavor="NA"/>
                                     <epsos:ingredient classCode="ACTI">
                                         <epsos:quantity>
-                                            <epsos:numerator nullFlavor="NA" xsi:type="epsos:PQ"/>
-                                            <epsos:denominator nullFlavor="NA" xsi:type="epsos:PQ"/>
+                                            <epsos:numerator nullFlavor="NA" xsi:type="PQ"/>
+                                            <epsos:denominator nullFlavor="NA" xsi:type="PQ"/>
                                         </epsos:quantity>
                                         <epsos:ingredient classCode="MMAT" determinerCode="KIND">
                                             <epsos:code nullFlavor="NA"/>
@@ -433,8 +433,8 @@
                                     <epsos:formCode nullFlavor="NA"/>
                                     <epsos:ingredient classCode="ACTI">
                                         <epsos:quantity>
-                                            <epsos:numerator nullFlavor="NA" xsi:type="epsos:PQ"/>
-                                            <epsos:denominator nullFlavor="NA" xsi:type="epsos:PQ"/>
+                                            <epsos:numerator nullFlavor="NA" xsi:type="PQ"/>
+                                            <epsos:denominator nullFlavor="NA" xsi:type="PQ"/>
                                         </epsos:quantity>
                                         <epsos:ingredient classCode="MMAT" determinerCode="KIND">
                                             <epsos:code nullFlavor="NA"/>
