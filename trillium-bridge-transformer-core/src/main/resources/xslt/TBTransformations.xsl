@@ -375,7 +375,7 @@
                         <xsl:value-of select="$translations/tbx:entry[tbx:source=$src]/tbx:target"/>
                     </title>
                 </xsl:when>
-                <xsl:when test="$usebing">
+                <xsl:when test="$usebing = 'true'">
                     <title xmlns="urn:hl7-org:v3">
                         <xsl:value-of select="tbx:translate($src, $language, $tolanguage)"/>
                     </title>
