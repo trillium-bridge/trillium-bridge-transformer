@@ -13,7 +13,7 @@
     <packaging>war</packaging>
 
     <properties>
-        <spring-security.version>3.2.5.RELEASE</spring-security.version>
+        <spring-security.version>[4.1.1,)</spring-security.version>
         <org.aspectj-version>1.6.9</org.aspectj-version>
         <org.slf4j-version>1.5.10</org.slf4j-version>
         <port>8081</port>
